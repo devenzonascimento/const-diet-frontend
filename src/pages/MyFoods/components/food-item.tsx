@@ -1,4 +1,4 @@
-import { FC } from "react";
+import MacronutrientBadge from "./macronutrient-badge";
 
 interface FoodItemProps {
   food: {
@@ -12,32 +12,26 @@ interface FoodItemProps {
   };
 }
 
-const FoodItem: FC<FoodItemProps> = ({ food }) => {
+const FoodItem = ({ food }: FoodItemProps) => {
   const { image, name, portion, carbo, protein, fat } = food;
 
   return (
-    <li className="relative w-full flex gap-2 p-2 bg-white rounded-lg shadow-xl">
+    <li className="relative w-full flex gap-3 p-2 bg-white rounded-lg shadow-lg">
       <img
-        className="w-20 h-20 object-cover rounded-md shadow-2xl"
+        className="w-20 h-20 object-cover rounded-md shadow-xl"
         src={image}
         alt="food"
       />
       <div className="w-full flex flex-col justify-between">
         <h2 className="font-semibold text-gray-800">{name}</h2>
-        <div className="w-full flex gap-2">
-          <p className="px-1 block text-blue-600 bg-blue-100 rounded-lg">
-            C: {`${carbo}g`}
-          </p>
-          <p className="px-1 block text-red-600 bg-red-100 rounded-lg">
-            P: {`${protein}g`}
-          </p>
-          <p className="px-1 block text-orange-600 bg-orange-100 rounded-lg">
-            G: {`${fat}g`}
-          </p>
+        <div className="w-full flex gap-3">
+          <MacronutrientBadge color="blue">{`C: ${carbo}g`}</MacronutrientBadge>
+          <MacronutrientBadge color="red">{`P: ${protein}g`}</MacronutrientBadge>
+          <MacronutrientBadge color="orange">{`G: ${fat}g`}</MacronutrientBadge>
         </div>
       </div>
 
-      <p className="absolute top-2 right-2 p-0.5 bg-sky-800 rounded-sm text-white ">{`${portion}g`}</p>
+      <p className="absolute top-2 right-2 px-1 font-medium text-white bg-sky-800 rounded-sm ">{`${portion}g`}</p>
     </li>
   );
 };

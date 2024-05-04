@@ -1,8 +1,8 @@
 interface MacronutrientsBadgeProps {
   nutrients: {
-    carbo: object
-    protein: object
-    fat: object
+    carbo: number
+    protein: number
+    fat: number
   }
 }
 

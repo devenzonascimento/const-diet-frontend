@@ -62,14 +62,14 @@ const FoodsList: FC = () => {
       image: "/assets/strawberry.jpg",
       name: "Morango",
       portion: 100,
-      carbo: 7,
-      protein: 0.8,
-      fat: 0.4,
+      carbo: 22.5,
+      protein: 12.3,
+      fat: 20.5,
     },
   ];
 
   return (
-    <ul className="w-full flex flex-col gap-6 py-6">
+    <ul className="w-full flex flex-col gap-6">
         {foodsList.map((food) => (
             <FoodItem key={food.id} food={food}/>
         ))}

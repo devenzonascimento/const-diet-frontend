@@ -1,4 +1,4 @@
-import MacronutrientBadge from "./macronutrient-badge";
+import MacronutrientsBadge from "./macronutrient-badges";
 
 interface FoodItemProps {
   food: {
@@ -25,9 +25,7 @@ const FoodItem = ({ food }: FoodItemProps) => {
       <div className="w-full flex flex-col justify-between">
         <h2 className="font-semibold text-gray-800">{name}</h2>
         <div className="w-full flex gap-3">
-          <MacronutrientBadge color="blue">{`C: ${carbo}g`}</MacronutrientBadge>
-          <MacronutrientBadge color="red">{`P: ${protein}g`}</MacronutrientBadge>
-          <MacronutrientBadge color="orange">{`G: ${fat}g`}</MacronutrientBadge>
+          <MacronutrientsBadge nutrients={{carbo, protein, fat}} />
         </div>
       </div>
 

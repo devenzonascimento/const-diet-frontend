@@ -13,11 +13,11 @@ const InputDefault = forwardRef<HTMLInputElement, InputDefaultProps>(
   ({ label = "", type = "text", name = "", ...props }, ref) => {
     return (
       <fieldset className="w-full flex flex-col">
-        <label className="font-semibold text-gray-800" htmlFor={props.id}>
+        <label className="font-semibold text-xl text-gray-800" htmlFor={props.id}>
           {label}
         </label>
         <input
-          className="p-1 p bg-transparent border-b border-gray-400"
+          className="text-lg p-1 p bg-transparent border-b border-gray-400"
           type={type}
           name={name}
           ref={ref}

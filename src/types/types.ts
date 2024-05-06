@@ -3,6 +3,7 @@ interface Food {
   image: string;
   name: string;
   portion: number;
+  calories: number;
   nutrients: Nutrients
 }
 
@@ -10,6 +11,8 @@ interface Nutrients {
   carbo: number;
   protein: number;
   fat: number;
+  sodium: number;
+  fiber: number;
 }
 
 interface Meal {

@@ -1,19 +1,11 @@
 import MacronutrientsBadge from "./macronutrient-badges";
 
 interface FoodItemProps {
-  food: {
-    id: number;
-    image: string;
-    name: string;
-    portion: number;
-    carbo: number;
-    protein: number;
-    fat: number;
-  };
+  food: Food
 }
 
 const FoodItem = ({ food }: FoodItemProps) => {
-  const { image, name, portion, carbo, protein, fat } = food;
+  const { image, name, portion, nutrients } = food;
 
   return (
     <li className="relative w-full flex gap-3 p-2 bg-white rounded-lg shadow-lg">
@@ -24,7 +16,7 @@ const FoodItem = ({ food }: FoodItemProps) => {
       />
       <div className="w-full flex flex-col justify-between">
         <h2 className="font-semibold text-gray-800">{name}</h2>
-        <MacronutrientsBadge nutrients={{ carbo, protein, fat }} />
+        <MacronutrientsBadge nutrients={nutrients} />
       </div>
 
       <p className="absolute top-2 right-2 px-1 font-medium text-white bg-sky-800 rounded-sm ">{`${portion}g`}</p>

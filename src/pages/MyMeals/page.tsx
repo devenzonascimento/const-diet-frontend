@@ -12,7 +12,6 @@ const MyMealsPage = () => {
       </header>
       <main className="flex flex-col justify-between items-center gap-4">
         <ProgressBar />
-
         <MealsList />
       </main>
     </div>

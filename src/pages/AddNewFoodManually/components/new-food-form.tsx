@@ -29,6 +29,11 @@ const NewFoodForm = () => {
       />
       <InputDefault
         id="carbo-input"
+        label="Calorias"
+        {...register("calories")}
+      />
+      <InputDefault
+        id="carbo-input"
         label="Carboidratos em gramas"
         {...register("carbo")}
       />

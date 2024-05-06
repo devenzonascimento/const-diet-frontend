@@ -16,7 +16,7 @@ const AddNewFoodManuallyPage = () => {
             onClick={() => console.log("voltar")}
           />
         </Link>
-        <h1 className="text-xl font-semibold">Meus alimentos</h1>
+        <h1 className="text-xl font-semibold">Novo alimento</h1>
       </header>
       <main className="flex flex-col justify-center items-center gap-8 px-2">
         <div className="h-40 aspect-square flex justify-center items-center bg-black rounded-xl">

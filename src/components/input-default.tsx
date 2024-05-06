@@ -1,19 +1,31 @@
-import { FunctionComponent } from "react";
+// import { UseFormRegister, FieldValues } from "react-hook-form";
 
-interface InputDefaultProps {
-    id: string
-    label: string
+type InputProps = InputHTMLAttributes<HTMLInputElement>;
+type LabelProps = {
+  label: string
 }
 
-const InputDefault: FunctionComponent<InputDefaultProps> = ({label}) => {
-  return (
-    <fieldset className="w-full flex flex-col">
-      <label className="font-semibold text-gray-800" htmlFor={`${label}-input`} >
-        {label}
-      </label>
-      <input className="p-1 p bg-transparent border-b border-gray-400" type={label} id={`${label}-input`} />
-    </fieldset>
-  );
-};
+type  InputDefaultProps = InputProps & LabelProps
+
+import { InputHTMLAttributes, forwardRef } from "react";
+
+const InputDefault = forwardRef<HTMLInputElement, InputDefaultProps>(
+  ({ label = "", type = "text", name = "", ...props }, ref) => {
+    return (
+      <fieldset className="w-full flex flex-col">
+        <label className="font-semibold text-gray-800" htmlFor={props.id}>
+          {label}
+        </label>
+        <input
+          className="p-1 p bg-transparent border-b border-gray-400"
+          type={type}
+          name={name}
+          ref={ref}
+          {...props}
+        />
+      </fieldset>
+    );
+  }
+);
 
 export default InputDefault;

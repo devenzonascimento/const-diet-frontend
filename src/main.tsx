@@ -10,6 +10,7 @@ import MyFoodsPage from "./pages/MyFoods/page";
 import LoginPage from "./pages/Login/page";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MyMealsPage from './pages/MyMeals/page';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "add-new-food-manually",
     element: <AddNewFoodManuallyPage />
+  },
+  {
+    path: "my-meals",
+    element: <MyMealsPage />
   }
 ])
 

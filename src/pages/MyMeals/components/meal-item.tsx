@@ -29,15 +29,15 @@ const MealItem = ({ meal }: MealItemProps) => {
   };
 
   return (
-    <div className="w-full flex bg-white rounded-2xl shadow-xl hover:scale-105 transition-all border-4 border-sky-700">
-      <div className=" w-full flex flex-col justify-between items-center p-2">
+    <div className="w-full flex bg-sky-700 rounded-2xl shadow-xl hover:scale-105 transition-all border-4 border-sky-700">
+      <div className=" w-full flex flex-col justify-between items-center p-2 bg-white rounded-l-xl">
         <h2 className=" w-full text-2xl uppercase font-semibold text-sky-700 text-center">
           #{id} Refeição
         </h2>
         <MacronutrientsBadge nutrients={calculateMealMacros(foods)} />
       </div>
 
-      <div className="flex flex-col justify-center gap-2 p-1 bg-sky-700 rounded-r-sm">
+      <div className="flex flex-col justify-center gap-2 p-1 rounded-r-sm">
         <p className=" text-lg font-semibold p-1 text-white text-center">
           {time.hour}H
         </p>

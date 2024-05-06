@@ -1,4 +1,4 @@
-import MacronutrientsBadge from "@/pages/MyFoods/components/macronutrient-badges";
+import MacronutrientsBadge from "@/components/macronutrient-badges";
 
 interface MealItemProps {
   meal: Meal;

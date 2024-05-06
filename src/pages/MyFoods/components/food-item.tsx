@@ -1,5 +1,6 @@
+import MacronutrientsBadge from "@/components/macronutrient-badges";
 import { Flame } from "lucide-react";
-import MacronutrientsBadge from "./macronutrient-badges";
+
 
 interface FoodItemProps {
   food: Food;

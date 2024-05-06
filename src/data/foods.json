@@ -4,6 +4,7 @@
       "image": "/assets/strawberry.jpg",
       "name": "Arroz",
       "portion": 100,
+      "calories": 168,
       "nutrients": {
         "carbo": 22.5,
         "protein": 2,
@@ -15,6 +16,7 @@
       "image": "/assets/apple.jpg",
       "name": "Feijão",
       "portion": 100,
+      "calories": 168,
       "nutrients": {
         "carbo": 10,
         "protein": 3.5,
@@ -26,6 +28,7 @@
       "image": "/assets/banana.jpg",
       "name": "Frango Grelhado",
       "portion": 100,
+      "calories": 168,
       "nutrients": {
         "carbo": 0,
         "protein": 25,
@@ -37,6 +40,7 @@
       "image": "/assets/strawberry.jpg",
       "name": "Batata Doce",
       "portion": 100,
+      "calories": 168,
       "nutrients": {
         "carbo": 18.5,
         "protein": 1,
@@ -48,6 +52,7 @@
       "image": "/assets/apple.jpg",
       "name": "Banana",
       "portion": 100,
+      "calories": 168,
       "nutrients": {
         "carbo": 22,
         "protein": 1.1,
@@ -59,6 +64,7 @@
       "image": "/assets/banana.jpg",
       "name": "Maçã",
       "portion": 100,
+      "calories": 168,
       "nutrients": {
         "carbo": 14,
         "protein": 0.3,
@@ -70,6 +76,7 @@
       "image": "/assets/strawberry.jpg",
       "name": "Morango",
       "portion": 100,
+      "calories": 168,
       "nutrients": {
         "carbo": 22.5,
         "protein": 12.3,

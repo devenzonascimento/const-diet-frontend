@@ -10,7 +10,7 @@ const MacronutrientsBadge = ({ nutrients }: MacronutrientsBadgeProps) => {
   const { carbo, protein, fat } = nutrients;
 
   return (
-    <div className="w-full flex gap-3">
+    <div className="w-full flex justify-center gap-3">
       <p
         className={`px-1 block font-medium text-blue-600 bg-blue-100 rounded-lg`}
       >

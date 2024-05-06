@@ -24,9 +24,7 @@ const FoodItem = ({ food }: FoodItemProps) => {
       />
       <div className="w-full flex flex-col justify-between">
         <h2 className="font-semibold text-gray-800">{name}</h2>
-        <div className="w-full flex gap-3">
-          <MacronutrientsBadge nutrients={{carbo, protein, fat}} />
-        </div>
+        <MacronutrientsBadge nutrients={{ carbo, protein, fat }} />
       </div>
 
       <p className="absolute top-2 right-2 px-1 font-medium text-white bg-sky-800 rounded-sm ">{`${portion}g`}</p>

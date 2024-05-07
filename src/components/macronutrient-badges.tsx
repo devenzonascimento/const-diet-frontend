@@ -1,16 +1,19 @@
+import { cn } from "@/lib/utils";
+
 interface MacronutrientsBadgeProps {
   nutrients: {
     carbo: number;
     protein: number;
     fat: number;
   };
+  className?: string;
 }
 
-const MacronutrientsBadge = ({ nutrients }: MacronutrientsBadgeProps) => {
+const MacronutrientsBadge = ({ className, nutrients }: MacronutrientsBadgeProps) => {
   const { carbo, protein, fat } = nutrients;
 
   return (
-    <div className="w-fit flex justify-center gap-3">
+    <div className={cn("w-fit flex justify-center gap-3", className)} >
       <p
         className={`px-1 block font-medium text-blue-700 bg-blue-200 rounded-lg`}
       >

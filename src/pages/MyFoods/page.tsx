@@ -5,6 +5,7 @@ import FoodsList from "./components/foods-list";
 import { Link } from "react-router-dom";
 
 const MyFoodsPage = () => {
+  
   return (
     <div className="h-screen bg-slate-100 px-4">
       <header className="relative flex justify-center items-center py-4">

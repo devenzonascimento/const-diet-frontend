@@ -1,11 +1,8 @@
-// import { UseFormRegister, FieldValues } from "react-hook-form";
-
-type InputProps = InputHTMLAttributes<HTMLInputElement>;
 type LabelProps = {
   label: string
 }
 
-type  InputDefaultProps = InputProps & LabelProps
+type  InputDefaultProps = InputHTMLAttributes<HTMLInputElement> & LabelProps
 
 import { InputHTMLAttributes, forwardRef } from "react";
 

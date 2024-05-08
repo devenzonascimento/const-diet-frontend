@@ -1,3 +1,4 @@
+import { Food } from "@/types/types";
 import { useEffect, useState } from "react";
 
 const useFetchFoodData = (id?: string) => {

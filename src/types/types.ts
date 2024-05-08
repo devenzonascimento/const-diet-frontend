@@ -1,13 +1,13 @@
-interface Food {
+export interface Food {
   id: string;
   image: string;
   name: string;
   portion: number;
   calories: number;
-  nutrients: Nutrients
+  nutrients: Nutrients;
 }
 
-interface Nutrients {
+export interface Nutrients {
   carbo: number;
   protein: number;
   fat: number;
@@ -15,12 +15,17 @@ interface Nutrients {
   fiber: number;
 }
 
-interface Meal {
+export interface Meal {
   id: string;
-  foods: Food[];
+  name: string;
+  foods: [
+    {
+      id: string;
+      portion: number;
+    }
+  ];
   time: {
-    hour: string
-    minute: string
-  }
+    hour: string;
+    minute: string;
+  };
 }
-

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 
 import { useForm } from "react-hook-form";
 
-const NewFoodForm = () => {
+const FoodForm = () => {
   const {
     register,
     handleSubmit,
@@ -55,4 +55,4 @@ const NewFoodForm = () => {
   );
 };
 
-export default NewFoodForm;
+export default FoodForm;

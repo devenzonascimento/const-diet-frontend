@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
 import MealItem from "./meal-item";
+import useFetchMealData from "@/hooks/useFetchMealData";
 
 const MealsList = () => {
 
-  const [mealsList, setMealsList] = useState<Meal[]>([])
-  
-  useEffect(() => {
-    const fetchData = async () => {
-
-      const url = "src/data/meals.json"
-
-      const response = await fetch(url)
-      const responseJSON = await response.json()
-      setMealsList(responseJSON)
-    }
-
-    fetchData()
-    
-  }, [])
+  const { mealsList } = useFetchMealData()
 
   return (
     <ul className="w-full flex flex-col gap-6">

@@ -1,9 +1,8 @@
-//import InputDefault from "@/components/input-default";
-//import { Button } from "@/components/ui/button";
-import { ArrowLeft, Camera } from "lucide-react";
-
 import { Link } from "react-router-dom";
-import NewFoodForm from "./components/new-food-form";
+
+import FoodForm from "@/components/food-form";
+
+import { ArrowLeft, Camera } from "lucide-react";
 
 const AddNewFoodManuallyPage = () => {
   return (
@@ -13,7 +12,6 @@ const AddNewFoodManuallyPage = () => {
           <ArrowLeft
             className="absolute top-4 left-0"
             size={32}
-            onClick={() => console.log("voltar")}
           />
         </Link>
         <h1 className="text-xl font-semibold">Novo alimento</h1>
@@ -22,7 +20,7 @@ const AddNewFoodManuallyPage = () => {
         <div className="h-40 aspect-square flex justify-center items-center bg-black rounded-xl">
           <Camera className="text-white" size={64} />
         </div>
-        <NewFoodForm />
+        <FoodForm />
       </main>
     </div>
   );

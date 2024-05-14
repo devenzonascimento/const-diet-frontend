@@ -5,6 +5,7 @@ const useModalSate = () => {
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
   const toggleModal = () => setIsOpen(!isOpen);
+  
   return { isOpen, openModal, closeModal, toggleModal };
 };
 

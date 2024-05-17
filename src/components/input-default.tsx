@@ -1,5 +1,6 @@
 type LabelProps = {
   label: string
+  errorMessage?: string
 }
 
 type  InputDefaultProps = InputHTMLAttributes<HTMLInputElement> & LabelProps
@@ -20,6 +21,7 @@ const InputDefault = forwardRef<HTMLInputElement, InputDefaultProps>(
           ref={ref}
           {...props}
         />
+        <p className="text-sm text-red-500 ">{props.errorMessage}</p>
       </fieldset>
     );
   }

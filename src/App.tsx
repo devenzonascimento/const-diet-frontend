@@ -1,15 +1,50 @@
-import AddNewFoodManuallyPage from "./pages/AddNewFoodManually/page";
-import MyFoodsPage from "./pages/MyFoods/page";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import LoginPage from "./pages/Login/page";
+import MyFoodsPage from './pages/Foods/MyFoods/page';
+import AddNewFoodManuallyPage from './pages/Foods/AddNewFoodManually/page';
+import EditFoodPage from './pages/Foods/EditFoodPage/page';
 
-function App() {
-  return (
-    <>
-      <AddNewFoodManuallyPage />
-      <MyFoodsPage />
-      <LoginPage />
-    </>
-  );
-}
+import MyMealsPage from './pages/MyMeals/page';
+import PrivateRoute from "./routes/private-route";
 
-export default App;
+const router = createBrowserRouter([
+  {
+    path: "login",
+    element: <LoginPage />
+  },
+  {
+    path: "my-foods",
+    element: (
+      <PrivateRoute >
+        <MyFoodsPage />
+      </PrivateRoute>
+    )
+  },
+  {
+    path: "add-new-food-manually",
+    element: (
+      <PrivateRoute >
+        <AddNewFoodManuallyPage />
+      </PrivateRoute>
+    )
+  },
+  {
+    path: "my-meals",
+    element: (
+      <PrivateRoute >
+        <MyMealsPage />
+      </PrivateRoute>
+    )
+  },
+  {
+    path: "/edit-food/:id",
+    element: (
+      <PrivateRoute >
+        <EditFoodPage />
+      </PrivateRoute>
+    )
+  }
+])
+
+export const App = () => { return (<RouterProvider router={router}/>) }

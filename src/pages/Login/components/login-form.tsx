@@ -2,9 +2,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { userLogin } from "@/services/http/login/userLogin";
+
 import InputDefault from "@/components/input-default";
 import { Button } from "@/components/ui/button";
-import { userLogin } from "@/services/http/login/userLogin";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -22,8 +23,6 @@ const LoginForm = () => {
   } = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema)
   });
-
-  //console.log(errors)
 
   const handleLogin = (data: LoginSchema) => {
     userLogin(data)
@@ -44,7 +43,7 @@ const LoginForm = () => {
         {...register("password")}
         errorMessage={errors.password ? "A senha precisa ter no mínimo 8 caracteres." : ""}
       />
-      <Button variant={"default"} className="w-full bg-gray-700"> Entrar </Button>
+      <Button variant={"default"} className="w-full bg-gray-700">Entrar</Button>
     </form>
   )
 }

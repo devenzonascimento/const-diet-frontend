@@ -2,6 +2,7 @@ import CaloriesBadge from "@/components/calories-badge";
 import MacronutrientsBadge from "@/components/macronutrient-badges";
 import ModalBackdrop from "@/components/modal-backdrop";
 import { Button } from "@/components/ui/button";
+import { Food } from "@/types/types";
 import { useNavigate } from "react-router-dom";
 
 interface FoodCardModalProps {
@@ -11,7 +12,7 @@ interface FoodCardModalProps {
 
 const FoodCardModal = ({
   onClose,
-  food: { id, name, image, calories, nutrients },
+  food: { id, name, calories, nutrients },
 }: FoodCardModalProps) => {
 
     const navigate = useNavigate();
@@ -25,7 +26,7 @@ const FoodCardModal = ({
     <ModalBackdrop onClose={onClose}>
       <div className="w-full h-fit mx-6 flex flex-col justify-between items-center gap-6 p-8 bg-slate-100 border-4 border-sky-500 rounded-lg shadow-xl">
         <img
-          src={image}
+          //src={image}
           alt=""
           className="w-48 aspect-square border-4 border-sky-500 rounded-full"
         />

@@ -3,13 +3,14 @@ import FoodCardModal from "./food-card-modal";
 import When from "@/components/when";
 import CaloriesBadge from "@/components/calories-badge";
 import useModalSate from "@/hooks/useModalState";
+import { Food } from "@/types/types";
 
 interface FoodItemProps {
   food: Food;
 }
 
 const FoodItem = ({ food }: FoodItemProps) => {
-  const { image, name, calories, nutrients } = food;
+  const { name, calories, nutrients } = food;
 
   const {isOpen, toggleModal} = useModalSate()
 
@@ -22,7 +23,7 @@ const FoodItem = ({ food }: FoodItemProps) => {
         <div className="h-20 aspect-square flex items-start border-r-4 border-sky-700 ">
           <img
             className="h-full  aspect-square object-cover rounded-l-md shadow-xl"
-            src={image}
+            //src={image}
             alt="food"
           />
         </div>

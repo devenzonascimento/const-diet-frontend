@@ -1,4 +1,4 @@
-import useFetchFoodData from "@/hooks/useFetchFoodData";
+import { useFetchFood } from "@/hooks/useFetchFood";
 
 interface FoodItemDescriptionProps {
   id: string;
@@ -6,7 +6,7 @@ interface FoodItemDescriptionProps {
 }
 
 const FoodItemDescription = ({ id, portion }: FoodItemDescriptionProps) => {
-  const { food } = useFetchFoodData(id);
+  const { food } = useFetchFood(id);
 
   return (
     <li className="w-full p-1">

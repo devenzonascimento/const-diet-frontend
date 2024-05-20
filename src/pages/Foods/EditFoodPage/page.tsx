@@ -26,7 +26,7 @@ const EditFoodPage = () => {
         <div className="h-40 aspect-square flex justify-center items-center bg-black rounded-xl">
           <Camera className="text-white" size={64} />
         </div>
-        <FoodForm />
+        <FoodForm foodData={food}/>
       </main>
     </div>
   );

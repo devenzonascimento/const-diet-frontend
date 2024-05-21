@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
+import { useFoodFormValidation } from "@/hooks/useFoodFormValidation";
 
-import FoodForm from "@/components/food-form";
-
-import { ArrowLeft, Camera } from "lucide-react";
 import { createFood } from "@/services/http/food/create-food";
 
+import InputDefault from "@/components/input-default";
+import { ArrowLeft, Camera } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
 const AddNewFoodManuallyPage = () => {
+
+  const { register, handleSubmit } = useFoodFormValidation()
   return (
     <div className="h-screen bg-gray-00 px-4">
       <header className="relative flex justify-center items-center py-4">
@@ -21,7 +25,50 @@ const AddNewFoodManuallyPage = () => {
         <div className="h-40 aspect-square flex justify-center items-center bg-black rounded-xl">
           <Camera className="text-white" size={64} />
         </div>
-        <FoodForm formAction={createFood}/>
+        <form
+          className="w-full flex flex-col gap-6 py-4"
+          onSubmit={handleSubmit((data) => createFood(data))}
+        >
+          <InputDefault
+            id="foodName-input"
+            label="Nome do alimento"
+            {...register("name")}
+          />
+          <InputDefault
+            id="carbo-input"
+            label="Calorias"
+            {...register("calories")}
+          />
+          <InputDefault
+            id="carbo-input"
+            label="Carboidratos em gramas"
+            {...register("carbohydrates")}
+          />
+          <InputDefault
+            id="protein-input"
+            label="Proteínas em gramas"
+            {...register("proteins")}
+          />
+          <InputDefault
+            id="fat-input"
+            label="Gorduras em gramas"
+            {...register("fats")}
+          />
+          <InputDefault
+            id="sodium-input"
+            label="Sódios em gramas"
+            {...register("sodiums")}
+          />
+          <InputDefault
+            id="fiber-input"
+            label="Fibra em gramas"
+            {...register("fibers")}
+          />
+
+          <Button type="submit" className="w-full bg-sky-700 hover:bg-sky-500">
+            Salvar alimento
+          </Button>
+        </form>
       </main>
     </div>
   );

@@ -2,12 +2,10 @@ import { Button } from "@/components/ui/button";
 import FoodItemDescription from "./food-item-description";
 import { Square, SquareCheckBig } from "lucide-react";
 import useToggleState from "@/hooks/useToggleState";
+import { MealFood } from "@/types/types";
 
 interface MealDescriptionProps {
-  foods: {
-    id: string;
-    portion: number;
-  }[];
+  foods: MealFood[]
   isOpen: boolean;
 }
 
@@ -22,8 +20,9 @@ const MealDescription = ({ foods, isOpen }: MealDescriptionProps) => {
         return (
           <FoodItemDescription
             key={food.id}
-            id={food.id}
-            portion={food.portion}
+            foodId={food.foodId}
+            quantity={food.quantity}
+            unit={food.unit}
           />
         );
       })}

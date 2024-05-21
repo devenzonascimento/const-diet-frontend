@@ -17,14 +17,15 @@ export interface Nutrients {
 export interface Meal {
   id: string;
   name: string;
-  foods: [
-    {
-      id: string;
-      portion: number;
-    }
-  ];
-  time: {
-    hour: string;
-    minute: string;
-  };
+  type?: string;
+  description?: string;
+  foods: MealFood[];
+}
+
+export interface MealFood {
+  id: string;
+  quantity: number;
+  unit: string;
+  foodId: string;
+  mealId: string;
 }

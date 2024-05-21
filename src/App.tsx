@@ -5,7 +5,7 @@ import MyFoodsPage from './pages/Foods/MyFoods/page';
 import AddNewFoodManuallyPage from './pages/Foods/AddNewFoodManually/page';
 import EditFoodPage from './pages/Foods/EditFoodPage/page';
 
-import MyMealsPage from './pages/MyMeals/page';
+import MyMealsPage from './pages/Meals/MyMeals/page';
 import PrivateRoute from "./routes/private-route";
 
 const router = createBrowserRouter([

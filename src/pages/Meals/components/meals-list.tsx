@@ -1,9 +1,9 @@
+import { useFetchMealsList } from "@/hooks/useFetchMealsList";
 import MealItem from "./meal-item";
-import useFetchMealData from "@/hooks/useFetchMealData";
 
 const MealsList = () => {
 
-  const { mealsList } = useFetchMealData()
+  const { mealsList } = useFetchMealsList()
 
   return (
     <ul className="w-full flex flex-col gap-6">

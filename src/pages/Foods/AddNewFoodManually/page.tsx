@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import FoodForm from "@/components/food-form";
 
 import { ArrowLeft, Camera } from "lucide-react";
+import { createFood } from "@/services/http/food/create-food";
 
 const AddNewFoodManuallyPage = () => {
   return (
@@ -20,7 +21,7 @@ const AddNewFoodManuallyPage = () => {
         <div className="h-40 aspect-square flex justify-center items-center bg-black rounded-xl">
           <Camera className="text-white" size={64} />
         </div>
-        <FoodForm />
+        <FoodForm formAction={createFood}/>
       </main>
     </div>
   );

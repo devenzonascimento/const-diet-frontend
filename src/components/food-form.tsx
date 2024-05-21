@@ -7,22 +7,23 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const foodFormSchema = z.object({
-  name: z.string(),
-  calories: z.number(),
-  carbohydrates: z.number(),
-  proteins: z.number(),
-  fats: z.number(),
-  sodiums: z.number(),
-  fibers: z.number(),
+  name: z.string().min(3),
+  calories: z.coerce.number(),
+  carbohydrates: z.coerce.number(),
+  proteins: z.coerce.number(),
+  fats: z.coerce.number(),
+  sodiums: z.coerce.number(),
+  fibers: z.coerce.number(),
 })
 
 type FoodFormSchema = z.infer<typeof foodFormSchema>
 
 interface FoodFormProps {
   foodData?: Partial<FoodFormSchema>
+  formAction: (data: FoodFormSchema) => Promise<boolean>
 }
 
-const FoodForm = ({foodData}: FoodFormProps) => {
+const FoodForm = ({foodData, formAction}: FoodFormProps) => {
   const {
     register,
     handleSubmit,
@@ -42,7 +43,9 @@ const FoodForm = ({foodData}: FoodFormProps) => {
   }, [foodData, setValue]);
 
   const handleLogin = (data: FoodFormSchema) => {
-    console.log(data)
+    formAction(data)
+    //TODO: a função retorna um boolean, ai com base nisso preciso informar pro usuario
+    // se deu certo ou nao
   }
 
   return (

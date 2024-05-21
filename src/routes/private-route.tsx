@@ -1,6 +1,5 @@
-
-
-import { ReactNode, useEffect } from 'react';
+import { checkAuthentication } from '@/services/http/check-authentication/check-authentication';
+import { ReactNode, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface PrivateRouteProps {
@@ -8,17 +7,32 @@ interface PrivateRouteProps {
 }
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
-  const isLogin = localStorage.getItem("token")
-
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!isLogin) {
-      navigate("/login");
-    }
-  }, [isLogin, navigate]);
+  const getAuth = async () => {
+    const response = await checkAuthentication();
+    setIsAuth(response);
+  };
 
-  return isLogin ? children : null;
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      await getAuth();
+    };
+    checkAuthStatus();
+  }, []);
+
+  useEffect(() => {
+    if (isAuth === false) {
+      navigate('/login');
+    }
+  }, [isAuth, navigate]);
+
+  if (isAuth === null) {
+    navigate('/login');
+  }
+
+  return isAuth ? children : null;
 };
 
 export default PrivateRoute;

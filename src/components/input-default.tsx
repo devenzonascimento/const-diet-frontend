@@ -8,7 +8,7 @@ type  InputDefaultProps = InputHTMLAttributes<HTMLInputElement> & LabelProps
 import { InputHTMLAttributes, forwardRef } from "react";
 
 const InputDefault = forwardRef<HTMLInputElement, InputDefaultProps>(
-  ({ label = "", type = "text", name = "", ...props }, ref) => {
+  ({ label = "", type = "text", name = "", errorMessage = "", ...props }, ref) => {
     return (
       <fieldset className="w-full flex flex-col">
         <label className="font-semibold text-xl text-gray-800" htmlFor={props.id}>
@@ -21,7 +21,7 @@ const InputDefault = forwardRef<HTMLInputElement, InputDefaultProps>(
           ref={ref}
           {...props}
         />
-        <p className="text-sm text-red-500 ">{props.errorMessage}</p>
+        <p className="text-sm text-red-500 ">{errorMessage}</p>
       </fieldset>
     );
   }

@@ -1,13 +1,9 @@
 export interface Food {
-  id?: string;
+  id: string;
   //image: string;
   name: string;
   calories: number;
-  carbohydrates: number;
-  proteins: number;
-  fats: number;
-  sodiums: number;
-  fibers: number;
+  nutrients: Nutrients
 }
 
 export interface Nutrients {

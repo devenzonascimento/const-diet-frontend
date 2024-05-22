@@ -14,8 +14,8 @@ export interface Nutrients {
   carbohydrates: number;
   proteins: number;
   fats: number;
-  sodium: number;
-  fiber: number;
+  sodiums: number;
+  fibers: number;
 }
 
 export interface Meal {

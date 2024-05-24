@@ -1,7 +1,7 @@
 import { api } from "@/services/api"
-import { Food } from "@/types/types"
+import { CreateFood } from "@/types/types"
 
-export const createFood = async (foodData: Food) => {
+export const createFood = async (foodData: CreateFood) => {
 
   console.log(foodData)
 

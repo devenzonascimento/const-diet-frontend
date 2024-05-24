@@ -1,7 +1,7 @@
 import { api } from "@/services/api"
-import { Food } from "@/types/types"
+import { CreateFood } from "@/types/types"
 
-export const updateFood = async (foodData: Food, foodId: string = "") => {
+export const updateFood = async (foodData: CreateFood, foodId: string = "") => {
   const userId = localStorage.getItem("userId")
 
   const response = await api.put(`/users/${userId}/foods/${foodId}`, foodData)

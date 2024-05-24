@@ -1,10 +1,21 @@
 export interface Food {
-  id: string;
-  //image: string;
+  id?: string;
   name: string;
   calories: number;
   nutrients: Nutrients
 }
+
+export interface CreateFood {
+  id?: string;
+  name: string;
+  calories: number;
+  carbohydrates: number;
+  proteins: number;
+  fats: number;
+  sodiums: number;
+  fibers: number;
+}
+ 
 
 export interface Nutrients {
   carbohydrates: number;

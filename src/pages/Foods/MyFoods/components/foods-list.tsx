@@ -4,7 +4,7 @@ import { getFoodsList } from "@/services/http/food/get-foods-list";
 
 const FoodsList = () => {
 
-  const { data: foodsList} = useQuery({
+  const { data: foodsList } = useQuery({
     queryKey: ["foodsList"],
     queryFn: getFoodsList,
   })

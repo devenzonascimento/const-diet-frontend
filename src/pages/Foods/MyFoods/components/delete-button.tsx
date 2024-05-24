@@ -11,17 +11,15 @@ import {
 } from "@/components/ui/alert-dialog"
 
 interface DeleteButtonProps {
-  OnDelete: () => void
+  onDelete: () => void
 }
 
-export const DeleteButton = ({OnDelete}: DeleteButtonProps) => {
+export const DeleteButton = ({onDelete}: DeleteButtonProps) => {
 
   return (
     <AlertDialog>
       <AlertDialogTrigger className="w-32 rounded-md text-sm font-medium ring-offset-background bg-red-700 text-white hover:bg-red-500">
-
           Excluir alimento
-
       </AlertDialogTrigger>
       <AlertDialogContent className="w-72 rounded-lg bg-slate-100">
         <AlertDialogHeader>
@@ -32,7 +30,7 @@ export const DeleteButton = ({OnDelete}: DeleteButtonProps) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel className=" bg-red-700 text-white hover:bg-red-500">Cancelar</AlertDialogCancel>
-          <AlertDialogAction className="bg-sky-700" onClick={OnDelete}>Continuar</AlertDialogAction>
+          <AlertDialogAction className="bg-sky-700" onClick={onDelete}>Continuar</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

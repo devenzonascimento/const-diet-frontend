@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: "/edit-food/:id",
+    path: "/edit-food/:foodId",
     element: (
       <PrivateRoute >
         <EditFoodPage />

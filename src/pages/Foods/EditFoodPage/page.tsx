@@ -1,18 +1,53 @@
-import { Link, useParams } from "react-router-dom";
-import { useFetchFood } from "@/hooks/useFetchFood";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useFoodFormValidation } from "@/hooks/useFoodFormValidation";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 import { updateFood } from "@/services/http/food/update-food";
 
 import { ArrowLeft, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import InputDefault from "@/components/input-default";
-import { useFoodFormValidation } from "@/hooks/useFoodFormValidation";
+
+import { CreateFood, Food } from "@/types/types";
+import { getFood } from "@/services/http/food/get-food";
+
+interface RouteParams {
+  foodId: string;
+}
 
 const EditFoodPage = () => {
-  const { id } = useParams<string>();
 
-  const { food } = useFetchFood(id)
+  const navigate = useNavigate()
+  
+  const queryClient = useQueryClient()
+  
+  const params = useParams<keyof RouteParams>() as RouteParams;
+  
+  const { foodId } = params;
 
+  const { data: food } = useQuery({
+    queryKey: ["food"],
+    queryFn: () => getFood(foodId),
+  })
+  
   const { register, handleSubmit } = useFoodFormValidation(food)
+  
+  const { mutateAsync: updateFoodFn } = useMutation({
+    mutationFn: updateFood,
+    onSuccess(_, {foodData: { name, calories, ...nutrients }}) {
+      queryClient.setQueryData(
+        ["foodsList"],
+        (data: Food[]) => data.map((food) => {
+          return food.id === foodId ? { id: foodId, name, calories, nutrients } : food
+        })
+      )
+    },
+  })
+
+  const onSubmit = (data: CreateFood) => {
+    updateFoodFn({ foodId, foodData: data })
+    navigate("/my-foods")
+  }
 
   return (
     <div className="h-screen bg-gray-00 px-4">
@@ -31,7 +66,7 @@ const EditFoodPage = () => {
         </div>
         <form
           className="w-full flex flex-col gap-6 py-4"
-          onSubmit={handleSubmit((data) => updateFood(data, id))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <InputDefault
             id="foodName-input"

@@ -1,8 +1,10 @@
-import FoodItem from "./food-item";
-import { useQuery } from "@tanstack/react-query";
-import { getFoodsList } from "@/services/http/food/get-foods-list";
-import InputSearch from "@/components/input-search";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
+import { getFoodsList } from "@/services/http/food/get-foods-list";
+
+import InputSearch from "@/components/input-search";
+import FoodItem from "./food-item";
 
 const FoodsList = () => {
 

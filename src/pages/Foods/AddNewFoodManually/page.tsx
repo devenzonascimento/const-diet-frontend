@@ -4,13 +4,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createFood } from "@/services/http/food/create-food";
 
 import InputDefault from "@/components/input-default";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-import { Food } from "@/types/types";
+import { CreateFood, Food } from "@/types/types";
 
 const AddNewFoodManuallyPage = () => {
+
+  const navigate = useNavigate()
 
   const { register, handleSubmit } = useFoodFormValidation()
 
@@ -21,6 +23,7 @@ const AddNewFoodManuallyPage = () => {
     onSuccess(_, variables) {
       queryClient.setQueryData(["foodsList"], (data: Food[]) => {
         return [...data, {
+          id: crypto.randomUUID,
           name: variables.name,
           calories: variables.calories,
           nutrients: {
@@ -34,6 +37,11 @@ const AddNewFoodManuallyPage = () => {
       })
     },
   })
+
+  const onSubmit = (data: CreateFood) => {
+    createFoodFn(data)
+    navigate("/my-foods")
+  }
 
   return (
     <div className="h-screen bg-gray-00 px-4">
@@ -52,7 +60,7 @@ const AddNewFoodManuallyPage = () => {
         </div>
         <form
           className="w-full flex flex-col gap-6 py-4"
-          onSubmit={handleSubmit((data) => createFoodFn(data))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <InputDefault
             id="foodName-input"

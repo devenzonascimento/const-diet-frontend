@@ -1,50 +1,26 @@
-import { Button } from "@/components/ui/button";
-import FoodItemDescription from "./food-item-description";
-import { Square, SquareCheckBig } from "lucide-react";
-import useToggleState from "@/hooks/useToggleState";
 import { MealFood } from "@/types/types";
 
 interface MealDescriptionProps {
-  foods: MealFood[]
+  foods: MealFood[] | undefined
   isOpen: boolean;
 }
 
-const MealDescription = ({ foods, isOpen }: MealDescriptionProps) => {
-  const { booleanExp, toggleBooleanExp } = useToggleState()
+export const MealDescription = ({ foods, isOpen }: MealDescriptionProps) => {
+
   return (
     <ul
       style={{ display: isOpen ? "flex" : "none" }}
       className="flex flex-col gap-2 p-4 border-t-2"
     >
-      {foods.map((food) => {
+      {foods?.map((foodItem) => {
         return (
-          <FoodItemDescription
-            key={food.id}
-            foodId={food.foodId}
-            quantity={food.quantity}
-            unit={food.unit}
-          />
+          <li key={foodItem.id} className="w-full p-1">
+            <p className="text-sky-700">
+              {`${foodItem.quantity} gramas de ${foodItem.food.name}`}
+            </p>
+          </li>
         );
       })}
-      <Button type="submit" className="flex gap-2 bg-sky-700 hover:bg-sky-500"
-        onClick={toggleBooleanExp}
-      >
-        {booleanExp ?
-          (
-            <>
-              <SquareCheckBig />
-              <p>Refeição concluída</p>
-            </>
-          ) : (
-            <>
-              <Square />
-            <p>Marcar como concluída</p>
-            </>
-          )
-        }
-      </Button>
     </ul>
   );
 };
-
-export default MealDescription;

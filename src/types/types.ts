@@ -37,6 +37,5 @@ export interface MealFood {
   id: string;
   quantity: number;
   unit: string;
-  foodId: string;
-  mealId: string;
+  food: Food;
 }

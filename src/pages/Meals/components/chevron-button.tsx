@@ -5,7 +5,7 @@ interface ChevronButtonProps {
   isOpen: boolean;
 }
 
-const ChevronButton = ({ isOpen }: ChevronButtonProps) => {
+export const ChevronButton = ({ isOpen }: ChevronButtonProps) => {
   return (
     <Button variant={"ghost"} className="p-0">
       {isOpen ? (
@@ -16,5 +16,3 @@ const ChevronButton = ({ isOpen }: ChevronButtonProps) => {
     </Button>
   );
 };
-
-export default ChevronButton;

@@ -2,7 +2,11 @@ export interface Food {
   id: string;
   name: string;
   calories: number;
-  nutrients: Nutrients
+  carbohydrates: number;
+  proteins: number;
+  fats: number;
+  sodiums: number;
+  fibers: number;
 }
 
 export interface CreateFood {
@@ -21,8 +25,8 @@ export interface Nutrients {
   carbohydrates: number;
   proteins: number;
   fats: number;
-  sodiums: number;
-  fibers: number;
+  sodiums?: number;
+  fibers?: number;
 }
 
 export interface Meal {

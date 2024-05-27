@@ -19,7 +19,7 @@ interface FoodCardModalProps {
 
 const FoodCardModal = ({
   onClose,
-  food: { id, name, calories, nutrients },
+  food: { id, name, calories, ...nutrients },
 }: FoodCardModalProps) => {
 
   const navigate = useNavigate();

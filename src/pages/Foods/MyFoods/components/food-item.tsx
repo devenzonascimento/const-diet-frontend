@@ -10,7 +10,7 @@ interface FoodItemProps {
 }
 
 const FoodItem = ({ food }: FoodItemProps) => {
-  const { name, calories, nutrients } = food;
+  const { name, calories, ...nutrients } = food;
 
   const {isOpen, toggleModal} = useModalSate()
 

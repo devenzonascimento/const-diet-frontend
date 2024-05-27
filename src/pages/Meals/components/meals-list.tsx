@@ -1,13 +1,17 @@
-import { useFetchMealsList } from "@/hooks/useFetchMealsList";
-import MealItem from "./meal-item";
+import { MealItem } from "./meal-item";
+import { useQuery } from "@tanstack/react-query";
+import { getMealsList } from "@/services/http/meal/get-meals-list";
 
 const MealsList = () => {
 
-  const { mealsList } = useFetchMealsList()
+  const { data: mealsList } = useQuery({
+    queryKey: ["mealsList"],
+    queryFn: getMealsList,
+  })
 
   return (
     <ul className="w-full flex flex-col gap-6">
-      {mealsList.map((meal) => (
+      {mealsList?.map((meal) => (
         <MealItem key={meal.id} meal={meal} />
       ))}
     </ul>

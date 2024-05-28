@@ -38,7 +38,7 @@ export interface Meal {
 }
 
 export interface MealFood {
-  id: string;
+  id?: string;
   quantity: number;
   unit: string;
   food: Food;

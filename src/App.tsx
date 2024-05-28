@@ -5,8 +5,9 @@ import MyFoodsPage from './pages/Foods/MyFoods/page';
 import AddNewFoodManuallyPage from './pages/Foods/AddNewFoodManually/page';
 import EditFoodPage from './pages/Foods/EditFoodPage/page';
 
-import MyMealsPage from './pages/Meals/MyMeals/page';
+import { MyMealsPage } from './pages/Meals/MyMeals/page';
 import PrivateRoute from "./routes/private-route";
+import { AddNewMealPage } from "./pages/Meals/AddNewMeal/page";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,14 @@ const router = createBrowserRouter([
     )
   },
   {
+    path: "/edit-food/:foodId",
+    element: (
+      <PrivateRoute >
+        <EditFoodPage />
+      </PrivateRoute>
+    )
+  },
+  {
     path: "my-meals",
     element: (
       <PrivateRoute >
@@ -38,13 +47,13 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: "/edit-food/:foodId",
+    path: "add-new-meal",
     element: (
       <PrivateRoute >
-        <EditFoodPage />
+        <AddNewMealPage />
       </PrivateRoute>
     )
-  }
+  },
 ])
 
 export const App = () => { return (<RouterProvider router={router}/>) }

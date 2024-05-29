@@ -23,7 +23,7 @@ export const DeleteButton = ({onDelete}: DeleteButtonProps) => {
       </AlertDialogTrigger>
       <AlertDialogContent className="w-72 rounded-lg bg-slate-100">
         <AlertDialogHeader>
-          <AlertDialogTitle>Você tem certeza absoluta?</AlertDialogTitle>
+          <AlertDialogTitle>Você tem certeza?</AlertDialogTitle>
           <AlertDialogDescription>
             Essa ação não pode ser desfeita. Isso excluirá permanentemente esse alimento da sua lista de alimentos.
           </AlertDialogDescription>

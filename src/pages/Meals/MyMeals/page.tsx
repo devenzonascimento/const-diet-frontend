@@ -1,6 +1,6 @@
 import { ArrowLeft, CirclePlus } from "lucide-react";
 
-import MealsList from "../components/meals-list";
+import { MealsList } from "./components/meals-list";
 import { Link } from "react-router-dom";
 
 export const MyMealsPage = () => {

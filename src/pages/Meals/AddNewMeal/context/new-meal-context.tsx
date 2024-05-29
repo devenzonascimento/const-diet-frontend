@@ -1,5 +1,5 @@
 // FoodContext.tsx
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { createContext, useState, ReactNode } from 'react';
 
 import { createMeal } from '@/services/http/meal/create-meal';
 
@@ -14,7 +14,7 @@ interface NewMealContextType {
   handleCreateMeal: () => void
 }
 
-const NewMealContext = createContext<NewMealContextType | undefined>(undefined);
+export const NewMealContext = createContext<NewMealContextType | undefined>(undefined);
 
 export const NewMealProvider = ({ children }: { children: ReactNode }) => {
 
@@ -76,12 +76,4 @@ export const NewMealProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </NewMealContext.Provider>
   );
-};
-
-export const useNewMealContext = () => {
-  const context = useContext(NewMealContext);
-  if (!context) {
-    throw new Error('useFoodContext must be used within a FoodProvider');
-  }
-  return context;
 };

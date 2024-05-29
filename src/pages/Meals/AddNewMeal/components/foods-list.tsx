@@ -1,4 +1,4 @@
-import { useNewMealContext } from "../context/new-meal-context"
+import { useNewMealContext } from "../context/use-meal-context";
 
 import { FoodItem } from "./food-item"
 import { Button } from "@/components/ui/button"

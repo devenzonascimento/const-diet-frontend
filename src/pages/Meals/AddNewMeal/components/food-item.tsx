@@ -1,5 +1,5 @@
 import { MealFood } from "@/types/types";
-import { useNewMealContext } from "../context/new-meal-context";
+import { useNewMealContext } from "../context/use-meal-context";
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 

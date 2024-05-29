@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
-import { useNewMealContext } from "../context/new-meal-context"
+import { useNewMealContext } from "../context/use-meal-context";
 
 import { getFood } from "@/services/http/food/get-food"
 import { getFoodsList } from "@/services/http/food/get-foods-list"

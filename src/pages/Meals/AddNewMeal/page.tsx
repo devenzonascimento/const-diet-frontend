@@ -1,4 +1,4 @@
-import { useNewMealContext } from "./context/new-meal-context";
+import { useNewMealContext } from "./context/use-meal-context";
 import useModalState from "@/hooks/useModalState";
 
 import { Link } from "react-router-dom";

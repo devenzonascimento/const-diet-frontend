@@ -11,7 +11,7 @@ const CaloriesBadge = ({ className, calories }: CaloriesBadgeProps) => {
     <div className={cn("flex items-center gap-0.5", className)}>
       <Flame className="text-red-600 fill-yellow-500" size={20} />
       <p className="pt-1 text-gray-800 font-semibold">
-        {calories}
+        {calories.toFixed()}
         <span className="text-xs">kcal</span>
       </p>
     </div>

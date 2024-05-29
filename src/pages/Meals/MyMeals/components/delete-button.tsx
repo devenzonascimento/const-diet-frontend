@@ -18,7 +18,7 @@ export const DeleteButton = ({onDelete}: DeleteButtonProps) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="w-32 rounded-md text-sm font-medium ring-offset-background bg-red-700 text-white hover:bg-red-500">
+      <AlertDialogTrigger className="w-full rounded-md text-sm font-medium ring-offset-background bg-red-700 text-white hover:bg-red-500">
           Excluir refeição
       </AlertDialogTrigger>
       <AlertDialogContent className="w-72 rounded-lg bg-slate-100">

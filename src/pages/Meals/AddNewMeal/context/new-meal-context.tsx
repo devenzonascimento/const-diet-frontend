@@ -1,7 +1,9 @@
 // FoodContext.tsx
-import { createMeal } from '@/services/http/meal/create-meal';
-import { MealFood } from '@/types/types';
 import { createContext, useContext, useState, ReactNode } from 'react';
+
+import { createMeal } from '@/services/http/meal/create-meal';
+
+import { MealFood } from '@/types/types';
 
 interface NewMealContextType {
   mealName: string

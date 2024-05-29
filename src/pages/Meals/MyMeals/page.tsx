@@ -13,7 +13,7 @@ export const MyMealsPage = () => {
           <CirclePlus size={32} className="absolute top-4 right-0" />
         </Link>
       </header>
-      <main className="flex flex-col justify-between items-center gap-4">
+      <main className="flex flex-col justify-between items-center gap-4 pb-6">
 
         <MealsList />
       </main>

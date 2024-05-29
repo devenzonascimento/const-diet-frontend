@@ -2,7 +2,7 @@ import { calculateTotalNutrients } from "@/functions/calculate-total-nutrients";
 
 import MacronutrientsBadge from "@/components/macronutrient-badges";
 
-import { MealFood } from "@/types/types";
+import {  MealFood } from "@/types/types";
 import { Button } from "@/components/ui/button";
 import { DeleteButton } from "./delete-button";
 
@@ -10,9 +10,10 @@ import { DeleteButton } from "./delete-button";
 interface MealDescriptionProps {
   foods: MealFood[] | undefined
   isOpen: boolean;
+  deleteMeal: VoidFunction
 }
 
-export const MealDescription = ({ foods, isOpen }: MealDescriptionProps) => {
+export const MealDescription = ({ foods, isOpen, deleteMeal }: MealDescriptionProps) => {
 
   return (
     <ul
@@ -37,7 +38,7 @@ export const MealDescription = ({ foods, isOpen }: MealDescriptionProps) => {
         >
           Editar alimento
         </Button>
-        <DeleteButton onDelete={() => console.log("Excluiu a ref")} />
+        <DeleteButton onDelete={deleteMeal} />
       </div>
     </ul>
   );

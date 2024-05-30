@@ -1,8 +1,10 @@
-import { createContext, useState, ReactNode } from 'react';
+import { createContext, useState, ReactNode, useEffect, useCallback } from 'react';
 
 import { createMeal } from '@/services/http/meal/create-meal';
 
 import { MealFood } from '@/types/types';
+import { getFoodsFromMeal } from '@/services/http/food/get-foods-from-meal';
+import { getMeal } from '@/services/http/meal/get-meal';
 
 interface MealContextType {
   mealName: string
@@ -11,11 +13,17 @@ interface MealContextType {
   addFoodToFoodList: (food: MealFood) => void
   removeFoodFromFoodList: (foodId: string) => void
   handleCreateMeal: () => void
+  loadMealById: (mealId: string) => void
 }
 
 export const MealContext = createContext<MealContextType | undefined>(undefined);
 
 export const MealProvider = ({ children }: { children: ReactNode }) => {
+
+  const [mealId, setMealId] = useState<string>("")
+
+
+
 
   const [mealName, setMealName] = useState<string>("")
 
@@ -58,6 +66,33 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
+
+
+
+
+  
+  const loadMealById = (mealId: string) => {
+    setMealId(mealId)
+  }
+
+  const loadMealData = useCallback(async () => {
+    if (mealId) {
+      const foodsInMeal = await getFoodsFromMeal(mealId);
+      if (foodsInMeal) {
+        setFoods(foodsInMeal);
+      }
+
+      const meal = await getMeal(mealId);
+      if (meal) {
+        setMealName(meal.name);
+      }
+    }
+  }, [mealId]);
+
+  useEffect(() => {
+    loadMealData();
+  }, [mealId, loadMealData]);
+
   const handleInputValue = (inputValue: string) => {
     setMealName(inputValue)
   }
@@ -70,7 +105,7 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
       addFoodToFoodList,
       removeFoodFromFoodList,
       handleCreateMeal,
-      
+      loadMealById
     }}>
       {children}
     </MealContext.Provider>

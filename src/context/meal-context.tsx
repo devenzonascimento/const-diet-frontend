@@ -1,11 +1,10 @@
-// FoodContext.tsx
 import { createContext, useState, ReactNode } from 'react';
 
 import { createMeal } from '@/services/http/meal/create-meal';
 
 import { MealFood } from '@/types/types';
 
-interface NewMealContextType {
+interface MealContextType {
   mealName: string
   handleInputValue: (inputValue: string) => void
   foods: MealFood[]
@@ -14,9 +13,9 @@ interface NewMealContextType {
   handleCreateMeal: () => void
 }
 
-export const NewMealContext = createContext<NewMealContextType | undefined>(undefined);
+export const MealContext = createContext<MealContextType | undefined>(undefined);
 
-export const NewMealProvider = ({ children }: { children: ReactNode }) => {
+export const MealProvider = ({ children }: { children: ReactNode }) => {
 
   const [mealName, setMealName] = useState<string>("")
 
@@ -64,7 +63,7 @@ export const NewMealProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <NewMealContext.Provider value={{
+    <MealContext.Provider value={{
       mealName, 
       handleInputValue,
       foods,
@@ -74,6 +73,6 @@ export const NewMealProvider = ({ children }: { children: ReactNode }) => {
       
     }}>
       {children}
-    </NewMealContext.Provider>
+    </MealContext.Provider>
   );
 };

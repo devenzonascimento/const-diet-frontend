@@ -1,4 +1,4 @@
-import { useNewMealContext } from "./context/use-meal-context";
+import { useMealContext } from "@/hooks/use-meal-context";
 import { useModalState } from "@/hooks/useModalState";
 
 import { Link } from "react-router-dom";
@@ -14,7 +14,7 @@ export const AddNewMealPage = () => {
 
   const { isOpen, toggleModal } = useModalState()
 
-  const { mealName, handleInputValue, handleCreateMeal } = useNewMealContext()
+  const { mealName, handleInputValue, handleCreateMeal } = useMealContext()
 
   return (
     <div className="h-screen bg-slate-100 px-4">

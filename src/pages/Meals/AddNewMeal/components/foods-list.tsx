@@ -1,4 +1,4 @@
-import { useNewMealContext } from "../context/use-meal-context";
+import { useMealContext } from "@/hooks/use-meal-context"
 
 import { FoodItem } from "./food-item"
 import { Button } from "@/components/ui/button"
@@ -11,7 +11,7 @@ interface FoodsListProps {
 
 export const FoodsList = ({ openFormModal }: FoodsListProps) => {
 
-  const { foods } = useNewMealContext()
+  const { foods } = useMealContext()
 
   return (
     <>

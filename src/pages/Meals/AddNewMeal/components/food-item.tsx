@@ -1,7 +1,10 @@
-import { MealFood } from "@/types/types";
-import { useNewMealContext } from "../context/use-meal-context";
+import { useMealContext } from "@/hooks/use-meal-context";
+
 import { Button } from "@/components/ui/button";
+
 import { Trash2 } from "lucide-react";
+
+import { MealFood } from "@/types/types";
 
 interface FoodItemProps {
   foodItem: MealFood;
@@ -9,7 +12,7 @@ interface FoodItemProps {
 
 export const FoodItem = ({ foodItem: { quantity, unit, food } }: FoodItemProps) => {
 
-  const { removeFoodFromFoodList } = useNewMealContext()
+  const { removeFoodFromFoodList } = useMealContext()
 
   const UNIT: Record<MealFood['unit'], string> = {
     "GRAMS": "g",

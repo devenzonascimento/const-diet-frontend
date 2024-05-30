@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { useForm } from "react-hook-form"
-import { useNewMealContext } from "../context/use-meal-context";
+import { useMealContext } from "@/hooks/use-meal-context"
+
 
 import { getFood } from "@/services/http/food/get-food"
 import { getFoodsList } from "@/services/http/food/get-foods-list"
@@ -35,7 +36,7 @@ export const AddFoodCard = ({ onClose }: AddFoodCardProps) => {
 
   const { register, handleSubmit } = useForm<FormData>()
 
-  const { addFoodToFoodList } = useNewMealContext()
+  const { addFoodToFoodList } = useMealContext()
 
   return (
     <ModalBackdrop onClose={onClose}>

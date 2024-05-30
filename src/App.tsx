@@ -8,6 +8,7 @@ import { EditFoodPage } from './pages/Foods/EditFood/page';
 import { MyMealsPage } from './pages/Meals/MyMeals/page';
 import { PrivateRoute } from "./routes/private-route";
 import { AddNewMealPage } from "./pages/Meals/AddNewMeal/page";
+import { EditMealPage } from "./pages/Meals/EditMeal/page";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,14 @@ const router = createBrowserRouter([
     element: (
       <PrivateRoute >
         <AddNewMealPage />
+      </PrivateRoute>
+    )
+  },
+  {
+    path: "edit-meal/:mealId",
+    element: (
+      <PrivateRoute >
+        <EditMealPage />
       </PrivateRoute>
     )
   },

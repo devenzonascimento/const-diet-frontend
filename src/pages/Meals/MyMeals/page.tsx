@@ -14,7 +14,6 @@ export const MyMealsPage = () => {
         </Link>
       </header>
       <main className="flex flex-col justify-between items-center gap-4 pb-6">
-
         <MealsList />
       </main>
     </div>

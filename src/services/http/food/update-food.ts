@@ -11,5 +11,5 @@ export const updateFood = async ({ foodId, foodData }: UpdateFoodParameters) => 
 
   const response = await api.put(`/users/${userId}/foods/${foodId}`, foodData)
 
-  return response.status === 201
+  return response.status === 200
 }

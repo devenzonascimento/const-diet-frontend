@@ -71,9 +71,5 @@
     font-family: "Poppins", Arial, Helvetica, sans-serif;
     border: 0px solid black;
     outline: none;
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }

@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useRef } from "react";
 
-const useBackdropClose = (onClose: VoidFunction) => {
+export const useBackdropClose = (onClose: VoidFunction) => {
   const backdropRef = useRef<HTMLDialogElement>(null);
 
   const handleCloseModal = (target: EventTarget | null) => {
@@ -22,5 +22,3 @@ const useBackdropClose = (onClose: VoidFunction) => {
 
   return backdropRef as RefObject<HTMLDialogElement>;
 };
-
-export default useBackdropClose

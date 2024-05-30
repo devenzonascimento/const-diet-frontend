@@ -6,7 +6,7 @@ import { updateFood } from "@/services/http/food/update-food";
 
 import { ArrowLeft, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import InputDefault from "@/components/input-default";
+import { InputDefault } from "@/components/input-default";
 
 import { CreateFood, Food } from "@/types/types";
 import { getFood } from "@/services/http/food/get-food";
@@ -15,26 +15,26 @@ interface RouteParams {
   foodId: string;
 }
 
-const EditFoodPage = () => {
+export const EditFoodPage = () => {
 
   const navigate = useNavigate()
-  
+
   const queryClient = useQueryClient()
-  
+
   const params = useParams<keyof RouteParams>() as RouteParams;
-  
+
   const { foodId } = params;
 
   const { data: food } = useQuery({
     queryKey: ["food"],
     queryFn: () => getFood(foodId),
   })
-  
+
   const { register, handleSubmit } = useFoodFormValidation(food)
-  
+
   const { mutateAsync: updateFoodFn } = useMutation({
     mutationFn: updateFood,
-    onSuccess(_, {foodData: { name, calories, ...nutrients }}) {
+    onSuccess(_, { foodData: { name, calories, ...nutrients } }) {
       queryClient.setQueryData(
         ["foodsList"],
         (data: Food[]) => data.map((food) => {
@@ -112,5 +112,3 @@ const EditFoodPage = () => {
     </div>
   );
 };
-
-export default EditFoodPage;

@@ -3,10 +3,10 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getFoodsList } from "@/services/http/food/get-foods-list";
 
-import InputSearch from "@/components/input-search";
-import FoodItem from "./food-item";
+import { InputSearch } from "@/components/input-search";
+import { FoodItem } from "./food-item";
 
-const FoodsList = () => {
+export const FoodsList = () => {
 
   const [searchTerm, setSearchTerm] = useState<string>("");
 
@@ -30,5 +30,3 @@ const FoodsList = () => {
     </>
   );
 };
-
-export default FoodsList;

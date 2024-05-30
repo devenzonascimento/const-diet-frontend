@@ -5,7 +5,7 @@ import { useNewMealContext } from "../context/use-meal-context";
 import { getFood } from "@/services/http/food/get-food"
 import { getFoodsList } from "@/services/http/food/get-foods-list"
 
-import ModalBackdrop from "@/components/modal-backdrop"
+import { ModalBackdrop } from "@/components/modal-backdrop"
 import { Button } from "@/components/ui/button"
 
 import { X, Utensils } from "lucide-react"
@@ -22,7 +22,7 @@ interface FormData {
 
 export const AddFoodCard = ({ onClose }: AddFoodCardProps) => {
 
-  const handleFoodData = async ({foodId, quantity, unit}: FormData) => { 
+  const handleFoodData = async ({ foodId, quantity, unit }: FormData) => {
     const food = await getFood(foodId)
 
     addFoodToFoodList({ quantity, unit, food })
@@ -43,11 +43,11 @@ export const AddFoodCard = ({ onClose }: AddFoodCardProps) => {
         <X size={32} className="absolute top-2 right-2" onClick={onClose} />
         <h1 className="text-2xl font-semibold text-center ">Escolha um alimento</h1>
 
-        <form 
-          className="flex flex-col gap-4" 
+        <form
+          className="flex flex-col gap-4"
           onSubmit={handleSubmit(handleFoodData)}
         >
-          <select 
+          <select
             className="text-lg py-1 px-2 border rounded-md"
             {...register("foodId")}
           >
@@ -71,8 +71,8 @@ export const AddFoodCard = ({ onClose }: AddFoodCardProps) => {
               {...register("quantity")}
             />
 
-            <select 
-               className="w-32 text-lg py-1 px-2 border rounded-md"
+            <select
+              className="w-32 text-lg py-1 px-2 border rounded-md"
               {...register("unit")}
             >
               <option value="GRAMS" >gramas</option>
@@ -80,7 +80,7 @@ export const AddFoodCard = ({ onClose }: AddFoodCardProps) => {
               <option value="UNITS" >unidades</option>
             </select>
           </fieldset>
-      
+
           <Button
             type="submit"
             className="w-full flex gap-4 bg-sky-700 hover:bg-sky-500"

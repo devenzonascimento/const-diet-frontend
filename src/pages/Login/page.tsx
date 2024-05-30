@@ -1,6 +1,6 @@
-import LoginForm from "./components/login-form";
+import { LoginForm } from "./components/login-form";
 
-const LoginPage = () => {
+export const LoginPage = () => {
   //const userId = localStorage.getItem("userId")
   //const token = localStorage.getItem("token")
   //console.log(userId, token)
@@ -13,6 +13,4 @@ const LoginPage = () => {
     </main>
   );
 };
-
-export default LoginPage;
 

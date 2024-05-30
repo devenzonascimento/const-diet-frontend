@@ -1,4 +1,4 @@
-import useBackdropClose from "@/hooks/useBackdropClose";
+import { useBackdropClose } from "@/hooks/useBackdropClose";
 import { ReactNode } from "react";
 
 interface ModalBackdropProps {
@@ -6,7 +6,7 @@ interface ModalBackdropProps {
   children: ReactNode;
 }
 
-const ModalBackdrop = ({ children, onClose }: ModalBackdropProps) => {
+export const ModalBackdrop = ({ children, onClose }: ModalBackdropProps) => {
   const backdropRef = useBackdropClose(onClose);
 
   return (
@@ -18,5 +18,3 @@ const ModalBackdrop = ({ children, onClose }: ModalBackdropProps) => {
     </dialog>
   );
 };
-
-export default ModalBackdrop;

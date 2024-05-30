@@ -6,7 +6,7 @@ interface PrivateRouteProps {
   children: ReactNode;
 }
 
-const PrivateRoute = ({ children }: PrivateRouteProps) => {
+export const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const [isAuth, setIsAuth] = useState<boolean | null>(null);
   const navigate = useNavigate();
 
@@ -34,5 +34,3 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
 
   return isAuth ? children : null;
 };
-
-export default PrivateRoute;

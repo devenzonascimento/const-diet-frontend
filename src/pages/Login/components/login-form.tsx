@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { userLogin } from "@/services/http/login/userLogin";
 
-import InputDefault from "@/components/input-default";
+import {InputDefault} from "@/components/input-default";
 import { Button } from "@/components/ui/button";
 
 const loginSchema = z.object({
@@ -14,7 +14,7 @@ const loginSchema = z.object({
 
 type LoginSchema = z.infer<typeof loginSchema>
 
-const LoginForm = () => {
+export const LoginForm = () => {
 
   const {
     register,
@@ -47,5 +47,3 @@ const LoginForm = () => {
     </form>
   )
 }
-//TODO: Melhorar as frases para error de email e senha
-export default LoginForm

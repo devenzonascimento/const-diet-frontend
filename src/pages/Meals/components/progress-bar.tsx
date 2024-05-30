@@ -1,6 +1,6 @@
 import { Progress } from "@/components/ui/progress";
 
-const ProgressBar = () => {
+export const ProgressBar = () => {
   return (
     <div className=" h-20 w-full flex flex-col justify-center items-center gap-1 px-6 bg-white border-4 border-sky-700 rounded-xl">
       <p className="font-semibold text-xl text-sky-600">Refeições concluídas</p>
@@ -12,5 +12,3 @@ const ProgressBar = () => {
     </div>
   );
 };
-
-export default ProgressBar;

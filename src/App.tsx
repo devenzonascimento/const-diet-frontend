@@ -1,12 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import LoginPage from "./pages/Login/page";
-import MyFoodsPage from './pages/Foods/MyFoods/page';
-import AddNewFoodManuallyPage from './pages/Foods/AddNewFoodManually/page';
-import EditFoodPage from './pages/Foods/EditFoodPage/page';
+import { LoginPage } from "./pages/Login/page";
+import { MyFoodsPage } from './pages/Foods/MyFoods/page';
+import { AddNewFoodPage } from './pages/Foods/AddNewFood/page';
+import { EditFoodPage } from './pages/Foods/EditFood/page';
 
 import { MyMealsPage } from './pages/Meals/MyMeals/page';
-import PrivateRoute from "./routes/private-route";
+import { PrivateRoute } from "./routes/private-route";
 import { AddNewMealPage } from "./pages/Meals/AddNewMeal/page";
 
 const router = createBrowserRouter([
@@ -23,10 +23,10 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: "add-new-food-manually",
+    path: "add-new-food",
     element: (
       <PrivateRoute >
-        <AddNewFoodManuallyPage />
+        <AddNewFoodPage />
       </PrivateRoute>
     )
   },
@@ -56,4 +56,4 @@ const router = createBrowserRouter([
   },
 ])
 
-export const App = () => { return (<RouterProvider router={router}/>) }
+export const App = () => { return (<RouterProvider router={router} />) }

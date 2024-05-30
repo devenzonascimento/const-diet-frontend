@@ -6,7 +6,7 @@ interface MacronutrientsBadgeProps {
   className?: string;
 }
 
-const MacronutrientsBadge = ({ className, nutrients: { carbohydrates, proteins, fats }}: MacronutrientsBadgeProps) => {
+export const MacronutrientsBadge = ({ className, nutrients: { carbohydrates, proteins, fats }}: MacronutrientsBadgeProps) => {
 
   return (
     <div className={cn("w-fit flex justify-center gap-3", className)} >
@@ -28,5 +28,3 @@ const MacronutrientsBadge = ({ className, nutrients: { carbohydrates, proteins, 
     </div>
   );
 };
-
-export default MacronutrientsBadge;

@@ -1,18 +1,19 @@
-import MacronutrientsBadge from "@/components/macronutrient-badges";
-import FoodCardModal from "./food-card-modal";
-import When from "@/components/when";
-import CaloriesBadge from "@/components/calories-badge";
-import useModalSate from "@/hooks/useModalState";
+import { MacronutrientsBadge } from "@/components/macronutrient-badges";
+import { FoodCardModal } from "./food-card-modal";
+import { When } from "@/components/when";
+import { CaloriesBadge } from "@/components/calories-badge";
+import { useModalState } from "@/hooks/useModalState";
+
 import { Food } from "@/types/types";
 
 interface FoodItemProps {
   food: Food;
 }
 
-const FoodItem = ({ food }: FoodItemProps) => {
+export const FoodItem = ({ food }: FoodItemProps) => {
   const { name, calories, ...nutrients } = food;
 
-  const {isOpen, toggleModal} = useModalSate()
+  const { isOpen, toggleModal } = useModalState()
 
   return (
     <>
@@ -31,15 +32,13 @@ const FoodItem = ({ food }: FoodItemProps) => {
           <h2 className="font-semibold text-gray-800">{name}</h2>
           <MacronutrientsBadge nutrients={nutrients} />
         </div>
-        
+
         <CaloriesBadge className="absolute top-0 right-1" calories={calories} />
-   
+
       </li>
       <When expr={isOpen}>
-        <FoodCardModal food={food} onClose={toggleModal}/>
+        <FoodCardModal food={food} onClose={toggleModal} />
       </When>
     </>
   );
 };
-
-export default FoodItem;

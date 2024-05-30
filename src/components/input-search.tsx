@@ -7,7 +7,7 @@ interface InputSearchProps {
   setInputValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const InputSearch = ({ inputValue, setInputValue }: InputSearchProps) => {
+export const InputSearch = ({ inputValue, setInputValue }: InputSearchProps) => {
   return (
     <fieldset className="relative w-full shadow-lg bg-transparent rounded-3xl">
       <Input
@@ -23,5 +23,3 @@ const InputSearch = ({ inputValue, setInputValue }: InputSearchProps) => {
     </fieldset>
   );
 };
-
-export default InputSearch;

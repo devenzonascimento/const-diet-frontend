@@ -1,6 +1,6 @@
 import { calculateTotalNutrients } from "@/functions/calculate-total-nutrients";
 
-import MacronutrientsBadge from "@/components/macronutrient-badges";
+import { MacronutrientsBadge } from "@/components/macronutrient-badges";
 
 import { MealFood } from "@/types/types";
 

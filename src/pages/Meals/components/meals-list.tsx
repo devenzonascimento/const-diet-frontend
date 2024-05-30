@@ -2,7 +2,7 @@ import { MealItem } from "./meal-item";
 import { useQuery } from "@tanstack/react-query";
 import { getMealsList } from "@/services/http/meal/get-meals-list";
 
-const MealsList = () => {
+export const MealsList = () => {
 
   const { data: mealsList } = useQuery({
     queryKey: ["mealsList"],
@@ -17,5 +17,3 @@ const MealsList = () => {
     </ul>
   );
 };
-
-export default MealsList;

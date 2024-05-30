@@ -5,11 +5,9 @@ type WhenProps = {
   children: ReactNode;
 };
 
-const When = ({ expr, children }: WhenProps) => {
+export const When = ({ expr, children }: WhenProps) => {
   if (typeof expr === "function" && !expr()) return <></>;
   if (!expr) return <></>;
 
   return children;
 };
-
-export default When;

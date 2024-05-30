@@ -6,7 +6,7 @@ interface CaloriesBadgeProps {
   className?: string;
 }
 
-const CaloriesBadge = ({ className, calories }: CaloriesBadgeProps) => {
+export const CaloriesBadge = ({ className, calories }: CaloriesBadgeProps) => {
   return (
     <div className={cn("flex items-center gap-0.5", className)}>
       <Flame className="text-red-600 fill-yellow-500" size={20} />
@@ -17,5 +17,3 @@ const CaloriesBadge = ({ className, calories }: CaloriesBadgeProps) => {
     </div>
   );
 };
-
-export default CaloriesBadge;

@@ -1,10 +1,10 @@
 import { useNewMealContext } from "./context/use-meal-context";
-import useModalState from "@/hooks/useModalState";
+import { useModalState } from "@/hooks/useModalState";
 
 import { Link } from "react-router-dom";
 
 import { FoodsList } from "./components/foods-list";
-import When from "@/components/when";
+import { When } from "@/components/when";
 import { AddFoodCard } from "./components/add-food-card";
 import { Button } from "@/components/ui/button";
 
@@ -37,7 +37,7 @@ export const AddNewMealPage = () => {
               className=" w-full text-lg font-semibold text-sky-900 text-center bg-transparent"
             />
           </fieldset>
-          <FoodsList openFormModal={toggleModal}/>
+          <FoodsList openFormModal={toggleModal} />
         </div>
 
         <Button

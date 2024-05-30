@@ -3,14 +3,14 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { createFood } from "@/services/http/food/create-food";
 
-import InputDefault from "@/components/input-default";
+import { InputDefault } from "@/components/input-default";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { CreateFood, Food } from "@/types/types";
 
-const AddNewFoodManuallyPage = () => {
+export const AddNewFoodPage = () => {
 
   const navigate = useNavigate()
 
@@ -106,5 +106,3 @@ const AddNewFoodManuallyPage = () => {
     </div>
   );
 };
-
-export default AddNewFoodManuallyPage;

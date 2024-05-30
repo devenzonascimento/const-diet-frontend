@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import useToggleState from "@/hooks/useToggleState";
+import { useToggleState } from "@/hooks/useToggleState";
 
 import { getFoodsFromMeal } from "@/services/http/food/get-foods-from-meal";
 import { calculateTotalCalories } from "@/functions/calculate-total-calories";
@@ -8,7 +8,7 @@ import { MealDescription } from "./meal-description";
 import { ChevronButton } from "./chevron-button";
 
 import { Meal } from "@/types/types";
-import CaloriesBadge from "@/components/calories-badge";
+import { CaloriesBadge } from "@/components/calories-badge";
 import { deleteMeal } from "@/services/http/meal/delete-meal";
 
 interface MealItemProps {

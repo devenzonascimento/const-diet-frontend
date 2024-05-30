@@ -7,7 +7,7 @@ type  InputDefaultProps = InputHTMLAttributes<HTMLInputElement> & LabelProps
 
 import { InputHTMLAttributes, forwardRef } from "react";
 
-const InputDefault = forwardRef<HTMLInputElement, InputDefaultProps>(
+export const InputDefault = forwardRef<HTMLInputElement, InputDefaultProps>(
   ({ label = "", type = "text", name = "", errorMessage = "", ...props }, ref) => {
     return (
       <fieldset className="w-full flex flex-col">
@@ -26,5 +26,3 @@ const InputDefault = forwardRef<HTMLInputElement, InputDefaultProps>(
     );
   }
 );
-
-export default InputDefault;

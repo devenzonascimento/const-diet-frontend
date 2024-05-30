@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 
-import FoodsList from "./components/foods-list";
+import { FoodsList } from "./components/foods-list";
 
 import { ArrowLeft, CirclePlus } from "lucide-react";
 
-const MyFoodsPage = () => {
+export const MyFoodsPage = () => {
 
   return (
     <div className="h-screen bg-slate-100 px-4">
       <header className="relative flex justify-center items-center py-4">
         <ArrowLeft size={32} className="absolute top-4 left-0" />
         <h1 className="text-xl font-semibold">Meus alimentos</h1>
-        <Link to="/add-new-food-manually">
+        <Link to="/add-new-food">
           <CirclePlus size={32} className="absolute top-4 right-0" />
         </Link>
       </header>
@@ -21,5 +21,3 @@ const MyFoodsPage = () => {
     </div>
   );
 };
-
-export default MyFoodsPage;

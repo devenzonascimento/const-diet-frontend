@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 
-import ModalBackdrop from "@/components/modal-backdrop";
+import { ModalBackdrop } from "@/components/modal-backdrop";
 import { X } from "lucide-react";
-import CaloriesBadge from "@/components/calories-badge";
-import MacronutrientsBadge from "@/components/macronutrient-badges";
+import { CaloriesBadge } from "@/components/calories-badge";
+import { MacronutrientsBadge } from "@/components/macronutrient-badges";
 import { Button } from "@/components/ui/button";
 import { DeleteButton } from "./delete-button";
 
@@ -17,7 +17,7 @@ interface FoodCardModalProps {
   onClose: VoidFunction;
 }
 
-const FoodCardModal = ({
+export const FoodCardModal = ({
   onClose,
   food: { id, name, calories, ...nutrients },
 }: FoodCardModalProps) => {
@@ -74,5 +74,3 @@ const FoodCardModal = ({
     </ModalBackdrop>
   );
 };
-
-export default FoodCardModal;

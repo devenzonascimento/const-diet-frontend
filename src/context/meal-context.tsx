@@ -5,6 +5,7 @@ import { createMeal } from '@/services/http/meal/create-meal';
 import { MealFood } from '@/types/types';
 import { getFoodsFromMeal } from '@/services/http/food/get-foods-from-meal';
 import { getMeal } from '@/services/http/meal/get-meal';
+import { updateMeal } from '@/services/http/meal/update-meal';
 
 interface MealContextType {
   mealName: string
@@ -13,6 +14,7 @@ interface MealContextType {
   addFoodToFoodList: (food: MealFood) => void
   removeFoodFromFoodList: (foodId: string) => void
   handleCreateMeal: () => void
+  handleUpdateMeal: () => void
   loadMealById: (mealId: string) => void
 }
 
@@ -66,7 +68,24 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     })
   }
 
+  const handleUpdateMeal = () => {
 
+    if (mealName == "" || foods.length == 0) {
+      return
+    }
+
+    updateMeal({
+      mealId,
+      mealName,
+      foods: foods.map((foodItem) => {
+        return {
+          foodId: foodItem.food.id,
+          quantity: Number(foodItem.quantity),
+          unit: foodItem.unit
+        }
+      })
+    })
+  }
 
 
 
@@ -105,6 +124,7 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
       addFoodToFoodList,
       removeFoodFromFoodList,
       handleCreateMeal,
+      handleUpdateMeal,
       loadMealById
     }}>
       {children}

@@ -19,7 +19,7 @@ export const EditMealPage = () => {
 
   const { isOpen, toggleModal } = useModalState()
 
-  const { mealName, handleInputValue, handleCreateMeal, loadMealById } = useMealContext()
+  const { mealName, handleInputValue, handleUpdateMeal, loadMealById } = useMealContext()
 
   const params = useParams<keyof RouteParams>() as RouteParams;
 
@@ -56,7 +56,7 @@ export const EditMealPage = () => {
         <Button
           type="submit"
           className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
-          onClick={handleCreateMeal}
+          onClick={handleUpdateMeal}
         >
           <Soup />
           Salvar alterações

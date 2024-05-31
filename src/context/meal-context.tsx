@@ -24,9 +24,6 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
 
   const [mealId, setMealId] = useState<string>("")
 
-
-
-
   const [mealName, setMealName] = useState<string>("")
 
   const [foods, setFoods] = useState<MealFood[]>([])
@@ -66,6 +63,9 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
         }
       })
     })
+
+    setFoods([])
+    setMealName("")
   }
 
   const handleUpdateMeal = () => {
@@ -85,6 +85,9 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
         }
       })
     })
+
+    setFoods([])
+    setMealName("")
   }
 
 

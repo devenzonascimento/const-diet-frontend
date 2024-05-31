@@ -53,14 +53,16 @@ export const EditMealPage = () => {
           <FoodsList openFormModal={toggleModal} />
         </div>
 
-        <Button
-          type="submit"
-          className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
-          onClick={handleUpdateMeal}
-        >
-          <Soup />
-          Salvar alterações
-        </Button>
+        <Link className="" to={"/my-meals"}>
+          <Button
+            type="submit"
+            className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
+            onClick={handleUpdateMeal}
+          >
+            <Soup />
+            Salvar alterações
+          </Button>
+        </Link>
         <When expr={isOpen}>
           <AddFoodCard onClose={toggleModal} />
         </When>

@@ -40,14 +40,17 @@ export const AddNewMealPage = () => {
           <FoodsList openFormModal={toggleModal} />
         </div>
 
-        <Button
-          type="submit"
-          className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
-          onClick={handleCreateMeal}
-        >
-          <Soup />
-          Criar refeição
-        </Button>
+        <Link className="w-full" to={"/my-meals"}>
+          <Button
+            type="submit"
+            className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
+            onClick={handleCreateMeal}
+          >
+            <Soup />
+            Criar refeição
+          </Button>
+        </Link>
+
         <When expr={isOpen}>
           <AddFoodCard onClose={toggleModal} />
         </When>

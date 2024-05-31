@@ -32,8 +32,6 @@ export interface Nutrients {
 export interface Meal {
   id: string;
   name: string;
-  type?: string;
-  description?: string;
   foods: MealFood[];
 }
 

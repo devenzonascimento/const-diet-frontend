@@ -18,7 +18,7 @@ export const MealDescription = ({ foods }: MealDescriptionProps) => {
       <ul className="flex flex-col gap-2 rounded-lg list-disc pl-8 py-2" >
         {foods?.map((foodItem) => {
           return (
-            <li key={foodItem.id} className="w-full p-1 text-sky-700">
+            <li key={foodItem.food.id} className="w-full p-1 text-sky-700">
               {`${foodItem.quantity}${UNIT[foodItem.unit]} de ${foodItem.food.name}`}
             </li>
           );

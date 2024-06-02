@@ -53,7 +53,7 @@ export const EditMealPage = () => {
           <FoodsList openFormModal={toggleModal} />
         </div>
 
-        <Link className="" to={"/my-meals"}>
+        <Link className="w-full" to="/my-meals">
           <Button
             type="submit"
             className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"

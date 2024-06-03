@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/button";
 
 import { ArrowLeft, Soup } from "lucide-react";
 import { useEffect } from "react";
+import { getMeal } from "@/services/http/meal/get-meal";
+import { useQuery } from "@tanstack/react-query";
 
 interface RouteParams {
   mealId: string;
@@ -19,13 +21,21 @@ export const EditMealPage = () => {
 
   const { isOpen, toggleModal } = useModalState()
 
-  const { mealName, handleInputValue, handleUpdateMeal, loadMealById } = useMealContext()
+  const { mealName, handleInputValue, handleUpdateMeal, loadMealData } = useMealContext()
 
   const { mealId } = useParams<keyof RouteParams>() as RouteParams;
 
+  const {data: meal, isPending} = useQuery({ 
+    queryKey: [`meal-${mealId}`],
+    queryFn: () => getMeal(mealId)
+  })
+
   useEffect(() => {
-    loadMealById(mealId);
-  }, [mealId, loadMealById]);
+    if (meal) {
+      loadMealData(meal)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPending])
 
   return (
     <div className="h-screen bg-slate-100 px-4">

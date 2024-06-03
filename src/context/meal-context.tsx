@@ -37,6 +37,16 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
 
     if (!existsInFoods) {
       setFoods([...foods, food])
+    } else {
+      const newFoods = foods.map((foodItem) => {
+        return foodItem.food.id === food.food.id 
+        ? 
+        { ...foodItem, quantity: Number(foodItem.quantity) + Number(food.quantity) } 
+        : 
+        foodItem
+      })
+
+      setFoods([...newFoods])
     }
   }
 

@@ -1,12 +1,10 @@
-import { createContext, useState, ReactNode, useEffect, useCallback } from 'react';
+import { createContext, useState, ReactNode } from 'react';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { createMeal } from '@/services/http/meal/create-meal';
+import { updateMeal } from '@/services/http/meal/update-meal';
 
 import { Meal, MealFood } from '@/types/types';
-import { getFoodsFromMeal } from '@/services/http/food/get-foods-from-meal';
-import { getMeal } from '@/services/http/meal/get-meal';
-import { updateMeal } from '@/services/http/meal/update-meal';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface MealContextType {
   mealName: string
@@ -16,7 +14,8 @@ interface MealContextType {
   removeFoodFromFoodList: (foodId: string) => void
   handleCreateMeal: () => void
   handleUpdateMeal: () => void
-  loadMealById: (mealId: string) => void
+  loadMealData: (mealData: Meal) => void
+  clearContext: () => void
 }
 
 export const MealContext = createContext<MealContextType | undefined>(undefined);
@@ -37,6 +36,7 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
 
     if (!existsInFoods) {
       setFoods([...foods, food])
+
     } else {
       const newFoods = foods.map((foodItem) => {
         return foodItem.food.id === food.food.id 
@@ -70,6 +70,26 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     },
   })
 
+  const { mutateAsync: updateMealFn } = useMutation({
+    mutationFn: updateMeal,
+    onSuccess() {
+      queryClient.setQueryData(
+        ["mealsList"],
+        (data: Meal[]) => data.map((mealItem) => {
+          return mealItem.id === mealId
+          ?
+          { 
+            id: mealId,
+            name: mealName,
+            foods: foods
+          }
+          :
+          mealItem
+        })
+      )
+    },
+  })
+
   const handleCreateMeal = async () => {
 
     await createMealFn({
@@ -87,13 +107,13 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     setMealName("")
   }
 
-  const handleUpdateMeal = () => {
+  const handleUpdateMeal = async () => {
 
     if (mealName == "" || foods.length == 0) {
       return
     }
 
-    updateMeal({
+    await updateMealFn({
       mealId,
       mealName,
       foods: foods.map((foodItem) => {
@@ -104,35 +124,18 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
         }
       })
     })
+  }
 
-    setFoods([])
+  const loadMealData = (mealData: Meal) => {
+    setMealId(mealData.id)
+    setMealName(mealData.name)
+    setFoods(mealData.foods)
+  }
+
+  const clearContext = () => {
     setMealName("")
+    setFoods([])
   }
-
-
-
-
-  const loadMealById = (mealId: string) => {
-    setMealId(mealId)
-  }
-
-  const loadMealData = useCallback(async () => {
-    if (mealId) {
-      const foodsInMeal = await getFoodsFromMeal(mealId);
-      if (foodsInMeal) {
-        setFoods(foodsInMeal);
-      }
-
-      const meal = await getMeal(mealId);
-      if (meal) {
-        setMealName(meal.name);
-      }
-    }
-  }, [mealId]);
-
-  useEffect(() => {
-    loadMealData();
-  }, [mealId, loadMealData]);
 
   const handleInputValue = (inputValue: string) => {
     setMealName(inputValue)
@@ -147,7 +150,8 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
       removeFoodFromFoodList,
       handleCreateMeal,
       handleUpdateMeal,
-      loadMealById,
+      loadMealData,
+      clearContext
     }}>
       {children}
     </MealContext.Provider>

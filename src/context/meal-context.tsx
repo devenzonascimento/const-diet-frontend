@@ -2,10 +2,11 @@ import { createContext, useState, ReactNode, useEffect, useCallback } from 'reac
 
 import { createMeal } from '@/services/http/meal/create-meal';
 
-import { MealFood } from '@/types/types';
+import { Meal, MealFood } from '@/types/types';
 import { getFoodsFromMeal } from '@/services/http/food/get-foods-from-meal';
 import { getMeal } from '@/services/http/meal/get-meal';
 import { updateMeal } from '@/services/http/meal/update-meal';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface MealContextType {
   mealName: string
@@ -40,20 +41,28 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
   }
 
   const removeFoodFromFoodList = (foodId: string) => {
-    const newFoods = foods.filter((food) => {
-      return food.food.id !== foodId
+    const newFoods = foods.filter((foodItem) => {
+      return foodItem.food.id !== foodId
     })
-
+    console.log(foodId)
     setFoods([...newFoods])
   }
 
+  const queryClient = useQueryClient()
+
+  const { mutateAsync: createMealFn } = useMutation({
+    mutationFn: createMeal,
+    onSuccess() {
+      queryClient.setQueryData(
+        ["mealsList"],
+        (data: Meal[]) => [...data, { id: crypto.randomUUID(), name: mealName, foods: foods }]
+      )
+    },
+  })
+
   const handleCreateMeal = () => {
 
-    if (mealName == "" || foods.length == 0) {
-      return
-    }
-
-    createMeal({
+    createMealFn({
       name: mealName,
       foods: foods.map((foodItem) => {
         return {
@@ -64,8 +73,8 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
       })
     })
 
-    setFoods([])
-    setMealName("")
+    //setFoods([])
+    //setMealName("")
   }
 
   const handleUpdateMeal = () => {
@@ -92,7 +101,7 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
 
 
 
-  
+
   const loadMealById = (mealId: string) => {
     setMealId(mealId)
   }
@@ -121,14 +130,14 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <MealContext.Provider value={{
-      mealName, 
+      mealName,
       handleInputValue,
       foods,
       addFoodToFoodList,
       removeFoodFromFoodList,
       handleCreateMeal,
       handleUpdateMeal,
-      loadMealById
+      loadMealById,
     }}>
       {children}
     </MealContext.Provider>

@@ -6,9 +6,21 @@ export const MealsListLoading = () => {
 
   return (
     <ul className="w-full flex flex-col gap-6">
-      {loadingElemntsArray?.map((data) => (
-        <Skeleton key={data} className="w-full h-16 flex flex-col gap-2 bg-white rounded-xl shadow-xl border-4 border-sky-700"></Skeleton>
+      {loadingElemntsArray.map((data) => (
+        <MealItemLoading key={data} />
       ))}
     </ul>
+  )
+}
+
+const MealItemLoading = () => {
+  return (
+    <Skeleton
+      className="w-full h-16 flex items-center gap-2 p-1 bg-white rounded-xl shadow-xl border-4 border-sky-700"
+    >
+      <Skeleton className="w-6 h-6 bg-sky-700"/>
+      <Skeleton className="w-56 h-4 bg-sky-700"/>
+      <Skeleton className="w-14 h-6 ml-auto bg-sky-700"/>
+    </Skeleton>
   )
 }

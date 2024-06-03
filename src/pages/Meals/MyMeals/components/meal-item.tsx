@@ -1,7 +1,6 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToggleState } from "@/hooks/useToggleState";
 
-import { getFoodsFromMeal } from "@/services/http/food/get-foods-from-meal";
 import { deleteMeal } from "@/services/http/meal/delete-meal";
 import { calculateTotalCalories } from "@/functions/calculate-total-calories";
 
@@ -24,11 +23,6 @@ export const MealItem = ({ meal }: MealItemProps) => {
   
   const queryClient = useQueryClient()
 
-  const { data: foods } = useQuery({
-    queryKey: [`foodsFromMeal-${meal.id}`],
-    queryFn: () => getFoodsFromMeal(meal.id),
-  })
-
   const { mutateAsync: deleteMealFn } = useMutation({
     mutationFn: deleteMeal,
     onSuccess() {
@@ -48,14 +42,14 @@ export const MealItem = ({ meal }: MealItemProps) => {
         <h2 className=" w-full text-lg font-semibold text-sky-700">
           {meal.name}
         </h2>
-        <CaloriesBadge calories={calculateTotalCalories(foods)} />
+        <CaloriesBadge calories={calculateTotalCalories(meal.foods)} />
       </div>
 
       <div
         style={{ display: booleanExp ? "flex" : "none" }}
         className="flex flex-col gap-2 p-4 border-t-2 border-gray-300"
       >
-        <MealDescription foods={foods} />
+        <MealDescription foods={meal.foods} />
 
         <Button className="w-full bg-white text-sky-700 border-2 border-sky-700">
           Ver mais detalhes

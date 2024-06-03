@@ -8,7 +8,7 @@ import { Meal, MealFood } from '@/types/types';
 
 interface MealContextType {
   mealName: string
-  handleInputValue: (inputValue: string) => void
+  handleInputMealName: (inputValue: string) => void
   foods: MealFood[]
   addFoodToFoodList: (food: MealFood) => void
   removeFoodFromFoodList: (foodId: string) => void
@@ -137,14 +137,14 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     setFoods([])
   }
 
-  const handleInputValue = (inputValue: string) => {
+  const handleInputMealName = (inputValue: string) => {
     setMealName(inputValue)
   }
 
   return (
     <MealContext.Provider value={{
       mealName,
-      handleInputValue,
+      handleInputMealName,
       foods,
       addFoodToFoodList,
       removeFoodFromFoodList,

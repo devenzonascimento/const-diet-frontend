@@ -44,7 +44,7 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     const newFoods = foods.filter((foodItem) => {
       return foodItem.food.id !== foodId
     })
-    console.log(foodId)
+
     setFoods([...newFoods])
   }
 
@@ -60,21 +60,21 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     },
   })
 
-  const handleCreateMeal = () => {
+  const handleCreateMeal = async () => {
 
-    createMealFn({
+    await createMealFn({
       name: mealName,
-      foods: foods.map((foodItem) => {
+      foods: foods.map(({ food, quantity, unit }) => {
         return {
-          foodId: foodItem.food.id,
-          quantity: Number(foodItem.quantity),
-          unit: foodItem.unit
+          foodId: food.id,
+          quantity: Number(quantity),
+          unit
         }
       })
     })
 
-    //setFoods([])
-    //setMealName("")
+    setFoods([])
+    setMealName("")
   }
 
   const handleUpdateMeal = () => {

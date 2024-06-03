@@ -7,6 +7,7 @@ import { FoodsList } from "./components/foods-list";
 import { When } from "@/components/when";
 import { AddFoodCard } from "./components/add-food-card";
 import { Button } from "@/components/ui/button";
+import { Loading } from "./components/loading";
 
 import { ArrowLeft, Soup } from "lucide-react";
 import { useEffect } from "react";
@@ -37,6 +38,10 @@ export const EditMealPage = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPending])
 
+  if (isPending) {
+    return <Loading />
+  }
+
   return (
     <div className="h-screen bg-slate-100 px-4">
       <header className="relative flex justify-center items-center py-4">
@@ -47,6 +52,7 @@ export const EditMealPage = () => {
       </header>
 
       <main className="flex flex-col justify-center items-center gap-8 pb-6">
+
         <div className="w-full min-h-40 flex flex-col items-center border-4 border-sky-700 rounded-md">
           <fieldset className="w-full p-1 border-b-4 border-sky-700">
             <input
@@ -71,9 +77,11 @@ export const EditMealPage = () => {
             Salvar alterações
           </Button>
         </Link>
+
         <When expr={isOpen}>
           <AddFoodCard onClose={toggleModal} />
         </When>
+        
       </main>
     </div>
   );

@@ -9,12 +9,18 @@ import { AddFoodCard } from "./components/add-food-card";
 import { Button } from "@/components/ui/button";
 
 import { ArrowLeft, Soup } from "lucide-react";
+import { useEffect } from "react";
 
 export const AddNewMealPage = () => {
 
   const { isOpen, toggleModal } = useModalState()
 
-  const { mealName, handleInputValue, handleCreateMeal } = useMealContext()
+  const { mealName, handleInputValue, handleCreateMeal, clearContext } = useMealContext()
+
+  useEffect(() => {
+    clearContext()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className="h-screen bg-slate-100 px-4">

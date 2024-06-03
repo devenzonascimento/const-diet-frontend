@@ -21,9 +21,7 @@ export const EditMealPage = () => {
 
   const { mealName, handleInputValue, handleUpdateMeal, loadMealById } = useMealContext()
 
-  const params = useParams<keyof RouteParams>() as RouteParams;
-
-  const { mealId } = params;
+  const { mealId } = useParams<keyof RouteParams>() as RouteParams;
 
   useEffect(() => {
     loadMealById(mealId);

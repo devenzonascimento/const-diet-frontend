@@ -75,7 +75,7 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     onSuccess() {
       queryClient.setQueryData(
         ["mealsList"],
-        (data: Meal[]) => data.map((mealItem) => {
+        (data: Meal[]) => data?.map((mealItem) => {
           return mealItem.id === mealId
           ?
           { 

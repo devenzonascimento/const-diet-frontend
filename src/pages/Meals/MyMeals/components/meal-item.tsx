@@ -12,6 +12,9 @@ import { Button } from "@/components/ui/button";
 import { DeleteButton } from "./delete-button";
 
 import { Meal } from "@/types/types";
+import { useModalState } from "@/hooks/useModalState";
+import { MealDetails } from "./meal-details";
+import { When } from "@/components/when";
 
 interface MealItemProps {
   meal: Meal;
@@ -20,6 +23,7 @@ interface MealItemProps {
 export const MealItem = ({ meal }: MealItemProps) => {
 
   const { booleanExp, toggleBooleanExp } = useToggleState();
+  const { isOpen, toggleModal } = useModalState()
   
   const queryClient = useQueryClient()
 
@@ -51,9 +55,16 @@ export const MealItem = ({ meal }: MealItemProps) => {
       >
         <MealDescription foods={meal.foods} />
 
-        <Button className="w-full bg-white text-sky-700 border-2 border-sky-700">
+        <Button className="w-full bg-white text-sky-700 border-2 border-sky-700"
+          onClick={toggleModal}
+        >
           Ver mais detalhes
         </Button>
+
+        <When expr={isOpen}>
+
+        <MealDetails meal={meal} onClose={toggleModal}/>
+        </When>
 
         <div className="grid grid-cols-2 gap-2">
           <Link to={`/edit-meal/${meal.id}`}>

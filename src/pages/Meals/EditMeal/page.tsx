@@ -45,7 +45,7 @@ export const EditMealPage = () => {
 
   return (
     <div className="h-screen bg-slate-100 px-4">
-      <header className="relative flex justify-center items-center py-4">
+      <header className="relative flex justify-center items-center py-4 text-sky-950">
         <Link to="/my-meals">
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>

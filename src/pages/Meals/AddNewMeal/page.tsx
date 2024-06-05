@@ -15,7 +15,7 @@ export const AddNewMealPage = () => {
 
   const { isOpen, toggleModal } = useModalState()
 
-  const { mealName, handleInputValue, handleCreateMeal, clearContext } = useMealContext()
+  const { mealName, handleInputMealName, handleCreateMeal, clearContext } = useMealContext()
 
   useEffect(() => {
     clearContext()
@@ -24,7 +24,7 @@ export const AddNewMealPage = () => {
 
   return (
     <div className="h-screen bg-slate-100 px-4">
-      <header className="relative flex justify-center items-center py-4">
+      <header className="relative flex justify-center items-center py-4 text-sky-950">
         <Link to="/my-meals">
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>
@@ -39,7 +39,7 @@ export const AddNewMealPage = () => {
               placeholder="Nome da refeição"
               value={mealName}
               maxLength={30}
-              onChange={({ target }) => handleInputValue(target.value)}
+              onChange={({ target }) => handleInputMealName(target.value)}
               className=" w-full text-lg font-semibold text-sky-900 text-center bg-transparent"
             />
           </fieldset>

@@ -45,7 +45,7 @@ export const AddNewFoodPage = () => {
 
   return (
     <div className="h-screen bg-gray-00 px-4">
-      <header className="relative flex justify-center items-center py-4">
+      <header className="relative flex justify-center items-center py-4 text-sky-950">
         <Link to="/my-foods">
           <ArrowLeft
             className="absolute top-4 left-0"

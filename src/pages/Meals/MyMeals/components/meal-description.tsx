@@ -1,3 +1,4 @@
+import { UNIT } from "@/constants/constants";
 import { MealFood } from "@/types/types";
 
 interface MealDescriptionProps {
@@ -5,12 +6,6 @@ interface MealDescriptionProps {
 }
 
 export const MealDescription = ({ foods }: MealDescriptionProps) => {
-
-  const UNIT: Record<MealFood['unit'], string> = {
-    "GRAMS": "g",
-    "MILILITERS": "ml",
-    "UNITS": "u",
-  }
 
   return (
     <>

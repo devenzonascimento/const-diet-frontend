@@ -1,18 +1,16 @@
 import { useFoodFormValidation } from "@/hooks/useFoodFormValidation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 import { createFood } from "@/services/http/food/create-food";
 
 import { InputDefault } from "@/components/input-default";
-import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { CreateFood, Food } from "@/types/types";
 
 export const AddNewFoodPage = () => {
-
-  const navigate = useNavigate()
 
   const { register, handleSubmit } = useFoodFormValidation()
 
@@ -38,7 +36,6 @@ export const AddNewFoodPage = () => {
 
   const onSubmit = (data: CreateFood) => {
     createFoodFn(data)
-    navigate("/my-foods")
   }
 
   return (
@@ -96,9 +93,11 @@ export const AddNewFoodPage = () => {
             {...register("fibers")}
           />
 
-          <Button type="submit" className="w-full bg-sky-700 hover:bg-sky-500">
-            Salvar alimento
-          </Button>
+          <Link to="/my-foods">
+            <Button type="submit" className="w-full bg-sky-700 hover:bg-sky-500">
+              Salvar alimento
+            </Button>
+          </Link>
         </form>
       </main>
     </div>

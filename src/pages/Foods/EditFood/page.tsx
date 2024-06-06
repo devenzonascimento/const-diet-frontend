@@ -1,7 +1,8 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFoodFormValidation } from "@/hooks/useFoodFormValidation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Link, useParams } from "react-router-dom";
 
+import { getFood } from "@/services/http/food/get-food";
 import { updateFood } from "@/services/http/food/update-food";
 
 import { ArrowLeft, Camera } from "lucide-react";
@@ -9,15 +10,12 @@ import { Button } from "@/components/ui/button";
 import { InputDefault } from "@/components/input-default";
 
 import { CreateFood, Food } from "@/types/types";
-import { getFood } from "@/services/http/food/get-food";
 
 interface RouteParams {
   foodId: string;
 }
 
 export const EditFoodPage = () => {
-
-  const navigate = useNavigate()
 
   const queryClient = useQueryClient()
 
@@ -44,7 +42,6 @@ export const EditFoodPage = () => {
 
   const onSubmit = (data: CreateFood) => {
     updateFoodFn({ foodId, foodData: data })
-    navigate("/my-foods")
   }
 
   return (
@@ -102,9 +99,11 @@ export const EditFoodPage = () => {
             {...register("fibers")}
           />
 
-          <Button type="submit" className="w-full bg-sky-700 hover:bg-sky-500">
-            Salvar alimento
-          </Button>
+          <Link to="/my-foods">
+            <Button type="submit" className="w-full bg-sky-700 hover:bg-sky-500">
+              Salvar alimento
+            </Button>
+          </Link>
         </form>
       </main>
     </div>

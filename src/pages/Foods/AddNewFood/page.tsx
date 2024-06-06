@@ -26,13 +26,11 @@ export const AddNewFoodPage = () => {
           id: crypto.randomUUID,
           name: variables.name,
           calories: variables.calories,
-          nutrients: {
-            carbohydrates: variables.carbohydrates,
-            proteins: variables.proteins,
-            fats: variables.fats,
-            sodiums: variables.sodiums,
-            fibers: variables.fibers,
-          }
+          carbohydrates: variables.carbohydrates,
+          proteins: variables.proteins,
+          fats: variables.fats,
+          sodiums: variables.sodiums,
+          fibers: variables.fibers,
         }]
       })
     },

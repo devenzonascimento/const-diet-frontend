@@ -35,6 +35,7 @@ export const EditFoodPage = () => {
   const { mutateAsync: updateFoodFn } = useMutation({
     mutationFn: updateFood,
     onSuccess(_, { foodData }) {
+      foodData.id = foodId
       queryClient.setQueryData(
         ["foodsList"],
         (data: Food[]) => data.map((food) => food.id === foodId ? foodData : food)

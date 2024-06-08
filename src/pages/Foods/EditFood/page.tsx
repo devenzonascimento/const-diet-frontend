@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import { CreateFood, Food } from "@/types/types";
 
 import { UNIT_OPTIONS } from "@/constants/constants";
-import { convertToBase100 } from "@/functions/convert-to-base-100";
 
 interface RouteParams {
   foodId: string;
@@ -38,7 +37,8 @@ export const EditFoodPage = () => {
 
   const { mutateAsync: updateFoodFn } = useMutation({
     mutationFn: updateFood,
-    onSuccess(_, foodData) {
+    onSuccess(_, { foodData }) {
+      foodData.id = foodId
       queryClient.setQueryData(
         ["foodsList"],
         (data: Food[]) => data.map((food) => food.id === foodId ? foodData : food)
@@ -47,10 +47,7 @@ export const EditFoodPage = () => {
   })
 
   const onSubmit = (data: CreateFood) => {
-    const food = convertToBase100(data)
-
-    updateFoodFn({ id: foodId, ...food })
-    
+    updateFoodFn({ foodId, foodData: data })
     navigate("/my-foods")
   }
 

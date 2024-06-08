@@ -2,14 +2,17 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useFoodFormValidation } from "@/hooks/use-food-form-validation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
+import { getFood } from "@/services/http/food/get-food";
 import { updateFood } from "@/services/http/food/update-food";
 
 import { ArrowLeft, Camera } from "lucide-react";
+import { DefaultInput } from "@/components/default-input";
+import { SelectInput } from "@/components/select-input";
 import { Button } from "@/components/ui/button";
-import { InputDefault } from "@/components/input-default";
 
 import { CreateFood, Food } from "@/types/types";
-import { getFood } from "@/services/http/food/get-food";
+
+import { UNIT_OPTIONS } from "@/constants/constants";
 
 interface RouteParams {
   foodId: string;
@@ -67,39 +70,53 @@ export const EditFoodPage = () => {
           className="w-full flex flex-col gap-6 py-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <InputDefault
+          <DefaultInput
             id="foodName-input"
             label="Nome do alimento"
             {...register("name")}
           />
-          <InputDefault
-            id="carbo-input"
+          <fieldset className="w-full grid grid-cols-2 gap-4">
+            <DefaultInput
+              id="quantity-input"
+              label="Quantidade"
+              {...register("quantity")}
+            />
+
+            <SelectInput
+              id="unit-input"
+              label="Unidade"
+              options={UNIT_OPTIONS}
+              {...register("unit")}
+            />
+          </fieldset>
+          <DefaultInput
+            id="calories-input"
             label="Calorias"
             {...register("calories")}
           />
-          <InputDefault
+          <DefaultInput
             id="carbo-input"
             label="Carboidratos em gramas"
             {...register("carbohydrates")}
           />
-          <InputDefault
+          <DefaultInput
             id="protein-input"
             label="Proteínas em gramas"
             {...register("proteins")}
           />
-          <InputDefault
+          <DefaultInput
             id="fat-input"
             label="Gorduras em gramas"
             {...register("fats")}
           />
-          <InputDefault
+          <DefaultInput
             id="sodium-input"
             label="Sódios em gramas"
             {...register("sodiums")}
           />
-          <InputDefault
+          <DefaultInput
             id="fiber-input"
-            label="Fibra em gramas"
+            label="Fibras em gramas"
             {...register("fibers")}
           />
 

@@ -1,6 +1,7 @@
 export interface Food {
   id: string;
   name: string;
+  unit: "GRAMS" | "MILILITERS";
   calories: number;
   carbohydrates: number;
   proteins: number;
@@ -19,7 +20,6 @@ export interface CreateFood {
   sodiums: number;
   fibers: number;
 }
- 
 
 export interface Nutrients {
   carbohydrates: number;

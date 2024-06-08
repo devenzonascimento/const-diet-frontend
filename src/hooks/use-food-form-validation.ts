@@ -1,10 +1,10 @@
-import { useEffect } from "react"
+import { useEffect } from "react";
 
-import { z } from "zod"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { Food } from "@/types/types"
+import { Food } from "@/types/types";
 
 const foodFormSchema = z.object({
   name: z.string().min(3),
@@ -16,15 +16,14 @@ const foodFormSchema = z.object({
   fats: z.coerce.number(),
   sodiums: z.coerce.number(),
   fibers: z.coerce.number(),
-})
+});
 
-type FoodFormSchema = z.infer<typeof foodFormSchema>
+type FoodFormSchema = z.infer<typeof foodFormSchema>;
 
 export const useFoodFormValidation = (food?: Food) => {
-  
   const { register, handleSubmit, setValue } = useForm<FoodFormSchema>({
     resolver: zodResolver(foodFormSchema),
-    defaultValues: food
+    defaultValues: food,
   });
 
   useEffect(() => {
@@ -32,11 +31,12 @@ export const useFoodFormValidation = (food?: Food) => {
       Object.entries(food).forEach(([key, value]) => {
         setValue(key as keyof FoodFormSchema, value);
       });
+      setValue("quantity", 100);
     }
   }, [food, setValue]);
 
   return {
     register,
     handleSubmit,
-  }
-}
+  };
+};

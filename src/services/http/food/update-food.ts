@@ -2,12 +2,7 @@ import { api } from "@/services/api"
 
 import { Food } from "@/types/types"
 
-interface UpdateFoodParameters {
-  foodId: string
-  foodData: Omit<Food, "id">
-}
-
-export const updateFood = async ({ foodId, foodData }: UpdateFoodParameters) => {
+export const updateFood = async (foodData: Food) => {
 
   const userId = localStorage.getItem("userId")
 
@@ -15,7 +10,7 @@ export const updateFood = async ({ foodId, foodData }: UpdateFoodParameters) => 
     return false;
   }
 
-  const response = await api.put(`/users/${userId}/foods/${foodId}`, foodData)
+  const response = await api.put(`/users/${userId}/foods/${foodData.id}`, foodData)
 
   return response.status === 200
 }

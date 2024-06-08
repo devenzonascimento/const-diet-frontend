@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { convertToBase100 } from "@/functions/convert-to-base-100";
 
 import { Food } from "@/types/types";
 
@@ -35,8 +37,15 @@ export const useFoodFormValidation = (food?: Food) => {
     }
   }, [food, setValue]);
 
+  const processAndSubmit = (onValid: SubmitHandler<FoodFormSchema>) => {
+    return handleSubmit((data) => {
+      const processedData = convertToBase100(data);
+        onValid(processedData);
+    });
+  };
+
   return {
     register,
-    handleSubmit,
+    handleSubmit: processAndSubmit,
   };
 };

@@ -1,24 +1,25 @@
 import { api } from "@/services/api";
 
-interface Login {
+interface LoginRequest {
   email: string;
   password: string;
 }
 
-interface UserLogin {
+interface LoginResponse {
   token: string;
   userId: string;
 }
 
-export const userLogin = async ({ email, password }: Login) => {
+export const userLogin = async (loginData: LoginRequest) => {
   try {
-    const response = await api.post("users/login", { email, password, });
+    const { data } = await api.post("users/login", loginData);
 
-    const user: UserLogin = response.data;
+    const {token, userId}: LoginResponse = data;
 
-    localStorage.setItem("token", user.token);
-    localStorage.setItem("userId", user.userId);
+    localStorage.setItem("token", token);
+    localStorage.setItem("userId", userId);
 
+    return true;
   } catch (error) {
     console.log(error);
   }

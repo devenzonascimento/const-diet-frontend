@@ -7,7 +7,9 @@ export const MyMealsPage = () => {
   return (
     <div className="h-screen bg-slate-100 px-4">
       <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <ArrowLeft size={32} className="absolute top-4 left-0" />
+        <Link to="/home">
+          <ArrowLeft size={32} className="absolute top-4 left-0" />
+        </Link>
         <h1 className="text-xl font-semibold">Minhas refeições</h1>
         <Link to="/add-new-meal">
           <CirclePlus size={32} className="absolute top-4 right-0" />

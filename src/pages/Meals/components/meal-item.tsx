@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useToggleState } from "@/hooks/useToggleState";
+import { useToggleState } from "@/hooks/use-toggle-state";
 
 import { getFoodsFromMeal } from "@/services/http/food/get-foods-from-meal";
 import { calculateTotalCalories } from "@/functions/calculate-total-calories";

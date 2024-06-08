@@ -1,4 +1,4 @@
-import { useBackdropClose } from "@/hooks/useBackdropClose";
+import { useBackdropClose } from "@/hooks/use-backdrop-close";
 import { ReactNode } from "react";
 
 interface ModalBackdropProps {

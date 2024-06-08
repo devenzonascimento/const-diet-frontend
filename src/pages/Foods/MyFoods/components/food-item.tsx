@@ -2,7 +2,7 @@ import { MacronutrientsBadge } from "@/components/macronutrient-badges";
 import { FoodCardModal } from "./food-card-modal";
 import { When } from "@/components/when";
 import { CaloriesBadge } from "@/components/calories-badge";
-import { useModalState } from "@/hooks/useModalState";
+import { useModalState } from "@/hooks/use-modal-state";
 
 import { Food } from "@/types/types";
 

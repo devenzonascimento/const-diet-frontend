@@ -1,4 +1,4 @@
-import { createContext, useState, ReactNode } from 'react';
+import { createContext, useState, ReactNode, useContext } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { createMeal } from '@/services/http/meal/create-meal';
@@ -156,4 +156,13 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </MealContext.Provider>
   );
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useMealContext = () => {
+  const context = useContext(MealContext);
+  if (!context) {
+    throw new Error('useMealContext must be used within a MealProvider');
+  }
+  return context;
 };

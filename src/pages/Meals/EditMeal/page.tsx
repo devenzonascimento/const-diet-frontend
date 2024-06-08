@@ -1,5 +1,5 @@
 import { useMealContext } from "@/hooks/use-meal-context";
-import { useModalState } from "@/hooks/useModalState";
+import { useModalState } from "@/hooks/use-modal-state";
 
 import { Link, useParams } from "react-router-dom";
 
@@ -27,7 +27,7 @@ export const EditMealPage = () => {
 
   const { mealId } = useParams<keyof RouteParams>() as RouteParams;
 
-  const {data: meal, isPending} = useQuery({ 
+  const { data: meal, isPending } = useQuery({
     queryKey: [`meal-${mealId}`],
     queryFn: () => getMeal(mealId)
   })
@@ -36,7 +36,7 @@ export const EditMealPage = () => {
     if (meal) {
       loadMealData(meal)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isPending])
 
   if (isPending) {

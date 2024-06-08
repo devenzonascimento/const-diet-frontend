@@ -1,4 +1,4 @@
-import { useFoodFormValidation } from "@/hooks/useFoodFormValidation";
+import { useFoodFormValidation } from "@/hooks/use-food-form-validation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 

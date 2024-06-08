@@ -1,5 +1,5 @@
 import { useMealContext } from "@/hooks/use-meal-context";
-import { useModalState } from "@/hooks/useModalState";
+import { useModalState } from "@/hooks/use-modal-state";
 
 import { Link } from "react-router-dom";
 
@@ -19,7 +19,7 @@ export const AddNewMealPage = () => {
 
   useEffect(() => {
     clearContext()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

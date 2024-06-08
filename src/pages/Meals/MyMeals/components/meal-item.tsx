@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useToggleState } from "@/hooks/useToggleState";
+import { useToggleState } from "@/hooks/use-toggle-state";
 
 import { deleteMeal } from "@/services/http/meal/delete-meal";
 import { calculateTotalCalories } from "@/functions/calculate-total-calories";
@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { DeleteButton } from "./delete-button";
 
 import { Meal } from "@/types/types";
-import { useModalState } from "@/hooks/useModalState";
+import { useModalState } from "@/hooks/use-modal-state";
 import { MealDetails } from "./meal-details";
 import { When } from "@/components/when";
 
@@ -24,7 +24,7 @@ export const MealItem = ({ meal }: MealItemProps) => {
 
   const { booleanExp, toggleBooleanExp } = useToggleState();
   const { isOpen, toggleModal } = useModalState()
-  
+
   const queryClient = useQueryClient()
 
   const { mutateAsync: deleteMealFn } = useMutation({
@@ -63,7 +63,7 @@ export const MealItem = ({ meal }: MealItemProps) => {
 
         <When expr={isOpen}>
 
-        <MealDetails meal={meal} onClose={toggleModal}/>
+          <MealDetails meal={meal} onClose={toggleModal} />
         </When>
 
         <div className="grid grid-cols-2 gap-2">

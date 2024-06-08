@@ -13,6 +13,8 @@ export interface Food {
 export interface CreateFood {
   id?: string;
   name: string;
+  unit: "GRAMS" | "MILILITERS";
+  quantity: number;
   calories: number;
   carbohydrates: number;
   proteins: number;

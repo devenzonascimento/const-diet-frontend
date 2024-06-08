@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createFood } from "@/services/http/food/create-food";
 
 import { ArrowLeft, Camera } from "lucide-react";
-import { DefaultInput } from "@/components/input-default";
+import { DefaultInput } from "@/components/default-input";
 import { SelectInput } from "@/components/select-input";
 import { Button } from "@/components/ui/button";
 

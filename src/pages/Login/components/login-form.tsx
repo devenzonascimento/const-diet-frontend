@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { userLogin } from "@/services/http/login/userLogin";
 
-import { InputDefault } from "@/components/input-default";
+import { DefaultInput } from "@/components/default-input";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -42,13 +42,13 @@ export const LoginForm = () => {
   return (
     <form className="w-80 p-8 flex flex-col justify-between items-center gap-4 bg-slate-100 rounded-xl" onSubmit={handleSubmit((data) => handleLogin(data))}>
       <h2 className="text-3xl font-semibold text-center text-gray-900">Entrar na conta</h2>
-      <InputDefault
+      <DefaultInput
         id="email"
         label="E-mail"
         {...register("email")}
         errorMessage={errors.email ? "Insira um email válido." : ""}
       />
-      <InputDefault
+      <DefaultInput
         id="password"
         label="Senha"
         {...register("password")}

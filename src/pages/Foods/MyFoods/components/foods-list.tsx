@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getFoodsList } from "@/services/http/food/get-foods-list";
 
-import { InputSearch } from "@/components/input-search";
+import { SearchInput } from "@/components/search-input";
 import { FoodItem } from "./food-item";
 
 export const FoodsList = () => {
@@ -21,7 +21,11 @@ export const FoodsList = () => {
 
   return (
     <>
-      <InputSearch inputValue={searchTerm} setInputValue={setSearchTerm} />
+      <SearchInput
+        placeholder="Buscar alimento"
+        value={searchTerm}
+        onChange={({ target }) => setSearchTerm(target.value)}
+      />
       <ul className="w-full flex flex-col gap-6">
         {filteredFoods?.map((food) => (
           <FoodItem key={food.id} food={food} />

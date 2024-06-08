@@ -1,4 +1,4 @@
-import { useMealContext } from "@/hooks/use-meal-context"
+import { useMealContext } from "@/context/meal-context"
 
 import { FoodItem } from "./food-item"
 import { Button } from "@/components/ui/button"

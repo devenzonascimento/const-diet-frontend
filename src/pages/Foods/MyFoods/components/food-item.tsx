@@ -24,7 +24,7 @@ export const FoodItem = ({ food }: FoodItemProps) => {
         <div className="h-20 aspect-square flex items-start border-r-4 border-sky-700 ">
           <img
             className="h-full  aspect-square object-cover rounded-l-md shadow-xl"
-            //src={image}
+            src="/assets/strawberry.jpg"
             alt="food"
           />
         </div>

@@ -48,7 +48,7 @@ export const FoodCardModal = ({
         <X size={32} className="absolute top-2 right-2" onClick={onClose} />
 
         <img
-          //src={image}
+          src="/assets/strawberry.jpg"
           alt=""
           className="w-48 aspect-square border-4 border-sky-500 rounded-full"
         />

@@ -4,8 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { userLogin } from "@/services/http/login/userLogin";
 
-import {InputDefault} from "@/components/input-default";
+import { InputDefault } from "@/components/input-default";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const loginSchema = z.object({
   email: z.string().email(),
@@ -15,6 +16,8 @@ const loginSchema = z.object({
 type LoginSchema = z.infer<typeof loginSchema>
 
 export const LoginForm = () => {
+
+  const navigate = useNavigate()
 
   const {
     register,
@@ -26,6 +29,7 @@ export const LoginForm = () => {
 
   const handleLogin = (data: LoginSchema) => {
     userLogin(data)
+    navigate("/home")
   }
 
   return (

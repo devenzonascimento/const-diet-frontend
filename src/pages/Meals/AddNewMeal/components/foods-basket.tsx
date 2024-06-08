@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button"
 
 import { Plus, PlusCircle } from "lucide-react"
 
-interface FoodsListProps {
+interface FoodsBasketProps {
   openFormModal: VoidFunction
 }
 
-export const FoodsList = ({ openFormModal }: FoodsListProps) => {
+export const FoodsBasket = ({ openFormModal }: FoodsBasketProps) => {
 
   const { foods } = useMealContext()
 

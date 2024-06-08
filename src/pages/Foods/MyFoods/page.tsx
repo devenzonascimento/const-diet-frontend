@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FoodsList } from "./components/foods-list";
 
 import { ArrowLeft, CirclePlus } from "lucide-react";
+import { FoodItem } from "./components/food-item";
 
 export const MyFoodsPage = () => {
 
@@ -18,7 +19,7 @@ export const MyFoodsPage = () => {
         </Link>
       </header>
       <main className="flex flex-col justify-center items-center gap-8 pb-6">
-        <FoodsList />
+        <FoodsList ItemComponent={FoodItem}/>
       </main>
     </div>
   );

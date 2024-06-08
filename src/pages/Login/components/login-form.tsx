@@ -27,9 +27,16 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema)
   });
 
-  const handleLogin = (data: LoginSchema) => {
-    userLogin(data)
-    navigate("/home")
+  const handleLogin = async (data: LoginSchema) => {
+    const isLogged = await userLogin(data)
+
+    if (isLogged) {
+      navigate("/home")
+    } else {
+      alert("O seu e-mail ou senha estão incorretos!")
+    }
+
+    //TODO: IMPLEMENTAR TELA DE ERRO, QUANDO RETORNAR FALSE, ABRIR MODAL INFORMANDO QUE EMAIL E SENHA ESTÃO ERRADOS
   }
 
   return (

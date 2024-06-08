@@ -8,6 +8,8 @@ import { Food } from "@/types/types"
 
 const foodFormSchema = z.object({
   name: z.string().min(3),
+  quantity: z.coerce.number(),
+  unit: z.enum(["GRAMS", "MILILITERS"]),
   calories: z.coerce.number(),
   carbohydrates: z.coerce.number(),
   proteins: z.coerce.number(),
@@ -19,7 +21,6 @@ const foodFormSchema = z.object({
 type FoodFormSchema = z.infer<typeof foodFormSchema>
 
 export const useFoodFormValidation = (food?: Food) => {
-
   
   const { register, handleSubmit, setValue } = useForm<FoodFormSchema>({
     resolver: zodResolver(foodFormSchema),

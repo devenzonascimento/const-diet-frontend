@@ -5,3 +5,8 @@ export const UNIT: Record<MealFood['unit'], string> = {
   "MILILITERS": "ml",
   "UNITS": "u",
 }
+
+export const UNIT_OPTIONS = [
+  { text: "Gramas", value: "GRAMS" },
+  { text: "Mililitros", value: "MILILITERS" },
+]

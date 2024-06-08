@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { createFood } from "@/services/http/food/create-food";
 
-import { convertToBase100 } from "@/functions/convert-to-base-100";
-
 import { ArrowLeft, Camera } from "lucide-react";
 import { DefaultInput } from "@/components/default-input";
 import { SelectInput } from "@/components/select-input";
@@ -42,9 +40,7 @@ export const AddNewFoodPage = () => {
   })
 
   const onSubmit = (data: CreateFood) => {
-    const food = convertToBase100(data)
-
-    createFoodFn(food)
+    createFoodFn(data)
 
     navigate("/my-foods")
   }

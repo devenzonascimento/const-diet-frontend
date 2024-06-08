@@ -13,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import { CreateFood, Food } from "@/types/types";
 
 import { UNIT_OPTIONS } from "@/constants/constants";
-import { convertToBase100 } from "@/functions/convert-to-base-100";
 
 interface RouteParams {
   foodId: string;
@@ -47,9 +46,7 @@ export const EditFoodPage = () => {
   })
 
   const onSubmit = (data: CreateFood) => {
-    const food = convertToBase100(data)
-
-    updateFoodFn({ id: foodId, ...food })
+    updateFoodFn({ id: foodId, ...data })
     
     navigate("/my-foods")
   }

@@ -1,12 +1,11 @@
-import { CreateFood, Food } from "@/types/types";
+import { CreateFood } from "@/types/types";
 
-export const convertToBase100 = (foodData: CreateFood): Omit<Food, "id"> => {
+export const convertToBase100 = (foodData: CreateFood) => {
 
-  const multiplier = (100 / foodData.quantity)
+  const multiplier = (foodData.quantity / 100)
 
   return {
-    name: foodData.name,
-    unit: foodData.unit,
+    ...foodData,
     calories: foodData.calories * multiplier,
     carbohydrates: foodData.carbohydrates * multiplier,
     proteins: foodData.proteins * multiplier,

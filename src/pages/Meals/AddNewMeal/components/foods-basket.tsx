@@ -1,6 +1,6 @@
 import { useMealContext } from "@/context/meal-context"
 
-import { FoodItem } from "./food-item"
+import { BasketItem } from "./basket-item"
 import { Button } from "@/components/ui/button"
 
 import { Plus, PlusCircle } from "lucide-react"
@@ -20,7 +20,7 @@ export const FoodsBasket = ({ openFormModal }: FoodsBasketProps) => {
         (
           <ul className="w-full h-full overflow-auto flex flex-col gap-2 p-2">
             {foods.map((food) => (
-              <FoodItem key={food.food.id} foodItem={food} />
+              <BasketItem key={food.food.id} foodItem={food} />
             ))
             }
             <Button

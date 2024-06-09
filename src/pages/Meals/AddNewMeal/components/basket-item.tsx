@@ -10,7 +10,7 @@ interface FoodItemProps {
   foodItem: MealFood;
 }
 
-export const FoodItem = ({ foodItem: { quantity, unit, food } }: FoodItemProps) => {
+export const BasketItem = ({ foodItem: { quantity, unit, food } }: FoodItemProps) => {
 
   const { removeFoodFromFoodList } = useMealContext()
 

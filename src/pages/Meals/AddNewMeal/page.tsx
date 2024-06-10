@@ -3,19 +3,23 @@ import { useMealContext } from "@/context/meal-context";
 
 import { Link } from "react-router-dom";
 
-import { FoodsBasket } from "./components/foods-basket";
+
 import { When } from "@/components/when";
-import { AddFoodCard } from "./components/add-food-card";
+
 import { Button } from "@/components/ui/button";
 
 import { ArrowLeft, Soup } from "lucide-react";
 import { useEffect } from "react";
+import { InputField } from "../components/input-field";
+import { FoodsBasket } from "../components/foods-basket";
+import { AddFoodCard } from "../components/add-food-card";
+
 
 export const AddNewMealPage = () => {
 
   const { isOpen, toggleModal } = useModalState()
 
-  const { mealName, handleInputMealName, handleCreateMeal, clearContext } = useMealContext()
+  const { handleCreateMeal, clearContext } = useMealContext()
 
   useEffect(() => {
     clearContext()
@@ -33,16 +37,7 @@ export const AddNewMealPage = () => {
 
       <main className="flex flex-col justify-center items-center gap-8 pb-6">
         <div className="w-full min-h-40 flex flex-col items-center border-4 border-sky-700 rounded-md">
-          <fieldset className="w-full p-1 border-b-4 border-sky-700">
-            <input
-              type="text"
-              placeholder="Nome da refeição"
-              value={mealName}
-              maxLength={30}
-              onChange={({ target }) => handleInputMealName(target.value)}
-              className=" w-full text-lg font-semibold text-sky-900 text-center bg-transparent"
-            />
-          </fieldset>
+          <InputField />
           <FoodsBasket openFormModal={toggleModal} />
         </div>
 

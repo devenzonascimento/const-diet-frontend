@@ -4,11 +4,12 @@ import { z } from "zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { convertToBase100 } from "@/functions/convert-to-base-100";
+import { convertFromBase100 } from "@/functions/convert-from-base-100";
 
 import { Food } from "@/types/types";
 
 const foodFormSchema = z.object({
+  id: z.string().optional(),
   name: z.string().min(3),
   quantity: z.coerce.number(),
   unit: z.enum(["GRAMS", "MILILITERS"]),
@@ -39,8 +40,15 @@ export const useFoodFormValidation = (food?: Food) => {
 
   const processAndSubmit = (onValid: SubmitHandler<FoodFormSchema>) => {
     return handleSubmit((data) => {
-      const processedData = convertToBase100(data);
-        onValid(processedData);
+      const valuesConverted = convertFromBase100(data);
+
+      const { quantity, ...food } = data;
+
+      onValid({
+        quantity,
+        ...food,
+        ...valuesConverted,
+      });
     });
   };
 

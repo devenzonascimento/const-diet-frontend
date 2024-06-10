@@ -94,11 +94,10 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
 
     await createMealFn({
       name: mealName,
-      foods: foods.map(({ food, quantity, unit }) => {
+      foods: foods.map(({ food, quantity }) => {
         return {
           foodId: food.id,
           quantity: Number(quantity),
-          unit
         }
       })
     })
@@ -116,11 +115,10 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     await updateMealFn({
       mealId,
       mealName,
-      foods: foods.map((foodItem) => {
+      foods: foods.map(({ food, quantity }) => {
         return {
-          foodId: foodItem.food.id,
-          quantity: Number(foodItem.quantity),
-          unit: foodItem.unit
+          foodId: food.id,
+          quantity: Number(quantity),
         }
       })
     })

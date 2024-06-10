@@ -6,7 +6,6 @@ interface UpdateMeal {
   foods: {
     foodId: string;
     quantity: number;
-    unit: string;
   }[];
 }
 

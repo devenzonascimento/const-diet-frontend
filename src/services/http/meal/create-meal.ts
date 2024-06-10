@@ -5,7 +5,6 @@ interface CreateMeal {
   foods: {
     foodId: string;
     quantity: number;
-    unit: string;
   }[];
 }
 

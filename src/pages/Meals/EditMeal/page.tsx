@@ -3,9 +3,9 @@ import { useModalState } from "@/hooks/use-modal-state";
 
 import { Link, useParams } from "react-router-dom";
 
-import { FoodsList } from "./components/foods-list";
+
 import { When } from "@/components/when";
-import { AddFoodCard } from "./components/add-food-card";
+
 import { Button } from "@/components/ui/button";
 import { Loading } from "./components/loading";
 
@@ -13,7 +13,10 @@ import { ArrowLeft, Soup } from "lucide-react";
 import { useEffect } from "react";
 import { getMeal } from "@/services/http/meal/get-meal";
 import { useQuery } from "@tanstack/react-query";
-import { InputField } from "./components/input-field";
+import { InputField } from "../components/input-field";
+import { FoodsBasket } from "../components/foods-basket";
+import { AddFoodCard } from "../components/add-food-card";
+
 
 interface RouteParams {
   mealId: string;
@@ -55,7 +58,7 @@ export const EditMealPage = () => {
       <main className="flex flex-col justify-center items-center gap-8 pb-6">
         <div className="w-full min-h-40 flex flex-col items-center border-4 border-sky-700 rounded-md">
           <InputField />
-          <FoodsList openFormModal={toggleModal} />
+          <FoodsBasket openFormModal={toggleModal} />
         </div>
 
         <Link className="w-full" to="/my-meals" >

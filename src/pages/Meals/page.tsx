@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 
-import { ProgressBar } from "./components/progress-bar";
-import { MealsList } from "./components/meals-list";
+import { ProgressBar } from "./_components/progress-bar";
+import { MealsList } from "./_components/meals-list";
 
 const MyMealsPage = () => {
   return (

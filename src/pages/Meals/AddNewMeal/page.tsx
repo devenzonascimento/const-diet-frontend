@@ -10,9 +10,9 @@ import { Button } from "@/components/ui/button";
 
 import { ArrowLeft, Soup } from "lucide-react";
 import { useEffect } from "react";
-import { InputField } from "../components/input-field";
-import { FoodsBasket } from "../components/foods-basket";
-import { AddFoodCard } from "../components/add-food-card";
+import { InputField } from "../_components/input-field";
+import { FoodsBasket } from "../_components/foods-basket";
+import { AddFoodCard } from "../_components/add-food-card";
 
 
 export const AddNewMealPage = () => {

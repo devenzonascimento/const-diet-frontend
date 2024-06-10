@@ -13,9 +13,9 @@ import { ArrowLeft, Soup } from "lucide-react";
 import { useEffect } from "react";
 import { getMeal } from "@/services/http/meal/get-meal";
 import { useQuery } from "@tanstack/react-query";
-import { InputField } from "../components/input-field";
-import { FoodsBasket } from "../components/foods-basket";
-import { AddFoodCard } from "../components/add-food-card";
+import { InputField } from "../_components/input-field";
+import { FoodsBasket } from "../_components/foods-basket";
+import { AddFoodCard } from "../_components/add-food-card";
 
 
 interface RouteParams {
@@ -70,7 +70,7 @@ export const EditMealPage = () => {
             <span>Salvar alterações</span>
           </Button>
         </Link>
-
+        //TODO: TROCAR O LINK POR NAVIGATE, PORQUE O LINK TA TROCANDO DE PAGE MESMO SE O SAVE NÃO FOR CONCLUIDO.
         <When expr={isOpen}>
           <AddFoodCard onClose={toggleModal} />
         </When>

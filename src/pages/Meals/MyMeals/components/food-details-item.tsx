@@ -15,12 +15,12 @@ export const FoodDetailsItem = ({ foodItem }: FoodDetailsItemProps) => {
 
   const calories = calculateTotalCalories([foodItem])
 
-  const { food, quantity, unit } = foodItem
+  const { food, quantity } = foodItem
 
   return (
     <li className="w-full h-fit flex flex-col items-center border-2 border-sky-700">
       <h3 className="w-full text-center border-2 border-sky-700">
-        {`${quantity}${UNIT[unit]} de ${food.name}`}
+        {`${quantity}${UNIT[food.unit]} de ${food.name}`}
       </h3>
       <table className="w-full text-center">
         <tbody>

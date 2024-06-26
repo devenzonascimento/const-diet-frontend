@@ -27,7 +27,7 @@ export const MealDetails = ({ meal, onClose }: MealDetailsProps) => {
       >
         <X size={32} className="absolute top-2 right-2" onClick={onClose} />
 
-        <h2 className="text-center text-xl font-semibold">{meal.name}</h2>
+        <h2 className="pt-5 text-center text-xl font-semibold">{meal.name}</h2>
         <div className="grid grid-cols-2 gap-4 ">
           <StatsBox title="Calorias" value={totalCalories} />
           <StatsBox title="Carbohidratos" value={totalNutrients.carbohydrates} />

@@ -1,31 +1,16 @@
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useLoginFormValidation, LoginSchema } from "@/hooks/use-login-form-validation";
+import { useNavigate } from "react-router-dom";
 
 import { userLogin } from "@/services/http/login/userLogin";
 
 import { DefaultInput } from "@/components/default-input";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
-
-const loginSchema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8).max(20),
-})
-
-type LoginSchema = z.infer<typeof loginSchema>
 
 export const LoginForm = () => {
 
   const navigate = useNavigate()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema)
-  });
+  const { register, handleSubmit, errors } = useLoginFormValidation()
 
   const handleLogin = async (data: LoginSchema) => {
     const isLogged = await userLogin(data)
@@ -33,9 +18,8 @@ export const LoginForm = () => {
     if (isLogged) {
       navigate("/home")
     } else {
-      alert("O seu e-mail ou senha estão incorretos!")
+      alert("Os seus dados estão incorretos!")
     }
-
     //TODO: IMPLEMENTAR TELA DE ERRO, QUANDO RETORNAR FALSE, ABRIR MODAL INFORMANDO QUE EMAIL E SENHA ESTÃO ERRADOS
   }
 

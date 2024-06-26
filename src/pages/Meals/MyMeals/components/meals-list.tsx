@@ -12,6 +12,7 @@ export const MealsList = () => {
     queryFn: getMealsList,
     refetchInterval: 1000,
     refetchOnMount: false,
+    retry: 2
   })
 
   if (isPending) {

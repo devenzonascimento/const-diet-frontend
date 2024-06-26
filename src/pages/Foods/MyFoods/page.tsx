@@ -10,7 +10,7 @@ export const MyFoodsPage = () => {
   return (
     <div className="h-screen bg-slate-100 px-4">
       <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/home">
+        <Link to="/">
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>
         <h1 className="text-xl font-semibold">Meus alimentos</h1>

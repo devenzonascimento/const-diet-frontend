@@ -16,7 +16,7 @@ export const LoginForm = () => {
     const isLogged = await userLogin(data)
 
     if (isLogged) {
-      navigate("/home")
+      navigate("/")
     } else {
       alert("Os seus dados estão incorretos!")
     }

@@ -22,7 +22,7 @@ export const SelectMealsCard = ({ mealsList, onClose }: SelectMealsCardProps) =>
 
   return (
     <ModalBackdrop onClose={onClose}>
-      <div className="max-h-[70%] max-w-[90%] flex flex-col gap-6 p-4 bg-slate-100 border-4 border-sky-500 rounded-md">
+      <div className="h-[80%] w-[90%] flex flex-col gap-6 p-4 bg-slate-100 border-4 border-sky-500 rounded-md">
         <h2 className="text-xl font-semibold text-center text-sky-950">
           Escolha uma refeição
         </h2>

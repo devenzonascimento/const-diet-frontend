@@ -8,13 +8,16 @@ import { MealProvider } from './context/meal-context'
 import { App } from './App'
 
 import "./globals.css"
+import { RoutineProvider } from './context/routine-context'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <MealProvider>
-        <App />
-      </MealProvider>
+      <RoutineProvider>
+        <MealProvider>
+          <App />
+        </MealProvider>
+      </RoutineProvider>
     </QueryClientProvider>
   </StrictMode>,
 )

@@ -42,3 +42,21 @@ export interface MealFood {
   quantity: number;
   food: Food;
 }
+
+export interface Routine {
+  id: string;
+  name: string;
+  meals: DailyMeal[];
+}
+
+export interface DailyMeal {
+  meal: Meal;
+  scheduledTime: string;
+  status: "PENDING" | "COMPLETED" | "MISSED"
+}
+
+export interface DailyMealCreate {
+  mealId: string;
+  scheduledTime: string;
+  status: "PENDING" | "COMPLETED" | "MISSED"
+}

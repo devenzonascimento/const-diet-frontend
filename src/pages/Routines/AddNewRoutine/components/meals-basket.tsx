@@ -16,7 +16,7 @@ export const MealsBasket = ({ meals, openCardToSelectMeals }: MealsBasketProps) 
         ?
         (
           <ul className="w-full h-full overflow-auto flex flex-col gap-2 p-2">
-            {meals?.map(mealItem => <li>{mealItem.meal.name} as {mealItem.scheduledTime}</li>)}
+            {meals?.map(mealItem => <li key={mealItem.meal.id}>{mealItem.meal.name} as {mealItem.time}</li>)}
             <Button
               className="w-full flex gap-2 mt-4 text-sky-700 bg-slate-50 border-2 border-sky-700"
               onClick={openCardToSelectMeals}

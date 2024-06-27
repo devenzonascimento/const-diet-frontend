@@ -51,12 +51,12 @@ export interface Routine {
 
 export interface DailyMeal {
   meal: Meal;
-  scheduledTime: string;
+  time: string;
   status: "PENDING" | "COMPLETED" | "MISSED"
 }
 
 export interface DailyMealCreate {
   mealId: string;
-  scheduledTime: string;
+  time: string;
   status: "PENDING" | "COMPLETED" | "MISSED"
 }

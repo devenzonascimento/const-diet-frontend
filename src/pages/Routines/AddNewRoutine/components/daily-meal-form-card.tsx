@@ -21,7 +21,7 @@ export const DailyMealFormCard = ({ meal, onClose }: DailyMealFormCardProps) => 
   const handleAddMeal = () => {
     addMeal({
       meal,
-      scheduledTime: time,
+      time: time,
       status: "PENDING"
     })
 

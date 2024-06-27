@@ -10,6 +10,7 @@ import { MyMealsPage } from './pages/Meals/MyMeals/page';
 import { AddNewMealPage } from "./pages/Meals/AddNewMeal/page";
 import { EditMealPage } from "./pages/Meals/EditMeal/page";
 import { MyRoutinesPage } from "./pages/Routines/MyRoutines/page";
+import { AddNewRoutinePage } from "./pages/Routines/AddNewRoutine/page";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: "my-foods",
+    path: "/my-foods",
     element: (
       <PrivateRoute >
         <MyFoodsPage />
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: "add-new-food",
+    path: "/add-new-food",
     element: (
       <PrivateRoute >
         <AddNewFoodPage />
@@ -49,7 +50,7 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: "my-meals",
+    path: "/my-meals",
     element: (
       <PrivateRoute >
         <MyMealsPage />
@@ -57,7 +58,7 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: "add-new-meal",
+    path: "/add-new-meal",
     element: (
       <PrivateRoute >
         <AddNewMealPage />
@@ -65,7 +66,7 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: "edit-meal/:mealId",
+    path: "/edit-meal/:mealId",
     element: (
       <PrivateRoute >
         <EditMealPage />
@@ -73,7 +74,7 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: "my-routines",
+    path: "/my-routines",
     element: (
       <PrivateRoute >
         <MyRoutinesPage />
@@ -81,15 +82,15 @@ const router = createBrowserRouter([
     )
   },
   {
-    path: "add-new-routine",
+    path: "/add-new-routine",
     element: (
       <PrivateRoute >
-        <AddNewMealPage />
+        <AddNewRoutinePage />
       </PrivateRoute>
     )
   },
   {
-    path: "edit-routine/:routineId",
+    path: "/edit-routine/:routineId",
     element: (
       <PrivateRoute >
         <EditMealPage />

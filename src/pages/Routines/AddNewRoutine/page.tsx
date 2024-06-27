@@ -18,7 +18,7 @@ export const AddNewRoutinePage = () => {
 
   const { isOpen, toggleModal } = useModalState()
 
-  const { routine, onRoutineNameChange } = useRoutineContext()
+  const { routine, onRoutineNameChange, handleCreateRoutine } = useRoutineContext()
 
   const { data: mealsList, isPending, isError } = useQuery({
     queryKey: ["mealsList"],
@@ -59,7 +59,7 @@ export const AddNewRoutinePage = () => {
         </div>
         <Button
           type="submit"
-          onClick={() => console.log(routine)}
+          onClick={handleCreateRoutine}
           className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
         >
           Criar rotina

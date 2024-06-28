@@ -19,7 +19,7 @@ export const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
           {label}
         </label>
         <select
-          className="w-full text-lg py-1 px-2 border rounded-md"
+          className="w-full text-lg py-1 px-2 border border-sky-900 rounded-md"
           ref={ref}
           {...props}
         >

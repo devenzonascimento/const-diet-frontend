@@ -7,9 +7,9 @@ import { getMealsList } from "@/services/http/meal/get-meals-list";
 
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { MealsBasket } from "./components/meals-basket";
+import { MealsBasket } from "../_components/meals-basket";
 import { When } from "@/components/when"
-import { SelectMealsCard } from "./components/select-meals-card";
+import { SelectMealsCard } from "../_components/select-meals-card";
 import { DefaultInput } from "@/components/default-input";
 
 export const AddNewRoutinePage = () => {

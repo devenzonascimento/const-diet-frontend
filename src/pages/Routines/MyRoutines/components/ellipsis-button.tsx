@@ -24,7 +24,7 @@ export const EllipsisButton = ({ routineId, className }: EllipsisButtonProps) =>
   }
 
   const handleEditRoutine = () => {
-    navigate(`edit-routine/${routineId}`)
+    navigate(`/edit-routine/${routineId}`)
   }
 
   return (

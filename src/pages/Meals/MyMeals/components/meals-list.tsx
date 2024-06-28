@@ -10,9 +10,6 @@ export const MealsList = () => {
   const { data: mealsList, isPending } = useQuery({
     queryKey: ["mealsList"],
     queryFn: getMealsList,
-    refetchInterval: 1000,
-    refetchOnMount: false,
-    retry: 2
   })
 
   if (isPending) {

@@ -5,6 +5,7 @@ import { createContext, useState, ReactNode, useContext } from 'react';
 
 interface CreateRoutine {
   name: string;
+  water: string;
   meals: DailyMeal[];
 }
 
@@ -12,13 +13,14 @@ interface RoutineContextType {
   routine: CreateRoutine;
   addMeal: (newMeal: DailyMeal) => void;
   onRoutineNameChange: (name: string) => void;
+  onRoutineWaterChange: (water: string) => void;
   handleCreateRoutine: () => void;
 }
 
 export const RoutineContext = createContext<RoutineContextType | undefined>(undefined);
 
 export const RoutineProvider = ({ children }: { children: ReactNode }) => {
-  const [routine, setRoutine] = useState<CreateRoutine>({ name: "", meals: [] });
+  const [routine, setRoutine] = useState<CreateRoutine>({ name: "", water: "", meals: [] });
 
   const addMeal = (newMeal: DailyMeal) => {
     setRoutine({ ...routine, meals: [...routine.meals, { ...newMeal, status: 'PENDING' }] });
@@ -26,6 +28,10 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
 
   const onRoutineNameChange = (name: string) => {
     setRoutine({ ...routine, name });
+  }
+
+  const onRoutineWaterChange = (water: string) => {
+    setRoutine({ ...routine, water });
   }
 
 
@@ -46,10 +52,11 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
 
     await createRoutineFn({
       name: routine.name,
+      water: Number(routine.water),
       meals: meals
     });
 
-    setRoutine({ name: "", meals: [] });
+    setRoutine({ name: "", water: "", meals: [] });
   }
 
   return (
@@ -57,6 +64,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       routine,
       addMeal,
       onRoutineNameChange,
+      onRoutineWaterChange,
       handleCreateRoutine
     }}>
       {children}

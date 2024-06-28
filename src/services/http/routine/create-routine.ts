@@ -4,6 +4,7 @@ import { DailyMealCreate } from "@/types/types";
 
 interface CreateRoutine {
   name: string;
+  water: number;
   meals: DailyMealCreate[];
 }
 

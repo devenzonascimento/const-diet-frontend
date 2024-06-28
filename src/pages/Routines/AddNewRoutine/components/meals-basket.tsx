@@ -11,25 +11,29 @@ interface MealsBasketProps {
 
 export const MealsBasket = ({ meals, openCardToSelectMeals }: MealsBasketProps) => {
   return (
-    <>
+    <div
+      className="h-full w-full flex flex-col justify-between gap-2 p-2 border-4 border-sky-900 rounded-md  overflow-auto"
+    >
       {meals.length > 0
         ?
         (
-          <ul className="w-full h-full overflow-auto flex flex-col gap-2 p-2">
-            {meals?.map(mealItem => <li key={mealItem.meal.id}>{mealItem.meal.name} as {mealItem.time}</li>)}
+          <>
+            <ul className="w-full flex flex-col gap-2 overflow-auto">
+              {meals?.map(mealItem => <li key={mealItem.meal.id}>{mealItem.meal.name} as {mealItem.time}</li>)}
+            </ul>
             <Button
-              className="w-full flex gap-2 mt-4 text-sky-700 bg-slate-50 border-2 border-sky-700"
               onClick={openCardToSelectMeals}
+              className="w-full flex gap-2 mt-4 text-sky-700 bg-slate-50 border-2 border-sky-700"
             >
               <Plus />
               <span className="text-base">Adicionar refeição</span>
             </Button>
-          </ul>
+          </>
         )
         :
         (
           <div
-            className="min-h-32 w-full flex justify-center items-center gap-2"
+            className="h-full w-full flex justify-center items-center gap-2"
             onClick={openCardToSelectMeals}
           >
             <PlusCircle size={32} className="text-gray-500" />
@@ -37,6 +41,6 @@ export const MealsBasket = ({ meals, openCardToSelectMeals }: MealsBasketProps) 
           </div>
         )
       }
-    </>
+    </div>
   )
 }

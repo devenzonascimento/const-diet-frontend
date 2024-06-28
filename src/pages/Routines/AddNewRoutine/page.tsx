@@ -5,14 +5,11 @@ import { Link } from "react-router-dom"
 
 import { getMealsList } from "@/services/http/meal/get-meals-list";
 
-import { Loading } from "@/pages/Meals/EditMeal/components/loading";
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { MealsBasket } from "./components/meals-basket";
 import { When } from "@/components/when"
 import { SelectMealsCard } from "./components/select-meals-card";
-
-
 
 export const AddNewRoutinePage = () => {
 
@@ -20,23 +17,19 @@ export const AddNewRoutinePage = () => {
 
   const { routine, onRoutineNameChange, handleCreateRoutine } = useRoutineContext()
 
-  const { data: mealsList, isPending, isError } = useQuery({
+  const { data: mealsList, isError } = useQuery({
     queryKey: ["mealsList"],
     queryFn: getMealsList,
   })
 
-  if (isPending) {
-    return <Loading />
-  }
-
-  if (isError) {
+  if (isError || !mealsList) {
     return <h1>OCORREU UM ERRO</h1>
   }
 
   return (
     <div className="h-screen bg-slate-100 px-4">
       <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/">
+        <Link to="/my-routines">
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>
         <h1 className="text-xl font-semibold">Criar uma Rotina</h1>

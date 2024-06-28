@@ -7,16 +7,14 @@ type SearchInputProps = InputHTMLAttributes<HTMLInputElement>
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   ({ ...props }, ref) => {
     return (
-      <fieldset className="relative w-full flex flex-col gap-2" >
+      <fieldset className="relative w-full flex gap-3 px-3 py-2 bg-white rounded-xl border-4 border-sky-700" >
+        <Search className=" text-neutral-500" size={28} />
         <input
-          className=" h-full w-full text-lg py-1 px-4  bg-white rounded-3xl border-2 border-sky-700 placeholder:text-gray-700"
+          className=" h-full w-full text-lg bg-transparent placeholder:text-neutral-400"
           type="text"
           ref={ref}
           {...props}
         />
-        <div className="absolute top-0 right-0 h-full aspect-square flex justify-center items-center bg-sky-700 rounded-full hover:bg-sky-500">
-          <Search className="text-white" size={24} />
-        </div>
       </fieldset>
     );
   }

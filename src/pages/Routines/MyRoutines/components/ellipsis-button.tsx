@@ -1,10 +1,12 @@
 import { useModalState } from "@/hooks/use-modal-state";
+import { useNavigate } from "react-router-dom";
 
 import { cn } from "@/lib/utils";
 import { deleteRoutine } from "@/services/http/routine/delete-routine";
 
 import { When } from "@/components/when";
-import { Edit2Icon, EllipsisVerticalIcon, Trash2Icon } from "lucide-react";
+import { Edit2Icon, EllipsisVerticalIcon } from "lucide-react";
+import { DeleteButton } from "./delete-button";
 
 interface EllipsisButtonProps {
   routineId: string;
@@ -15,8 +17,14 @@ export const EllipsisButton = ({ routineId, className }: EllipsisButtonProps) =>
 
   const { isOpen, toggleModal } = useModalState()
 
+  const navigate = useNavigate()
+
   const handleDeleteRoutine = () => {
     deleteRoutine(routineId)
+  }
+
+  const handleEditRoutine = () => {
+    navigate(`edit-routine/${routineId}`)
   }
 
   return (
@@ -25,8 +33,8 @@ export const EllipsisButton = ({ routineId, className }: EllipsisButtonProps) =>
         <EllipsisVerticalIcon />
       </button>
       <When expr={isOpen}>
-        <Trash2Icon onClick={handleDeleteRoutine}/>
-        <Edit2Icon />
+        <DeleteButton onDelete={handleDeleteRoutine} />
+        <Edit2Icon onClick={handleEditRoutine} />
       </When>
     </div>
   );

@@ -4,7 +4,7 @@ import { useToggleState } from "@/hooks/use-toggle-state";
 import { deleteMeal } from "@/services/http/meal/delete-meal";
 import { calculateTotalCalories } from "@/functions/calculate-total-calories";
 
-import { ChevronButton } from "./chevron-button";
+
 import { CaloriesBadge } from "@/components/calories-badge";
 import { MealDescription } from "./meal-description";
 import { Link } from "react-router-dom";
@@ -15,6 +15,7 @@ import { Meal } from "@/types/types";
 import { useModalState } from "@/hooks/use-modal-state";
 import { MealDetails } from "./meal-details";
 import { When } from "@/components/when";
+import { ChevronButton } from "@/components/chevron-button";
 
 interface MealItemProps {
   meal: Meal;
@@ -42,7 +43,7 @@ export const MealItem = ({ meal }: MealItemProps) => {
       className="w-full flex flex-col gap-2 bg-white rounded-xl shadow-xl border-4 border-sky-700"
     >
       <div className=" w-full flex gap-2 items-center py-2 px-1" onClick={toggleBooleanExp}>
-        <ChevronButton isOpen={booleanExp} />
+        <ChevronButton className="text-sky-700" isOpen={booleanExp} />
         <h2 className=" w-full text-lg font-semibold text-sky-700">
           {meal.name}
         </h2>

@@ -5,6 +5,7 @@ import { getRoutinesList } from "@/services/http/routine/get-routine-list"
 
 import { ArrowLeft, CirclePlus } from "lucide-react"
 import { List } from "@/components/list"
+import { RoutineItem } from "./components/routine-item"
 
 export const MyRoutinesPage = () => {
 
@@ -32,9 +33,12 @@ export const MyRoutinesPage = () => {
       <main className="flex flex-col justify-between items-center gap-4 pb-6">
         <List
           data={routinesList}
-          renderItem={({ item }) => <div key={item.id}>{item.name}</div>}
+          renderItem={({ item }) => <RoutineItem key={item.id} routine={item} />}
         />
       </main>
     </div>
   )
 }
+
+
+

@@ -1,8 +1,7 @@
-import { useEffect } from "react";
 import { useModalState } from "@/hooks/use-modal-state"
 import { useRoutineContext } from "@/context/routine-context";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate,  } from "react-router-dom"
 
 import { getMealsList } from "@/services/http/meal/get-meals-list";
 
@@ -27,24 +26,14 @@ export const AddNewRoutinePage = () => {
     createRoutineStates
   } = useRoutineContext()
 
-  useEffect(() => {
-    if (createRoutineStates.isSuccess) {
-      navigate("/my-routines")
-    }
-  }, [createRoutineStates.isSuccess, navigate])
+  const redirectToSuccess = () => {
+    navigate("/my-routines")
+  };
 
-  const { data: mealsList, isPending, isError } = useQuery({
+  const { data: mealsList } = useQuery({
     queryKey: ["mealsList"],
     queryFn: getMealsList,
   })
-
-  if (isPending) {
-    return null
-  }
-
-  if (isError || !mealsList) {
-    return <h1>OCORREU UM ERRO</h1>
-  }
 
   return (
     <div className="h-screen max-h-screen flex flex-col bg-slate-100 px-4 ">
@@ -79,7 +68,7 @@ export const AddNewRoutinePage = () => {
         <MealsBasket meals={routine.meals} openCardToSelectMeals={toggleModal} />
         <Button
           type="submit"
-          onClick={handleCreateRoutine}
+          onClick={() => handleCreateRoutine(redirectToSuccess)}
           className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
         >
           Criar rotina

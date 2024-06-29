@@ -37,6 +37,10 @@ export const EditRoutinePage = () => {
     updateRoutineStates
   } = useRoutineContext()
 
+  const redirectToSuccess = () => {
+    navigate("/my-routines")
+  };
+
   useEffect(() => {
     if (updateRoutineStates.isSuccess) {
       navigate("/my-routines")
@@ -108,7 +112,7 @@ export const EditRoutinePage = () => {
         <MealsBasket meals={routine.meals} openCardToSelectMeals={toggleModal} />
         <Button
           type="submit"
-          onClick={() => handleUpdateRoutine(routineId)}
+          onClick={() => handleUpdateRoutine(routineId, redirectToSuccess)}
           className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
         >
           Salvar alteração

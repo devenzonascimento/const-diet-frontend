@@ -23,8 +23,8 @@ interface RoutineContextType {
   removeMeal: (mealToRemove: DailyMeal) => void;
   onRoutineNameChange: (name: string) => void;
   onRoutineWaterChange: (water: string) => void;
-  handleCreateRoutine: () => void;
-  handleUpdateRoutine: (routineId: string) => void
+  handleCreateRoutine: (redirect: () => void) => void;
+  handleUpdateRoutine: (routineId: string, redirect: () => void) => void;
   deleteRoutineFn: UseMutateAsyncFunction<boolean, Error, string, unknown>
   setRoutineData: (routine: CreateRoutine) => void
 
@@ -92,7 +92,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     },
   })
 
-  const handleCreateRoutine = async () => {
+  const handleCreateRoutine = async (redirect: () => void) => {
 
     const meals = routine.meals.map(mealItem => {
       return {
@@ -109,6 +109,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     });
 
     setRoutine({ name: "", water: "", meals: [] });
+    redirect();
   }
 
   const createRoutineStates = {
@@ -130,7 +131,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     },
   })
 
-  const handleUpdateRoutine = async (routineId: string) => {
+  const handleUpdateRoutine = async (routineId: string, redirect: () => void) => {
 
     const meals = routine.meals.map(mealItem => {
       return {
@@ -148,6 +149,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     });
 
     setRoutine({ name: "", water: "", meals: [] });
+    redirect();
   }
 
   const updateRoutineStates = {

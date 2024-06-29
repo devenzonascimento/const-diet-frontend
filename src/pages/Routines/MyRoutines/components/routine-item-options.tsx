@@ -2,18 +2,15 @@ import { useRoutineContext } from "@/context/routine-context";
 import { useModalState } from "@/hooks/use-modal-state";
 import { useNavigate } from "react-router-dom";
 
-import { cn } from "@/lib/utils";
-
 import { When } from "@/components/when";
 import { Edit2Icon, EllipsisVerticalIcon } from "lucide-react";
 import { DeleteButton } from "./delete-button";
 
-interface EllipsisButtonProps {
+interface RoutineItemOptionsProps {
   routineId: string;
-  className?: string;
 }
 
-export const EllipsisButton = ({ routineId, className }: EllipsisButtonProps) => {
+export const RoutineItemOptions = ({ routineId }: RoutineItemOptionsProps) => {
 
   const { isOpen, toggleModal } = useModalState()
 
@@ -31,7 +28,7 @@ export const EllipsisButton = ({ routineId, className }: EllipsisButtonProps) =>
 
   return (
     <div className="flex flex-col gap-4">
-      <button onClick={toggleModal} className={cn(className)}>
+      <button onClick={toggleModal}>
         <EllipsisVerticalIcon />
       </button>
       <When expr={isOpen}>

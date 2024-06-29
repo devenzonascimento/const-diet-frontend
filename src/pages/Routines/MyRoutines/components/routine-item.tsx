@@ -1,13 +1,13 @@
 import { useModalState } from "@/hooks/use-modal-state"
 
 import { ChevronButton } from "@/components/chevron-button"
-import { EllipsisButton } from "./ellipsis-button"
 import { FlameIcon, DropletIcon } from "lucide-react"
 import { NutrientBadge } from "./nutrient-badge"
 import { List } from "@/components/list"
 import { DailyMealItem } from "./daily-meal-item"
 
 import { Routine } from "@/types/types"
+import { RoutineItemOptions } from "./routine-item-options"
 
 
 interface RoutineItemProps {
@@ -28,7 +28,7 @@ export const RoutineItem = ({ routine }: RoutineItemProps) => {
         <h2 onClick={toggleModal} className="w-4/5 text-center text-lg">
           {routine.name}
         </h2>
-        <EllipsisButton routineId={routine.id} />
+        <RoutineItemOptions routineId={routine.id} />
       </header>
 
       {isOpen && (

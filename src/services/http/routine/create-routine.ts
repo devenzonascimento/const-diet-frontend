@@ -1,6 +1,6 @@
 import { api } from "@/services/api";
 
-import { DailyMealCreate } from "@/types/types";
+import { DailyMealCreate, Routine } from "@/types/types";
 
 interface CreateRoutine {
   name: string;
@@ -8,7 +8,7 @@ interface CreateRoutine {
   meals: DailyMealCreate[];
 }
 
-export const createRoutine = async (routineData: CreateRoutine) => {
+export const createRoutine = async (routineData: CreateRoutine): Promise<Routine> => {
   if (routineData.name == "") {
     throw new Error("O nome da rotina é obrigatório!");
   }
@@ -18,7 +18,7 @@ export const createRoutine = async (routineData: CreateRoutine) => {
 
   const userId = localStorage.getItem("userId");
 
-  await api.post(`/users/${userId}/routines`, routineData);
+  const { data } = await api.post(`/users/${userId}/routines`, routineData);
 
-  return;
+  return data
 };

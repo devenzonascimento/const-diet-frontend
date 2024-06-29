@@ -19,7 +19,7 @@ export const updateRoutine = async ({id, ...routineData}:  UpdateRoutine) => {
 
   const userId = localStorage.getItem("userId")
 
-  const response = await api.put(`/users/${userId}/routines/${id}`, routineData)
+  const { data } = await api.put(`/users/${userId}/routines/${id}`, routineData)
 
-  return response.status === 200
+  return data
 }

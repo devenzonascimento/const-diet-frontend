@@ -1,7 +1,7 @@
 import { createRoutine } from '@/services/http/routine/create-routine';
 import { updateRoutine } from '@/services/http/routine/update-routine';
-import { DailyMeal } from '@/types/types';
-import { useMutation } from '@tanstack/react-query';
+import { DailyMeal, Routine } from '@/types/types';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createContext, useState, ReactNode, useContext } from 'react';
 
 interface CreateRoutine {
@@ -75,9 +75,19 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
+  const queryClient = useQueryClient()
+
   const createRoutineMutation = useMutation({
     mutationKey: ["create-routine"],
-    mutationFn: createRoutine
+    mutationFn: createRoutine,
+    onSuccess(data) {
+      queryClient.setQueryData(
+        ["routinesList"],
+        (routineList: Routine[]) => {
+          return [...routineList, data]
+        }
+      )
+    },
   })
 
   const handleCreateRoutine = async () => {
@@ -107,7 +117,15 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
 
   const updateRoutineMutation = useMutation({
     mutationKey: ["update-routine"],
-    mutationFn: updateRoutine
+    mutationFn: updateRoutine,
+    onSuccess(data) {
+      queryClient.setQueryData(
+        ["routinesList"],
+        (routineList: Routine[]) => {
+          return routineList.map((routine) => routine.id === data.id ? data : routine)
+        }
+      )
+    },
   })
 
   const handleUpdateRoutine = async (routineId: string) => {

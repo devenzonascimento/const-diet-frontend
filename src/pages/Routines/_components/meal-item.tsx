@@ -1,8 +1,5 @@
 import { useModalState } from "@/hooks/use-modal-state"
 
-import { calculateTotalCalories } from "@/functions/calculate-total-calories"
-import { calculateTotalNutrients } from "@/functions/calculate-total-nutrients"
-
 import { CaloriesBadge } from "@/components/calories-badge"
 import { Badge } from "./badge"
 import { When } from "@/components/when"
@@ -14,10 +11,6 @@ interface MealItemProps {
   meal: Meal
 }
 export const MealItem = ({ meal }: MealItemProps) => {
-
-  const totalCalories = calculateTotalCalories(meal.foods)
-
-  const { carbohydrates, proteins, fats } = calculateTotalNutrients(meal.foods)
 
   const { isOpen, openModal, closeModal } = useModalState()
 
@@ -31,17 +24,17 @@ export const MealItem = ({ meal }: MealItemProps) => {
           <h3 className="text-sm font-semibold text-white break-words">
             {meal.name}
           </h3>
-          <CaloriesBadge calories={totalCalories} />
+          <CaloriesBadge calories={meal.totalCalories} />
         </header>
         <div className="max-w-full flex flex-wrap gap-2">
           <Badge>
-            {`C ${carbohydrates.toFixed()}g`}
+            {`C ${meal.totalCarbohydrates.toFixed()}g`}
           </Badge>
           <Badge>
-            {`P ${proteins.toFixed()}g`}
+            {`P ${meal.totalProteins.toFixed()}g`}
           </Badge>
           <Badge>
-            {`G ${fats.toFixed()}g`}
+            {`G ${meal.totalFats.toFixed()}g`}
           </Badge>
         </div>
       </li>

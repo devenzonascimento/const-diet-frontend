@@ -34,6 +34,12 @@ export interface Nutrients {
 export interface Meal {
   id: string;
   name: string;
+  totalCalories: number;
+  totalCarbohydrates: number;
+  totalProteins: number;
+  totalFats: number;
+  totalSodiums: number;
+  totalFibers: number;
   foods: MealFood[];
 }
 

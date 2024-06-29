@@ -10,6 +10,12 @@ interface UpdateRoutine {
 }
 
 export const updateRoutine = async ({id, ...routineData}:  UpdateRoutine) => {
+  if (routineData.name == "") {
+    throw new Error("O nome da rotina é obrigatório!");
+  }
+  if (routineData.meals.length == 0) {
+    throw new Error("Uma rotina precisa ter no mínimo uma refeição!");
+  }
 
   const userId = localStorage.getItem("userId")
 

@@ -46,6 +46,13 @@ export interface MealFood {
 export interface Routine {
   id: string;
   name: string;
+  water: number;
+  totalCalories: number;
+  totalCarbohydrates: number;
+  totalProteins: number;
+  totalFats: number;
+  totalSodiums: number;
+  totalFibers: number;
   meals: DailyMeal[];
 }
 

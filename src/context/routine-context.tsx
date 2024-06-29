@@ -1,4 +1,5 @@
 import { createRoutine } from '@/services/http/routine/create-routine';
+import { updateRoutine } from '@/services/http/routine/update-routine';
 import { DailyMeal } from '@/types/types';
 import { useMutation } from '@tanstack/react-query';
 import { createContext, useState, ReactNode, useContext } from 'react';
@@ -15,6 +16,8 @@ interface RoutineContextType {
   onRoutineNameChange: (name: string) => void;
   onRoutineWaterChange: (water: string) => void;
   handleCreateRoutine: () => void;
+  handleUpdateRoutine: (routineId: string) => void
+  setRoutineData: (routine: CreateRoutine) => void
 }
 
 export const RoutineContext = createContext<RoutineContextType | undefined>(undefined);
@@ -34,6 +37,15 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     setRoutine({ ...routine, water });
   }
 
+  const setRoutineData = (routine: CreateRoutine) => {
+    if (routine) {
+      setRoutine({
+        name: routine.name,
+        water: routine.water,
+        meals: routine.meals
+      })
+    }
+  }
 
   const { mutateAsync: createRoutineFn } = useMutation({
     mutationKey: ["create-routine"],
@@ -59,13 +71,40 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     setRoutine({ name: "", water: "", meals: [] });
   }
 
+  const { mutateAsync: updateRoutineFn } = useMutation({
+    mutationKey: ["create-routine"],
+    mutationFn: updateRoutine
+  })
+
+  const handleUpdateRoutine = async (routineId: string) => {
+
+    const meals = routine.meals.map(mealItem => {
+      return {
+        mealId: mealItem.meal.id,
+        time: mealItem.time,
+        status: mealItem.status
+      }
+    })
+
+    await updateRoutineFn({
+      id: routineId,
+      name: routine.name,
+      water: Number(routine.water),
+      meals: meals
+    });
+
+    setRoutine({ name: "", water: "", meals: [] });
+  }
+
   return (
     <RoutineContext.Provider value={{
       routine,
       addMeal,
       onRoutineNameChange,
       onRoutineWaterChange,
-      handleCreateRoutine
+      handleCreateRoutine,
+      handleUpdateRoutine,
+      setRoutineData
     }}>
       {children}
     </RoutineContext.Provider>

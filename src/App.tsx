@@ -11,6 +11,7 @@ import { AddNewMealPage } from "./pages/Meals/AddNewMeal/page";
 import { EditMealPage } from "./pages/Meals/EditMeal/page";
 import { MyRoutinesPage } from "./pages/Routines/MyRoutines/page";
 import { AddNewRoutinePage } from "./pages/Routines/AddNewRoutine/page";
+import { EditRoutinePage } from "./pages/Routines/EditRoutine/page";
 
 const router = createBrowserRouter([
   {
@@ -93,7 +94,7 @@ const router = createBrowserRouter([
     path: "/edit-routine/:routineId",
     element: (
       <PrivateRoute >
-        <EditMealPage />
+        <EditRoutinePage />
       </PrivateRoute>
     )
   },

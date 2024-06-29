@@ -19,6 +19,7 @@ interface MutationStates {
 interface RoutineContextType {
   routine: CreateRoutine;
   addMeal: (newMeal: DailyMeal) => void;
+  removeMeal: (mealToRemove: DailyMeal) => void;
   onRoutineNameChange: (name: string) => void;
   onRoutineWaterChange: (water: string) => void;
   handleCreateRoutine: () => void;
@@ -46,6 +47,14 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     }
 
     setRoutine({ ...routine, meals: [...routine.meals, { ...newMeal, status: 'PENDING' }] });
+  }
+
+  const removeMeal = (mealToRemove: DailyMeal) => {
+    const newMeals = routine.meals.filter(meal => {
+      return !(meal.time === mealToRemove.time && meal.meal.id === mealToRemove.meal.id)
+    })
+
+    setRoutine({ ...routine, meals: newMeals });
   }
 
   const onRoutineNameChange = (name: string) => {
@@ -131,6 +140,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     <RoutineContext.Provider value={{
       routine,
       addMeal,
+      removeMeal,
       onRoutineNameChange,
       onRoutineWaterChange,
       handleCreateRoutine,

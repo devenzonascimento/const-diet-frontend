@@ -11,7 +11,7 @@ export const MealBasketItem = ({ dailyMeal }: MealBasketItemProps) => {
   const { removeMeal } = useRoutineContext()
 
   return (
-    <li className="h-16 flex items-center justify-between gap-1.5 bg-white rounded-sm overflow-hidden shadow-lg">
+    <li className="h-16 min-h-16 flex items-center justify-between gap-1.5 bg-white rounded-sm overflow-hidden shadow-lg">
       <span className=" h-full flex items-center px-1.5 bg-sky-700 text-white font-semibold">
         {dailyMeal.time}
       </span>

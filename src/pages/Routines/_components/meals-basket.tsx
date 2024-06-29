@@ -22,14 +22,16 @@ export const MealsBasket = ({ meals, openCardToSelectMeals }: MealsBasketProps) 
           <>
             <List
               data={meals}
-              renderItem={({ item }) => <MealBasketItem dailyMeal={item} />}
+              renderItem={({ item }) => {
+                return <MealBasketItem key={`${item.meal.id}-${item.time}`} dailyMeal={item}/>
+              }}
             />            
             <Button
               onClick={openCardToSelectMeals}
               className="w-full flex gap-2 mt-4 text-sky-700 bg-slate-50 border-2 border-sky-700"
             >
               <Plus />
-              <span className="text-base">Adicionar refeição</span>
+              <span className="text-base">Adicionar mais refeições</span>
             </Button>
           </>
         )

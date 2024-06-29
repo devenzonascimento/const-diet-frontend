@@ -8,13 +8,17 @@ import { MealItem } from "./meal-item";
 import { Meal } from "@/types/types";
 
 interface SelectMealsCardProps {
-  mealsList: Meal[];
+  mealsList: Meal[] | undefined;
   onClose: () => void;
 }
 
 export const SelectMealsCard = ({ mealsList, onClose }: SelectMealsCardProps) => {
 
   const [searchTerm, setSearchTerm] = useState<string>("");
+
+  if (!mealsList) {
+    return null;
+  }
 
   const filteredMeals = mealsList?.filter(meal =>
     meal.name.toLowerCase().includes(searchTerm.toLowerCase())

@@ -1,7 +1,8 @@
 import { createRoutine } from '@/services/http/routine/create-routine';
+import { deleteRoutine } from '@/services/http/routine/delete-routine';
 import { updateRoutine } from '@/services/http/routine/update-routine';
 import { DailyMeal, Routine } from '@/types/types';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 import { createContext, useState, ReactNode, useContext } from 'react';
 
 interface CreateRoutine {
@@ -24,6 +25,7 @@ interface RoutineContextType {
   onRoutineWaterChange: (water: string) => void;
   handleCreateRoutine: () => void;
   handleUpdateRoutine: (routineId: string) => void
+  deleteRoutineFn: UseMutateAsyncFunction<boolean, Error, string, unknown>
   setRoutineData: (routine: CreateRoutine) => void
 
   createRoutineStates: MutationStates
@@ -154,6 +156,19 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     isSuccess: updateRoutineMutation.isSuccess,
   }
 
+  const { mutateAsync: deleteRoutineFn } = useMutation({
+    mutationKey: ["delete-routine"],
+    mutationFn: deleteRoutine,
+    onSuccess(_, routineId) {
+      queryClient.setQueryData(
+        ["routinesList"],
+        (routineList: Routine[]) => {
+          return routineList.filter(routine => routine.id !== routineId)
+        }
+      );
+    },
+  })
+
   return (
     <RoutineContext.Provider value={{
       routine,
@@ -163,6 +178,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       onRoutineWaterChange,
       handleCreateRoutine,
       handleUpdateRoutine,
+      deleteRoutineFn,
       setRoutineData,
 
       createRoutineStates,

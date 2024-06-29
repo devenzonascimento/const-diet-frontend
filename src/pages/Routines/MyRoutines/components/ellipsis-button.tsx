@@ -1,8 +1,8 @@
+import { useRoutineContext } from "@/context/routine-context";
 import { useModalState } from "@/hooks/use-modal-state";
 import { useNavigate } from "react-router-dom";
 
 import { cn } from "@/lib/utils";
-import { deleteRoutine } from "@/services/http/routine/delete-routine";
 
 import { When } from "@/components/when";
 import { Edit2Icon, EllipsisVerticalIcon } from "lucide-react";
@@ -19,8 +19,10 @@ export const EllipsisButton = ({ routineId, className }: EllipsisButtonProps) =>
 
   const navigate = useNavigate()
 
+  const { deleteRoutineFn } = useRoutineContext()
+
   const handleDeleteRoutine = () => {
-    deleteRoutine(routineId)
+    deleteRoutineFn(routineId)
   }
 
   const handleEditRoutine = () => {

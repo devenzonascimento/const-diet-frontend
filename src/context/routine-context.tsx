@@ -37,6 +37,14 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
   const [routine, setRoutine] = useState<CreateRoutine>({ name: "", water: "", meals: [] });
 
   const addMeal = (newMeal: DailyMeal) => {
+    const existMealAtTheSameTime = routine.meals.find(meal => {
+      return meal.time === newMeal.time && meal.meal.id === newMeal.meal.id
+    })
+
+    if (existMealAtTheSameTime) {
+      return
+    }
+
     setRoutine({ ...routine, meals: [...routine.meals, { ...newMeal, status: 'PENDING' }] });
   }
 

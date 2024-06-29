@@ -10,6 +10,12 @@ interface CreateRoutine {
   meals: DailyMeal[];
 }
 
+interface MutationStates {
+  isPending: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+}
+
 interface RoutineContextType {
   routine: CreateRoutine;
   addMeal: (newMeal: DailyMeal) => void;
@@ -18,7 +24,12 @@ interface RoutineContextType {
   handleCreateRoutine: () => void;
   handleUpdateRoutine: (routineId: string) => void
   setRoutineData: (routine: CreateRoutine) => void
+
+  createRoutineStates: MutationStates
+  updateRoutineStates: MutationStates
 }
+
+
 
 export const RoutineContext = createContext<RoutineContextType | undefined>(undefined);
 
@@ -47,7 +58,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
-  const { mutateAsync: createRoutineFn } = useMutation({
+  const createRoutineMutation = useMutation({
     mutationKey: ["create-routine"],
     mutationFn: createRoutine
   })
@@ -62,7 +73,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       }
     })
 
-    await createRoutineFn({
+    await createRoutineMutation.mutateAsync({
       name: routine.name,
       water: Number(routine.water),
       meals: meals
@@ -71,8 +82,14 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     setRoutine({ name: "", water: "", meals: [] });
   }
 
-  const { mutateAsync: updateRoutineFn } = useMutation({
-    mutationKey: ["create-routine"],
+  const createRoutineStates = {
+    isPending: createRoutineMutation.isPending,
+    isError: createRoutineMutation.isError,
+    isSuccess: createRoutineMutation.isSuccess,
+  }
+
+  const updateRoutineMutation = useMutation({
+    mutationKey: ["update-routine"],
     mutationFn: updateRoutine
   })
 
@@ -86,7 +103,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       }
     })
 
-    await updateRoutineFn({
+    await updateRoutineMutation.mutateAsync({
       id: routineId,
       name: routine.name,
       water: Number(routine.water),
@@ -94,6 +111,12 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     });
 
     setRoutine({ name: "", water: "", meals: [] });
+  }
+
+  const updateRoutineStates = {
+    isPending: updateRoutineMutation.isPending,
+    isError: updateRoutineMutation.isError,
+    isSuccess: updateRoutineMutation.isSuccess,
   }
 
   return (
@@ -104,7 +127,10 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       onRoutineWaterChange,
       handleCreateRoutine,
       handleUpdateRoutine,
-      setRoutineData
+      setRoutineData,
+
+      createRoutineStates,
+      updateRoutineStates
     }}>
       {children}
     </RoutineContext.Provider>

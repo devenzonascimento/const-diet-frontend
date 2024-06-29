@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useModalState } from "@/hooks/use-modal-state"
 import { useRoutineContext } from "@/context/routine-context";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
 import { getMealsList } from "@/services/http/meal/get-meals-list";
 
@@ -22,6 +22,8 @@ export const EditRoutinePage = () => {
 
   const { routineId } = useParams<keyof RouteParams>() as RouteParams;
 
+  const navigate = useNavigate()
+
   const { isOpen, toggleModal } = useModalState()
   
   const queryClient = useQueryClient()
@@ -31,8 +33,15 @@ export const EditRoutinePage = () => {
     onRoutineNameChange,
     onRoutineWaterChange,
     handleUpdateRoutine,
-    setRoutineData
+    setRoutineData,
+    updateRoutineStates
   } = useRoutineContext()
+
+  useEffect(() => {
+    if (updateRoutineStates.isSuccess) {
+      navigate("/my-routines")
+    }
+  }, [updateRoutineStates.isSuccess, navigate])
   
   const loadRoutineData = () => {
     const data = queryClient.getQueryData<Routine[]>(["routinesList"])
@@ -68,6 +77,13 @@ export const EditRoutinePage = () => {
 
   return (
     <div className="h-screen max-h-screen flex flex-col bg-slate-100 px-4 ">
+      {updateRoutineStates.isPending && (
+        <div className="fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
+          <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
+            <p className="text-2xl font-semibold">Aguarde...</p>
+          </div>
+        </div>
+      )}
       <header className="relative flex justify-center items-center py-4 text-sky-950">
         <Link to="/my-routines">
           <ArrowLeft size={32} className="absolute top-4 left-0" />

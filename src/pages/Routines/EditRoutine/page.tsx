@@ -20,9 +20,9 @@ interface RouteParams {
 
 export const EditRoutinePage = () => {
 
-  const { routineId } = useParams<keyof RouteParams>() as RouteParams;
-
   const navigate = useNavigate()
+  
+  const { routineId } = useParams<keyof RouteParams>() as RouteParams;
 
   const { isOpen, toggleModal } = useModalState()
   
@@ -40,12 +40,6 @@ export const EditRoutinePage = () => {
   const redirectToSuccess = () => {
     navigate("/my-routines")
   };
-
-  useEffect(() => {
-    if (updateRoutineStates.isSuccess) {
-      navigate("/my-routines")
-    }
-  }, [updateRoutineStates.isSuccess, navigate])
   
   const loadRoutineData = () => {
     const data = queryClient.getQueryData<Routine[]>(["routinesList"])
@@ -66,18 +60,10 @@ export const EditRoutinePage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const { data: mealsList, isPending, isError } = useQuery({
+  const { data: mealsList } = useQuery({
     queryKey: ["mealsList"],
     queryFn: getMealsList,
   })
-
-  if (isPending) {
-    return null
-  }
-
-  if (isError || !mealsList) {
-    return <h1>OCORREU UM ERRO</h1>
-  }
 
   return (
     <div className="h-screen max-h-screen flex flex-col bg-slate-100 px-4 ">

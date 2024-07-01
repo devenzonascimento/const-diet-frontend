@@ -1,9 +1,11 @@
+import { createContext, useState, ReactNode, useContext } from 'react';
+import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+
 import { createRoutine } from '@/services/http/routine/create-routine';
 import { deleteRoutine } from '@/services/http/routine/delete-routine';
 import { updateRoutine } from '@/services/http/routine/update-routine';
+
 import { DailyMeal, Routine } from '@/types/types';
-import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/react-query';
-import { createContext, useState, ReactNode, useContext } from 'react';
 
 interface CreateRoutine {
   name: string;
@@ -23,10 +25,11 @@ interface RoutineContextType {
   removeMeal: (mealToRemove: DailyMeal) => void;
   onRoutineNameChange: (name: string) => void;
   onRoutineWaterChange: (water: string) => void;
+  setRoutineData: (routine: CreateRoutine) => void;
+  clearRoutineData: () => void;
   handleCreateRoutine: (redirect: () => void) => void;
   handleUpdateRoutine: (routineId: string, redirect: () => void) => void;
   deleteRoutineFn: UseMutateAsyncFunction<boolean, Error, string, unknown>
-  setRoutineData: (routine: CreateRoutine) => void
 
   createRoutineStates: MutationStates
   updateRoutineStates: MutationStates
@@ -77,6 +80,10 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     }
   }
 
+  const clearRoutineData = () => {
+    setRoutine({ name: "", water: "", meals: [] });
+  }
+
   const queryClient = useQueryClient()
 
   const createRoutineMutation = useMutation({
@@ -108,7 +115,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       meals: meals
     });
 
-    setRoutine({ name: "", water: "", meals: [] });
+    clearRoutineData()
     redirect();
   }
 
@@ -148,7 +155,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       meals: meals
     });
 
-    setRoutine({ name: "", water: "", meals: [] });
+    clearRoutineData()
     redirect();
   }
 
@@ -178,10 +185,11 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       removeMeal,
       onRoutineNameChange,
       onRoutineWaterChange,
+      setRoutineData,
+      clearRoutineData,
       handleCreateRoutine,
       handleUpdateRoutine,
       deleteRoutineFn,
-      setRoutineData,
 
       createRoutineStates,
       updateRoutineStates

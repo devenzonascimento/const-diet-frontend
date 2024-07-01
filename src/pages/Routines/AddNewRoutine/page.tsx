@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useModalState } from "@/hooks/use-modal-state"
 import { useRoutineContext } from "@/context/routine-context";
 import { useQuery } from "@tanstack/react-query";
@@ -22,9 +23,15 @@ export const AddNewRoutinePage = () => {
     routine,
     onRoutineNameChange,
     onRoutineWaterChange,
+    clearRoutineData,
     handleCreateRoutine,
     createRoutineStates
   } = useRoutineContext()
+
+  useEffect(() => {
+    clearRoutineData()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const redirectToSuccess = () => {
     navigate("/my-routines")

@@ -63,7 +63,7 @@ export const FoodCardModal = ({
           <Button
             type="button"
             className="w-32 bg-sky-700 hover:bg-sky-500"
-            onClick={() => navigate(`/edit-food/${id}`)}
+            onClick={() => navigate(`/editar-alimento/${id}`)}
           >
             Editar alimento
           </Button>

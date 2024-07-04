@@ -49,7 +49,7 @@ export const EditMealPage = () => {
   return (
     <div className="h-screen bg-slate-100 px-4">
       <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/my-meals">
+        <Link to="/minhas-refeicoes">
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>
         <h1 className="text-xl font-semibold">Editar refeição</h1>
@@ -61,7 +61,7 @@ export const EditMealPage = () => {
           <FoodsBasket openFormModal={toggleModal} />
         </div>
 
-        <Link className="w-full" to="/my-meals" >
+        <Link className="w-full" to="/minhas-refeicoes" >
           <Button
             className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
             onClick={handleUpdateMeal}

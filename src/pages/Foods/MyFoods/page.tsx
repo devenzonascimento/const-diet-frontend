@@ -14,12 +14,12 @@ export const MyFoodsPage = () => {
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>
         <h1 className="text-xl font-semibold">Meus alimentos</h1>
-        <Link to="/add-new-food">
+        <Link to="/novo-alimento">
           <CirclePlus size={32} className="absolute top-4 right-0" />
         </Link>
       </header>
       <main className="flex flex-col justify-center items-center gap-8 pb-6">
-        <FoodsList ItemComponent={FoodItem}/>
+        <FoodsList ItemComponent={FoodItem} />
       </main>
     </div>
   );

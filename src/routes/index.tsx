@@ -4,6 +4,7 @@ import { PrivateRoute } from "./private-route";
 import { AppProvider } from "@/context";
 
 import { LoginPage } from "@/pages/Login/page";
+import { App } from "@/App";
 import { HomePage } from "@/pages/Home/page";
 import { MyFoodsPage } from "@/pages/Foods/MyFoods/page";
 import { AddNewFoodPage } from "@/pages/Foods/AddNewFood/page";
@@ -29,99 +30,51 @@ export const router = createBrowserRouter([
     element: (
       <AppProvider>
         <PrivateRoute >
-          <HomePage />
+          <App />
         </PrivateRoute>
       </AppProvider>
-    )
-  },
-  {
-    path: "/my-foods",
-    element: (
-      <AppProvider>
-        <PrivateRoute >
-          <MyFoodsPage />
-        </PrivateRoute>
-      </AppProvider>
-    )
-  },
-  {
-    path: "/add-new-food",
-    element: (
-      <AppProvider>
-        <PrivateRoute >
-          <AddNewFoodPage />
-        </PrivateRoute>
-      </AppProvider>
-    )
-  },
-  {
-    path: "/edit-food/:foodId",
-    element: (
-      <AppProvider>
-        <PrivateRoute >
-          <EditFoodPage />
-        </PrivateRoute>
-      </AppProvider>
-    )
-  },
-  {
-    path: "/my-meals",
-    element: (
-      <AppProvider>
-        <PrivateRoute >
-          <MyMealsPage />
-        </PrivateRoute>
-      </AppProvider>
-    )
-  },
-  {
-    path: "/add-new-meal",
-    element: (
-      <AppProvider>
-        <PrivateRoute >
-          <AddNewMealPage />
-        </PrivateRoute>
-      </AppProvider>
-    )
-  },
-  {
-    path: "/edit-meal/:mealId",
-    element: (
-      <AppProvider>
-        <PrivateRoute >
-          <EditMealPage />
-        </PrivateRoute>
-      </AppProvider>
-    )
-  },
-  {
-    path: "/my-routines",
-    element: (
-      <AppProvider>
-        <PrivateRoute >
-          <MyRoutinesPage />
-        </PrivateRoute>
-      </AppProvider>
-    )
-  },
-  {
-    path: "/add-new-routine",
-    element: (
-      <AppProvider>
-        <PrivateRoute >
-          <AddNewRoutinePage />
-        </PrivateRoute>
-      </AppProvider>
-    )
-  },
-  {
-    path: "/edit-routine/:routineId",
-    element: (
-      <AppProvider>
-        <PrivateRoute >
-          <EditRoutinePage />
-        </PrivateRoute>
-      </AppProvider>
-    )
+    ),
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "meus-alimentos",
+        element: <MyFoodsPage />,
+      },
+      {
+        path: "novo-alimento",
+        element: <AddNewFoodPage />
+      },
+      {
+        path: "editar-alimento/:foodId",
+        element: <EditFoodPage />
+      },
+      {
+        path: "minhas-refeicoes",
+        element: <MyMealsPage />,
+      },
+      {
+        path: "nova-refeicao",
+        element: <AddNewMealPage />
+      },
+      {
+        path: "editar-refeicao/:mealId",
+        element: <EditMealPage />
+      },
+      {
+        path: "minhas-rotinas",
+        element: <MyRoutinesPage />,
+      },
+      {
+        path: "nova-rotina",
+        element: <AddNewRoutinePage />
+      },
+      {
+        path: "editar-rotina/:routineId",
+        element: <EditRoutinePage />
+      },
+    ]
   },
 ])

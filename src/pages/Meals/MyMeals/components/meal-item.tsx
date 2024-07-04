@@ -68,7 +68,7 @@ export const MealItem = ({ meal }: MealItemProps) => {
         </When>
 
         <div className="grid grid-cols-2 gap-2">
-          <Link to={`/edit-meal/${meal.id}`}>
+          <Link to={`/editar-refeicao/${meal.id}`}>
             <Button className="w-full bg-sky-700 hover:bg-sky-500" >
               Editar refeição
             </Button>

@@ -21,13 +21,13 @@ interface RouteParams {
 export const EditRoutinePage = () => {
 
   const navigate = useNavigate()
-  
+
   const { routineId } = useParams<keyof RouteParams>() as RouteParams;
 
   const { isOpen, toggleModal } = useModalState()
-  
+
   const queryClient = useQueryClient()
-  
+
   const {
     routine,
     onRoutineNameChange,
@@ -38,9 +38,9 @@ export const EditRoutinePage = () => {
   } = useRoutineContext()
 
   const redirectToSuccess = () => {
-    navigate("/my-routines")
+    navigate("/minhas-rotinas")
   };
-  
+
   const loadRoutineData = () => {
     const data = queryClient.getQueryData<Routine[]>(["routinesList"])
 
@@ -75,7 +75,7 @@ export const EditRoutinePage = () => {
         </div>
       )}
       <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/my-routines">
+        <Link to="/minhas-rotinas">
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>
         <h1 className="text-xl font-semibold">Editar Rotina</h1>

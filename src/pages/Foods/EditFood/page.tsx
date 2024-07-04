@@ -47,14 +47,14 @@ export const EditFoodPage = () => {
 
   const onSubmit = (data: CreateFood) => {
     updateFoodFn({ id: foodId, ...data })
-    
-    navigate("/my-foods")
+
+    navigate("/meus-alimentos")
   }
 
   return (
     <div className="h-screen bg-gray-00 px-4">
       <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/my-foods">
+        <Link to="/meus-alimentos">
           <ArrowLeft
             className="absolute top-4 left-0"
             size={32}

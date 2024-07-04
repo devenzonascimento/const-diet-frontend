@@ -11,7 +11,7 @@ export const MyMealsPage = () => {
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>
         <h1 className="text-xl font-semibold">Minhas refeições</h1>
-        <Link to="/add-new-meal">
+        <Link to="/nova-refeicao">
           <CirclePlus size={32} className="absolute top-4 right-0" />
         </Link>
       </header>

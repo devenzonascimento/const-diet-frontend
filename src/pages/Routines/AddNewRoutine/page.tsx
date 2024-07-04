@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useModalState } from "@/hooks/use-modal-state"
 import { useRoutineContext } from "@/context/routine-context";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate,  } from "react-router-dom"
+import { Link, useNavigate, } from "react-router-dom"
 
 import { getMealsList } from "@/services/http/meal/get-meals-list";
 
@@ -30,11 +30,11 @@ export const AddNewRoutinePage = () => {
 
   useEffect(() => {
     clearRoutineData()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const redirectToSuccess = () => {
-    navigate("/my-routines")
+    navigate("/minhas-rotinas")
   };
 
   const { data: mealsList } = useQuery({
@@ -52,7 +52,7 @@ export const AddNewRoutinePage = () => {
         </div>
       )}
       <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/my-routines">
+        <Link to="/minhas-rotinas">
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>
         <h1 className="text-xl font-semibold">Criar uma Rotina</h1>

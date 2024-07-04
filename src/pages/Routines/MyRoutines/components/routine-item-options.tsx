@@ -23,7 +23,7 @@ export const RoutineItemOptions = ({ routineId }: RoutineItemOptionsProps) => {
   }
 
   const handleEditRoutine = () => {
-    navigate(`/edit-routine/${routineId}`)
+    navigate(`/editar-rotina/${routineId}`)
   }
 
   return (

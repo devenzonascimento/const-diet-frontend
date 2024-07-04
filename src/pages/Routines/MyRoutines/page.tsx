@@ -34,12 +34,12 @@ export const MyRoutinesPage = () => {
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>
         <h1 className="text-xl font-semibold">Minhas rotinas</h1>
-        <Link to="/add-new-routine">
+        <Link to="/nova-rotina">
           <CirclePlus size={32} className="absolute top-4 right-0" />
         </Link>
       </header>
       <main className="flex flex-col justify-between items-center gap-4 pb-6">
-        <SearchInput 
+        <SearchInput
           placeholder="Buscar rotina"
           value={searchTerm}
           onChange={({ target }) => setSearchTerm(target.value)}

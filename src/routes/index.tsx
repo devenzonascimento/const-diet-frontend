@@ -15,6 +15,9 @@ import { EditMealPage } from "@/pages/Meals/EditMeal/page";
 import { MyRoutinesPage } from "@/pages/Routines/MyRoutines/page";
 import { AddNewRoutinePage } from "@/pages/Routines/AddNewRoutine/page";
 import { EditRoutinePage } from "@/pages/Routines/EditRoutine/page";
+import { MyPlansPage } from "@/pages/Plans/MyPlans/page";
+import { AddNewPlanPage } from "@/pages/Plans/AddNewPlan/page";
+import { EditPlanPage } from "@/pages/Plans/EditPlan/page";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +77,18 @@ export const router = createBrowserRouter([
       {
         path: "editar-rotina/:routineId",
         element: <EditRoutinePage />
+      },
+      {
+        path: "meus-planos",
+        element: <MyPlansPage />,
+      },
+      {
+        path: "novo-plano",
+        element: <AddNewPlanPage />
+      },
+      {
+        path: "editar-plano/:planId",
+        element: <EditPlanPage />
       },
     ]
   },

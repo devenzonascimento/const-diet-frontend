@@ -3,7 +3,7 @@ import { useModalState } from "@/hooks/use-modal-state"
 import { CaloriesBadge } from "@/components/calories-badge"
 import { Badge } from "./badge"
 import { When } from "@/components/when"
-import { DailyMealFormCard } from "./daily-meal-form-card"
+import { RoutineMealFormCard } from "./routine-meal-form-card"
 
 import { Meal } from "@/types/types"
 
@@ -39,7 +39,7 @@ export const MealItem = ({ meal }: MealItemProps) => {
         </div>
       </li>
       <When expr={isOpen} >
-        <DailyMealFormCard meal={meal} onClose={closeModal} />
+        <RoutineMealFormCard meal={meal} onClose={closeModal} />
       </When>
     </>
   )

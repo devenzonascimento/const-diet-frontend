@@ -7,12 +7,12 @@ import { Button } from "@/components/ui/button";
 
 import { Meal } from "@/types/types";
 
-interface DailyMealFormCardProps {
+interface RoutineMealFormCardProps {
   meal: Meal;
   onClose: () => void;
 }
 
-export const DailyMealFormCard = ({ meal, onClose }: DailyMealFormCardProps) => {
+export const RoutineMealFormCard = ({ meal, onClose }: RoutineMealFormCardProps) => {
 
   const [time, setTime] = useState<string>("")
 
@@ -22,7 +22,6 @@ export const DailyMealFormCard = ({ meal, onClose }: DailyMealFormCardProps) => 
     addMeal({
       meal,
       time: time,
-      status: "PENDING"
     })
 
     onClose()

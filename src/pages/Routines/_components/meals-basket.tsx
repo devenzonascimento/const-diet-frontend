@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button"
 
 import { Plus, PlusCircle } from "lucide-react"
 
-import { DailyMeal } from "@/types/types"
+import { RoutineMeal } from "@/types/types"
 import { MealBasketItem } from "./meal-basket-item"
 import { List } from "@/components/list"
 
 interface MealsBasketProps {
-  meals: DailyMeal[]
+  meals: RoutineMeal[]
   openCardToSelectMeals: VoidFunction
 }
 
@@ -23,7 +23,7 @@ export const MealsBasket = ({ meals, openCardToSelectMeals }: MealsBasketProps) 
             <List
               data={meals}
               renderItem={({ item }) => {
-                return <MealBasketItem key={`${item.meal.id}-${item.time}`} dailyMeal={item}/>
+                return <MealBasketItem key={`${item.meal.id}-${item.time}`} routineMeal={item}/>
               }}
             />            
             <Button

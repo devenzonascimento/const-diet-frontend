@@ -59,17 +59,15 @@ export interface Routine {
   totalFats: number;
   totalSodiums: number;
   totalFibers: number;
-  meals: DailyMeal[];
+  meals: RoutineMeal[];
 }
 
-export interface DailyMeal {
+export interface RoutineMeal {
   meal: Meal;
   time: string;
-  status: "PENDING" | "COMPLETED" | "MISSED"
 }
 
-export interface DailyMealCreate {
+export interface RoutineMealCreate {
   mealId: string;
   time: string;
-  status: "PENDING" | "COMPLETED" | "MISSED"
 }

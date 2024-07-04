@@ -5,12 +5,12 @@ import { createRoutine } from '@/services/http/routine/create-routine';
 import { deleteRoutine } from '@/services/http/routine/delete-routine';
 import { updateRoutine } from '@/services/http/routine/update-routine';
 
-import { DailyMeal, Routine } from '@/types/types';
+import { RoutineMeal, Routine } from '@/types/types';
 
 interface CreateRoutine {
   name: string;
   water: string;
-  meals: DailyMeal[];
+  meals: RoutineMeal[];
 }
 
 interface MutationStates {
@@ -21,8 +21,8 @@ interface MutationStates {
 
 interface RoutineContextType {
   routine: CreateRoutine;
-  addMeal: (newMeal: DailyMeal) => void;
-  removeMeal: (mealToRemove: DailyMeal) => void;
+  addMeal: (newMeal: RoutineMeal) => void;
+  removeMeal: (mealToRemove: RoutineMeal) => void;
   onRoutineNameChange: (name: string) => void;
   onRoutineWaterChange: (water: string) => void;
   setRoutineData: (routine: CreateRoutine) => void;
@@ -42,7 +42,7 @@ export const RoutineContext = createContext<RoutineContextType | undefined>(unde
 export const RoutineProvider = ({ children }: { children: ReactNode }) => {
   const [routine, setRoutine] = useState<CreateRoutine>({ name: "", water: "", meals: [] });
 
-  const addMeal = (newMeal: DailyMeal) => {
+  const addMeal = (newMeal: RoutineMeal) => {
     const existMealAtTheSameTime = routine.meals.find(meal => {
       return meal.time === newMeal.time && meal.meal.id === newMeal.meal.id
     })
@@ -51,10 +51,10 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       return
     }
 
-    setRoutine({ ...routine, meals: [...routine.meals, { ...newMeal, status: 'PENDING' }] });
+    setRoutine({ ...routine, meals: [...routine.meals, { ...newMeal }] });
   }
 
-  const removeMeal = (mealToRemove: DailyMeal) => {
+  const removeMeal = (mealToRemove: RoutineMeal) => {
     const newMeals = routine.meals.filter(meal => {
       return !(meal.time === mealToRemove.time && meal.meal.id === mealToRemove.meal.id)
     })
@@ -105,7 +105,6 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       return {
         mealId: mealItem.meal.id,
         time: mealItem.time,
-        status: mealItem.status
       }
     })
 
@@ -144,7 +143,6 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       return {
         mealId: mealItem.meal.id,
         time: mealItem.time,
-        status: mealItem.status
       }
     })
 

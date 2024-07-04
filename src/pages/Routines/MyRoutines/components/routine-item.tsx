@@ -4,7 +4,7 @@ import { ChevronButton } from "@/components/chevron-button"
 import { FlameIcon, DropletIcon } from "lucide-react"
 import { NutrientBadge } from "./nutrient-badge"
 import { List } from "@/components/list"
-import { DailyMealItem } from "./daily-meal-item"
+import { RoutineMealItem } from "./routine-meal-item"
 
 import { Routine } from "@/types/types"
 import { RoutineItemOptions } from "./routine-item-options"
@@ -79,36 +79,10 @@ export const RoutineItem = ({ routine }: RoutineItemProps) => {
           <p className="w-full text-white text-xl font-medium text-center">Suas refeições</p>
           <List
             data={routine.meals}
-            renderItem={({ item }) => <DailyMealItem key={item.meal.id} dailyMeal={item} />}
+            renderItem={({ item }) => <RoutineMealItem key={item.meal.id} routineMeal={item} />}
           />
         </div>
       )}
     </li>
   )
 }
-
-
-
-
-/*
-
-Invalid `prisma.routine.delete()` invocation in
-c:\projetos\const-diet-backend\src\repositories\routine-repository.ts:120:22
-
-  117     routineId,
-  118   },
-  119 }),
-→ 120 prisma.routine.delete(
-An operation failed because it depends on one or more records that were required but not found. Record to delete does not exist.
-
-
-
-Invalid `prisma.dailyMeal.createMany()` invocation in
-c:\projetos\const-diet-backend\src\repositories\daily-meal-repository.ts:10:35
-
-   7 
-   8 export class DailyMealRepositoryPrisma implements DailyMealRepository {
-   9   async createMany(routineId: string, data: DailyMealCreate[]) {
-→ 10     return await prisma.dailyMeal.createMany(
-Unique constraint failed on the fields: (`routineId`,`mealId`)
-*/

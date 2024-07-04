@@ -1,12 +1,12 @@
 import { api } from "@/services/api"
 
-import { DailyMealCreate } from "@/types/types";
+import { RoutineMealCreate } from "@/types/types";
 
 interface UpdateRoutine {
   id: string;
   name: string;
   water: number;
-  meals: DailyMealCreate[];
+  meals: RoutineMealCreate[];
 }
 
 export const updateRoutine = async ({id, ...routineData}:  UpdateRoutine) => {

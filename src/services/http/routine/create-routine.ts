@@ -1,11 +1,11 @@
 import { api } from "@/services/api";
 
-import { DailyMealCreate, Routine } from "@/types/types";
+import { RoutineMealCreate, Routine } from "@/types/types";
 
 interface CreateRoutine {
   name: string;
   water: number;
-  meals: DailyMealCreate[];
+  meals: RoutineMealCreate[];
 }
 
 export const createRoutine = async (routineData: CreateRoutine): Promise<Routine> => {

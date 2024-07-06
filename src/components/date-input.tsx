@@ -23,7 +23,7 @@ export function DateInput({ label, date, setDate }: DateInputProps) {
       </p>
       <Popover>
         <PopoverTrigger asChild>
-          <div
+          <button
             id="date"
             className="w-full flex items-center text-lg py-1 px-2 border border-sky-900 rounded-md text-left font-normal bg-white"
           >
@@ -33,7 +33,7 @@ export function DateInput({ label, date, setDate }: DateInputProps) {
               :
               <span>Pick a date</span>
             }
-          </div>
+          </button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar

@@ -71,3 +71,8 @@ export interface RoutineMealCreate {
   mealId: string;
   time: string;
 }
+
+export type CycleIllustrationType = {
+  day: 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab' | 'dom';
+  number: "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7";
+}

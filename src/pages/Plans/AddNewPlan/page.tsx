@@ -1,7 +1,5 @@
-import { useState } from "react"
+import { usePlanContext } from "@/context/plan-context"
 import { Link } from "react-router-dom"
-
-import { addMonths } from "date-fns"
 
 import { ArrowLeft } from "lucide-react"
 import { DefaultInput } from "@/components/default-input"
@@ -12,18 +10,16 @@ import { WeeklyCycle } from "../_components/weekly-cycle"
 import { CustomCycle } from "../_components/custom-cycle"
 
 export const AddNewPlanPage = () => {
-  const [date, setDate] = useState<{ start: Date, end: Date }>({
-    start: new Date(),
-    end: addMonths(new Date(), 3),
-  })
-
-  const setStart = (newDate: Date) => {
-    setDate({ ...date, start: newDate })
-  }
-
-  const setEnd = (newDate: Date) => {
-    setDate({ ...date, end: newDate })
-  }
+  const {
+    nameValue,
+    setNameValue,
+    goalValue,
+    setGoalValue,
+    startDateValue,
+    setStartDateValue,
+    endDateValue,
+    setEndDateValue,
+  } = usePlanContext()
 
   return (
     <div className="h-screen bg-slate-100 px-4">
@@ -37,18 +33,30 @@ export const AddNewPlanPage = () => {
         <DefaultInput
           label="Dê um nome ao seu plano"
           placeholder="Ex: Projeto verão"
+          value={nameValue}
+          onChange={({ target }) => setNameValue(target.value)}
         />
         <DefaultInput
           label="Qual o objetivo do seu plano"
           placeholder="Ex: Ganhar peso"
+          value={goalValue}
+          onChange={({ target }) => setGoalValue(target.value)}
         />
         <fieldset className="w-full flex gap-4">
-          <DateInput label="Inicio" date={date?.start} setDate={setStart} />
-          <DateInput label="Fim" date={date?.end} setDate={setEnd} />
+          <DateInput
+            label="Inicio"
+            date={startDateValue}
+            setDate={setStartDateValue}
+          />
+          <DateInput
+            label="Fim"
+            date={endDateValue}
+            setDate={setEndDateValue}
+          />
         </fieldset>
         <div className="w-full flex flex-col gap-2">
           <p className="font-semibold text-lg text-sky-950">
-            Escolha a periodicidade
+            Escolha uma frequência
           </p>
           <ul className="flex flex-col gap-4">
             <EveryDayCycle />

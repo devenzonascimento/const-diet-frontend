@@ -18,7 +18,7 @@ export const EveryDayCycle = () => {
         <div className="flex flex-col gap-1 p-3">
           <h2 className="font-semibold text-lg text-sky-950">Todos os dias</h2>
           <p className="text-sm text-slate-500">
-            Essa periodicidade define que você vai seguir a mesma rotina todos os dias durante seu plano
+            Essa frequência define que você seguirá a mesma rotina de alimentação todos os dias durante o período do seu plano. Ideal para quem prefere consistência diária na dieta.
           </p>
         </div>
         <div className="pl-2 pb-2">
@@ -27,9 +27,9 @@ export const EveryDayCycle = () => {
       </li>
       <When expr={isOpen} >
         <CycleCard
-          title="Períodicidade diária"
+          title="Ciclo de repetição diária"
           description="explicação..."
-          numberOfSlots={3}
+          numberOfSlots={1}
           onClose={toggleModal}
         />
       </When>

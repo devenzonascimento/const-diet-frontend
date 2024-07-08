@@ -12,7 +12,7 @@ interface PlanContextType {
   endDateValue: Date
   setEndDateValue: (date: Date) => void
   routinesCycle: (Routine | undefined)[];
-  setRoutinesCycle: (routines: Routine[]) => void
+  setRoutinesCycle: (routines: (Routine | undefined)[]) => void
   addRoutine: (routine: Routine, slot: number) => void
   removeRoutine: (slot: number) => void
 }
@@ -38,7 +38,7 @@ type Action =
   | { type: 'SET_GOAL'; payload: string }
   | { type: 'SET_START_DATE'; payload: Date }
   | { type: 'SET_END_DATE'; payload: Date }
-  | { type: 'SET_ROUTINES_CYCLE'; payload: Routine[] }
+  | { type: 'SET_ROUTINES_CYCLE'; payload: (Routine | undefined)[] }
   | { type: 'ADD_ROUTINE'; payload: { routine: Routine, slot: number } }
   | { type: 'REMOVE_ROUTINE'; payload: number }
 
@@ -95,7 +95,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       endDateValue: state.endDate,
       setEndDateValue: (date: Date) => dispatch({ type: 'SET_END_DATE', payload: date }),
       routinesCycle: state.routinesCycle,
-      setRoutinesCycle: (routines: Routine[]) => dispatch({ type: 'SET_ROUTINES_CYCLE', payload: routines }),
+      setRoutinesCycle: (routines: (Routine | undefined)[]) => dispatch({ type: 'SET_ROUTINES_CYCLE', payload: routines }),
       addRoutine: (routine: Routine, slot: number) => dispatch({ type: 'ADD_ROUTINE', payload: { routine, slot } }),
       removeRoutine: (slot: number) => dispatch({ type: 'REMOVE_ROUTINE', payload: slot }),
     }}>

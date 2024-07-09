@@ -76,3 +76,11 @@ export type CycleIllustrationType = {
   day: 'seg' | 'ter' | 'qua' | 'qui' | 'sex' | 'sab' | 'dom';
   number: "R1" | "R2" | "R3" | "R4" | "R5" | "R6" | "R7";
 }
+
+export interface Plan {
+  name: string;
+  goal: string;
+  startDate: Date;
+  endDate: Date;
+  routines: Routine[];
+}

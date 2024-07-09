@@ -1,4 +1,6 @@
-import { Routine } from '@/types/types';
+import { createPlan } from '@/services/http/plan/create-plan';
+import { Plan, Routine } from '@/types/types';
+import { useMutation } from '@tanstack/react-query';
 import { addMonths } from 'date-fns';
 import { createContext, ReactNode, useContext, useReducer } from 'react';
 
@@ -15,6 +17,7 @@ interface PlanContextType {
   setRoutinesCycle: (routines: (Routine | undefined)[]) => void
   addRoutine: (routine: Routine, slot: number) => void
   removeRoutine: (slot: number) => void
+  handleCreatePlan: () => void;
 }
 
 interface PlanState {
@@ -82,7 +85,26 @@ export const PlanContext = createContext<PlanContextType | undefined>(undefined)
 export const PlanProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(planReducer, initialState);
 
+  const createPlanMutation = useMutation({
+    mutationKey: ["create-plan"],
+    mutationFn: createPlan
+  })
 
+  const handleCreatePlan = async () => { 
+    const { name, goal, startDate, endDate, routinesCycle }  = state
+    
+    const routines = routinesCycle.filter(routineCycle => routineCycle != undefined)
+
+    const planData = formatPlanData({
+      name,
+      goal,
+      startDate,
+      endDate,
+      routines: routines
+    })
+
+    createPlanMutation.mutateAsync(planData)
+  }
 
   return (
     <PlanContext.Provider value={{
@@ -98,6 +120,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       setRoutinesCycle: (routines: (Routine | undefined)[]) => dispatch({ type: 'SET_ROUTINES_CYCLE', payload: routines }),
       addRoutine: (routine: Routine, slot: number) => dispatch({ type: 'ADD_ROUTINE', payload: { routine, slot } }),
       removeRoutine: (slot: number) => dispatch({ type: 'REMOVE_ROUTINE', payload: slot }),
+      handleCreatePlan,
     }}>
       {children}
     </PlanContext.Provider>
@@ -135,20 +158,20 @@ function generateDates(startDate: Date, endDate: Date): Date[] {
   return dates;
 }
 
-function assignRoutinesToDates(dates: Date[], cycle: string[]): { routineId: string; date: Date }[] {
+function assignRoutinesToDates(dates: Date[], cycle: Routine[]): { routineId: string; date: Date }[] {
   const assignments: { routineId: string; date: Date }[] = [];
 
   for (let i = 0; i < dates.length; i++) {
-    const routineId = cycle[i % cycle.length];
+    const routineId = cycle[i % cycle.length].id;
     assignments.push({ routineId, date: dates[i] });
   }
 
   return assignments;
 }
 
-function createPlan(name: string, goal: string, startDate: Date, endDate: Date, cycle: string[]): PlanCreate {
-  const dates = generateDates(startDate, endDate);
-  const routineAssignments = assignRoutinesToDates(dates, cycle);
+function formatPlanData(planData: Plan) {
+  const dates = generateDates(planData.startDate, planData.endDate);
+  const routineAssignments = assignRoutinesToDates(dates, planData.routines);
 
   const routinesMap: { [key: string]: Date[] } = {};
 
@@ -161,20 +184,11 @@ function createPlan(name: string, goal: string, startDate: Date, endDate: Date, 
 
   const routines = Object.entries(routinesMap).map(([routineId, dates]) => ({
     routineId,
-    date: dates,
+    dates: dates,
   }));
 
   return {
-    name,
-    goal,
-    startDate,
-    endDate,
-    routines,
+    ...planData,    
+    routines: routines
   };
 }
-
-
-const everyDay = ["R1"]
-const alternated = ["R1", "R2"]
-const weekly = ["R1", "R2", "R3", "R4", "R5", "R6", "R7"]
-const custom = ["R1", "R2", "R3", "R4"]

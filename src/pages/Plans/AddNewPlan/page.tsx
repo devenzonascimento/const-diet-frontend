@@ -8,6 +8,7 @@ import { EveryDayCycle } from "../_components/every-day-cycle"
 import { AlternatedCycle } from "../_components/alternated-cycle"
 import { WeeklyCycle } from "../_components/weekly-cycle"
 import { CustomCycle } from "../_components/custom-cycle"
+import { Button } from "@/components/ui/button"
 
 export const AddNewPlanPage = () => {
   const {
@@ -19,6 +20,7 @@ export const AddNewPlanPage = () => {
     setStartDateValue,
     endDateValue,
     setEndDateValue,
+    handleCreatePlan
   } = usePlanContext()
 
   return (
@@ -65,6 +67,13 @@ export const AddNewPlanPage = () => {
             <CustomCycle />
           </ul>
         </div>
+        <Button
+          type="submit"
+          className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
+          onClick={handleCreatePlan}
+        >
+          Criar plano
+        </Button>
       </main>
     </div>
   )

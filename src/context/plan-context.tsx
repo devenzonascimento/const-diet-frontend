@@ -1,8 +1,12 @@
-import { createPlan } from '@/services/http/plan/create-plan';
-import { Plan, Routine } from '@/types/types';
-import { useMutation } from '@tanstack/react-query';
-import { addMonths } from 'date-fns';
 import { createContext, ReactNode, useContext, useReducer } from 'react';
+import { useMutation } from '@tanstack/react-query';
+
+import { createPlan } from '@/services/http/plan/create-plan';
+
+import { addMonths } from 'date-fns';
+import { formatPlanData } from '@/functions/format-plan-data';
+
+import { Routine } from '@/types/types';
 
 interface PlanContextType {
   nameValue: string
@@ -94,7 +98,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
     const { name, goal, startDate, endDate, routinesCycle }  = state
     
     const routines = routinesCycle.filter(routineCycle => routineCycle != undefined)
-
+    
     const planData = formatPlanData({
       name,
       goal,
@@ -103,6 +107,8 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       routines: routines
     })
 
+    console.log(planData)
+    return
     createPlanMutation.mutateAsync(planData)
   }
 
@@ -127,16 +133,6 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-
-
-
-
-
-
-
-
-
-
 // eslint-disable-next-line react-refresh/only-export-components
 export const usePlanContext = () => {
   const context = useContext(PlanContext);
@@ -145,50 +141,3 @@ export const usePlanContext = () => {
   }
   return context;
 };
-
-function generateDates(startDate: Date, endDate: Date): Date[] {
-  const dates: Date[] = [];
-  const currentDate = new Date(startDate);
-
-  while (currentDate <= endDate) {
-    dates.push(new Date(currentDate));
-    currentDate.setDate(currentDate.getDate() + 1);
-  }
-
-  return dates;
-}
-
-function assignRoutinesToDates(dates: Date[], cycle: Routine[]): { routineId: string; date: Date }[] {
-  const assignments: { routineId: string; date: Date }[] = [];
-
-  for (let i = 0; i < dates.length; i++) {
-    const routineId = cycle[i % cycle.length].id;
-    assignments.push({ routineId, date: dates[i] });
-  }
-
-  return assignments;
-}
-
-function formatPlanData(planData: Plan) {
-  const dates = generateDates(planData.startDate, planData.endDate);
-  const routineAssignments = assignRoutinesToDates(dates, planData.routines);
-
-  const routinesMap: { [key: string]: Date[] } = {};
-
-  routineAssignments.forEach(({ routineId, date }) => {
-    if (!routinesMap[routineId]) {
-      routinesMap[routineId] = [];
-    }
-    routinesMap[routineId].push(date);
-  });
-
-  const routines = Object.entries(routinesMap).map(([routineId, dates]) => ({
-    routineId,
-    dates: dates,
-  }));
-
-  return {
-    ...planData,    
-    routines: routines
-  };
-}

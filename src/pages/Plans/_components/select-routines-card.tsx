@@ -9,6 +9,7 @@ import { List } from "@/components/list";
 import { RoutineItem } from "./routine-item";
 
 import { Routine } from "@/types/types";
+import { RoutinesItemsLoading } from "./routines-items-loading";
 
 export const SelectRoutinesCard = ({ onClose, itemsAction }: { onClose: () => void, itemsAction: (routine: Routine) => void }) => {
 
@@ -18,14 +19,6 @@ export const SelectRoutinesCard = ({ onClose, itemsAction }: { onClose: () => vo
     queryKey: ['routinesList'],
     queryFn: getRoutinesList
   })
-
-  if (isPending) {
-    return <div>Carregando rotinas...</div>
-  }
-
-  if (!routinesList) {
-    return <div>Erro</div>
-  }
 
   const filteredRoutines = routinesList?.filter(meal =>
     meal.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -42,12 +35,20 @@ export const SelectRoutinesCard = ({ onClose, itemsAction }: { onClose: () => vo
           value={searchTerm}
           onChange={({ target }) => setSearchTerm(target.value)}
         />
-        <List
-          data={filteredRoutines}
-          renderItem={({ item }) =>
-            <RoutineItem key={item.id} routine={item} onClick={() => itemsAction(item)} />
-          }
-        />
+        {isPending ?
+          (
+            <RoutinesItemsLoading />
+          )
+          :
+          (
+            <List
+              data={filteredRoutines || []}
+              renderItem={({ item }) =>
+                <RoutineItem key={item.id} routine={item} onClick={() => itemsAction(item)} />
+              }
+            />
+          )
+        }
       </div>
     </ModalBackdrop>
   )

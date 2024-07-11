@@ -27,7 +27,7 @@ export const CycleCard = ({
   onClose
 }: CycleCardProps) => {
 
-  const { routinesCycle, setRoutinesCycle, startDateValue } = usePlanContext()
+  const { routinesCycle, setRoutinesCycle, startDateValue, setIsCycleDefined } = usePlanContext()
 
   useEffect(() => {
     setRoutinesCycle(Array.from({ length: numberOfSlots }))
@@ -36,11 +36,12 @@ export const CycleCard = ({
 
   const [existEmptySlot, setExistEmptySlot] = useState<boolean>(true)
 
-  useEffect(() => {    
+  useEffect(() => {
     setExistEmptySlot(routinesCycle.some(routineCycle => routineCycle === undefined))
   }, [routinesCycle, setRoutinesCycle])
 
   const handleSave = () => {
+    setIsCycleDefined()
     onClose()
   }
 

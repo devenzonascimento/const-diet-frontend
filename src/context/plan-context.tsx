@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useReducer } from 'react';
+import { createContext, ReactNode, useContext, useReducer, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { createPlan } from '@/services/http/plan/create-plan';
@@ -19,6 +19,8 @@ interface PlanContextType {
   setEndDateValue: (date: Date) => void
   routinesCycle: (Routine | undefined)[];
   setRoutinesCycle: (routines: (Routine | undefined)[]) => void
+  isCycleDefined: boolean
+  setIsCycleDefined: () => void
   addRoutine: (routine: Routine, slot: number) => void
   removeRoutine: (slot: number) => void
   handleCreatePlan: () => void;
@@ -89,6 +91,8 @@ export const PlanContext = createContext<PlanContextType | undefined>(undefined)
 export const PlanProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(planReducer, initialState);
 
+  const [isCycleDefined, setIsCycleDefined] = useState<boolean>(true)
+
   const createPlanMutation = useMutation({
     mutationKey: ["create-plan"],
     mutationFn: createPlan
@@ -124,6 +128,8 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       setEndDateValue: (date: Date) => dispatch({ type: 'SET_END_DATE', payload: date }),
       routinesCycle: state.routinesCycle,
       setRoutinesCycle: (routines: (Routine | undefined)[]) => dispatch({ type: 'SET_ROUTINES_CYCLE', payload: routines }),
+      isCycleDefined,
+      setIsCycleDefined: () => setIsCycleDefined(!isCycleDefined),
       addRoutine: (routine: Routine, slot: number) => dispatch({ type: 'ADD_ROUTINE', payload: { routine, slot } }),
       removeRoutine: (slot: number) => dispatch({ type: 'REMOVE_ROUTINE', payload: slot }),
       handleCreatePlan,

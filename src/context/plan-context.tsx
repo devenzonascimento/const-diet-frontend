@@ -3,7 +3,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { createPlan } from '@/services/http/plan/create-plan';
 
-import { addMonths } from 'date-fns';
+import { addDays, addMonths, compareAsc } from 'date-fns';
 import { formatPlanData } from '@/functions/format-plan-data';
 
 import { Routine } from '@/types/types';
@@ -73,9 +73,9 @@ const planReducer = (state: PlanState, action: Action): PlanState => {
       return { ...state, routinesCycle: newRoutinesCycle };
     }
     case 'REMOVE_ROUTINE': {
-      const slot = action.payload      
+      const slot = action.payload
 
-      const newRoutinesCycle = state.routinesCycle.map((item, index) => {        
+      const newRoutinesCycle = state.routinesCycle.map((item, index) => {
         return index !== slot ? item : undefined
       })
 
@@ -98,11 +98,11 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
     mutationFn: createPlan
   })
 
-  const handleCreatePlan = async () => { 
-    const { name, goal, startDate, endDate, routinesCycle }  = state
-    
+  const handleCreatePlan = async () => {
+    const { name, goal, startDate, endDate, routinesCycle } = state
+
     const routines = routinesCycle.filter(routineCycle => routineCycle != undefined)
-    
+
     const planData = formatPlanData({
       name,
       goal,
@@ -116,6 +116,37 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
     createPlanMutation.mutateAsync(planData)
   }
 
+  const validateStartDate = (date: Date) => {
+
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+
+    if (compareAsc(currentDate, date) === 1) {
+      
+      alert("Erro: A data selecionada não pode ser anterior à data de hoje. Por favor, escolha uma data futura ou a data de hoje.")
+
+      return;
+    }
+
+    dispatch({ type: 'SET_START_DATE', payload: date })
+
+    if (compareAsc(date, state.endDate) === 1) {
+      dispatch({ type: 'SET_END_DATE', payload: addDays(date, 1) })
+    }
+  }
+
+  const validateEndDate = (date: Date) => {
+
+    if (compareAsc(state.startDate, date) === 1) {
+      
+      alert("Erro: A data selecionada não pode ser anterior à data de início. Por favor, escolha uma data futura ou a data de hoje.")
+      
+      return;
+    }
+
+    dispatch({ type: 'SET_END_DATE', payload: date })
+  }
+
   return (
     <PlanContext.Provider value={{
       nameValue: state.name,
@@ -123,9 +154,9 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       goalValue: state.goal,
       setGoalValue: (value: string) => dispatch({ type: 'SET_GOAL', payload: value }),
       startDateValue: state.startDate,
-      setStartDateValue: (date: Date) => dispatch({ type: 'SET_START_DATE', payload: date }),
+      setStartDateValue: validateStartDate,
       endDateValue: state.endDate,
-      setEndDateValue: (date: Date) => dispatch({ type: 'SET_END_DATE', payload: date }),
+      setEndDateValue: validateEndDate,
       routinesCycle: state.routinesCycle,
       setRoutinesCycle: (routines: (Routine | undefined)[]) => dispatch({ type: 'SET_ROUTINES_CYCLE', payload: routines }),
       isCycleDefined,

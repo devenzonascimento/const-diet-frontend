@@ -16,6 +16,7 @@ import { MyRoutinesPage } from "@/pages/Routines/MyRoutines/page";
 import { AddNewRoutinePage } from "@/pages/Routines/AddNewRoutine/page";
 import { EditRoutinePage } from "@/pages/Routines/EditRoutine/page";
 import { MyPlansPage } from "@/pages/Plans/MyPlans/page";
+import { PlanDetailsPage } from "@/pages/Plans/PlanDetails/page";
 import { AddNewPlanPage } from "@/pages/Plans/AddNewPlan/page";
 import { EditPlanPage } from "@/pages/Plans/EditPlan/page";
 
@@ -81,6 +82,10 @@ export const router = createBrowserRouter([
       {
         path: "meus-planos",
         element: <MyPlansPage />,
+      },
+      {
+        path: "detalhes-do-meu-plano/:planId",
+        element: <PlanDetailsPage />,
       },
       {
         path: "novo-plano",

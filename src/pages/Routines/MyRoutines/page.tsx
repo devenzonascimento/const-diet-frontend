@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
 
-import { getRoutinesList } from "@/services/http/routine/get-routine-list"
+import { getRoutinesList } from "@/services/http/routine/get-routines-list"
 
 import { ArrowLeft, CirclePlus } from "lucide-react"
 import { List } from "@/components/list"

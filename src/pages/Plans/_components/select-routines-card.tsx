@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { getRoutinesList } from "@/services/http/routine/get-routine-list";
+import { getRoutinesList } from "@/services/http/routine/get-routines-list";
 
 import { ModalBackdrop } from "@/components/modal-backdrop";
 import { SearchInput } from "@/components/search-input";

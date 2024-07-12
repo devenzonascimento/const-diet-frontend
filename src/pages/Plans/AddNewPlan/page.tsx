@@ -56,11 +56,13 @@ export const AddNewPlanPage = () => {
             label="Início"
             date={startDateValue}
             setDate={setStartDateValue}
+            popupAlign="start"
           />
           <DateInput
             label="Fim"
             date={endDateValue}
             setDate={setEndDateValue}
+            popupAlign="end"
           />
         </fieldset>
         {!isCycleDefined ?

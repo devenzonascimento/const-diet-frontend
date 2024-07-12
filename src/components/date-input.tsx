@@ -14,9 +14,10 @@ interface DateInputProps {
   label: string;
   date: Date | undefined
   setDate: (newDate: Date) => void
+  popupAlign?: "start" | "center" | "end"
 }
 
-export function DateInput({ label, date, setDate }: DateInputProps) {
+export function DateInput({ label, date, setDate, popupAlign="center" }: DateInputProps) {
   return (
     <fieldset className="w-full flex flex-col gap-2">
       <p className="font-semibold text-lg text-sky-950">
@@ -36,7 +37,7 @@ export function DateInput({ label, date, setDate }: DateInputProps) {
             }
           </button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent className="w-auto p-0" align={popupAlign}>
           <Calendar
             defaultMonth={date}          
             initialFocus

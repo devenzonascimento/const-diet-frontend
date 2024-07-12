@@ -39,18 +39,20 @@ export const AddNewPlanPage = () => {
         <DefaultInput
           label="Dê um nome ao seu plano"
           placeholder="Ex: Projeto verão"
+          maxLength={30}
           value={nameValue}
           onChange={({ target }) => setNameValue(target.value)}
         />
         <DefaultInput
           label="Qual o objetivo do seu plano"
           placeholder="Ex: Ganhar peso"
+          maxLength={30}
           value={goalValue}
           onChange={({ target }) => setGoalValue(target.value)}
         />
         <fieldset className="w-full flex gap-4">
           <DateInput
-            label="Inicio"
+            label="Início"
             date={startDateValue}
             setDate={setStartDateValue}
           />
@@ -81,16 +83,21 @@ export const AddNewPlanPage = () => {
               <p className="font-semibold text-lg text-sky-950">
                 Seu ciclo
               </p>
-              <ul className="flex flex-col gap-4 p-2 bg-white border border-sky-800 rounded-lg">
+              <ul className="flex flex-col gap-4 px-2 py-4 bg-white border border-sky-800 rounded-lg">
                 {routinesCycle.map((routineCycle, index) =>
-                  <div key={routineCycle?.id} className="flex items-center gap-2">
-                    <span
-                      className="min-w-14 text-center text-white bg-sky-700 p-1 rounded-md"
-                    >
-                      {index + 1}º dia
-                    </span>
-                    <p className="font-medium text-sky-950">{routineCycle?.name}</p>
-                  </div>
+                  <li key={index} className="flex flex-col gap-4">
+                    <div className="flex items-center gap-2">
+                      <span
+                        className="min-w-14 text-center text-white bg-sky-700 p-1 rounded-md"
+                      >
+                        {index + 1}º dia
+                      </span>
+                      <p className="font-medium text-sky-950">{routineCycle?.name}</p>
+                    </div>
+                    {routinesCycle.length - 1 > index && 
+                    <hr className="w-[97%] self-center border-gray-300" />
+                    }
+                  </li>
                 )}
               </ul>
             </div>

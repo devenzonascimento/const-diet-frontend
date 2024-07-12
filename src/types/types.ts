@@ -78,6 +78,7 @@ export type CycleIllustrationType = {
 }
 
 export interface Plan {
+  id: string;
   name: string;
   goal: string;
   startDate: Date;

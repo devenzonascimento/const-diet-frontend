@@ -1,6 +1,6 @@
 import { Plan, Routine } from "@/types/types";
 
-export function formatPlanData(planData: Plan) {
+export function formatPlanData(planData: Omit<Plan, "id">) {
   const dates = generateDates(planData.startDate, planData.endDate);
   const routineAssignments = assignRoutinesToDates(dates, planData.routines);
 

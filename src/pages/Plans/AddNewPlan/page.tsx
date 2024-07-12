@@ -24,6 +24,7 @@ export const AddNewPlanPage = () => {
     routinesCycle,
     isCycleDefined,
     setIsCycleDefined,
+    isFormComplete,
     handleCreatePlan
   } = usePlanContext()
 
@@ -62,7 +63,7 @@ export const AddNewPlanPage = () => {
             setDate={setEndDateValue}
           />
         </fieldset>
-        {isCycleDefined ?
+        {!isCycleDefined ?
           (
             <div className="w-full flex flex-col gap-2">
               <p className="font-semibold text-lg text-sky-950">
@@ -94,8 +95,8 @@ export const AddNewPlanPage = () => {
                       </span>
                       <p className="font-medium text-sky-950">{routineCycle?.name}</p>
                     </div>
-                    {routinesCycle.length - 1 > index && 
-                    <hr className="w-[97%] self-center border-gray-300" />
+                    {routinesCycle.length - 1 > index &&
+                      <hr className="w-[97%] self-center border-gray-300" />
                     }
                   </li>
                 )}
@@ -105,7 +106,7 @@ export const AddNewPlanPage = () => {
         }
 
         <Button
-          disabled={false}
+          disabled={!isFormComplete}
           type="submit"
           className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
           onClick={handleCreatePlan}

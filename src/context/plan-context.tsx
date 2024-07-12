@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useReducer, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useReducer, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import { createPlan } from '@/services/http/plan/create-plan';
@@ -21,6 +21,7 @@ interface PlanContextType {
   setRoutinesCycle: (routines: (Routine | undefined)[]) => void
   isCycleDefined: boolean
   setIsCycleDefined: () => void
+  isFormComplete: boolean
   addRoutine: (routine: Routine, slot: number) => void
   removeRoutine: (slot: number) => void
   handleCreatePlan: () => void;
@@ -91,7 +92,17 @@ export const PlanContext = createContext<PlanContextType | undefined>(undefined)
 export const PlanProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(planReducer, initialState);
 
-  const [isCycleDefined, setIsCycleDefined] = useState<boolean>(true)
+  const [isCycleDefined, setIsCycleDefined] = useState<boolean>(false)
+
+  const [isFormComplete, setIsFormComplete] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (isCycleDefined && state.name !== "" && state.goal !== "") {
+      setIsFormComplete(true)
+    } else {
+      setIsFormComplete(false)
+    }
+  }, [state, isCycleDefined])
 
   const createPlanMutation = useMutation({
     mutationKey: ["create-plan"],
@@ -122,7 +133,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
     currentDate.setHours(0, 0, 0, 0);
 
     if (compareAsc(currentDate, date) === 1) {
-      
+
       alert("Erro: A data selecionada não pode ser anterior à data de hoje. Por favor, escolha uma data futura ou a data de hoje.")
 
       return;
@@ -138,9 +149,9 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
   const validateEndDate = (date: Date) => {
 
     if (compareAsc(state.startDate, date) === 1) {
-      
+
       alert("Erro: A data selecionada não pode ser anterior à data de início. Por favor, escolha uma data futura ou a data de hoje.")
-      
+
       return;
     }
 
@@ -161,6 +172,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       setRoutinesCycle: (routines: (Routine | undefined)[]) => dispatch({ type: 'SET_ROUTINES_CYCLE', payload: routines }),
       isCycleDefined,
       setIsCycleDefined: () => setIsCycleDefined(!isCycleDefined),
+      isFormComplete,
       addRoutine: (routine: Routine, slot: number) => dispatch({ type: 'ADD_ROUTINE', payload: { routine, slot } }),
       removeRoutine: (slot: number) => dispatch({ type: 'REMOVE_ROUTINE', payload: slot }),
       handleCreatePlan,

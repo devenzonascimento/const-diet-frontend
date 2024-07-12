@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/popover"
 
 import { Calendar as CalendarIcon } from "lucide-react"
+import { SelectSingleEventHandler } from "react-day-picker";
 
 interface DateInputProps {
   label: string;
@@ -37,10 +38,11 @@ export function DateInput({ label, date, setDate }: DateInputProps) {
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0" align="start">
           <Calendar
+            defaultMonth={date}          
             initialFocus
             mode="single"
             selected={date}
-            onSelect={setDate}
+            onSelect={setDate as SelectSingleEventHandler}
           />
         </PopoverContent>
       </Popover>

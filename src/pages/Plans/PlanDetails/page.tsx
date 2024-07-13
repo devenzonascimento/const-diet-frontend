@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
 import { getPlan } from "@/services/http/plan/get-plan";
 
@@ -12,23 +12,33 @@ interface RouteParams {
 export const PlanDetailsPage = () => {
   const { planId } = useParams<keyof RouteParams>() as RouteParams;
 
-  const { data: routine } = useQuery({
+  const navigate = useNavigate()
+
+  const { data: plan, isError } = useQuery({
     queryKey: [`plan-${planId}`],
     queryFn: () => getPlan(planId),
     refetchOnMount: false,
   })
 
+  if (isError) {
+    navigate("/meus-planos")
+  }
+
+  if (!plan) {
+    return null
+  }
+
   return (
     <div className="h-screen bg-slate-100 px-4">
       <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/">
+        <Link to="/meus-planos">
           <ArrowLeft size={32} className="absolute top-4 left-0" />
         </Link>
-        <h1 className="text-xl font-semibold">{routine?.name}</h1>        
+        <h1 className="text-xl font-semibold">Detalhes do seu plano</h1>
       </header>
       <main className="flex flex-col justify-between items-center gap-4 pb-6">
-        
       </main>
     </div>
   )
 }
+

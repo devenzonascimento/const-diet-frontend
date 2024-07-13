@@ -8,6 +8,12 @@ import { formatPlanData } from '@/functions/format-plan-data';
 
 import { Routine } from '@/types/types';
 
+interface MutationStates {
+  isPending: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+}
+
 interface PlanContextType {
   nameValue: string
   setNameValue: (value: string) => void
@@ -25,6 +31,8 @@ interface PlanContextType {
   addRoutine: (routine: Routine, slot: number) => void
   removeRoutine: (slot: number) => void
   handleCreatePlan: () => void;
+
+  createPlanMutation: MutationStates
 }
 
 interface PlanState {
@@ -112,18 +120,16 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
   const handleCreatePlan = async () => {
     const { name, goal, startDate, endDate, routinesCycle } = state
 
-    const routines = routinesCycle.filter(routineCycle => routineCycle != undefined)
+    const cycleRoutineIds = routinesCycle.filter(routineCycle => routineCycle != undefined).map(routine => routine.id)
 
     const planData = formatPlanData({
       name,
       goal,
       startDate,
       endDate,
-      routines: routines
+      cycleRoutineIds
     })
 
-    console.log(planData)
-    return
     createPlanMutation.mutateAsync(planData)
   }
 
@@ -176,6 +182,9 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       addRoutine: (routine: Routine, slot: number) => dispatch({ type: 'ADD_ROUTINE', payload: { routine, slot } }),
       removeRoutine: (slot: number) => dispatch({ type: 'REMOVE_ROUTINE', payload: slot }),
       handleCreatePlan,
+
+
+      createPlanMutation,
     }}>
       {children}
     </PlanContext.Provider>

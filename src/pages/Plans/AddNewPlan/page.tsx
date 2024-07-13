@@ -25,11 +25,20 @@ export const AddNewPlanPage = () => {
     isCycleDefined,
     setIsCycleDefined,
     isFormComplete,
-    handleCreatePlan
+    handleCreatePlan,
+
+    createPlanMutation
   } = usePlanContext()
 
   return (
     <div className="h-screen bg-slate-100 px-4">
+      {createPlanMutation.isPending && (
+        <div className="fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
+          <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
+            <p className="text-2xl font-semibold">Aguarde...</p>
+          </div>
+        </div>
+      )}
       <header className="relative flex justify-center items-center py-4 text-sky-950">
         <Link to="/meus-planos">
           <ArrowLeft size={32} className="absolute top-4 left-0" />

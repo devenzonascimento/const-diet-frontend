@@ -83,5 +83,47 @@ export interface Plan {
   goal: string;
   startDate: Date;
   endDate: Date;
-  routines: Routine[];
+  routines: DailyRoutine[];
+}
+
+export interface DailyRoutine {
+  id: string;
+  name: string;
+  date: Date;
+  status: "PENDING" | "COMPLETED" | "MISSED"
+  water: number;
+  totalCalories: number;
+  totalCarbohydrates: number;
+  totalProteins: number;
+  totalFats: number;
+  totalSodiums: number;
+  totalFibers: number;
+  meals: DailyMeal[];
+}
+
+export interface DailyMeal {
+  id: string;
+  name: string;
+  time: string;
+  status: "PENDING" | "COMPLETED" | "MISSED"
+  totalCalories: number;
+  totalCarbohydrates: number;
+  totalProteins: number;
+  totalFats: number;
+  totalSodiums: number;
+  totalFibers: number;
+  foods: DailyMealFood[];
+}
+
+export interface DailyMealFood {
+  id: string;
+  name: string;
+  unit: "GRAMS" | "MILILITERS";
+  quantity: number;
+  calories: number;
+  carbohydrates: number;
+  proteins: number;
+  fats: number;
+  sodiums: number;
+  fibers: number;
 }

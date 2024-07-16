@@ -8,7 +8,7 @@ interface DailyMealItemProps {
 
 export const DailyMealItem = ({ meal }: DailyMealItemProps) => {
   return (
-    <li className="flex items-center justify-between bg-sky-700 rounded-xl overflow-hidden font-semibold border border-sky-800">
+    <li className="flex items-center justify-between bg-sky-800 rounded-xl overflow-hidden font-semibold border border-sky-800">
       <details className="w-full flex flex-col gap-2 p-2 bg-white">
         <summary className=" text-sky-950 bg-white">
           {meal.name}
@@ -23,7 +23,7 @@ export const DailyMealItem = ({ meal }: DailyMealItemProps) => {
           )}          
         />
       </details>
-      <span className="w-20 h-full p-2 flex items-center justify-center text-white">
+      <span className="min-w-14 h-full py-2 flex items-center justify-center text-white">
         {meal.time}
       </span>
     </li>

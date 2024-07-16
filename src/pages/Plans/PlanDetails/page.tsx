@@ -29,27 +29,30 @@ export const PlanDetailsPage = () => {
   }
 
   return (
-    <div className="h-screen bg-slate-100 px-4">
-      <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/meus-planos">
-          <ArrowLeft size={32} className="absolute top-4 left-0" />
+    <div className="h-screen flex flex-col gap-4 bg-slate-100">
+      <header className="relative flex justify-center items-center py-3 text-white bg-sky-800">
+        <Link
+          to="/meus-planos"
+          className="absolute top-1/2 left-0 -translate-y-1/2 h-full aspect-square flex items-center justify-center"
+        >
+          <ArrowLeft size={28} />
         </Link>
         <h1 className="text-xl font-semibold">Detalhes do seu plano</h1>
       </header>
-      <main className="flex flex-col justify-between items-center gap-4 pb-6">        
+      <main className="flex flex-col justify-between items-center gap-4 pb-6 px-4">
         <div className="w-full flex items-center bg-sky-800 border border-sky-800 rounded-md overflow-hidden">
-          <span className="flex items-center justify-center px-2 rounded-l-sm">      
-            <CalendarFoldIcon size={24}  className=" text-white"/>
+          <span className="flex items-center justify-center px-2 rounded-l-sm">
+            <CalendarFoldIcon size={24} className=" text-white" />
           </span>
           <h2 className="w-full p-2 text-start text-lg font-medium text-sky-950 bg-white">
             {plan?.name}
           </h2>
         </div>
         <div className="w-full flex items-center bg-sky-800 border border-sky-800 rounded-md overflow-hidden">
-          <span className="flex items-center justify-center px-2 rounded-l-sm">      
-            <GoalIcon size={24}  className=" text-white"/>
+          <span className="flex items-center justify-center px-2 rounded-l-sm">
+            <GoalIcon size={24} className=" text-white" />
           </span>
-          <p className="w-full p-2 text-start font-medium text-sky-950 bg-white">
+          <p className="w-full p-2 text-start text-lg font-medium text-sky-950 bg-white">
             Objetivo: {plan?.goal}
           </p>
         </div>

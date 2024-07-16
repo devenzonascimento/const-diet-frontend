@@ -11,10 +11,10 @@ interface DailyRoutineItemProps {
 
 export const DailyRoutineItem = ({ routine }: DailyRoutineItemProps) => {
   return (
-    <main className="w-full flex flex-col gap-4 p-2">
-      <h3 className="w-full text-center text-xl font-semibold text-sky-950">
+    <section className="w-full flex flex-col items-center gap-4 p-2 bg-white border border-sky-800 rounded-xl">
+      <h1 className="w-full text-center text-xl font-semibold text-sky-950">
         {routine.name}
-      </h3>
+      </h1>
       <section className="w-full flex justify-evenly">
         <div className="h-32 w-32 flex flex-col gap-1 items-center justify-center bg-white border-4 border-sky-800 rounded-full">
           <FlameIcon strokeWidth={1} className="text-sky-600 fill-sky-100" size={48} />
@@ -58,7 +58,7 @@ export const DailyRoutineItem = ({ routine }: DailyRoutineItemProps) => {
           className="col-span-2"
         />
       </section>
-      <h4 className="w-full text-sky-950 text-xl font-medium text-center">Suas refeições</h4>
+      <h2 className="w-full text-sky-950 text-xl font-medium text-center">Suas refeições</h2>
       <List
         data={routine.meals.sort((a, b) => {
           const [aHours, aMinutes] = a.time.split(':').map(Number);
@@ -71,7 +71,7 @@ export const DailyRoutineItem = ({ routine }: DailyRoutineItemProps) => {
         })}
         renderItem={({ item }) => <DailyMealItem key={item.id} meal={item} />}
       />
-    </main>
+    </section>
   )
 }
 

@@ -18,7 +18,7 @@ export const DayViewer = ({ plan }: DayViewerProps) => {
   startDate.setHours(0, 0, 0, 0)
 
   const [selectedDay, setSelectedDay] = useState<Date>(startDate);
-  
+
   return (
     <>
       <SelectDayViewer
@@ -29,14 +29,12 @@ export const DayViewer = ({ plan }: DayViewerProps) => {
           toDate: plan?.endDate
         }}
       />
-      <section className="w-full flex flex-col items-center gap-2 bg-white border border-sky-800 rounded-xl">
-        {plan.routines.map(routine => {
-          return isEqual(routine.date, selectedDay) ?
-            <DailyRoutineItem key={routine.id} routine={routine} />
-            :
-            null
-        })}
-      </section>
+      {plan.routines.map(routine => {
+        return isEqual(routine.date, selectedDay) ?
+          <DailyRoutineItem key={routine.id} routine={routine} />
+          :
+          null
+      })}
     </>
   );
 }

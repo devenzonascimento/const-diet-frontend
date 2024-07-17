@@ -1,13 +1,12 @@
 import { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { Link } from "react-router-dom"
 
 import { getRoutinesList } from "@/services/http/routine/get-routines-list"
 
-import { ArrowLeft, CirclePlus } from "lucide-react"
 import { List } from "@/components/list"
 import { RoutineItem } from "./components/routine-item"
 import { SearchInput } from "@/components/search-input"
+import { Header } from "@/components/ui/header"
 
 export const MyRoutinesPage = () => {
 
@@ -28,17 +27,13 @@ export const MyRoutinesPage = () => {
   );
 
   return (
-    <div className="h-screen bg-slate-100 px-4">
-      <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/">
-          <ArrowLeft size={32} className="absolute top-4 left-0" />
-        </Link>
-        <h1 className="text-xl font-semibold">Minhas rotinas</h1>
-        <Link to="/nova-rotina">
-          <CirclePlus size={32} className="absolute top-4 right-0" />
-        </Link>
-      </header>
-      <main className="flex flex-col justify-between items-center gap-4 pb-6">
+    <>
+      <Header
+        title="Minhas rotinas"
+        leftButtonNavigateTo="/"
+        rightButtonNavigateTo="/nova-rotina"
+      />
+      <main className="flex flex-col justify-between items-center gap-4 px-4 pb-6">
         <SearchInput
           placeholder="Buscar rotina"
           value={searchTerm}
@@ -49,7 +44,7 @@ export const MyRoutinesPage = () => {
           renderItem={({ item }) => <RoutineItem key={item.id} routine={item} />}
         />
       </main>
-    </div>
+    </>
   )
 }
 

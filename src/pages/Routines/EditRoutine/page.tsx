@@ -2,17 +2,17 @@ import { useEffect } from "react";
 import { useModalState } from "@/hooks/use-modal-state"
 import { useRoutineContext } from "@/context/routine-context";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { getMealsList } from "@/services/http/meal/get-meals-list";
 
-import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { MealsBasket } from "../_components/meals-basket";
 import { When } from "@/components/when"
 import { DefaultInput } from "@/components/default-input";
 import { SelectMealsCard } from "../_components/select-meals-card";
 import { Routine } from "@/types/types";
+import { Header } from "@/components/ui/header";
 
 interface RouteParams {
   routineId: string;
@@ -66,7 +66,7 @@ export const EditRoutinePage = () => {
   })
 
   return (
-    <div className="h-screen max-h-screen flex flex-col bg-slate-100 px-4 ">
+    <>
       {updateRoutineStates.isPending && (
         <div className="fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
           <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
@@ -74,13 +74,11 @@ export const EditRoutinePage = () => {
           </div>
         </div>
       )}
-      <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/minhas-rotinas">
-          <ArrowLeft size={32} className="absolute top-4 left-0" />
-        </Link>
-        <h1 className="text-xl font-semibold">Editar Rotina</h1>
-      </header>
-      <main className="h-full flex flex-col items-center gap-4 pb-6 overflow-auto">
+      <Header
+        title="Editar rotina"
+        leftButtonNavigateTo="/minhas-rotinas"
+      />
+      <main className="h-full flex flex-col items-center gap-4 px-4 pb-6 overflow-auto">
         <DefaultInput
           label="Dê um nome a sua rotina"
           placeholder="Dia de carbo alto"
@@ -108,7 +106,7 @@ export const EditRoutinePage = () => {
       <When expr={isOpen}>
         <SelectMealsCard mealsList={mealsList} onClose={toggleModal} />
       </When>
-    </div>
+    </>
   )
 }
 

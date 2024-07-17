@@ -1,7 +1,6 @@
 import { usePlanContext } from "@/context/plan-context"
-import { Link } from "react-router-dom"
 
-import { ArrowLeft, XIcon } from "lucide-react"
+import { XIcon } from "lucide-react"
 import { DefaultInput } from "@/components/default-input"
 import { DateInput } from "@/components/date-input"
 import { EveryDayCycle } from "../_components/every-day-cycle"
@@ -9,6 +8,7 @@ import { AlternatedCycle } from "../_components/alternated-cycle"
 import { WeeklyCycle } from "../_components/weekly-cycle"
 import { CustomCycle } from "../_components/custom-cycle"
 import { Button } from "@/components/ui/button"
+import { Header } from "@/components/ui/header"
 
 export const AddNewPlanPage = () => {
 
@@ -31,7 +31,7 @@ export const AddNewPlanPage = () => {
   } = usePlanContext()
 
   return (
-    <div className="h-screen bg-slate-100 px-4">
+    <div className="h-screen flex flex-col gap-4 bg-slate-100">
       {createPlanMutation.isPending && (
         <div className="fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
           <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
@@ -39,13 +39,11 @@ export const AddNewPlanPage = () => {
           </div>
         </div>
       )}
-      <header className="relative flex justify-center items-center py-4 text-sky-950">
-        <Link to="/meus-planos">
-          <ArrowLeft size={32} className="absolute top-4 left-0" />
-        </Link>
-        <h1 className="text-xl font-semibold">Novo plano</h1>
-      </header>
-      <main className="flex flex-col justify-between items-center gap-4 pb-6">
+      <Header
+        title="Novo plano"
+        leftButtonNavigateTo="/meus-planos"
+      />
+      <main className="flex flex-col justify-between items-center gap-4 px-4 pb-6">
         <DefaultInput
           label="Dê um nome ao seu plano"
           placeholder="Ex: Projeto verão"

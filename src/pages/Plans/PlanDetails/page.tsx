@@ -1,10 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
 import { getPlan } from "@/services/http/plan/get-plan";
 
-import { ArrowLeft, CalendarFoldIcon, GoalIcon } from "lucide-react"
+import { CalendarFoldIcon, GoalIcon } from "lucide-react"
 import { DayViewer } from "./components/day-viewer";
+import { Header } from "@/components/ui/header";
 
 interface RouteParams {
   planId: string;
@@ -30,15 +31,10 @@ export const PlanDetailsPage = () => {
 
   return (
     <div className="h-screen flex flex-col gap-4 bg-slate-100">
-      <header className="relative flex justify-center items-center py-3 text-white bg-sky-800">
-        <Link
-          to="/meus-planos"
-          className="absolute top-1/2 left-0 -translate-y-1/2 h-full aspect-square flex items-center justify-center"
-        >
-          <ArrowLeft size={28} />
-        </Link>
-        <h1 className="text-xl font-semibold">Detalhes do seu plano</h1>
-      </header>
+      <Header
+        title="Detalhes do plano"
+        leftButtonNavigateTo="/meus-planos"
+      />
       <main className="flex flex-col justify-between items-center gap-4 pb-6 px-4">
         <div className="w-full flex items-center bg-sky-800 border border-sky-800 rounded-md overflow-hidden">
           <span className="flex items-center justify-center px-2 rounded-l-sm">

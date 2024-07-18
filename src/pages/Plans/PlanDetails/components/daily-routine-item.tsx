@@ -37,27 +37,27 @@ export const DailyRoutineItem = ({ routine }: DailyRoutineItemProps) => {
         <section className="w-full grid grid-cols-6 gap-2">
           <StatsCard
             title="Carboidratos"
-            value={`${routine.totalCarbohydrates.toFixed()}g`}
+            value={routine.totalCarbohydrates.toFixed()}
             className="col-span-3"
           />
           <StatsCard
             title="Proteínas"
-            value={`${routine.totalProteins.toFixed()}g`}
+            value={routine.totalProteins.toFixed()}
             className="col-span-3"
           />
           <StatsCard
             title="Gorduras"
-            value={`${routine.totalFats.toFixed()}g`}
+            value={routine.totalFats.toFixed()}
             className="col-span-2"
           />
           <StatsCard
             title="Sódio"
-            value={`${routine.totalSodiums.toFixed(3)}g`}
+            value={routine.totalSodiums.toFixed(3)}
             className="col-span-2"
           />
           <StatsCard
             title="Fibras"
-            value={`${routine.totalFibers.toFixed()}g`}
+            value={routine.totalFibers.toFixed()}
             className="col-span-2"
           />
         </section>
@@ -82,4 +82,3 @@ export const DailyRoutineItem = ({ routine }: DailyRoutineItemProps) => {
     </section>
   )
 }
-

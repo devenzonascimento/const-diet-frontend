@@ -31,9 +31,9 @@ export const StatsCard = ({ title, value, className, type = "" }: StatsCardProps
             null
           )}
       </span>
-      <span className="w-full p-1 text-sky-950 border-2 border-sky-800 rounded-b-xl">
+      <span className="w-full p-1 text-sky-950 bg-white border-2 border-sky-800 rounded-b-xl">
         {value}
-        <span className="text-sm">{type ? (type && type == "flame" ? "kcal" : "ml") : "g"}</span>
+        <span className="text-xs">{type ? (type && type == "flame" ? "kcal" : "ml") : "g"}</span>
       </span>
     </div>
   )

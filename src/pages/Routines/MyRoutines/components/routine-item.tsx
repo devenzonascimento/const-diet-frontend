@@ -1,88 +1,72 @@
-import { useModalState } from "@/hooks/use-modal-state"
+import { useNavigate } from "react-router-dom"
 
-import { ChevronButton } from "@/components/chevron-button"
-import { FlameIcon, DropletIcon } from "lucide-react"
-import { NutrientBadge } from "./nutrient-badge"
-import { List } from "@/components/list"
-import { RoutineMealItem } from "./routine-meal-item"
+import { SquareArrowOutUpRightIcon } from "lucide-react";
+import { StatsCard } from "@/components/stats-card"
 
-import { Routine } from "@/types/types"
-import { RoutineItemOptions } from "./routine-item-options"
-
+import { Routine } from "@/types/types";
 
 interface RoutineItemProps {
-  routine: Routine
+  routine: Routine;
 }
 
 export const RoutineItem = ({ routine }: RoutineItemProps) => {
-  const { isOpen, toggleModal } = useModalState()
+
+  const navigate = useNavigate()
+
+  const navigateToDetailsPage = () => {
+    navigate(`/detalhes-da-rotina/${routine.id}`)
+  }
 
   return (
     <li
-      className="h-fit w-full flex flex-col gap-4 items-center bg-sky-600 rounded-xl shadow-xl overflow-hidden"
+      className="min-h-42 w-full flex bg-white border-2 border-sky-800 rounded-xl shadow-xl"
     >
-      <header
-        className="w-full p-2 flex items-center justify-between text-white bg-sky-700"
-      >
-        <ChevronButton onClick={toggleModal} isOpen={isOpen} />
-        <h2 onClick={toggleModal} className="w-4/5 text-center text-lg">
-          {routine.name}
-        </h2>
-        <RoutineItemOptions routineId={routine.id} />
-      </header>
-
-      {isOpen && (
-        <div className="w-full flex flex-col gap-4 p-2">
-          <div className="w-full flex justify-between">
-            <div className="h-36 w-36 flex flex-col gap-1 items-center justify-center bg-sky-500 border-2 border-white rounded-full">
-              <FlameIcon strokeWidth={1} className="text-white fill-white" size={64} />
-              <p className="mb-3 font- text-white">
-                <span className="text-2xl">{routine.totalCalories.toFixed()}</span>
-                <span>kcal</span>
-              </p>
-            </div>
-            <div className="h-36 w-36 flex flex-col gap-1 items-center justify-center bg-sky-500 border-2 border-white rounded-full">
-              <DropletIcon strokeWidth={1} className="text-white fill-white" size={64} />
-              <p className="mb-3 font- text-white">
-                <span className="text-2xl">{routine.water}</span>
-                <span>ml</span>
-              </p>
-            </div>
-          </div>
-          <div className="w-full grid grid-cols-6 gap-2">
-            <NutrientBadge
-              title="Carboidratos"
-              value={routine.totalCarbohydrates.toFixed()}
-              className="col-span-3"
+      <div className="w-full flex-1 flex flex-col gap-2 p-2">
+        <header className="flex items-center gap-1">
+          <h2 className="pl-1 text-lg font-semibold text-sky-950 truncate">
+            {routine.name}
+          </h2>
+          <button
+            onClick={navigateToDetailsPage}
+            className="ml-auto p-1 bg-sky-900 rounded-md"
+          >
+            <SquareArrowOutUpRightIcon className="text-white" />
+          </button>
+        </header>
+        <main className="flex flex-col gap-4">
+          <section className="flex justify-between gap-4">
+            <StatsCard
+              title="Calorias"
+              value={routine.totalCalories.toFixed()}
+              type="flame"
+              className="flex-1"
             />
-            <NutrientBadge
-              title="Proteínas"
-              value={routine.totalProteins.toFixed()}
-              className="col-span-3"
+            <StatsCard
+              title="Agua"
+              value={routine.water}
+              type="water"
+              className="flex-1"
             />
-            <NutrientBadge
-              title="Gorduras"
-              value={routine.totalFats.toFixed()}
-              className="col-span-2"
-            />
-            <NutrientBadge
-              title="Sódio"
-              value={routine.totalSodiums.toFixed()}
-              className="col-span-2"
-            />
-            <NutrientBadge
-              title="Fibras"
-              value={routine.totalFibers.toFixed()}
-              className="col-span-2"
-            />
-          </div>
-          <p className="w-full text-white text-xl font-medium text-center">Suas refeições</p>
-          <List
-            data={routine.meals}
-            renderItem={({ item }) => <RoutineMealItem key={item.meal.id} routineMeal={item} />}
-          />
-        </div>
-      )}
+          </section>
+          <ul className="flex items-center justify-between gap-1 ">
+            <li className="min-w-12 flex justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">
+              C {routine.totalCarbohydrates.toFixed()}g
+            </li>
+            <li className="min-w-12 flex justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">
+              P {routine.totalProteins.toFixed()}g
+            </li>
+            <li className="min-w-12 flex justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">
+              G {routine.totalFats.toFixed()}g
+            </li>
+            <li className="min-w-12 flex justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">
+              S {routine.totalSodiums.toFixed(3)}g
+            </li>
+            <li className="min-w-12 flex justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">
+              F {routine.totalFibers.toFixed()}g
+            </li>
+          </ul>
+        </main>
+      </div>
     </li>
   )
 }

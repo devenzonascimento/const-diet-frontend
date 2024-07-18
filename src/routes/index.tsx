@@ -13,6 +13,7 @@ import { MyMealsPage } from "@/pages/Meals/MyMeals/page";
 import { AddNewMealPage } from "@/pages/Meals/AddNewMeal/page";
 import { EditMealPage } from "@/pages/Meals/EditMeal/page";
 import { MyRoutinesPage } from "@/pages/Routines/MyRoutines/page";
+import { RoutineDetailsPage } from "@/pages/Routines/RoutineDetails/page";
 import { AddNewRoutinePage } from "@/pages/Routines/AddNewRoutine/page";
 import { EditRoutinePage } from "@/pages/Routines/EditRoutine/page";
 import { MyPlansPage } from "@/pages/Plans/MyPlans/page";
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       {
         path: "minhas-rotinas",
         element: <MyRoutinesPage />,
+      },
+      {
+        path: "detalhes-da-rotina/:routineId",
+        element: <RoutineDetailsPage />,
       },
       {
         path: "nova-rotina",

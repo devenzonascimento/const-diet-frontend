@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useModalState } from "@/hooks/use-modal-state"
 import { useRoutineContext } from "@/context/routine-context";
 import { useQuery } from "@tanstack/react-query";
-import { useNavigate, } from "react-router-dom"
 
 import { getMealsList } from "@/services/http/meal/get-meals-list";
 
@@ -16,8 +15,6 @@ import { Header } from "@/components/ui/header";
 export const AddNewRoutinePage = () => {
 
   const { isOpen, toggleModal } = useModalState()
-
-  const navigate = useNavigate()
 
   const {
     nameValue,
@@ -34,10 +31,6 @@ export const AddNewRoutinePage = () => {
     clearRoutineData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const redirectToSuccess = () => {
-    navigate("/minhas-rotinas")
-  };
 
   const { data: mealsList } = useQuery({
     queryKey: ["mealsList"],
@@ -75,7 +68,7 @@ export const AddNewRoutinePage = () => {
         <MealsBasket meals={meals} openCardToSelectMeals={toggleModal} />
         <Button
           type="submit"
-          onClick={() => handleCreateRoutine(redirectToSuccess)}
+          onClick={handleCreateRoutine}
           className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
         >
           Criar rotina

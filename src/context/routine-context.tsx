@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useReducer } from 'react';
 import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 import { createRoutine } from '@/services/http/routine/create-routine';
 import { deleteRoutine } from '@/services/http/routine/delete-routine';
@@ -29,8 +30,8 @@ interface RoutineContextType {
   removeMeal: (mealToRemove: RoutineMeal) => void;
   setRoutineData: (routine: CreateRoutine) => void;
   clearRoutineData: () => void;
-  handleCreateRoutine: (redirect: () => void) => void;
-  handleUpdateRoutine: (routineId: string, redirect: () => void) => void;
+  handleCreateRoutine: () => void;
+  handleUpdateRoutine: (routineId: string) => void;
   deleteRoutineFn: UseMutateAsyncFunction<boolean, Error, string, unknown>
 
   createRoutineStates: MutationStates
@@ -104,6 +105,8 @@ export const RoutineContext = createContext<RoutineContextType | undefined>(unde
 
 export const RoutineProvider = ({ children }: { children: ReactNode }) => {
 
+  const navigate = useNavigate()
+
   const [state, dispatch] = useReducer(routineReducer, initialState);
 
   const clearRoutineData = () => {
@@ -125,7 +128,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     },
   })
 
-  const handleCreateRoutine = async (redirect: () => void) => {
+  const handleCreateRoutine = async () => {
 
     const meals = state.meals.map(mealItem => {
       return {
@@ -141,7 +144,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     });
 
     clearRoutineData()
-    redirect();
+    navigate("/minhas-rotinas")
   }
 
   const createRoutineStates = {
@@ -163,7 +166,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     },
   })
 
-  const handleUpdateRoutine = async (routineId: string, redirect: () => void) => {
+  const handleUpdateRoutine = async (routineId: string) => {
 
     const meals = state.meals.map(mealItem => {
       return {
@@ -180,7 +183,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     });
 
     clearRoutineData()
-    redirect();
+    navigate("/minhas-rotinas")
   }
 
   const updateRoutineStates = {

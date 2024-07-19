@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useModalState } from "@/hooks/use-modal-state"
 import { useRoutineContext } from "@/context/routine-context";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 import { getMealsList } from "@/services/http/meal/get-meals-list";
 
@@ -20,8 +20,6 @@ interface RouteParams {
 
 export const EditRoutinePage = () => {
 
-  const navigate = useNavigate()
-
   const { routineId } = useParams<keyof RouteParams>() as RouteParams;
 
   const { isOpen, toggleModal } = useModalState()
@@ -38,10 +36,6 @@ export const EditRoutinePage = () => {
     setRoutineData,
     updateRoutineStates
   } = useRoutineContext()
-
-  const redirectToSuccess = () => {
-    navigate("/minhas-rotinas")
-  };
 
   const loadRoutineData = () => {
     const data = queryClient.getQueryData<Routine[]>(["routinesList"])
@@ -98,7 +92,7 @@ export const EditRoutinePage = () => {
         <MealsBasket meals={meals} openCardToSelectMeals={toggleModal} />
         <Button
           type="submit"
-          onClick={() => handleUpdateRoutine(routineId, redirectToSuccess)}
+          onClick={() => handleUpdateRoutine(routineId)}
           className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
         >
           Salvar alteração

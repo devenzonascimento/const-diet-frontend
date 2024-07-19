@@ -9,8 +9,9 @@ import { Meal } from "@/types/types"
 
 interface MealItemProps {
   meal: Meal
+  onClose: () => void
 }
-export const MealItem = ({ meal }: MealItemProps) => {
+export const MealItem = ({ meal, onClose }: MealItemProps) => {
 
   const { isOpen, openModal, closeModal } = useModalState()
 
@@ -39,7 +40,7 @@ export const MealItem = ({ meal }: MealItemProps) => {
         </div>
       </li>
       <When expr={isOpen} >
-        <RoutineMealFormCard meal={meal} onClose={closeModal} />
+        <RoutineMealFormCard meal={meal} onClose={() => { closeModal(); onClose(); }} />
       </When>
     </>
   )

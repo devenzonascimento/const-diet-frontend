@@ -20,7 +20,7 @@ export const SelectMealsCard = ({ mealsList, onClose }: SelectMealsCardProps) =>
     return null;
   }
 
-  const filteredMeals = mealsList?.filter(meal =>
+  const filteredList = mealsList?.filter(meal =>
     meal.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -36,8 +36,8 @@ export const SelectMealsCard = ({ mealsList, onClose }: SelectMealsCardProps) =>
           onChange={({ target }) => setSearchTerm(target.value)}
         />
         <List
-          data={filteredMeals}
-          renderItem={({ item }) => <MealItem key={item.id} meal={item} />}
+          data={filteredList}
+          renderItem={({ item }) => <MealItem key={item.id} meal={item} onClose={onClose}/>}
         />
       </div>
     </ModalBackdrop>

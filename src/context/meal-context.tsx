@@ -114,7 +114,7 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
 
     await updateMealFn({
       mealId,
-      mealName,
+      name: mealName,
       foods: foods.map(({ food, quantity }) => {
         return {
           foodId: food.id,

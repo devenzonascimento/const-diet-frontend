@@ -2,7 +2,7 @@ import { api } from "@/services/api"
 
 interface UpdateMeal {
   mealId: string;
-  mealName: string;
+  name: string;
   foods: {
     foodId: string;
     quantity: number;

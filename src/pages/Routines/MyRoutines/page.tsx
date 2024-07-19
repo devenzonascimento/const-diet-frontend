@@ -12,17 +12,12 @@ export const MyRoutinesPage = () => {
 
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const { data: routinesList, isError } = useQuery({
+  const { data: routinesList, isPending } = useQuery({
     queryKey: ["routinesList"],
-    queryFn: getRoutinesList,
-    refetchOnMount: false,
+    queryFn: getRoutinesList,    
   })
 
-  if (isError || !routinesList) {
-    return <div>Erro ao carregar rotinas</div>
-  }
-
-  const filteredRoutine = routinesList?.filter(routine =>
+  const filteredList = routinesList?.filter(routine =>
     routine.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -40,9 +35,10 @@ export const MyRoutinesPage = () => {
           onChange={({ target }) => setSearchTerm(target.value)}
         />
         <List
-          data={filteredRoutine}
+          data={filteredList ?? []}
           renderItem={({ item }) => <RoutineItem key={item.id} routine={item} />}
         />
+        {isPending && <p>Loading</p>}
       </main>
     </>
   )

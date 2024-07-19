@@ -76,6 +76,8 @@ const routineReducer = (state: RoutineState, action: Action): RoutineState => {
       })
 
       if (existMealAtTheSameTime) {
+        alert("Você já selecionou essa refeição nesse mesmo horário. Selecione um horário diferente ou selecione outra refeição")
+
         return state
       }
 

@@ -1,4 +1,4 @@
-import { calculatecalories } from "@/functions/calculate-total-calories"
+import { calculateTotalCalories } from "@/functions/calculate-total-calories"
 import { calculateTotalNutrients } from "@/functions/calculate-total-nutrients"
 
 import { UNIT } from "@/constants/constants"
@@ -13,7 +13,7 @@ export const FoodDetailsItem = ({ foodItem }: FoodDetailsItemProps) => {
 
   const nutrients = calculateTotalNutrients([foodItem])
 
-  const calories = calculatecalories([foodItem])
+  const calories = calculateTotalCalories([foodItem])
 
   const { food, quantity } = foodItem
 

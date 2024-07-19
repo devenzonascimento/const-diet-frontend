@@ -1,6 +1,6 @@
 import { MealFood } from "@/types/types";
 
-export const calculatecalories = (foods: MealFood[] | undefined) => {
+export const calculateTotalCalories = (foods: MealFood[] | undefined) => {
   let calories = 0;
 
   foods?.forEach((item) => {

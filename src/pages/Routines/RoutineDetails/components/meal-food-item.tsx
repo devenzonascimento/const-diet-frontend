@@ -1,9 +1,10 @@
 import { CaloriesBadge } from "@/components/calories-badge";
 
+import { calculateTotalCalories } from "@/functions/calculate-total-calories";
+
 import { MealFood } from "@/types/types";
 
 import { UNIT } from "@/constants/constants";
-import { calculatecalories } from "@/functions/calculate-total-calories";
 
 interface MealFoodItemProps {
   mealFood: MealFood;
@@ -21,7 +22,7 @@ export const MealFoodItem = ({ mealFood }: MealFoodItemProps) => {
           <span> de </span>
           <span>{mealFood.food.name}</span>
         </h1>
-        <CaloriesBadge calories={calculatecalories([mealFood])} />
+        <CaloriesBadge calories={calculateTotalCalories([mealFood])} />
       </header>
       <ul className="flex items-center justify-between gap-1 ">
         <li className="min-w-12 flex items-center justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">

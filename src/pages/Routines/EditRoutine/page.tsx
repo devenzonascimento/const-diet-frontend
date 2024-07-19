@@ -29,9 +29,11 @@ export const EditRoutinePage = () => {
   const queryClient = useQueryClient()
 
   const {
-    routine,
-    onRoutineNameChange,
-    onRoutineWaterChange,
+    nameValue,
+    setNameValue,
+    waterValue,
+    setWaterValue,
+    meals,
     handleUpdateRoutine,
     setRoutineData,
     updateRoutineStates
@@ -68,7 +70,7 @@ export const EditRoutinePage = () => {
   return (
     <>
       {updateRoutineStates.isPending && (
-        <div className="fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
+        <div className="z-10 fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
           <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
             <p className="text-2xl font-semibold">Aguarde...</p>
           </div>
@@ -79,21 +81,21 @@ export const EditRoutinePage = () => {
         leftButtonNavigateTo="/minhas-rotinas"
       />
       <main className="h-full flex flex-col items-center gap-4 px-4 pb-6 overflow-auto">
-        <DefaultInput
+      <DefaultInput
           label="Dê um nome a sua rotina"
           placeholder="Dia de carbo alto"
           maxLength={30}
-          value={routine.name}
-          onChange={({ target }) => onRoutineNameChange(target.value)}
+          value={nameValue}
+          onChange={({ target }) => setNameValue(target.value)}
         />
         <DefaultInput
           label="Quantos mililitros de agua você vai beber durante o dia?"
           placeholder="3250"
           maxLength={30}
-          value={routine.water}
-          onChange={({ target }) => onRoutineWaterChange(target.value)}
+          value={waterValue}
+          onChange={({ target }) => setWaterValue(target.value)}
         />
-        <MealsBasket meals={routine.meals} openCardToSelectMeals={toggleModal} />
+        <MealsBasket meals={meals} openCardToSelectMeals={toggleModal} />
         <Button
           type="submit"
           onClick={() => handleUpdateRoutine(routineId, redirectToSuccess)}

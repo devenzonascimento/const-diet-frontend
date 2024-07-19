@@ -1,20 +1,15 @@
+import { useEffect } from "react";
 import { useModalState } from "@/hooks/use-modal-state";
 import { useMealContext } from "@/context/meal-context";
-
 import { useNavigate } from "react-router-dom";
 
-
-import { When } from "@/components/when";
-
-import { Button } from "@/components/ui/button";
-
-import { Soup } from "lucide-react";
-import { useEffect } from "react";
+import { Header } from "@/components/ui/header";
 import { InputField } from "../_components/input-field";
 import { FoodsBasket } from "../_components/foods-basket";
+import { Button } from "@/components/ui/button";
+import { Soup } from "lucide-react";
+import { When } from "@/components/when";
 import { AddFoodCard } from "../_components/add-food-card";
-import { Header } from "@/components/ui/header";
-
 
 export const AddNewMealPage = () => {
 
@@ -65,4 +60,3 @@ export const AddNewMealPage = () => {
     </>
   );
 }
-

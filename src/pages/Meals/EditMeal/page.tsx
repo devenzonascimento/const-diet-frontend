@@ -6,17 +6,14 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { getMeal } from "@/services/http/meal/get-meal";
 
-import { When } from "@/components/when";
-
-import { Button } from "@/components/ui/button";
 import { Loading } from "./components/loading";
-
-import { Soup } from "lucide-react";
+import { Header } from "@/components/ui/header";
 import { InputField } from "../_components/input-field";
 import { FoodsBasket } from "../_components/foods-basket";
+import { Soup } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { When } from "@/components/when";
 import { AddFoodCard } from "../_components/add-food-card";
-import { Header } from "@/components/ui/header";
-
 
 interface RouteParams {
   mealId: string;
@@ -86,4 +83,3 @@ export const EditMealPage = () => {
     </>
   );
 }
-

@@ -102,22 +102,9 @@ export const EditRoutinePage = () => {
           Salvar alteração
         </Button>
       </main>
-
       <When expr={isOpen}>
         <SelectMealsCard mealsList={mealsList} onClose={toggleModal} />
       </When>
     </>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-

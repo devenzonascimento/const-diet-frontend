@@ -79,22 +79,9 @@ export const AddNewRoutinePage = () => {
           Criar rotina
         </Button>
       </main>
-
       <When expr={isOpen}>
         <SelectMealsCard mealsList={mealsList} onClose={toggleModal} />
       </When>
     </>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-

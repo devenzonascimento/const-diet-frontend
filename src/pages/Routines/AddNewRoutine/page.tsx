@@ -10,7 +10,7 @@ import { MealsBasket } from "../_components/meals-basket";
 import { When } from "@/components/when"
 import { SelectMealsCard } from "../_components/select-meals-card";
 import { DefaultInput } from "@/components/default-input";
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 
 export const AddNewRoutinePage = () => {
 

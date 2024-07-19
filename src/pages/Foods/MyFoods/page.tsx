@@ -1,6 +1,6 @@
 import { FoodsList } from "./components/foods-list";
 import { FoodItem } from "./components/food-item";
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 
 export const MyFoodsPage = () => {
   return (

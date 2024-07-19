@@ -5,7 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getFood } from "@/services/http/food/get-food";
 import { updateFood } from "@/services/http/food/update-food";
 
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 import { DefaultInput } from "@/components/default-input";
 import { SelectInput } from "@/components/select-input";
 import { Button } from "@/components/ui/button";

@@ -4,7 +4,7 @@ import { useMealContext } from "@/context/meal-context";
 import { useModalState } from "@/hooks/use-modal-state";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 import { InputField } from "../_components/input-field";
 import { FoodsBasket } from "../_components/foods-basket";
 import { Soup } from "lucide-react";

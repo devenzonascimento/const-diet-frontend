@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { createFood } from "@/services/http/food/create-food";
 
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 import { DefaultInput } from "@/components/default-input";
 import { SelectInput } from "@/components/select-input";
 import { Button } from "@/components/ui/button";

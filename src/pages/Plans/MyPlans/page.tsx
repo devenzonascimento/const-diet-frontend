@@ -6,7 +6,7 @@ import { getPlansList } from "@/services/http/plan/get-plans-list";
 import { SearchInput } from "@/components/search-input";
 import { List } from "@/components/list";
 import { PlanItem } from "./components/plan-item";
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 
 export const MyPlansPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");

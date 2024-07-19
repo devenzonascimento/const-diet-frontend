@@ -8,7 +8,7 @@ import { AlternatedCycle } from "../_components/alternated-cycle"
 import { WeeklyCycle } from "../_components/weekly-cycle"
 import { CustomCycle } from "../_components/custom-cycle"
 import { Button } from "@/components/ui/button"
-import { Header } from "@/components/ui/header"
+import { Header } from "@/components/header"
 
 export const AddNewPlanPage = () => {
 

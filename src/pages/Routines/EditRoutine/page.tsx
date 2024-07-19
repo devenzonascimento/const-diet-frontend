@@ -12,7 +12,7 @@ import { When } from "@/components/when"
 import { DefaultInput } from "@/components/default-input";
 import { SelectMealsCard } from "../_components/select-meals-card";
 import { Routine } from "@/types/types";
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 
 interface RouteParams {
   routineId: string;
@@ -75,7 +75,7 @@ export const EditRoutinePage = () => {
         leftButtonNavigateTo="/minhas-rotinas"
       />
       <main className="h-full flex flex-col items-center gap-4 px-4 pb-6 overflow-auto">
-      <DefaultInput
+        <DefaultInput
           label="Dê um nome a sua rotina"
           placeholder="Dia de carbo alto"
           maxLength={30}

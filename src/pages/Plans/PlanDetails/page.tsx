@@ -5,7 +5,7 @@ import { getPlan } from "@/services/http/plan/get-plan";
 
 import { CalendarFoldIcon, GoalIcon } from "lucide-react"
 import { DayViewer } from "./components/day-viewer";
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 
 interface RouteParams {
   planId: string;

@@ -3,7 +3,7 @@ import { useModalState } from "@/hooks/use-modal-state";
 import { useMealContext } from "@/context/meal-context";
 import { useNavigate } from "react-router-dom";
 
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 import { InputField } from "../_components/input-field";
 import { FoodsBasket } from "../_components/foods-basket";
 import { Button } from "@/components/ui/button";

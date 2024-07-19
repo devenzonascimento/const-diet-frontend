@@ -6,7 +6,7 @@ import { getRoutinesList } from "@/services/http/routine/get-routines-list"
 import { List } from "@/components/list"
 import { RoutineItem } from "./components/routine-item"
 import { SearchInput } from "@/components/search-input"
-import { Header } from "@/components/ui/header"
+import { Header } from "@/components/header"
 
 export const MyRoutinesPage = () => {
 
@@ -14,7 +14,7 @@ export const MyRoutinesPage = () => {
 
   const { data: routinesList, isPending } = useQuery({
     queryKey: ["routinesList"],
-    queryFn: getRoutinesList,    
+    queryFn: getRoutinesList,
   })
 
   const filteredList = routinesList?.filter(routine =>

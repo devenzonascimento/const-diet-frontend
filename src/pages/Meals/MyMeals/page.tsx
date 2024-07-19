@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { getMealsList } from "@/services/http/meal/get-meals-list";
 
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 import { SearchInput } from "@/components/search-input";
 import { List } from "@/components/list";
 import { MealItem } from "./components/meal-item";

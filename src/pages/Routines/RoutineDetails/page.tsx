@@ -3,11 +3,12 @@ import { useNavigate, useParams } from "react-router-dom"
 
 import { getRoutine } from "@/services/http/routine/get-routine";
 
-import { Header } from "@/components/ui/header";
+import { Header } from "@/components/header";
 import { DropletIcon, FlameIcon } from "lucide-react"
 import { StatsCard } from "@/components/stats-card";
 import { List } from "@/components/list";
 import { RoutineMealItem } from "./components/routine-meal-item";
+import { useRoutineContext } from "@/context/routine-context";
 
 interface RouteParams {
   routineId: string;
@@ -15,7 +16,14 @@ interface RouteParams {
 
 export const RoutineDetailsPage = () => {
   const { routineId } = useParams<keyof RouteParams>() as RouteParams;
+
   const navigate = useNavigate()
+
+  const onEditOptionClick = () => {
+    navigate(`/editar-rotina/${routineId}`)
+  }
+
+  const { deleteRoutineStates, handleDeleteRoutine } = useRoutineContext()
 
   const { data: routine, isError } = useQuery({
     queryKey: [`routine-${routineId}`],
@@ -33,9 +41,19 @@ export const RoutineDetailsPage = () => {
 
   return (
     <div className="h-screen flex flex-col gap-2 bg-slate-100">
+      {deleteRoutineStates.isPending && (
+        <div className="z-10 fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
+          <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
+            <p className="text-2xl font-semibold">Aguarde...</p>
+          </div>
+        </div>
+      )}
       <Header
         title="Detalhes da rotina"
         leftButtonNavigateTo="/minhas-rotinas"
+        isRightButtonOptions
+        onEditOptionClick={onEditOptionClick}
+        onDeleteOptionClick={() => handleDeleteRoutine(routineId)}
       />
       <main className="flex flex-col justify-between items-center gap-4 pb-6 px-2">
         <section className="w-full flex flex-col items-center gap-2 bg-white border border-sky-800 rounded-xl overflow-hidden">

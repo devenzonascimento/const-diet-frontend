@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useReducer } from 'react';
-import { UseMutateAsyncFunction, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { createRoutine } from '@/services/http/routine/create-routine';
@@ -32,10 +32,11 @@ interface RoutineContextType {
   clearRoutineData: () => void;
   handleCreateRoutine: () => void;
   handleUpdateRoutine: (routineId: string) => void;
-  deleteRoutineFn: UseMutateAsyncFunction<boolean, Error, string, unknown>
+  handleDeleteRoutine: (routineId: string) => void;
 
   createRoutineStates: MutationStates
   updateRoutineStates: MutationStates
+  deleteRoutineStates: MutationStates
 }
 
 interface RoutineState {
@@ -192,7 +193,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
     isSuccess: updateRoutineMutation.isSuccess,
   }
 
-  const { mutateAsync: deleteRoutineFn } = useMutation({
+  const deleteRoutineMutation = useMutation({
     mutationKey: ["delete-routine"],
     mutationFn: deleteRoutine,
     onSuccess(_, routineId) {
@@ -204,6 +205,18 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       );
     },
   })
+
+  const handleDeleteRoutine = async (routineId: string) => {
+    await deleteRoutineMutation.mutateAsync(routineId)
+
+    navigate("/minhas-rotinas")
+  }
+
+  const deleteRoutineStates = {
+    isPending: deleteRoutineMutation.isPending,
+    isError: deleteRoutineMutation.isError,
+    isSuccess: deleteRoutineMutation.isSuccess,
+  }
 
   return (
     <RoutineContext.Provider value={{
@@ -218,10 +231,11 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       clearRoutineData,
       handleCreateRoutine,
       handleUpdateRoutine,
-      deleteRoutineFn,
+      handleDeleteRoutine,
 
       createRoutineStates,
-      updateRoutineStates
+      updateRoutineStates,
+      deleteRoutineStates,
     }}>
       {children}
     </RoutineContext.Provider>

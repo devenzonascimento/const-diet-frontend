@@ -1,7 +1,7 @@
 import { useModalState } from "@/hooks/use-modal-state";
 import { useMealContext } from "@/context/meal-context";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 import { When } from "@/components/when";
@@ -18,9 +18,15 @@ import { Header } from "@/components/ui/header";
 
 export const AddNewMealPage = () => {
 
+  const navigate = useNavigate()
+
   const { isOpen, toggleModal } = useModalState()
 
-  const { handleCreateMeal, clearContext } = useMealContext()
+  const { handleCreateMeal, clearContext, createMealStates } = useMealContext()
+
+  const redirectToSuccess = () => {
+    navigate("/minhas-refeicoes")
+  };
 
   useEffect(() => {
     clearContext()
@@ -29,6 +35,13 @@ export const AddNewMealPage = () => {
 
   return (
     <>
+      {createMealStates.isPending && (
+        <div className="z-10 fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
+          <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
+            <p className="text-2xl font-semibold">Aguarde...</p>
+          </div>
+        </div>
+      )}
       <Header
         title="Criar refeição"
         leftButtonNavigateTo="/minhas-refeicoes"
@@ -38,22 +51,17 @@ export const AddNewMealPage = () => {
           <InputField />
           <FoodsBasket openFormModal={toggleModal} />
         </div>
-
-        <Link className="w-full" to="/minhas-refeicoes">
-          <Button
-            type="submit"
-            className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
-            onClick={handleCreateMeal}
-          >
-            <Soup />
-            Criar refeição
-          </Button>
-        </Link>
-
-        <When expr={isOpen}>
-          <AddFoodCard onClose={toggleModal} />
-        </When>
+        <Button
+          className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
+          onClick={() => handleCreateMeal(redirectToSuccess)}
+        >
+          <Soup />
+          Criar refeição
+        </Button>
       </main>
+      <When expr={isOpen}>
+        <AddFoodCard onClose={toggleModal} />
+      </When>
     </>
   );
 }

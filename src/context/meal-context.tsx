@@ -6,16 +6,25 @@ import { updateMeal } from '@/services/http/meal/update-meal';
 
 import { Meal, MealFood } from '@/types/types';
 
+interface MutationStates {
+  isPending: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+}
+
 interface MealContextType {
   mealName: string
   handleInputMealName: (inputValue: string) => void
   foods: MealFood[]
   addFoodToFoodList: (food: MealFood) => void
   removeFoodFromFoodList: (foodId: string) => void
-  handleCreateMeal: () => void
-  handleUpdateMeal: () => void
+  handleCreateMeal: (redirect: () => void) => void
+  handleUpdateMeal: (redirect: () => void) => void
   loadMealData: (mealData: Meal) => void
   clearContext: () => void
+
+  createMealStates: MutationStates
+  updateMealStates: MutationStates
 }
 
 export const MealContext = createContext<MealContextType | undefined>(undefined);
@@ -58,41 +67,33 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     setFoods([...newFoods])
   }
 
+  const clearMealData = () => {
+    setFoods([])
+    setMealName("")
+  }
+
   const queryClient = useQueryClient()
 
-  const { mutateAsync: createMealFn } = useMutation({
+  const createMealMutation = useMutation({
+    mutationKey: ["create-meal"],
     mutationFn: createMeal,
-    onSuccess() {
+    onSuccess(data) {
       queryClient.setQueryData(
         ["mealsList"],
-        (data: Meal[]) => [...data, { id: crypto.randomUUID(), name: mealName, foods: foods }]
+        (mealsList: Meal[]) => {
+          return [data, ...mealsList]
+        }
       )
     },
   })
 
-  const { mutateAsync: updateMealFn } = useMutation({
-    mutationFn: updateMeal,
-    onSuccess() {
-      queryClient.setQueryData(
-        ["mealsList"],
-        (data: Meal[]) => data?.map((mealItem) => {
-          return mealItem.id === mealId
-          ?
-          { 
-            id: mealId,
-            name: mealName,
-            foods: foods
-          }
-          :
-          mealItem
-        })
-      )
-    },
-  })
+  const handleCreateMeal = async (redirect: () => void) => {
 
-  const handleCreateMeal = async () => {
+    if (mealName == "" || foods.length == 0) {
+      return
+    }
 
-    await createMealFn({
+    await createMealMutation.mutateAsync({
       name: mealName,
       foods: foods.map(({ food, quantity }) => {
         return {
@@ -100,19 +101,38 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
           quantity: Number(quantity),
         }
       })
-    })
+    });
 
-    setFoods([])
-    setMealName("")
+    clearMealData()
+    redirect();
   }
 
-  const handleUpdateMeal = async () => {
+  const createMealStates = {
+    isPending: createMealMutation.isPending,
+    isError: createMealMutation.isError,
+    isSuccess: createMealMutation.isSuccess,
+  }
+
+  const updateMealMutation = useMutation({
+    mutationKey: ["update-meal"],
+    mutationFn: updateMeal,
+    onSuccess(data) {
+      queryClient.setQueryData(
+        ["mealsList"],
+        (mealsList: Meal[]) => {
+          return mealsList.map((meal) => meal.id === data.id ? data : meal)
+        }
+      )
+    },
+  })
+
+  const handleUpdateMeal = async (redirect: () => void) => {
 
     if (mealName == "" || foods.length == 0) {
       return
     }
 
-    await updateMealFn({
+    await updateMealMutation.mutateAsync({
       mealId,
       name: mealName,
       foods: foods.map(({ food, quantity }) => {
@@ -121,7 +141,16 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
           quantity: Number(quantity),
         }
       })
-    })
+    });
+
+    clearMealData()
+    redirect();
+  }
+
+  const updateMealStates = {
+    isPending: updateMealMutation.isPending,
+    isError: updateMealMutation.isError,
+    isSuccess: updateMealMutation.isSuccess,
   }
 
   const loadMealData = (mealData: Meal) => {
@@ -149,7 +178,10 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
       handleCreateMeal,
       handleUpdateMeal,
       loadMealData,
-      clearContext
+      clearContext,
+
+      createMealStates,
+      updateMealStates,
     }}>
       {children}
     </MealContext.Provider>

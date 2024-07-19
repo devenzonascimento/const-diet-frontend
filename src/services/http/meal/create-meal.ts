@@ -1,5 +1,7 @@
 import { api } from "@/services/api"
 
+import { Meal } from "@/types/types";
+
 interface CreateMeal {
   name: string;
   foods: {
@@ -8,7 +10,7 @@ interface CreateMeal {
   }[];
 }
 
-export const createMeal = async (mealData: CreateMeal) => {
+export const createMeal = async (mealData: CreateMeal): Promise<Meal> => {
 
   if (mealData.name == "") {
     throw new Error ("O nome da refeição é obrigatório!")
@@ -19,7 +21,7 @@ export const createMeal = async (mealData: CreateMeal) => {
 
   const userId = localStorage.getItem("userId")
 
-  const response = await api.post(`/users/${userId}/meals`, mealData)
+  const { data } = await api.post(`/users/${userId}/meals`, mealData)
 
-  return response.status === 201
+  return data
 }

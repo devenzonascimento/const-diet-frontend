@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useMealContext } from "@/context/meal-context";
 import { useModalState } from "@/hooks/use-modal-state";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { getMeal } from "@/services/http/meal/get-meal";
 
@@ -24,11 +24,17 @@ interface RouteParams {
 
 export const EditMealPage = () => {
 
-  const { isOpen, toggleModal } = useModalState()
-
-  const { handleUpdateMeal, loadMealData } = useMealContext()
+  const navigate = useNavigate()
 
   const { mealId } = useParams<keyof RouteParams>() as RouteParams;
+
+  const { isOpen, toggleModal } = useModalState()
+
+  const { handleUpdateMeal, loadMealData, updateMealStates } = useMealContext()
+
+  const redirectToSuccess = () => {
+    navigate("/minhas-refeicoes")
+  };
 
   const { data: meal, isPending } = useQuery({
     queryKey: [`meal-${mealId}`],
@@ -48,6 +54,13 @@ export const EditMealPage = () => {
 
   return (
     <>
+      {updateMealStates.isPending && (
+        <div className="z-10 fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
+          <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
+            <p className="text-2xl font-semibold">Aguarde...</p>
+          </div>
+        </div>
+      )}
       <Header
         title="Editar refeição"
         leftButtonNavigateTo="/minhas-refeicoes"
@@ -59,21 +72,17 @@ export const EditMealPage = () => {
           <InputField />
           <FoodsBasket openFormModal={toggleModal} />
         </div>
-
-        <Link className="w-full" to="/minhas-refeicoes" >
-          <Button
-            className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
-            onClick={handleUpdateMeal}
-          >
-            <Soup />
-            <span>Salvar alterações</span>
-          </Button>
-        </Link>
-        //TODO: TROCAR O LINK POR NAVIGATE, PORQUE O LINK TA TROCANDO DE PAGE MESMO SE O SAVE NÃO FOR CONCLUIDO.
-        <When expr={isOpen}>
-          <AddFoodCard onClose={toggleModal} />
-        </When>
+        <Button
+          className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
+          onClick={() => handleUpdateMeal(redirectToSuccess)}
+        >
+          <Soup />
+          Salvar alterações
+        </Button>
       </main>
+      <When expr={isOpen}>
+        <AddFoodCard onClose={toggleModal} />
+      </When>
     </>
   );
 }

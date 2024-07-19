@@ -49,7 +49,7 @@ export const RoutineDetailsPage = () => {
               <div className="h-32 w-32 flex flex-col gap-1 items-center justify-center bg-white border-4 border-sky-800 rounded-full">
                 <FlameIcon strokeWidth={1} className="text-sky-600 fill-sky-100" size={48} />
                 <p className="mb-3 text-sky-950">
-                  <span className="text-2xl font-medium">{routine.totalCalories.toFixed()}</span>
+                  <span className="text-2xl font-medium">{routine.calories.toFixed()}</span>
                   <span>kcal</span>
                 </p>
               </div>
@@ -64,27 +64,27 @@ export const RoutineDetailsPage = () => {
             <section className="w-full grid grid-cols-6 gap-2">
               <StatsCard
                 title="Carboidratos"
-                value={routine.totalCalories.toFixed()}
+                value={routine.carbohydrates.toFixed()}
                 className="col-span-3"
               />
               <StatsCard
                 title="Proteínas"
-                value={routine.totalProteins.toFixed()}
+                value={routine.proteins.toFixed()}
                 className="col-span-3"
               />
               <StatsCard
                 title="Gorduras"
-                value={routine.totalFats.toFixed()}
+                value={routine.fats.toFixed()}
                 className="col-span-2"
               />
               <StatsCard
                 title="Sódio"
-                value={routine.totalSodiums.toFixed(3)}
+                value={routine.sodium.toFixed(3)}
                 className="col-span-2"
               />
               <StatsCard
                 title="Fibras"
-                value={routine.totalFibers.toFixed()}
+                value={routine.fibers.toFixed()}
                 className="col-span-2"
               />
             </section>

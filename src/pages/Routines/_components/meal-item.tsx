@@ -24,17 +24,17 @@ export const MealItem = ({ meal }: MealItemProps) => {
           <h3 className="text-sm font-semibold text-white break-words">
             {meal.name}
           </h3>
-          <CaloriesBadge calories={meal.totalCalories} />
+          <CaloriesBadge calories={meal.calories} />
         </header>
         <div className="max-w-full flex flex-wrap gap-2">
           <Badge>
-            {`C ${meal.totalCarbohydrates.toFixed()}g`}
+            {`C ${meal.carbohydrates.toFixed()}g`}
           </Badge>
           <Badge>
-            {`P ${meal.totalProteins.toFixed()}g`}
+            {`P ${meal.proteins.toFixed()}g`}
           </Badge>
           <Badge>
-            {`G ${meal.totalFats.toFixed()}g`}
+            {`G ${meal.fats.toFixed()}g`}
           </Badge>
         </div>
       </li>

@@ -39,7 +39,7 @@ export const RoutineItem = ({ routine, onClick, onDelete }: RoutineItemProps) =>
                 <FlameIcon size={18} className="text-sky-800" />
               </div>
               <p className="w-full flex items-center justify-center font-semibold p-1 bg-sky-800 text-white rounded-b-xl">
-                {routine.totalCalories.toFixed()}
+                {routine.calories.toFixed()}
                 <span className="text-xs">kcal</span>
               </p>
             </div>
@@ -58,19 +58,19 @@ export const RoutineItem = ({ routine, onClick, onDelete }: RoutineItemProps) =>
           </section>
           <ul className="flex items-center justify-around gap-1 ">
             <li className="min-w-12 flex justify-center text-xs font-medium text-white bg-sky-800 p-1 rounded-lg">
-              C {routine.totalCarbohydrates.toFixed()}g
+              C {routine.carbohydrates.toFixed()}g
             </li>
             <li className="min-w-12 flex justify-center text-xs font-medium text-white bg-sky-800 p-1 rounded-lg">
-              P {routine.totalProteins.toFixed()}g
+              P {routine.proteins.toFixed()}g
             </li>
             <li className="min-w-12 flex justify-center text-xs font-medium text-white bg-sky-800 p-1 rounded-lg">
-              G {routine.totalFats.toFixed()}g
+              G {routine.fats.toFixed()}g
             </li>
             <li className="min-w-12 flex justify-center text-xs font-medium text-white bg-sky-800 p-1 rounded-lg">
-              S {routine.totalSodiums.toFixed(3)}g
+              S {routine.sodium.toFixed(3)}g
             </li>
             <li className="min-w-12 flex justify-center text-xs font-medium text-white bg-sky-800 p-1 rounded-lg">
-              F {routine.totalFibers.toFixed()}g
+              F {routine.fibers.toFixed()}g
             </li>
           </ul>
         </main>

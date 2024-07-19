@@ -1,4 +1,4 @@
-import { calculateTotalCalories } from "@/functions/calculate-total-calories"
+import { calculatecalories } from "@/functions/calculate-total-calories"
 import { calculateTotalNutrients } from "@/functions/calculate-total-nutrients"
 
 import { ModalBackdrop } from "@/components/modal-backdrop"
@@ -16,7 +16,7 @@ interface MealDetailsProps {
 
 export const MealDetails = ({ meal, onClose }: MealDetailsProps) => {
 
-  const totalCalories = calculateTotalCalories(meal.foods)
+  const calories = calculatecalories(meal.foods)
 
   const totalNutrients = calculateTotalNutrients(meal.foods)
 
@@ -29,11 +29,11 @@ export const MealDetails = ({ meal, onClose }: MealDetailsProps) => {
 
         <h2 className="pt-5 text-center text-xl font-semibold">{meal.name}</h2>
         <div className="grid grid-cols-2 gap-4 ">
-          <StatsBox title="Calorias" value={totalCalories} />
+          <StatsBox title="Calorias" value={calories} />
           <StatsBox title="Carbohidratos" value={totalNutrients.carbohydrates} />
           <StatsBox title="Proteínas" value={totalNutrients.proteins} />
           <StatsBox title="Gorduras" value={totalNutrients.fats} />
-          <StatsBox title="Sódio" value={totalNutrients.sodiums} />
+          <StatsBox title="Sódio" value={totalNutrients.sodium} />
           <StatsBox title="Fibras" value={totalNutrients.fibers} />
         </div>
 

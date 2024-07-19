@@ -32,7 +32,7 @@ export const AddNewFoodPage = () => {
           carbohydrates: variables.carbohydrates,
           proteins: variables.proteins,
           fats: variables.fats,
-          sodiums: variables.sodiums,
+          sodium: variables.sodium,
           fibers: variables.fibers,
         }]
       })
@@ -66,7 +66,6 @@ export const AddNewFoodPage = () => {
             label="Quantidade"
             {...register("quantity")}
           />
-
           <SelectInput
             id="unit-input"
             label="Unidade"
@@ -95,16 +94,15 @@ export const AddNewFoodPage = () => {
           {...register("fats")}
         />
         <DefaultInput
-          id="sodium-input"
-          label="Sódios em gramas"
-          {...register("sodiums")}
-        />
-        <DefaultInput
           id="fiber-input"
           label="Fibras em gramas"
           {...register("fibers")}
         />
-
+        <DefaultInput
+          id="sodium-input"
+          label="Sódios em gramas"
+          {...register("sodium")}
+        />
         <Button type="submit" className="w-full bg-sky-700 hover:bg-sky-500">
           Salvar alimento
         </Button>

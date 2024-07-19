@@ -101,16 +101,15 @@ export const EditFoodPage = () => {
           {...register("fats")}
         />
         <DefaultInput
-          id="sodium-input"
-          label="Sódios em gramas"
-          {...register("sodiums")}
-        />
-        <DefaultInput
           id="fiber-input"
           label="Fibras em gramas"
           {...register("fibers")}
         />
-
+        <DefaultInput
+          id="sodium-input"
+          label="Sódios em gramas"
+          {...register("sodium")}
+        />
         <Button type="submit" className="w-full bg-sky-700 hover:bg-sky-500">
           Salvar alimento
         </Button>

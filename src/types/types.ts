@@ -6,8 +6,8 @@ export interface Food {
   carbohydrates: number;
   proteins: number;
   fats: number;
-  sodiums: number;
   fibers: number;
+  sodium: number;
 }
 
 export interface CreateFood {
@@ -19,27 +19,19 @@ export interface CreateFood {
   carbohydrates: number;
   proteins: number;
   fats: number;
-  sodiums: number;
+  sodium: number;
   fibers: number;
-}
-
-export interface Nutrients {
-  carbohydrates: number;
-  proteins: number;
-  fats: number;
-  sodiums?: number;
-  fibers?: number;
 }
 
 export interface Meal {
   id: string;
   name: string;
-  totalCalories: number;
-  totalCarbohydrates: number;
-  totalProteins: number;
-  totalFats: number;
-  totalSodiums: number;
-  totalFibers: number;
+  calories: number;
+  carbohydrates: number;
+  proteins: number;
+  fats: number;
+  fibers: number;
+  sodium: number;
   foods: MealFood[];
 }
 
@@ -53,12 +45,12 @@ export interface Routine {
   id: string;
   name: string;
   water: number;
-  totalCalories: number;
-  totalCarbohydrates: number;
-  totalProteins: number;
-  totalFats: number;
-  totalSodiums: number;
-  totalFibers: number;
+  calories: number;
+  carbohydrates: number;
+  proteins: number;
+  fats: number;
+  fibers: number;
+  sodium: number;
   meals: RoutineMeal[];
 }
 
@@ -92,12 +84,12 @@ export interface DailyRoutine {
   date: Date;
   status: "PENDING" | "COMPLETED" | "MISSED"
   water: number;
-  totalCalories: number;
-  totalCarbohydrates: number;
-  totalProteins: number;
-  totalFats: number;
-  totalSodiums: number;
-  totalFibers: number;
+  calories: number;
+  carbohydrates: number;
+  proteins: number;
+  fats: number;
+  fibers: number;
+  sodium: number;
   meals: DailyMeal[];
 }
 
@@ -106,12 +98,12 @@ export interface DailyMeal {
   name: string;
   time: string;
   status: "PENDING" | "COMPLETED" | "MISSED"
-  totalCalories: number;
-  totalCarbohydrates: number;
-  totalProteins: number;
-  totalFats: number;
-  totalSodiums: number;
-  totalFibers: number;
+  calories: number;
+  carbohydrates: number;
+  proteins: number;
+  fats: number;
+  fibers: number;
+  sodium: number;
   foods: DailyMealFood[];
 }
 
@@ -124,6 +116,6 @@ export interface DailyMealFood {
   carbohydrates: number;
   proteins: number;
   fats: number;
-  sodiums: number;
   fibers: number;
+  sodium: number;
 }

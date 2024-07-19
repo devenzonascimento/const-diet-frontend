@@ -1,4 +1,4 @@
-import { calculateTotalCalories } from "@/functions/calculate-total-calories"
+import { calculatecalories } from "@/functions/calculate-total-calories"
 import { calculateTotalNutrients } from "@/functions/calculate-total-nutrients"
 
 import { UNIT } from "@/constants/constants"
@@ -13,7 +13,7 @@ export const FoodDetailsItem = ({ foodItem }: FoodDetailsItemProps) => {
 
   const nutrients = calculateTotalNutrients([foodItem])
 
-  const calories = calculateTotalCalories([foodItem])
+  const calories = calculatecalories([foodItem])
 
   const { food, quantity } = foodItem
 
@@ -61,7 +61,7 @@ export const FoodDetailsItem = ({ foodItem }: FoodDetailsItemProps) => {
               Sódio
             </td>
             <td className="border-2 border-sky-700 p-1 w-1/2" >
-              {nutrients.sodiums.toFixed(2)}
+              {nutrients.sodium.toFixed(2)}
             </td>
           </tr>
           <tr>

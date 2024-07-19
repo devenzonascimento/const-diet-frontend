@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useToggleState } from "@/hooks/use-toggle-state";
 
 import { getFoodsFromMeal } from "@/services/http/food/get-foods-from-meal";
-import { calculateTotalCalories } from "@/functions/calculate-total-calories";
+import { calculatecalories } from "@/functions/calculate-total-calories";
 
 import { MealDescription } from "./meal-description";
 import { ChevronButton } from "./chevron-button";
@@ -32,7 +32,7 @@ export const MealItem = ({ meal: { id, name } }: MealItemProps) => {
         <h2 className=" w-full text-xl uppercase font-semibold text-sky-700">
           {name}
         </h2>
-        <CaloriesBadge calories={calculateTotalCalories(foodsFromMeal)} />
+        <CaloriesBadge calories={calculatecalories(foodsFromMeal)} />
       </div>
       <MealDescription foods={foodsFromMeal} isOpen={booleanExp} />
     </li>

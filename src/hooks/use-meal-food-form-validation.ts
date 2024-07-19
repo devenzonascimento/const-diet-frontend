@@ -17,7 +17,7 @@ const foodFormSchema = z.object({
   carbohydrates: z.coerce.number(),
   proteins: z.coerce.number(),
   fats: z.coerce.number(),
-  sodiums: z.coerce.number(),
+  sodium: z.coerce.number(),
   fibers: z.coerce.number(),
 });
 

@@ -37,7 +37,7 @@ export const RoutineItem = ({ routine }: RoutineItemProps) => {
           <section className="flex justify-between gap-4">
             <StatsCard
               title="Calorias"
-              value={routine.totalCalories.toFixed()}
+              value={routine.calories.toFixed()}
               type="flame"
               className="flex-1"
             />
@@ -50,19 +50,19 @@ export const RoutineItem = ({ routine }: RoutineItemProps) => {
           </section>
           <ul className="flex items-center justify-between gap-1 ">
             <li className="min-w-12 flex justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">
-              C {routine.totalCarbohydrates.toFixed()}g
+              C {routine.carbohydrates.toFixed()}g
             </li>
             <li className="min-w-12 flex justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">
-              P {routine.totalProteins.toFixed()}g
+              P {routine.proteins.toFixed()}g
             </li>
             <li className="min-w-12 flex justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">
-              G {routine.totalFats.toFixed()}g
+              G {routine.fats.toFixed()}g
             </li>
             <li className="min-w-12 flex justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">
-              S {routine.totalSodiums.toFixed(3)}g
+              S {routine.sodium.toFixed(3)}g
             </li>
             <li className="min-w-12 flex justify-center text-[0.84rem] font-medium text-white bg-sky-800 px-2 py-0.5 rounded-md">
-              F {routine.totalFibers.toFixed()}g
+              F {routine.fibers.toFixed()}g
             </li>
           </ul>
         </main>

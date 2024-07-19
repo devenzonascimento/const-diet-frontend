@@ -1,12 +1,9 @@
 import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useMealContext } from "@/context/meal-context";
 import { useModalState } from "@/hooks/use-modal-state";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { getMeal } from "@/services/http/meal/get-meal";
-
-import { Loading } from "./components/loading";
 import { Header } from "@/components/ui/header";
 import { InputField } from "../_components/input-field";
 import { FoodsBasket } from "../_components/foods-basket";
@@ -14,6 +11,7 @@ import { Soup } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { When } from "@/components/when";
 import { AddFoodCard } from "../_components/add-food-card";
+import { Meal } from "@/types/types";
 
 interface RouteParams {
   mealId: string;
@@ -27,27 +25,28 @@ export const EditMealPage = () => {
 
   const { isOpen, toggleModal } = useModalState()
 
-  const { handleUpdateMeal, loadMealData, updateMealStates } = useMealContext()
+  const { handleUpdateMeal, updateMealStates, setMealData } = useMealContext()
 
   const redirectToSuccess = () => {
     navigate("/minhas-refeicoes")
   };
 
-  const { data: meal, isPending } = useQuery({
-    queryKey: [`meal-${mealId}`],
-    queryFn: () => getMeal(mealId)
-  })
+  const queryClient = useQueryClient()
+
+  const loadMealData = () => {
+    const data = queryClient.getQueryData<Meal[]>(["mealsList"])
+
+    const mealToLoad = data?.find(meal => meal.id === mealId)
+
+    if (mealToLoad) {
+      setMealData(mealToLoad)
+    }
+  }
 
   useEffect(() => {
-    if (meal) {
-      loadMealData(meal)
-    }
+    loadMealData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isPending])
-
-  if (isPending) {
-    return <Loading />
-  }
+  }, [])
 
   return (
     <>

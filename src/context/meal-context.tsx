@@ -20,7 +20,7 @@ interface MealContextType {
   removeFoodFromFoodList: (foodId: string) => void
   handleCreateMeal: (redirect: () => void) => void
   handleUpdateMeal: (redirect: () => void) => void
-  loadMealData: (mealData: Meal) => void
+  setMealData: (mealData: Meal) => void
   clearContext: () => void
 
   createMealStates: MutationStates
@@ -153,7 +153,7 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
     isSuccess: updateMealMutation.isSuccess,
   }
 
-  const loadMealData = (mealData: Meal) => {
+  const setMealData = (mealData: Meal) => {
     setMealId(mealData.id)
     setMealName(mealData.name)
     setFoods(mealData.foods)
@@ -177,7 +177,7 @@ export const MealProvider = ({ children }: { children: ReactNode }) => {
       removeFoodFromFoodList,
       handleCreateMeal,
       handleUpdateMeal,
-      loadMealData,
+      setMealData,
       clearContext,
 
       createMealStates,

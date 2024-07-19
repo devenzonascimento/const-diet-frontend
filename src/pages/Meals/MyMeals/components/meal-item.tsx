@@ -2,8 +2,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToggleState } from "@/hooks/use-toggle-state";
 
 import { deleteMeal } from "@/services/http/meal/delete-meal";
-import { calculatecalories } from "@/functions/calculate-total-calories";
-
 
 import { CaloriesBadge } from "@/components/calories-badge";
 import { MealDescription } from "./meal-description";
@@ -47,7 +45,7 @@ export const MealItem = ({ meal }: MealItemProps) => {
         <h2 className=" w-full text-lg font-semibold text-sky-700">
           {meal.name}
         </h2>
-        <CaloriesBadge calories={calculatecalories(meal.foods)} />
+        <CaloriesBadge calories={meal.calories} />
       </div>
 
       <div

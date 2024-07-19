@@ -1,11 +1,7 @@
-import { calculatecalories } from "@/functions/calculate-total-calories"
-import { calculateTotalNutrients } from "@/functions/calculate-total-nutrients"
-
 import { ModalBackdrop } from "@/components/modal-backdrop"
+import { X } from "lucide-react"
 import { StatsBox } from "./stats-box"
 import { FoodDetailsItem } from "./food-details-item"
-
-import { X } from "lucide-react"
 
 import { Meal } from "@/types/types"
 
@@ -15,11 +11,6 @@ interface MealDetailsProps {
 }
 
 export const MealDetails = ({ meal, onClose }: MealDetailsProps) => {
-
-  const calories = calculatecalories(meal.foods)
-
-  const totalNutrients = calculateTotalNutrients(meal.foods)
-
   return (
     <ModalBackdrop onClose={onClose}>
       <div
@@ -29,12 +20,12 @@ export const MealDetails = ({ meal, onClose }: MealDetailsProps) => {
 
         <h2 className="pt-5 text-center text-xl font-semibold">{meal.name}</h2>
         <div className="grid grid-cols-2 gap-4 ">
-          <StatsBox title="Calorias" value={calories} />
-          <StatsBox title="Carbohidratos" value={totalNutrients.carbohydrates} />
-          <StatsBox title="Proteínas" value={totalNutrients.proteins} />
-          <StatsBox title="Gorduras" value={totalNutrients.fats} />
-          <StatsBox title="Sódio" value={totalNutrients.sodium} />
-          <StatsBox title="Fibras" value={totalNutrients.fibers} />
+          <StatsBox title="Calorias" value={meal.calories} />
+          <StatsBox title="Carbohidratos" value={meal.carbohydrates} />
+          <StatsBox title="Proteínas" value={meal.proteins} />
+          <StatsBox title="Gorduras" value={meal.fats} />
+          <StatsBox title="Fibras" value={meal.fibers} />
+          <StatsBox title="Sódio" value={meal.sodium} />
         </div>
 
         <h2 className="text-center text-xl font-semibold">Alimentos</h2>

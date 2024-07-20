@@ -26,6 +26,7 @@ interface PlanContextType {
   setEndDateValue: (date: Date) => void
   routinesCycle: (Routine | undefined)[];
   setRoutinesCycle: (routines: (Routine | undefined)[]) => void
+  setPlanData: (plan: PlanState) => void
   isCycleDefined: boolean
   setIsCycleDefined: () => void
   isFormComplete: boolean
@@ -53,6 +54,7 @@ const initialState: PlanState = {
 };
 
 type Action =
+  | { type: 'SET_PLAN_DATA'; payload: PlanState }
   | { type: 'SET_NAME'; payload: string }
   | { type: 'SET_GOAL'; payload: string }
   | { type: 'SET_START_DATE'; payload: Date }
@@ -63,6 +65,8 @@ type Action =
 
 const planReducer = (state: PlanState, action: Action): PlanState => {
   switch (action.type) {
+    case 'SET_PLAN_DATA':
+      return action.payload
     case 'SET_NAME':
       return { ...state, name: action.payload };
     case 'SET_GOAL':
@@ -172,6 +176,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <PlanContext.Provider value={{
+      setPlanData: (plan: PlanState) => dispatch({ type: "SET_PLAN_DATA", payload: plan}),
       nameValue: state.name,
       setNameValue: (value: string) => dispatch({ type: 'SET_NAME', payload: value }),
       goalValue: state.goal,

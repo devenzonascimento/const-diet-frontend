@@ -8,21 +8,7 @@ interface PlanData {
 
 export function formatPlanData(planData: PlanData) {
   const dates = generateDates(planData.startDate, planData.endDate);
-  const routineAssignments = assignRoutinesToDates(dates, planData.cycleRoutineIds);
-
-  const routinesMap: { [key: string]: Date[] } = {};
-
-  routineAssignments.forEach(({ routineId, date }) => {
-    if (!routinesMap[routineId]) {
-      routinesMap[routineId] = [];
-    }
-    routinesMap[routineId].push(date);
-  });
-
-  const routines = Object.entries(routinesMap).map(([routineId, dates]) => ({
-    routineId,
-    dates: dates,
-  }));
+  const routines = assignRoutinesToDates(dates, planData.cycleRoutineIds);
 
   return {
     ...planData,    

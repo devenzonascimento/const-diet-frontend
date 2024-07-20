@@ -7,7 +7,7 @@ interface PlanCreate {
   endDate: Date;
   routines: {
     routineId: string;
-    dates: Date[];
+    date: Date;
   }[];
 }
 

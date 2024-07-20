@@ -8,12 +8,6 @@ import { updateRoutine } from '@/services/http/routine/update-routine';
 
 import { RoutineMeal, Routine } from '@/types/types';
 
-interface CreateRoutine {
-  name: string;
-  water: string;
-  meals: RoutineMeal[];
-}
-
 interface MutationStates {
   isPending: boolean;
   isError: boolean;
@@ -28,7 +22,7 @@ interface RoutineContextType {
   meals: RoutineMeal[]
   addMeal: (newMeal: RoutineMeal) => void;
   removeMeal: (mealToRemove: RoutineMeal) => void;
-  setRoutineData: (routine: CreateRoutine) => void;
+  setRoutineData: (routine: RoutineState) => void;
   clearRoutineData: () => void;
   handleCreateRoutine: () => void;
   handleUpdateRoutine: (routineId: string) => void;
@@ -52,7 +46,7 @@ const initialState: RoutineState = {
 };
 
 type Action =
-  | { type: 'SET_ROUTINE_DATA'; payload: CreateRoutine }
+  | { type: 'SET_ROUTINE_DATA'; payload: RoutineState }
   | { type: 'SET_NAME'; payload: string }
   | { type: 'SET_WATER'; payload: string }
   | { type: 'SET_MEALS'; payload: RoutineMeal[] }
@@ -227,7 +221,7 @@ export const RoutineProvider = ({ children }: { children: ReactNode }) => {
       meals: state.meals,
       addMeal: (newMeal: RoutineMeal) => dispatch({ type: "ADD_MEAL", payload: newMeal }),
       removeMeal: (mealToRemove: RoutineMeal) => dispatch({ type: "REMOVE_MEAL", payload: mealToRemove }),
-      setRoutineData: (routine: CreateRoutine) => dispatch({ type: "SET_ROUTINE_DATA", payload: routine }),
+      setRoutineData: (routine: RoutineState) => dispatch({ type: "SET_ROUTINE_DATA", payload: routine }),
       clearRoutineData,
       handleCreateRoutine,
       handleUpdateRoutine,

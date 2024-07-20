@@ -90,32 +90,5 @@ export interface DailyRoutine {
   fats: number;
   fibers: number;
   sodium: number;
-  meals: DailyMeal[];
-}
-
-export interface DailyMeal {
-  id: string;
-  name: string;
-  time: string;
-  status: "PENDING" | "COMPLETED" | "MISSED"
-  calories: number;
-  carbohydrates: number;
-  proteins: number;
-  fats: number;
-  fibers: number;
-  sodium: number;
-  foods: DailyMealFood[];
-}
-
-export interface DailyMealFood {
-  id: string;
-  name: string;
-  unit: "GRAMS" | "MILILITERS";
-  quantity: number;
-  calories: number;
-  carbohydrates: number;
-  proteins: number;
-  fats: number;
-  fibers: number;
-  sodium: number;
+  meals: RoutineMeal[];
 }

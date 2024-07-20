@@ -7,6 +7,7 @@ import { addDays, addMonths, compareAsc } from 'date-fns';
 import { formatPlanData } from '@/functions/format-plan-data';
 
 import { Routine } from '@/types/types';
+import { useNavigate } from 'react-router-dom';
 
 interface MutationStates {
   isPending: boolean;
@@ -98,6 +99,9 @@ const planReducer = (state: PlanState, action: Action): PlanState => {
 export const PlanContext = createContext<PlanContextType | undefined>(undefined);
 
 export const PlanProvider = ({ children }: { children: ReactNode }) => {
+
+  const navigate = useNavigate()
+
   const [state, dispatch] = useReducer(planReducer, initialState);
 
   const [isCycleDefined, setIsCycleDefined] = useState<boolean>(false)
@@ -130,7 +134,9 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       cycleRoutineIds
     })
 
-    createPlanMutation.mutateAsync(planData)
+    await createPlanMutation.mutateAsync(planData)
+
+    navigate("/meus-planos")
   }
 
   const validateStartDate = (date: Date) => {

@@ -8,6 +8,7 @@ import { formatPlanData } from '@/functions/format-plan-data';
 
 import { Routine } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
+import { updatePlan } from '@/services/http/plan/update-plan';
 
 interface MutationStates {
   isPending: boolean;
@@ -34,8 +35,10 @@ interface PlanContextType {
   addRoutine: (routine: Routine, slot: number) => void
   removeRoutine: (slot: number) => void
   handleCreatePlan: () => void;
+  handleUpdatePlan: (planId: string) => void
 
   createPlanMutation: MutationStates
+  updatePlanMutation: MutationStates
 }
 
 interface PlanState {
@@ -175,6 +178,30 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
     dispatch({ type: 'SET_END_DATE', payload: date })
   }
 
+  
+  const updatePlanMutation = useMutation({
+    mutationKey: ["update-plan"],
+    mutationFn: updatePlan
+  })
+
+  const handleUpdatePlan = async (planId: string) => {
+    const { name, goal, startDate, endDate, routinesCycle } = state
+
+    const cycleRoutineIds = routinesCycle.filter(routineCycle => routineCycle != undefined).map(routine => routine.id)
+
+    const planData = formatPlanData({
+      name,
+      goal,
+      startDate,
+      endDate,
+      cycleRoutineIds
+    })
+
+    await updatePlanMutation.mutateAsync({ id: planId, ...planData })
+
+    navigate("/meus-planos")
+  }
+
   return (
     <PlanContext.Provider value={{
       setPlanData: (plan: PlanState) => dispatch({ type: "SET_PLAN_DATA", payload: plan }),
@@ -195,9 +222,11 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       addRoutine: (routine: Routine, slot: number) => dispatch({ type: 'ADD_ROUTINE', payload: { routine, slot } }),
       removeRoutine: (slot: number) => dispatch({ type: 'REMOVE_ROUTINE', payload: slot }),
       handleCreatePlan,
+      handleUpdatePlan,
 
 
       createPlanMutation,
+      updatePlanMutation,
     }}>
       {children}
     </PlanContext.Provider>

@@ -11,17 +11,13 @@ import { Header } from "@/components/header";
 export const MyPlansPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const { data: routinesList, isError } = useQuery({
+  const { data } = useQuery({
     queryKey: ["plansList"],
     queryFn: getPlansList,
     refetchOnMount: false,
   })
 
-  if (isError || !routinesList) {
-    return <div>Erro ao carregar rotinas</div>
-  }
-
-  const filteredRoutine = routinesList?.filter(routine =>
+  const filteredList = data?.filter(routine =>
     routine.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -39,7 +35,7 @@ export const MyPlansPage = () => {
           onChange={({ target }) => setSearchTerm(target.value)}
         />
         <List
-          data={filteredRoutine}
+          data={filteredList || []}
           renderItem={({ item }) => <PlanItem key={item.id} plan={item} />}
         />
       </main>

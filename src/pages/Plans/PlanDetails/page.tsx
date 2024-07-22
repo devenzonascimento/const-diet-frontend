@@ -34,6 +34,9 @@ export const PlanDetailsPage = () => {
       <Header
         title="Detalhes do plano"
         leftButtonNavigateTo="/meus-planos"
+        isRightButtonOptions
+        onEditOptionClick={() => navigate(`/editar-plano/${planId}`)}
+        onDeleteOptionClick={() => { }}
       />
       <main className="flex flex-col justify-between items-center gap-4 pb-6 px-4">
         <div className="w-full flex items-center bg-sky-800 border border-sky-800 rounded-md overflow-hidden">

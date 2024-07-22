@@ -27,7 +27,7 @@ export const CycleCard = ({
   onClose
 }: CycleCardProps) => {
 
-  const { routinesCycle, setRoutinesCycle, startDateValue, setIsCycleDefined } = usePlanContext()
+  const { routinesCycle, setRoutinesCycle, startDateValue, toggleCycleDefined } = usePlanContext()
 
   useEffect(() => {
     setRoutinesCycle(Array.from({ length: numberOfSlots }))
@@ -41,7 +41,7 @@ export const CycleCard = ({
   }, [routinesCycle, setRoutinesCycle])
 
   const handleSave = () => {
-    setIsCycleDefined()
+    toggleCycleDefined()
     onClose()
   }
 

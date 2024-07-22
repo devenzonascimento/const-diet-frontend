@@ -28,7 +28,8 @@ interface PlanContextType {
   setRoutinesCycle: (routines: (Routine | undefined)[]) => void
   setPlanData: (plan: PlanState) => void
   isCycleDefined: boolean
-  setIsCycleDefined: () => void
+  setIsCycleUndefined: () => void
+  toggleCycleDefined: () => void
   isFormComplete: boolean
   addRoutine: (routine: Routine, slot: number) => void
   removeRoutine: (slot: number) => void
@@ -176,7 +177,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <PlanContext.Provider value={{
-      setPlanData: (plan: PlanState) => dispatch({ type: "SET_PLAN_DATA", payload: plan}),
+      setPlanData: (plan: PlanState) => dispatch({ type: "SET_PLAN_DATA", payload: plan }),
       nameValue: state.name,
       setNameValue: (value: string) => dispatch({ type: 'SET_NAME', payload: value }),
       goalValue: state.goal,
@@ -188,7 +189,8 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       routinesCycle: state.routinesCycle,
       setRoutinesCycle: (routines: (Routine | undefined)[]) => dispatch({ type: 'SET_ROUTINES_CYCLE', payload: routines }),
       isCycleDefined,
-      setIsCycleDefined: () => setIsCycleDefined(!isCycleDefined),
+      setIsCycleUndefined: () => setIsCycleDefined(false),
+      toggleCycleDefined: () => setIsCycleDefined(!isCycleDefined),
       isFormComplete,
       addRoutine: (routine: Routine, slot: number) => dispatch({ type: 'ADD_ROUTINE', payload: { routine, slot } }),
       removeRoutine: (slot: number) => dispatch({ type: 'REMOVE_ROUTINE', payload: slot }),

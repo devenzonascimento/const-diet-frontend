@@ -23,7 +23,7 @@ export const AddNewPlanPage = () => {
     setEndDateValue,
     routinesCycle,
     isCycleDefined,
-    setIsCycleDefined,
+    toggleCycleDefined,
     isFormComplete,
     handleCreatePlan,
 
@@ -89,7 +89,7 @@ export const AddNewPlanPage = () => {
           :
           (
             <div className="relative w-full flex flex-col gap-2">
-              <XIcon size={32} onClick={setIsCycleDefined} className="absolute top-0 right-0" />
+              <XIcon size={32} onClick={toggleCycleDefined} className="absolute top-0 right-0" />
               <p className="font-semibold text-lg text-sky-950">
                 Seu ciclo
               </p>

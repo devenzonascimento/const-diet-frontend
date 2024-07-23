@@ -33,7 +33,7 @@ export const AddNewPlanPage = () => {
   } = usePlanContext()
 
   return (
-    <div className="h-screen flex flex-col gap-4 bg-slate-100">
+    <>
       {createPlanMutation.isPending && (
         <div className="z-10 fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
           <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
@@ -133,6 +133,6 @@ export const AddNewPlanPage = () => {
           Criar plano
         </Button>
       </main>
-    </div>
+    </>
   )
 }

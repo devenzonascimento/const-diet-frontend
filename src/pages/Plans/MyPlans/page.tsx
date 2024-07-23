@@ -22,7 +22,7 @@ export const MyPlansPage = () => {
   );
 
   return (
-    <div className="h-screen flex flex-col gap-4 bg-slate-100">
+    <>
       <Header
         title="Meus planos"
         leftButtonNavigateTo="/"
@@ -39,6 +39,6 @@ export const MyPlansPage = () => {
           renderItem={({ item }) => <PlanItem key={item.id} plan={item} />}
         />
       </main>
-    </div>
+    </>
   )
 }

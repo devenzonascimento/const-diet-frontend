@@ -1,5 +1,7 @@
 import { api } from "@/services/api";
 
+import { Plan } from "@/types/types";
+
 interface PlanCreate {
   name: string;
   goal: string;
@@ -11,7 +13,7 @@ interface PlanCreate {
   }[];
 }
 
-export const createPlan = async (planData: PlanCreate) => {
+export const createPlan = async (planData: PlanCreate): Promise<Plan> => {
   try {
     const userId = localStorage.getItem("userId");
 
@@ -20,5 +22,7 @@ export const createPlan = async (planData: PlanCreate) => {
     return data;
   } catch (error) {
     console.log(error);
+
+    return {} as Plan
   }
 };

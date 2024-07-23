@@ -1,12 +1,39 @@
 import { List } from "@/components/list";
 
-import { DailyMeal } from "@/types/types";
+import { UNIT } from "@/constants/constants";
+
+export interface Meal {
+  id: string;
+  time: string;
+  name: string;
+  calories: number;
+  carbohydrates: number;
+  proteins: number;
+  fats: number;
+  fibers: number;
+  sodium: number;
+  foods: MealFood[];
+}
+
+export interface MealFood {
+  id: string;
+  name: string;
+  unit: "GRAMS" | "MILILITERS";
+  quantity: number;
+  calories: number;
+  carbohydrates: number;
+  proteins: number;
+  fats: number;
+  sodium: number;
+  fibers: number;
+}
 
 interface DailyMealItemProps {
-  meal: DailyMeal;
+  meal: Meal;
 }
 
 export const DailyMealItem = ({ meal }: DailyMealItemProps) => {
+  
   return (
     <li className="flex items-center justify-between bg-sky-800 rounded-xl overflow-hidden font-semibold border border-sky-800">
       <details className="w-full flex flex-col gap-2 p-2 bg-white">
@@ -14,11 +41,11 @@ export const DailyMealItem = ({ meal }: DailyMealItemProps) => {
           {meal.name}
         </summary>
         <List
-          className="gap-3 pt-2 pl-2"
+          className="gap-3 pt-2 pl-1"
           data={meal.foods}
           renderItem={({ item }) => (
-            <li key={item.id} className="w-full text-sm text-sky-900 bg-white">
-              {item.quantity}g de {item.name}
+            <li key={item.id} className="w-full text-sm text-sky-900 bg-white list-disc list-inside">
+              {item.quantity}{UNIT[item.unit]} de {item.name}
             </li>
           )}          
         />
@@ -29,14 +56,3 @@ export const DailyMealItem = ({ meal }: DailyMealItemProps) => {
     </li>
   )
 }
-
-/*
-<li className="flex items-center justify-between bg-sky-700 rounded-xl overflow-hidden font-semibold border border-sky-800">
-  <span className="w-full p-2 text-sky-950 bg-white">
-    {meal.name}
-  </span>
-  <span className="w-20 h-full p-2 flex items-center justify-center text-white">
-    {meal.time}
-  </span>
-</li>
-*/

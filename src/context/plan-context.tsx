@@ -1,12 +1,12 @@
 import { createContext, ReactNode, useContext, useEffect, useReducer, useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { createPlan } from '@/services/http/plan/create-plan';
 
 import { addDays, addMonths, compareAsc } from 'date-fns';
 import { formatPlanData } from '@/functions/format-plan-data';
 
-import { Routine } from '@/types/types';
+import { Plan, Routine } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
 import { updatePlan } from '@/services/http/plan/update-plan';
 
@@ -108,6 +108,8 @@ export const PlanContext = createContext<PlanContextType | undefined>(undefined)
 
 export const PlanProvider = ({ children }: { children: ReactNode }) => {
 
+  const queryClient = useQueryClient()
+  
   const navigate = useNavigate()
 
   const [state, dispatch] = useReducer(planReducer, initialState);
@@ -126,7 +128,15 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
 
   const createPlanMutation = useMutation({
     mutationKey: ["create-plan"],
-    mutationFn: createPlan
+    mutationFn: createPlan,
+    onSuccess(createdPlan) {
+      queryClient.setQueryData(
+        ["plansList"],
+        (plansList: Plan[]) => {
+          return [createdPlan, ...plansList]
+        }
+      )
+    },
   })
 
   const handleCreatePlan = async () => {
@@ -181,7 +191,17 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
   
   const updatePlanMutation = useMutation({
     mutationKey: ["update-plan"],
-    mutationFn: updatePlan
+    mutationFn: updatePlan,
+    onSuccess(updatedPlan) {
+      queryClient.setQueryData(
+        ["plansList"],
+        (plansList: Plan[]) => {
+          return plansList.map(plan => {
+            return plan.id === updatedPlan.id ? updatedPlan : plan
+          })
+        }
+      )
+    },
   })
 
   const handleUpdatePlan = async (planId: string) => {

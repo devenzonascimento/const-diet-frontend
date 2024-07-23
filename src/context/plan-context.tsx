@@ -197,13 +197,28 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
         ["plansList"],
         (plansList: Plan[]) => {
           return plansList.map(plan => {
-            return plan.id === updatedPlan.id ? updatedPlan : plan
+
+            if (plan.id === updatedPlan.id) {
+              return {
+                id: updatedPlan.id,
+                name: updatedPlan.name,
+                goal: updatedPlan.goal,
+                startDate: updatedPlan.startDate,
+                endDate: updatedPlan.endDate,
+              }
+            }
+
+            return plan
           })
         }
       )
+      queryClient.setQueryData(
+        [`plan-${updatedPlan.id}`],
+        () => updatedPlan
+      )
     },
   })
-
+ 
   const handleUpdatePlan = async (planId: string) => {
     const { name, goal, startDate, endDate, routinesCycle } = state
 

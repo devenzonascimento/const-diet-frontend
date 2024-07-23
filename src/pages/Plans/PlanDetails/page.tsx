@@ -17,8 +17,7 @@ export const PlanDetailsPage = () => {
 
   const { data: plan, isError } = useQuery({
     queryKey: [`plan-${planId}`],
-    queryFn: () => getPlan(planId),
-    refetchOnMount: false,
+    queryFn: () => getPlan(planId),    
   })
 
   if (isError) {

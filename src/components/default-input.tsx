@@ -15,7 +15,7 @@ export const DefaultInput = forwardRef<HTMLInputElement, DefaultInputProps>(
           {label}
         </label>
         <input
-          className="w-full text-lg py-1 px-2 border border-sky-900 rounded-md placeholder:text-gray-700"
+          className="w-full text-lg py-1 px-2 border border-sky-900 rounded-md placeholder:text-gray-400"
           type={type}
           ref={ref}
           {...props}

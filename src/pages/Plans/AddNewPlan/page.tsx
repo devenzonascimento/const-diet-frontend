@@ -1,5 +1,7 @@
 import { usePlanContext } from "@/context/plan-context"
 
+import { addMonths } from "date-fns"
+
 import { XIcon } from "lucide-react"
 import { DefaultInput } from "@/components/default-input"
 import { DateInput } from "@/components/date-input"
@@ -64,12 +66,20 @@ export const AddNewPlanPage = () => {
             date={startDateValue}
             setDate={setStartDateValue}
             popupAlign="start"
+            setRange={{
+              fromDate: new Date(),
+              toDate: addMonths(new Date(), 12)
+            }}
           />
           <DateInput
             label="Fim"
             date={endDateValue}
             setDate={setEndDateValue}
             popupAlign="end"
+            setRange={{
+              fromDate: startDateValue,
+              toDate: addMonths(startDateValue, 12)
+            }}
           />
         </fieldset>
         {!isCycleDefined ?
@@ -126,16 +136,3 @@ export const AddNewPlanPage = () => {
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

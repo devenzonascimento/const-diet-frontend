@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom"
 import { usePlanContext } from "@/context/plan-context";
 import { useQuery } from "@tanstack/react-query";
 
+import { addMonths } from "date-fns";
+
 import { getPlan } from "@/services/http/plan/get-plan";
 
 import { Header } from "@/components/header";
@@ -33,18 +35,18 @@ export const EditPlanPage = () => {
     endDateValue,
     setEndDateValue,
     routinesCycle,
-    
+
     isCycleDefined,
     setIsCycleUndefined,
     setPlanData,
     isFormComplete,
     handleUpdatePlan,
-    createPlanMutation
+    updatePlanMutation
   } = usePlanContext()
 
-  const {data: planToLoad} = useQuery({
+  const { data: planToLoad } = useQuery({
     queryKey: [`plan-${planId}`],
-    queryFn: () => getPlan(planId),    
+    queryFn: () => getPlan(planId),
   })
 
   const loadPlanData = () => {
@@ -63,11 +65,11 @@ export const EditPlanPage = () => {
   useEffect(() => {
     loadPlanData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [planToLoad])  
+  }, [planToLoad])
 
   return (
     <>
-      {createPlanMutation.isPending && (
+      {updatePlanMutation.isPending && (
         <div className="z-10 fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
           <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
             <p className="text-2xl font-semibold">Aguarde...</p>
@@ -99,12 +101,20 @@ export const EditPlanPage = () => {
             date={startDateValue}
             setDate={setStartDateValue}
             popupAlign="start"
+            setRange={{
+              fromDate: new Date(),
+              toDate: addMonths(new Date(), 12)
+            }}            
           />
           <DateInput
             label="Fim"
             date={endDateValue}
             setDate={setEndDateValue}
             popupAlign="end"
+            setRange={{
+              fromDate: startDateValue,
+              toDate: addMonths(startDateValue, 12)
+            }}
           />
         </fieldset>
 
@@ -155,14 +165,10 @@ export const EditPlanPage = () => {
           type="submit"
           className="w-full flex gap-2 bg-sky-700 hover:bg-sky-500"
           onClick={() => handleUpdatePlan(planId)}
-        > 
+        >
           Salvar alterações
         </Button>
       </main>
     </>
   )
 }
-
-//TODO: CANSEI PORRA, EU ESTAVA TENTANDO FAZER A PAGINA DE EDIÇÃO E EU DECIDI DIVIDIR E DUAS EDIÇÕES, UMA EDIÇÃO COMPLETA REFAZENDO O PLANO, E UMA EDIÇÃO UNICA DIRETO NA PAGINA DE DETALHES QUE ALTERA UM DIA ESPECIFICO, POREM SURTEI, JA DEU, TENTEI CARREGADOR OS DADOS PRA ESSA PAGINA, POREM COMO ELE PEGA O CICLO COMPLETO, NÃO TEM COMO RETORNAR O ESTADO DE CRIAÇÃO PORQUE ELE NÃO ARMAZENA SE A REPETIÇÃO É DIARIA, SEMANAL .... GRRRRRRRRRRRRRRRRRRR FODASSE
-
-//TODO: SE LEMBRANDO DA IDEIA DA TELA DE DETALHES DE COLOCAR UM HEADER COM O NOME DO DIA, E EM BAIXO A DATA COMPLETO, COM BOTOES DE SETAS AOS LADOS PARA ALTERAR ENTRE OS DIAS DE FORMA INTUITIVA, E LEMBRA TAMBEM DE PARAR DE USAR O QUERYCLIENT E FAZER UMA REQUEST COM A MESMA KEY, PORQUE CASE O DADOS NÃO ESTEJA EM CACHE A APLICAÇÃO VAI CRACHAR

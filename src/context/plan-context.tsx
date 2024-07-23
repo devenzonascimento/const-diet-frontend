@@ -9,6 +9,7 @@ import { formatPlanData } from '@/functions/format-plan-data';
 import { Plan, Routine } from '@/types/types';
 import { useNavigate } from 'react-router-dom';
 import { updatePlan } from '@/services/http/plan/update-plan';
+import { deletePlan } from '@/services/http/plan/delete-plan';
 
 interface MutationStates {
   isPending: boolean;
@@ -36,9 +37,12 @@ interface PlanContextType {
   removeRoutine: (slot: number) => void
   handleCreatePlan: () => void;
   handleUpdatePlan: (planId: string) => void
+  handleDeletePlan: (planId: string) => void
+  
 
   createPlanMutation: MutationStates
   updatePlanMutation: MutationStates
+  deletePlanMutation: MutationStates
 }
 
 interface PlanState {
@@ -234,6 +238,25 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
 
     await updatePlanMutation.mutateAsync({ id: planId, ...planData })
 
+    navigate(`/detalhes-do-meu-plano/${planId}`)
+  }
+
+  const deletePlanMutation = useMutation({
+    mutationKey: ["delete-plan"],
+    mutationFn: deletePlan,
+    onSuccess(_, deletedPlanId) {
+      queryClient.setQueryData(
+        ["plansList"],
+        (plansList: Plan[]) => {
+          return plansList.filter(plan => plan.id !== deletedPlanId)
+        }
+      )
+    },
+  })
+
+  const handleDeletePlan = async (planId: string) => {
+    await deletePlanMutation.mutateAsync(planId)
+
     navigate("/meus-planos")
   }
 
@@ -258,10 +281,12 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
       removeRoutine: (slot: number) => dispatch({ type: 'REMOVE_ROUTINE', payload: slot }),
       handleCreatePlan,
       handleUpdatePlan,
+      handleDeletePlan,
 
 
       createPlanMutation,
       updatePlanMutation,
+      deletePlanMutation
     }}>
       {children}
     </PlanContext.Provider>

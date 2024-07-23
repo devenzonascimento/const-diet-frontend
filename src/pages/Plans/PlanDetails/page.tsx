@@ -6,6 +6,7 @@ import { getPlan } from "@/services/http/plan/get-plan";
 import { CalendarFoldIcon, GoalIcon } from "lucide-react"
 import { DayViewer } from "./components/day-viewer";
 import { Header } from "@/components/header";
+import { usePlanContext } from "@/context/plan-context";
 
 interface RouteParams {
   planId: string;
@@ -15,9 +16,11 @@ export const PlanDetailsPage = () => {
   const { planId } = useParams<keyof RouteParams>() as RouteParams;
   const navigate = useNavigate()
 
+  const { handleDeletePlan, deletePlanMutation } = usePlanContext()
+
   const { data: plan, isError } = useQuery({
     queryKey: [`plan-${planId}`],
-    queryFn: () => getPlan(planId),    
+    queryFn: () => getPlan(planId),
   })
 
   if (isError) {
@@ -29,13 +32,20 @@ export const PlanDetailsPage = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col gap-4 bg-slate-100">
+    <>
+      {deletePlanMutation.isPending && (
+        <div className="z-10 fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
+          <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">
+            <p className="text-2xl font-semibold">Aguarde...</p>
+          </div>
+        </div>
+      )}
       <Header
         title="Detalhes do plano"
         leftButtonNavigateTo="/meus-planos"
         isRightButtonOptions
         onEditOptionClick={() => navigate(`/editar-plano/${planId}`)}
-        onDeleteOptionClick={() => { }}
+        onDeleteOptionClick={() => handleDeletePlan(planId)}
       />
       <main className="flex flex-col justify-between items-center gap-4 pb-6 px-4">
         <div className="w-full flex items-center bg-sky-800 border border-sky-800 rounded-md overflow-hidden">
@@ -57,7 +67,7 @@ export const PlanDetailsPage = () => {
 
         <DayViewer plan={plan} />
       </main>
-    </div>
+    </>
   )
 }
 

@@ -20,6 +20,7 @@ import { MyPlansPage } from "@/pages/Plans/MyPlans/page";
 import { PlanDetailsPage } from "@/pages/Plans/PlanDetails/page";
 import { AddNewPlanPage } from "@/pages/Plans/AddNewPlan/page";
 import { EditPlanPage } from "@/pages/Plans/EditPlan/page";
+import { DailyRoutinePage } from "@/pages/DailyRoutine/page";
 
 export const router = createBrowserRouter([
   {
@@ -99,6 +100,10 @@ export const router = createBrowserRouter([
       {
         path: "editar-plano/:planId",
         element: <EditPlanPage />
+      },
+      {
+        path: "meu-plano-diario",
+        element: <DailyRoutinePage />
       },
     ]
   },

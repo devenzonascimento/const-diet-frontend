@@ -3,23 +3,34 @@ import { Link } from "react-router-dom"
 import { ArrowLeftIcon, PlusCircleIcon, } from "lucide-react"
 import { DropdownMenu } from "./dropdown-menu";
 
-interface HeaderProps {
+type HeaderProps = {
   title: string;
-  leftButtonNavigateTo: string;
-  rightButtonNavigateTo?: string;
-  isRightButtonOptions?: boolean;
-  onEditOptionClick?: () => void;
-  onDeleteOptionClick?: () => void;
 }
+
+type LeftButtonProps =
+  | { leftButtonNavigateTo: string }
+  | { leftButtonNavigateTo?: never }
+
+
+type RightButtonProps =
+  | { rightButtonNavigateTo?: never; rightButtonOptions?: never; }
+  | { rightButtonNavigateTo: string; rightButtonOptions?: never; }
+  | {
+    rightButtonNavigateTo?: never;
+    rightButtonOptions: {
+      onEditOptionClick: () => void;
+      onDeleteOptionClick: () => void;
+    };
+  }
+
+
 
 export const Header = ({
   title,
   leftButtonNavigateTo,
   rightButtonNavigateTo,
-  isRightButtonOptions,
-  onEditOptionClick,
-  onDeleteOptionClick,
-}: HeaderProps) => {
+  rightButtonOptions
+}: HeaderProps & LeftButtonProps & RightButtonProps) => {
 
   return (
     <header className="relative flex justify-center items-center py-3 text-white bg-sky-800">
@@ -34,7 +45,7 @@ export const Header = ({
         )
       }
       <h1 className="text-xl font-semibold">{title}</h1>
-      {(rightButtonNavigateTo && !isRightButtonOptions) &&
+      {(rightButtonNavigateTo && !rightButtonOptions) &&
         (
           <Link
             to={rightButtonNavigateTo}
@@ -44,12 +55,12 @@ export const Header = ({
           </Link>
         )
       }
-      {(isRightButtonOptions && onEditOptionClick && onDeleteOptionClick) && (
+      {rightButtonOptions && (
         <DropdownMenu
           alertDialogTitle="Você tem certeza?"
           alertDialogDescription="Essa ação não pode ser desfeita. Isso excluirá permanentemente essa rotina da sua lista de rotinas."
-          onEditOptionClick={onEditOptionClick}
-          onDeleteOptionClick={onDeleteOptionClick}
+          onEditOptionClick={rightButtonOptions.onEditOptionClick}
+          onDeleteOptionClick={rightButtonOptions.onDeleteOptionClick}
         />
       )}
     </header>

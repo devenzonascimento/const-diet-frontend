@@ -72,7 +72,7 @@ export const EditRoutinePage = () => {
       )}
       <Header
         title="Editar rotina"
-        leftButtonNavigateTo="/minhas-rotinas"
+        leftButtonNavigateTo={`/detalhes-da-rotina/${routineId}`}
       />
       <main className="h-full flex flex-col items-center gap-4 px-4 pb-6 overflow-auto">
         <DefaultInput

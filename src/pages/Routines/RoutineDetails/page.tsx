@@ -51,9 +51,10 @@ export const RoutineDetailsPage = () => {
       <Header
         title="Detalhes da rotina"
         leftButtonNavigateTo="/minhas-rotinas"
-        isRightButtonOptions
-        onEditOptionClick={onEditOptionClick}
-        onDeleteOptionClick={() => handleDeleteRoutine(routineId)}
+        rightButtonOptions={{
+          onEditOptionClick,
+          onDeleteOptionClick: () => handleDeleteRoutine(routineId)
+        }}
       />
       <main className="flex flex-col justify-between items-center gap-4 pb-6 px-2">
         <section className="w-full flex flex-col items-center gap-2 bg-white border border-sky-800 rounded-xl overflow-hidden">

@@ -1,12 +1,14 @@
+import { sortTimes } from "@/functions/sort-times";
+
 import { FlameIcon, DropletIcon } from "lucide-react"
 import { StatsCard } from "@/components/stats-card"
 import { List } from "@/components/list";
 import { DailyMealItem } from "./daily-meal-item";
 
-import { DailyRoutine } from "@/types/types"
+import { DailyRoutineComplete } from "@/types/types"
 
 interface DailyRoutineItemProps {
-  routine: DailyRoutine;
+  routine: DailyRoutineComplete;
 }
 
 export const DailyRoutineItem = ({ routine }: DailyRoutineItemProps) => {
@@ -66,15 +68,7 @@ export const DailyRoutineItem = ({ routine }: DailyRoutineItemProps) => {
             Suas refeições
           </h2>
           <List
-            data={routine.meals.sort((a, b) => {
-              const [aHours, aMinutes] = a.time.split(':').map(Number);
-              const [bHours, bMinutes] = b.time.split(':').map(Number);
-
-              if (aHours === bHours) {
-                return aMinutes - bMinutes;
-              }
-              return aHours - bHours;
-            })}
+            data={routine.meals.sort(sortTimes)}
             renderItem={({ item }) => <DailyMealItem key={item.id} meal={item} />}
           />
         </section>

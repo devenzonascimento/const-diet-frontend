@@ -10,16 +10,21 @@ export const MealBasketItem = ({ routineMeal }: MealBasketItemProps) => {
 
   const { removeMeal } = useRoutineContext()
 
+  const { meal, time } = routineMeal
+
   return (
-    <li className="h-16 min-h-16 flex items-center justify-between gap-1.5 bg-white rounded-sm overflow-hidden shadow-lg">
-      <span className=" h-full flex items-center px-1.5 bg-sky-700 text-white font-semibold">
-        {routineMeal.time}
-      </span>
-      <span className="w-full text-sky-800 font-semibold break-words">
-        {routineMeal.meal.name}
-      </span>
-      <button onClick={() => removeMeal(routineMeal)} className="h-full px-2 bg-red-600 ">
-        <Trash2Icon className="text-white" />
+    <li className="flex justify-between  rounded-sm shadow-lg">
+      <div className="flex-1 py-1 px-2  bg-white border border-r-0 border-sky-800 rounded-l-lg">
+        <p className="font-semibold text-xl text-sky-950">
+          {time}
+        </p>
+        <h2 className="flex-1 text-sky-950">{meal.name}</h2>
+      </div>
+      <button
+        onClick={() => removeMeal(routineMeal)}
+        className="h-full px-2 bg-red-600 text-white rounded-r-md"
+      >
+        <Trash2Icon size={28} />
       </button>
     </li>
   )

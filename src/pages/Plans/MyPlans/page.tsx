@@ -28,7 +28,7 @@ export const MyPlansPage = () => {
         leftButtonNavigateTo="/"
         rightButtonNavigateTo="/novo-plano"
       />
-      <main className="flex flex-col justify-between items-center gap-4 px-4 pb-6">
+      <main className="w-full flex flex-col justify-between items-center gap-4 px-4 pb-6">
         <SearchInput
           placeholder="Buscar rotina"
           value={searchTerm}

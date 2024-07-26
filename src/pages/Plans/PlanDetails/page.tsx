@@ -48,7 +48,7 @@ export const PlanDetailsPage = () => {
           onDeleteOptionClick: () => handleDeletePlan(planId)
         }}
       />
-      <main className="flex flex-col justify-between items-center gap-4 pb-6 px-4">
+      <main className="w-full flex flex-col justify-between items-center gap-4 pb-6 px-4">
         <div className="w-full flex items-center bg-sky-800 border border-sky-800 rounded-md overflow-hidden">
           <span className="flex items-center justify-center px-2 rounded-l-sm">
             <CalendarFoldIcon size={24} className=" text-white" />

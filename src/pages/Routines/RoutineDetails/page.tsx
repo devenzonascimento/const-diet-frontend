@@ -40,7 +40,7 @@ export const RoutineDetailsPage = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col gap-2 bg-slate-100">
+    <div className="w-full flex-1 flex flex-col gap-2 bg-slate-100">
       {deleteRoutineStates.isPending && (
         <div className="z-10 fixed top-0 left-0 h-screen w-screen bg-black/70 flex items-center justify-center">
           <div className="h-40 w-60 bg-white flex items-center justify-center rounded-xl">

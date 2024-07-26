@@ -72,4 +72,10 @@
     border: 0px solid black;
     outline: none;
   }
+  #root {
+    min-height: 100dvh;
+    min-width: 100dvw;
+    display: flex;
+    flex-direction: column;
+  }
 }

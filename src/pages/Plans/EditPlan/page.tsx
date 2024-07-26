@@ -80,7 +80,7 @@ export const EditPlanPage = () => {
         title="Editar rotina"
         leftButtonNavigateTo={`/detalhes-do-meu-plano/${planId}`}
       />
-      <main className="flex flex-col justify-between items-center gap-4 px-4 pb-6">
+      <main className="w-full flex flex-col justify-between items-center gap-4 px-4 pb-6">
         <DefaultInput
           label="Dê um nome ao seu plano"
           placeholder="Ex: Projeto verão"

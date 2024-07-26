@@ -10,7 +10,7 @@ export const MyFoodsPage = () => {
         leftButtonNavigateTo="/"
         rightButtonNavigateTo="/novo-alimento"
       />
-      <main className="flex flex-col justify-center items-center gap-8 px-4 pb-6">
+      <main className="w-full flex flex-col justify-center items-center gap-8 px-4 pb-6">
         <FoodsList ItemComponent={FoodItem} />
       </main>
     </>

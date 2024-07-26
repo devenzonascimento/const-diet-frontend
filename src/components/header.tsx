@@ -33,7 +33,7 @@ export const Header = ({
 }: HeaderProps & LeftButtonProps & RightButtonProps) => {
 
   return (
-    <header className="relative flex justify-center items-center py-3 text-white bg-sky-800">
+    <header className="relative w-full flex justify-center items-center py-3 text-white bg-sky-800">
       {leftButtonNavigateTo &&
         (
           <Link

@@ -61,7 +61,7 @@ export const EditMealPage = () => {
         title="Editar refeição"
         leftButtonNavigateTo="/minhas-refeicoes"
       />
-      <main className="flex flex-col justify-center items-center gap-8 px-4 pb-6">
+      <main className="w-full flex flex-col justify-center items-center gap-8 px-4 pb-6">
         <div
           className="w-full min-h-40 flex flex-col items-center border-4 border-sky-700 rounded-md"
         >

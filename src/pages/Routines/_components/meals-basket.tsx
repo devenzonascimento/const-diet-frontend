@@ -38,7 +38,7 @@ export const MealsBasket = ({ meals, openCardToSelectMeals }: MealsBasketProps) 
         :
         (
           <div
-            className="h-full w-full flex justify-center items-center gap-2"
+            className="h-40 w-full flex justify-center items-center gap-2"
             onClick={openCardToSelectMeals}
           >
             <PlusCircle size={32} className="text-gray-500" />

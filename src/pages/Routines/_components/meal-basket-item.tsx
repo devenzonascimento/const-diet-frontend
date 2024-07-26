@@ -13,7 +13,7 @@ export const MealBasketItem = ({ routineMeal }: MealBasketItemProps) => {
   const { meal, time } = routineMeal
 
   return (
-    <li className="flex justify-between  rounded-sm shadow-lg">
+    <li className="flex justify-between rounded-sm shadow-lg">
       <div className="flex-1 py-1 px-2  bg-white border border-r-0 border-sky-800 rounded-l-lg">
         <p className="font-semibold text-xl text-sky-950">
           {time}
@@ -22,7 +22,7 @@ export const MealBasketItem = ({ routineMeal }: MealBasketItemProps) => {
       </div>
       <button
         onClick={() => removeMeal(routineMeal)}
-        className="h-full px-2 bg-red-600 text-white rounded-r-md"
+        className="px-2 bg-red-600 text-white rounded-r-md"
       >
         <Trash2Icon size={28} />
       </button>

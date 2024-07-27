@@ -2,7 +2,7 @@ import { api } from "@/services/api";
 
 import { DailyRoutineComplete, MealStatus } from "@/types/types";
 
-export class DailyRoutineService {
+class DailyRoutineService {
   async getDailyRoutine(): Promise<DailyRoutineComplete> {
     try {
       const userId = localStorage.getItem("userId");
@@ -34,3 +34,5 @@ export class DailyRoutineService {
     }
   }
 }
+
+export const dailyRoutineService = new DailyRoutineService()

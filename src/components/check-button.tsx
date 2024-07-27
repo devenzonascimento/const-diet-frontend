@@ -1,25 +1,25 @@
-import { Button } from "@/components/ui/button"
-import { Square, SquareCheckBig } from "lucide-react"
+import { SquareCheckBigIcon, SquareIcon } from "lucide-react"
+import { Button } from "./ui/button"
 
 interface CheckButtonProps {
   isCheck: boolean
-  toggleCheck: VoidFunction
+  onClick: VoidFunction
 }
 
-export const CheckButton = ({ isCheck, toggleCheck}: CheckButtonProps) => {
+export const CheckButton = ({ isCheck, onClick }: CheckButtonProps) => {
   return (
     <Button type="submit" className="flex gap-2 bg-sky-700 hover:bg-sky-500"
-      onClick={toggleCheck}
+      onClick={onClick}
     >
       {isCheck ?
         (
           <>
-            <SquareCheckBig />
+            <SquareCheckBigIcon />
             <p>Refeição concluída</p>
           </>
         ) : (
           <>
-            <Square />
+            <SquareIcon />
             <p>Marcar como concluída</p>
           </>
         )

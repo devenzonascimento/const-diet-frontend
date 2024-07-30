@@ -1,6 +1,6 @@
 import { useModalState } from "@/hooks/use-modal-state";
 
-import { format } from "date-fns"
+import { compareAsc, format } from "date-fns"
 import { ptBR } from "date-fns/locale";
 
 import {
@@ -8,37 +8,79 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { CalendarSearchIcon } from "lucide-react"
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 
 import { SelectSingleEventHandler } from "react-day-picker";
 
 interface SelectDayViewerProps {
-  date: Date | undefined
+  date: Date
   setDate: (newDate: Date) => void
-  setRange?: { fromDate: Date, toDate: Date }
+  setRange: { fromDate: Date, toDate: Date }
 }
 
 export const SelectDayViewer = ({ date, setDate, setRange }: SelectDayViewerProps) => {
+
   const { isOpen, toggleModal } = useModalState()
+
+  const handleIncreaseDate = () => {
+    if (!date) {
+      setDate(setRange?.fromDate)
+      return
+    }
+
+    const newDate = new Date(date)
+    newDate.setDate(newDate.getDate() + 1)
+    setDate(newDate)
+  }
+
+  const handleDecreaseDate = () => {
+    if (!date) {
+      setDate(setRange?.toDate)
+      return
+    }
+
+    const newDate = new Date(date)
+    newDate.setDate(newDate.getDate() - 1)
+    setDate(newDate)
+  }
+
+  const reachedMinDate = compareAsc(new Date(date), setRange.fromDate) === 0
+  const reachedMaxDate = compareAsc(new Date(date), setRange.toDate) === 0
+
   return (
     <Popover open={isOpen}>
       <PopoverTrigger asChild>
-        <button
-          onClick={toggleModal}
-          className="w-full flex items-center bg-sky-800 border border-sky-800 rounded-md overflow-hidden"
-        >
-          <span className="flex items-center justify-center px-2 rounded-l-sm">
-            <CalendarSearchIcon size={24} className=" text-white" />
-          </span>
-          <span className="w-full p-2 text-start text-lg font-medium text-sky-950 bg-white">
-            {date ?
-              format(date, "EEE, dd 'de' LLL 'de' y", { locale: ptBR })
+        <div className="w-full h-16 flex items-center justify-between bg-sky-800 rounded-xl">
+          <button
+            onClick={handleDecreaseDate}
+            disabled={reachedMinDate}
+            className={`${reachedMinDate ? "text-white/30" : "text-white"} h-full px-3 flex items-center justify-center`}
+          >
+            <ChevronLeftIcon size={32} />
+          </button>
+          <button
+            onClick={toggleModal}
+            className="flex flex-col items-center p-2 text-lg text-white font-semibold"
+          >
+            {date ? (
+              <>
+                <span className="capitalize">{format(date, "EEEE", { locale: ptBR })}</span>
+                <span>{format(date, "dd 'de' LLLL 'de' y", { locale: ptBR })}</span>
+              </>
+            )
               :
               "Pick a date"
             }
-          </span>
-        </button>
+          </button>
+          <button
+            onClick={handleIncreaseDate}
+            disabled={reachedMaxDate}
+            className={`${reachedMaxDate ? "text-white/30" : "text-white"} h-full px-3 flex items-center justify-center`}
+          >
+            <ChevronRightIcon size={32} />
+          </button>
+        </div>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align={"center"}>
         <Calendar

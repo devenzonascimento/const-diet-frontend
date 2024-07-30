@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
-import { getPlansList } from "@/services/http/plan/get-plans-list";
+import { planService } from "@/services/http/plan/plan-service";
 
 import { SearchInput } from "@/components/search-input";
 import { List } from "@/components/list";
@@ -13,7 +13,7 @@ export const MyPlansPage = () => {
 
   const { data } = useQuery({
     queryKey: ["plansList"],
-    queryFn: getPlansList,
+    queryFn: planService.getAll,
     refetchOnMount: false,
   })
 

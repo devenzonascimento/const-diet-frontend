@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import { addMonths } from "date-fns";
 
-import { getPlan } from "@/services/http/plan/get-plan";
+import { planService } from "@/services/http/plan/plan-service";
 
 import { Header } from "@/components/header";
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,6 @@ export const EditPlanPage = () => {
     endDateValue,
     setEndDateValue,
     routinesCycle,
-
     isCycleDefined,
     setIsCycleUndefined,
     setPlanData,
@@ -46,7 +45,7 @@ export const EditPlanPage = () => {
 
   const { data: planToLoad } = useQuery({
     queryKey: [`plan-${planId}`],
-    queryFn: () => getPlan(planId),
+    queryFn: () => planService.getById(planId),
   })
 
   const loadPlanData = () => {
@@ -104,7 +103,7 @@ export const EditPlanPage = () => {
             setRange={{
               fromDate: new Date(),
               toDate: addMonths(new Date(), 12)
-            }}            
+            }}
           />
           <DateInput
             label="Fim"

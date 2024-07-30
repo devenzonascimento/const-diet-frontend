@@ -1,15 +1,13 @@
 import { createContext, ReactNode, useContext, useEffect, useReducer, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
-import { createPlan } from '@/services/http/plan/create-plan';
+import { planService } from '@/services/http/plan/plan-service';
 
 import { addDays, addMonths, compareAsc } from 'date-fns';
 import { formatPlanData } from '@/functions/format-plan-data';
 
 import { Plan, Routine } from '@/types/types';
-import { useNavigate } from 'react-router-dom';
-import { updatePlan } from '@/services/http/plan/update-plan';
-import { deletePlan } from '@/services/http/plan/delete-plan';
 
 interface MutationStates {
   isPending: boolean;
@@ -132,7 +130,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
 
   const createPlanMutation = useMutation({
     mutationKey: ["create-plan"],
-    mutationFn: createPlan,
+    mutationFn: planService.create,
     onSuccess(createdPlan) {
       queryClient.setQueryData(
         ["plansList"],
@@ -195,7 +193,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
   
   const updatePlanMutation = useMutation({
     mutationKey: ["update-plan"],
-    mutationFn: updatePlan,
+    mutationFn: planService.update,
     onSuccess(updatedPlan) {
       queryClient.setQueryData(
         ["plansList"],
@@ -243,7 +241,7 @@ export const PlanProvider = ({ children }: { children: ReactNode }) => {
 
   const deletePlanMutation = useMutation({
     mutationKey: ["delete-plan"],
-    mutationFn: deletePlan,
+    mutationFn: planService.delete,
     onSuccess(_, deletedPlanId) {
       queryClient.setQueryData(
         ["plansList"],

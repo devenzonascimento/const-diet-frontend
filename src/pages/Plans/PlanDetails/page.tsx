@@ -1,12 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
+import { usePlanContext } from "@/context/plan-context";
 import { useNavigate, useParams } from "react-router-dom"
+import { useQuery } from "@tanstack/react-query";
 
-import { getPlan } from "@/services/http/plan/get-plan";
+import { planService } from "@/services/http/plan/plan-service";
 
 import { CalendarFoldIcon, GoalIcon } from "lucide-react"
 import { DayViewer } from "./components/day-viewer";
 import { Header } from "@/components/header";
-import { usePlanContext } from "@/context/plan-context";
 
 interface RouteParams {
   planId: string;
@@ -20,7 +20,7 @@ export const PlanDetailsPage = () => {
 
   const { data: plan, isError } = useQuery({
     queryKey: [`plan-${planId}`],
-    queryFn: () => getPlan(planId),
+    queryFn: () => planService.getById(planId),
   })
 
   if (isError) {
@@ -71,4 +71,3 @@ export const PlanDetailsPage = () => {
     </>
   )
 }
-

@@ -9,6 +9,9 @@ interface PlanData {
 export function formatPlanData(planData: PlanData) {
   const { cycleRoutineIds, ...plan } = planData
 
+  plan.startDate.setHours(0,0,0,0)
+  plan.endDate.setHours(0,0,0,0)
+
   const dates = generateDates(planData.startDate, planData.endDate);
 
   const routines = assignRoutinesToDates(dates, cycleRoutineIds);

@@ -82,6 +82,34 @@ class PlanService {
       return [] as Plan[];
     }
   }
+
+  async setActivePlan(planId: string): Promise<Plan> {
+    try {
+      const userId = localStorage.getItem("userId");
+  
+      const { data } = await api.patch(`/users/${userId}/plans/${planId}/active`);
+  
+      return data;
+    } catch (error) {
+      console.log(error);
+  
+      return {} as Plan;
+    }
+  }
+
+  async getActivePlan(): Promise<Plan> {
+    try {
+      const userId = localStorage.getItem("userId");
+  
+      const { data } = await api.get(`/users/${userId}/plans/active`);
+  
+      return data;
+    } catch (error) {
+      console.log(error);
+  
+      return {} as Plan;
+    }
+  }
 }
 
 export const planService = new PlanService();

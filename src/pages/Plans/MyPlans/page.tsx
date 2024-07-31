@@ -36,7 +36,7 @@ export const MyPlansPage = () => {
         />
         <List
           data={filteredList || []}
-          renderItem={({ item }) => <PlanItem key={item.id} plan={item} />}
+          renderItem={({ item }) => <PlanItem key={item.id} plan={item} hasRedirectButton/>}
         />
       </main>
     </>

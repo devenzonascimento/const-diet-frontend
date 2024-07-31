@@ -8,9 +8,11 @@ import { useNavigate } from "react-router-dom"
 
 interface PlaItemProps {
   plan: Plan
+  hasRedirectButton?: boolean
+  onClick?: () => void;
 }
 
-export const PlanItem = ({ plan }: PlaItemProps) => {
+export const PlanItem = ({ plan, hasRedirectButton, onClick }: PlaItemProps) => {
 
   const navigate = useNavigate()
 
@@ -20,14 +22,17 @@ export const PlanItem = ({ plan }: PlaItemProps) => {
 
   return (
     <li
+      onClick={onClick}
       className="relative min-h-42 w-full flex flex-col gap-2 p-2 bg-white border-2 border-sky-800 rounded-xl shadow-xl"
     >
-      <button
-        onClick={navigateToDetailsPage}
-        className="absolute top-2 right-2 p-1 bg-sky-900 rounded-md"
-      >
-        <SquareArrowOutUpRightIcon className="text-white" />
-      </button>
+      {hasRedirectButton && (
+        <button
+          onClick={navigateToDetailsPage}
+          className="absolute top-2 right-2 p-1 bg-sky-900 rounded-md"
+        >
+          <SquareArrowOutUpRightIcon className="text-white" />
+        </button>
+      )}
       <h2 className="text-lg font-semibold text-sky-950 truncate">
         {plan.name}
       </h2>

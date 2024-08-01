@@ -29,13 +29,13 @@ export const LoginPage = () => {
   const { mutateAsync: login } = useMutation({
     mutationFn: accountService.login,
     onSuccess(isLogged) {
-      if (isLogged) {
-        navigate("/")
+      if (!isLogged) {
+        alert("Os seus dados estão incorretos!")
+        return
       }
+
+      navigate("/")
     },
-    onError() {
-      alert("Os seus dados estão incorretos!")
-    }
   })
 
   return (

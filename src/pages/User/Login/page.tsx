@@ -1,26 +1,42 @@
-import { useLoginFormValidation, LoginSchema } from "@/hooks/use-login-form-validation";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
 
-import { userLogin } from "@/services/http/login/userLogin";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { accountService } from "@/services/http/account/account-service";
 
 import { AppleIcon } from "lucide-react";
 import { DefaultInput } from "@/components/default-input";
+
+
+const loginSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8).max(20),
+});
+
+export type LoginSchema = z.infer<typeof loginSchema>;
 
 export const LoginPage = () => {
 
   const navigate = useNavigate()
 
-  const { register, handleSubmit, errors } = useLoginFormValidation()
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
+  });
 
-  const handleLogin = async (data: LoginSchema) => {
-    const isLogged = await userLogin(data)
-
-    if (isLogged) {
-      navigate("/")
-    } else {
+  const { mutateAsync: login } = useMutation({
+    mutationFn: accountService.login,
+    onSuccess(isLogged) {
+      if (isLogged) {
+        navigate("/")
+      }
+    },
+    onError() {
       alert("Os seus dados estão incorretos!")
     }
-  }
+  })
 
   return (
     <div
@@ -33,7 +49,7 @@ export const LoginPage = () => {
         <h1 className="text-4xl font-semibold text-white">Seja Bem-vindo!</h1>
       </header>
       <form
-        onSubmit={handleSubmit(handleLogin)}
+        onSubmit={handleSubmit(data => login(data))}
         className="h-4/6 w-full p-8 flex flex-col gap-8 items-center bg-white rounded-t-[3.5rem]"
       >
         <h2 className="text-3xl font-semibold text-center text-sky-950">
@@ -54,8 +70,10 @@ export const LoginPage = () => {
           errorMessage={errors.password ? "A senha precisa ter no mínimo 8 caracteres." : ""}
         />
         <p className="font-medium text-sky-900">
-          <span>Não tem cadastro? </span>
-          <a className="underline underline-offset-2">registre-se agora!</a>
+          <span>Não possui uma conta? </span>
+          <Link to="/cadastrar-conta" className="underline underline-offset-2">
+            cadastre-se!
+          </Link>
         </p>
         <button
           type="submit"

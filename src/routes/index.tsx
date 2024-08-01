@@ -3,7 +3,8 @@ import { createBrowserRouter } from "react-router-dom";
 import { PrivateRoute } from "./private-route";
 import { AppProvider } from "@/context";
 
-import { LoginPage } from "@/pages/Login/page";
+import { RegisterPage } from "@/pages/User/Register/page";
+import { LoginPage } from "@/pages/User/Login/page";
 import { App } from "@/App";
 import { HomePage } from "@/pages/Home/page";
 import { MyFoodsPage } from "@/pages/Foods/MyFoods/page";
@@ -23,6 +24,14 @@ import { EditPlanPage } from "@/pages/Plans/EditPlan/page";
 import { DailyRoutinePage } from "@/pages/DailyRoutine/page";
 
 export const router = createBrowserRouter([
+  {
+    path: "cadastrar-conta",
+    element: (
+      <AppProvider>
+        <RegisterPage />
+      </AppProvider>
+    )
+  },
   {
     path: "login",
     element: (

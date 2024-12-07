@@ -1,7 +1,7 @@
-import { CreateFood } from "@/types/types";
+import { CreateFood } from '@/types/types'
 
 export const convertToBase100 = (foodData: CreateFood) => {
-  const multiplier = 100 / foodData.quantity;
+  const multiplier = 100 / foodData.quantity
 
   return {
     calories: foodData.calories * multiplier,
@@ -10,5 +10,5 @@ export const convertToBase100 = (foodData: CreateFood) => {
     fats: foodData.fats * multiplier,
     sodium: foodData.sodium * multiplier,
     fibers: foodData.fibers * multiplier,
-  };
-};
+  }
+}

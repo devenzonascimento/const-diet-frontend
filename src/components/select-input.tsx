@@ -1,21 +1,24 @@
-import { SelectHTMLAttributes, forwardRef } from "react";
+import React, { SelectHTMLAttributes, forwardRef } from 'react'
 
 interface Props {
-  label: string;
+  label: string
   options: {
-    text: string;
-    value: string | number;
+    text: string
+    value: string | number
   }[]
-  errorMessage?: string;
+  errorMessage?: string
 }
 
 type SelectInputProps = SelectHTMLAttributes<HTMLSelectElement> & Props
 
 export const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
-  ({ label = "", options, errorMessage = "", ...props }, ref) => {
+  ({ label = '', options, errorMessage = '', ...props }, ref) => {
     return (
       <fieldset className="w-full flex flex-col gap-2">
-        <label className="font-semibold text-lg text-sky-950" htmlFor={props.id}>
+        <label
+          className="font-semibold text-lg text-sky-950"
+          htmlFor={props.id}
+        >
           {label}
         </label>
         <select
@@ -23,12 +26,14 @@ export const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
           ref={ref}
           {...props}
         >
-          {options.map((option) => (
-            <option key={option.value} value={option.value} >{option.text}</option>
+          {options.map(option => (
+            <option key={option.value} value={option.value}>
+              {option.text}
+            </option>
           ))}
         </select>
         <p className="text-sm text-red-500 ">{errorMessage}</p>
       </fieldset>
-    );
-  }
-);
+    )
+  },
+)

@@ -1,6 +1,8 @@
-import { FoodsList } from "./components/foods-list";
-import { FoodItem } from "./components/food-item";
-import { Header } from "@/components/header";
+import React from 'react'
+
+import { FoodsList } from './components/foods-list'
+import { FoodItem } from './components/food-item'
+import { Header } from '@/components/header'
 
 export const MyFoodsPage = () => {
   return (
@@ -14,5 +16,5 @@ export const MyFoodsPage = () => {
         <FoodsList ItemComponent={FoodItem} />
       </main>
     </>
-  );
-};
+  )
+}

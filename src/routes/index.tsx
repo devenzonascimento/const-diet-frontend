@@ -7,7 +7,7 @@ import { AppProvider } from '@/context'
 import { RegisterPage } from '@/pages/User/Register/page'
 import { LoginPage } from '@/pages/User/Login/page'
 import { HomePage } from '@/pages/Home/page'
-import { MyFoodsPage } from '@/pages/Foods/MyFoods/page'
+import { MyFoodsPage } from '@/pages/Foods/MyFoods/my-foods-view-model'
 import { AddFoodPage } from '@/pages/Foods/AddFood/add-food-view-model'
 import { EditFoodPage } from '@/pages/Foods/EditFood/page'
 import { MyMealsPage } from '@/pages/Meals/MyMeals/page'
@@ -22,6 +22,7 @@ import { PlanDetailsPage } from '@/pages/Plans/PlanDetails/page'
 import { AddNewPlanPage } from '@/pages/Plans/AddNewPlan/page'
 import { EditPlanPage } from '@/pages/Plans/EditPlan/page'
 import { DailyRoutinePage } from '@/pages/DailyRoutine/page'
+import { FoodDetailsPage } from '@/pages/Foods/FoodDetails/food-details-view-model'
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: 'meus-alimentos',
         element: <MyFoodsPage />,
+      },
+      {
+        path: 'detalhes-do-alimento/:foodId',
+        element: <FoodDetailsPage />,
       },
       {
         path: 'novo-alimento',

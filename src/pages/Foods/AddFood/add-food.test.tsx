@@ -14,7 +14,7 @@ function MakeSut() {
   return <AddFoodView {...props} />
 }
 
-describe('useAddFoodModel', () => {
+describe('<AddFoodPage />', () => {
   beforeEach(() => {
     mockAddFoodService.mockClear()
   })

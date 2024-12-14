@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+@theme {
+  --background-color-primary: #f1f5f9;
+  --background-color-secondary: #e2e8f0;
+
+  --text-color-primary: #0f172a;
+  --text-color-secondary: #475569;
+
+  --border-color-border: #cbd5e1;
+
+  --color-highlight: #8b5cf6;
+  --color-hover: #7c3aed;
+  --color-focus: #c4b5fd;
+  --color-disabled: #64748b;
+  --color-error: #f43f5e;
+  --color-success: #10b981;
+}
+
+#root {
+    min-height: 100dvh;
+    min-width: 100dvw;
+    display: flex;
+    flex-direction: column;
+}

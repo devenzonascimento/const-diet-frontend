@@ -1,12 +1,11 @@
 import React from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Outlet } from 'react-router-dom'
 
 import { PrivateRoute } from './private-route'
 import { AppProvider } from '@/context'
 
 import { RegisterPage } from '@/pages/User/Register/page'
 import { LoginPage } from '@/pages/User/Login/page'
-import { App } from '@/App'
 import { HomePage } from '@/pages/Home/page'
 import { MyFoodsPage } from '@/pages/Foods/MyFoods/page'
 import { AddFoodPage } from '@/pages/Foods/AddFood/add-food-view-model'
@@ -46,7 +45,7 @@ export const router = createBrowserRouter([
     element: (
       <AppProvider>
         <PrivateRoute>
-          <App />
+          <Outlet />
         </PrivateRoute>
       </AppProvider>
     ),

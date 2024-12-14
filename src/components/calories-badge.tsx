@@ -1,19 +1,20 @@
-import { cn } from "@/lib/utils";
-import { Flame } from "lucide-react";
+import React from 'react'
+import { cn } from '@/lib/utils'
+import { FlameIcon } from 'lucide-react'
 
 interface CaloriesBadgeProps {
-  calories: number;
-  className?: string;
+  calories: number
+  className?: string
 }
 
 export const CaloriesBadge = ({ className, calories }: CaloriesBadgeProps) => {
   return (
-    <div className={cn("flex items-center gap-0.5", className)}>
-      <Flame className="text-sky-700 fill-sky-200" size={18} />
-      <p className="pt-1 text-gray-800 font-semibold">
+    <div className={cn('flex items-center gap-0.5', className)}>
+      <FlameIcon className="size-4.5 text-white fill-violet-300" />
+
+      <p className="mt-0.5 text-sm leading-4.5 text-white font-semibold">
         {calories.toFixed()}
-        <span className="text-xs">kcal</span>
       </p>
     </div>
-  );
-};
+  )
+}

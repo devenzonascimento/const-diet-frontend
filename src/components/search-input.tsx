@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { SearchIcon, XIcon } from 'lucide-react'
 
@@ -9,15 +9,12 @@ type SearchInputProps = {
   onClear?: () => void
 }
 
-export const SearchInput = ({ placeholder, value, onChange, onClear }: SearchInputProps) => {
-  const [showClearButton, setShowClearButton] = useState(false)
-
-  useEffect(() => {
-    const isInputValueEmpty = value === ''
-
-    setShowClearButton(!isInputValueEmpty)
-  }, [value])
-
+export const SearchInput = ({
+  placeholder,
+  value,
+  onChange,
+  onClear,
+}: SearchInputProps) => {
   return (
     <fieldset className="w-full flex items-center gap-2 p-2 bg-zinc-700 rounded-xl border-2 border-violet-400">
       <SearchIcon className="size-6 text-white" />
@@ -30,7 +27,7 @@ export const SearchInput = ({ placeholder, value, onChange, onClear }: SearchInp
         onChange={onChange}
       />
 
-      {showClearButton && (
+      {value !== '' && (
         <button type="button" onClick={onClear}>
           <XIcon className="size-6 text-white" />
         </button>

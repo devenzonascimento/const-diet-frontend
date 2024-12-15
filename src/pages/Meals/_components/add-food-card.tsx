@@ -1,5 +1,5 @@
 import { ModalBackdrop } from "@/components/modal-backdrop"
-import { FoodsList } from "@/pages/Foods/MyFoods/components/foods-list"
+// import { FoodsList } from "@/pages/Foods/MyFoods/components/foods-list"
 import { FoodItem } from "./food-item"
 
 import { X } from "lucide-react"
@@ -16,7 +16,7 @@ export const AddFoodCard = ({ onClose }: AddFoodCardProps) => {
       >
         <X size={32} className="absolute top-2 right-2" onClick={onClose} />
         <h1 className="text-2xl font-semibold text-center mt-4">Escolha um alimento</h1>
-        <FoodsList ItemComponent={FoodItem} />
+        {/* <FoodsList ItemComponent={FoodItem} /> */}
       </div>
     </ModalBackdrop>
   )

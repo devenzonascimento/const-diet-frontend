@@ -8,11 +8,11 @@ import { foodFormSchema, FoodFormSchema } from '@/schemas/food-form-schema'
 import { Food, FoodWithQuantity } from '@/types/food-types'
 import { QueryKeys } from '@/types/query-keys'
 
-type useAddFoodModelProps = {
+type UseAddFoodModelProps = {
   addFoodService: IAddFoodService
 }
 
-export function useAddFoodModel({ addFoodService }: useAddFoodModelProps) {
+export function useAddFoodModel({ addFoodService }: UseAddFoodModelProps) {
   const navigate = useNavigate()
 
   const {

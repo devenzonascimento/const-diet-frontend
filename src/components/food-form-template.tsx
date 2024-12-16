@@ -19,12 +19,13 @@ export const FoodFormTemplate = ({
 }: FoodFormTemplateProps) => {
   return (
     <form
-      className="w-full flex flex-col gap-4 px-4 pb-4"
+      className="w-full flex flex-col gap-4 p-4 overflow-y-auto overflow-x-hidden"
       onSubmit={handleSubmit}
-      data-testid="form-add-food"
+      data-testid="food-form"
     >
       <DefaultInput
         id="foodName-input"
+        required
         label="Nome do alimento"
         errorMessage={errors.name?.message}
         {...register('name')}
@@ -81,7 +82,10 @@ export const FoodFormTemplate = ({
         {...register('sodium')}
         data-testid="sodium-input"
       />
-      <Button type="submit" className="w-full bg-sky-700 hover:bg-sky-500">
+      <Button
+        type="submit"
+        className="w-full text-white bg-violet-600 hover:bg-violet-500"
+      >
         Salvar alimento
       </Button>
     </form>

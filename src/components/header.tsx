@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 
 import { ArrowLeftIcon, PlusCircleIcon } from 'lucide-react'
 import { DropdownMenu } from './dropdown-menu'
+import { cn } from '@/lib/utils'
 
 type HeaderProps = {
   title: string
+  className?: string
 }
 
 type LeftButtonProps =
@@ -28,9 +30,15 @@ export const Header = ({
   leftButtonNavigateTo,
   rightButtonNavigateTo,
   rightButtonOptions,
+  className,
 }: HeaderProps & LeftButtonProps & RightButtonProps) => {
   return (
-    <header className="relative h-14 w-full flex justify-center items-center py-3 text-white bg-violet-500">
+    <header
+      className={cn(
+        'relative h-14 w-full flex justify-center items-center py-3 text-white bg-violet-500',
+        className,
+      )}
+    >
       {leftButtonNavigateTo && (
         <Link
           to={leftButtonNavigateTo}

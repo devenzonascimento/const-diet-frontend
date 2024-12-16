@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 
@@ -6,12 +7,12 @@ export function FoodDetailsLoadingPage() {
   return (
     <div className="flex-1 flex flex-col gap-28 bg-linear-to-b/oklch bg-highlight to-violet-400 to-20%">
       <header className="w-full flex items-center justify-between">
-        <button
-          type="button"
+        <Link
+          to="/meus-alimentos"
           className="size-14 flex items-center justify-center p-3"
         >
           <ArrowLeft className="size-full text-white shrink-0" />
-        </button>
+        </Link>
       </header>
 
       <div className="flex-1 flex flex-col items-center gap-4 p-4  bg-zinc-900 rounded-t-[60px]">

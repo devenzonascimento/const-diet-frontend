@@ -1,21 +1,37 @@
-import { InputHTMLAttributes, forwardRef } from "react";
+import React from 'react'
 
-import { Search } from "lucide-react";
+import { SearchIcon, XIcon } from 'lucide-react'
 
-type SearchInputProps = InputHTMLAttributes<HTMLInputElement>
+type SearchInputProps = {
+  value: string
+  placeholder: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onClear?: () => void
+}
 
-export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ ...props }, ref) => {
-    return (
-      <fieldset className="relative w-full flex gap-3 px-3 py-2 bg-white rounded-xl border-2 border-sky-800" >
-        <Search className=" text-neutral-500" size={28} />
-        <input
-          className=" h-full w-full text-lg bg-transparent placeholder:text-neutral-400"
-          type="text"
-          ref={ref}
-          {...props}
-        />
-      </fieldset>
-    );
-  }
-);
+export const SearchInput = ({
+  placeholder,
+  value,
+  onChange,
+  onClear,
+}: SearchInputProps) => {
+  return (
+    <fieldset className="w-full flex items-center gap-2 p-2 bg-zinc-700 rounded-xl border-2 border-violet-400">
+      <SearchIcon className="size-6 text-white" />
+
+      <input
+        type="text"
+        placeholder={placeholder}
+        className="tracking-wide flex-1 text-lg text-white placeholder:text-zinc-400 bg-transparent outline-none"
+        value={value}
+        onChange={onChange}
+      />
+
+      {value !== '' && (
+        <button type="button" onClick={onClear}>
+          <XIcon className="size-6 text-white" />
+        </button>
+      )}
+    </fieldset>
+  )
+}

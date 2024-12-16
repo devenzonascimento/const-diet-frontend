@@ -11,7 +11,7 @@ export function convertFoodMacronutrientsToBase(
 ): FoodWithQuantity {
   const { id, name, unit, quantity, ...dataToConvert } = food
 
-  if (quantity === baseToConvert) {
+  if (quantity === baseToConvert || quantity <= 0) {
     return food
   }
 

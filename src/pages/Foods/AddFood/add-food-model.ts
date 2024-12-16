@@ -1,37 +1,34 @@
-import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { IAddFoodService } from '@/services/http/food/food-service'
-import { addFoodSchema, AddFoodSchema } from './add-food-schema'
-import { Food } from '@/types/types'
-import { QueryKeys } from '@/types/query-keys'
 import { convertFoodMacronutrientsToBase } from '@/functions/convert-food-macronutrients-to-base'
+import { foodFormSchema, FoodFormSchema } from '@/schemas/food-form-schema'
 import { FoodWithQuantity } from '@/types/food-types'
+import { QueryKeys } from '@/types/query-keys'
 
-type useAddFoodModelProps = {
+type UseAddFoodModelProps = {
   addFoodService: IAddFoodService
 }
 
-export function useAddFoodModel({ addFoodService }: useAddFoodModelProps) {
+export function useAddFoodModel({ addFoodService }: UseAddFoodModelProps) {
   const navigate = useNavigate()
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AddFoodSchema>({
-    resolver: zodResolver(addFoodSchema),
+  } = useForm<FoodFormSchema>({
+    resolver: zodResolver(foodFormSchema),
   })
 
   const queryClient = useQueryClient()
 
   const { mutateAsync } = useMutation({
     mutationFn: addFoodService,
-    onSuccess(newFood) {
-      queryClient.setQueryData([QueryKeys.FoodList], (foodList: Food[]) => {
-        return [...foodList, newFood]
-      })
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.FoodList] })
 
       navigate('/meus-alimentos')
     },
@@ -40,7 +37,7 @@ export function useAddFoodModel({ addFoodService }: useAddFoodModelProps) {
     },
   })
 
-  const onSubmit = (formData: AddFoodSchema) => {
+  const onSubmit = (formData: FoodFormSchema) => {
     const food: FoodWithQuantity = {
       id: 0,
       ...formData,
@@ -60,10 +57,10 @@ export function useAddFoodModel({ addFoodService }: useAddFoodModelProps) {
       sodium: parsedFood.sodium,
     })
   }
-  console.log(errors)
+
   return {
-    handleSubmit,
-    onSubmit,
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) =>
+      handleSubmit(onSubmit)(e),
     register,
     errors,
   }

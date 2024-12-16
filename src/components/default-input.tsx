@@ -8,23 +8,29 @@ type Props = {
 type DefaultInputProps = InputHTMLAttributes<HTMLInputElement> & Props
 
 export const DefaultInput = forwardRef<HTMLInputElement, DefaultInputProps>(
-  ({ label = '', type = 'text', errorMessage = '', ...props }, ref) => {
+  (
+    { label = '', type = 'text', errorMessage = '', required, ...props },
+    ref,
+  ) => {
     return (
       <fieldset className="w-full flex flex-col">
-        <label
-          className="font-semibold text-lg text-sky-950 pb-2"
-          htmlFor={props.id}
-        >
-          {label}
-        </label>
+        <div className="">
+          <label className="pb-1 text-lg text-white" htmlFor={props.id}>
+            {label}
+          </label>
+
+          {required && <span className="pl-0.5 text-error">*</span>}
+        </div>
+
         <input
-          className="w-full text-lg py-1 px-2 border border-sky-900 rounded-md placeholder:text-gray-400"
+          className="w-full py-1 px-2 tracking-wide text-lg text-white placeholder:text-zinc-600 border border-violet-300 focus:border-violet-400 rounded-md outline-none"
           type={type}
           ref={ref}
           {...props}
         />
+
         {errorMessage && (
-          <span className="text-sm text-red-500" data-testid="error-message">
+          <span className="text-sm text-error" data-testid="error-message">
             {errorMessage}
           </span>
         )}

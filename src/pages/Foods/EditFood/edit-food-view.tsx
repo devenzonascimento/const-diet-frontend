@@ -1,23 +1,34 @@
 import React from 'react'
-import { useAddFoodModel } from './add-food-model'
+import { useEditFoodModel } from './edit-food-model'
+import { EditFoodLoadingPage } from './components/loading-page'
+import { FoodNotFoundPage } from '../not-found-page'
 import { Header } from '@/components/header'
 import { FoodFormTemplate } from '@/components/food-form-template'
 
-type AddFoodViewProps = ReturnType<typeof useAddFoodModel>
+type EditFoodViewProps = ReturnType<typeof useEditFoodModel>
 
-export const AddFoodView = ({
+export function EditFoodView({
   handleSubmit,
   register,
   errors,
-}: AddFoodViewProps) => {
+  isFoodLoading,
+  isNotFound,
+}: EditFoodViewProps) {
+  if (isFoodLoading) {
+    return <EditFoodLoadingPage />
+  }
+
+  if (isNotFound) {
+    return <FoodNotFoundPage />
+  }
+
   return (
     <div className="flex-1 flex flex-col bg-zinc-900 overflow-hidden">
       <Header
-        title="Novo alimento"
+        title="Editar alimento"
         leftButtonNavigateTo="/meus-alimentos"
         className="sticky top-0"
       />
-
       <FoodFormTemplate
         handleSubmit={handleSubmit}
         register={register}

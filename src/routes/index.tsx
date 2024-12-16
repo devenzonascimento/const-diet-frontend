@@ -1,27 +1,33 @@
 import React from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Outlet } from 'react-router-dom'
 
 import { PrivateRoute } from './private-route'
 import { AppProvider } from '@/context'
 
 import { RegisterPage } from '@/pages/User/Register/page'
 import { LoginPage } from '@/pages/User/Login/page'
-import { App } from '@/App'
+
 import { HomePage } from '@/pages/Home/page'
-import { MyFoodsPage } from '@/pages/Foods/MyFoods/page'
+
+import { MyFoodsPage } from '@/pages/Foods/MyFoods/my-foods-view-model'
 import { AddFoodPage } from '@/pages/Foods/AddFood/add-food-view-model'
-import { EditFoodPage } from '@/pages/Foods/EditFood/page'
+import { EditFoodPage } from '@/pages/Foods/EditFood/edit-food-view-model'
+import { FoodDetailsPage } from '@/pages/Foods/FoodDetails/food-details-view-model'
+
 import { MyMealsPage } from '@/pages/Meals/MyMeals/page'
 import { AddNewMealPage } from '@/pages/Meals/AddNewMeal/page'
 import { EditMealPage } from '@/pages/Meals/EditMeal/page'
+
 import { MyRoutinesPage } from '@/pages/Routines/MyRoutines/page'
-import { RoutineDetailsPage } from '@/pages/Routines/RoutineDetails/page'
 import { AddNewRoutinePage } from '@/pages/Routines/AddNewRoutine/page'
 import { EditRoutinePage } from '@/pages/Routines/EditRoutine/page'
+import { RoutineDetailsPage } from '@/pages/Routines/RoutineDetails/page'
+
 import { MyPlansPage } from '@/pages/Plans/MyPlans/page'
-import { PlanDetailsPage } from '@/pages/Plans/PlanDetails/page'
 import { AddNewPlanPage } from '@/pages/Plans/AddNewPlan/page'
 import { EditPlanPage } from '@/pages/Plans/EditPlan/page'
+import { PlanDetailsPage } from '@/pages/Plans/PlanDetails/page'
+
 import { DailyRoutinePage } from '@/pages/DailyRoutine/page'
 
 export const router = createBrowserRouter([
@@ -46,7 +52,7 @@ export const router = createBrowserRouter([
     element: (
       <AppProvider>
         <PrivateRoute>
-          <App />
+          <Outlet />
         </PrivateRoute>
       </AppProvider>
     ),
@@ -58,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: 'meus-alimentos',
         element: <MyFoodsPage />,
+      },
+      {
+        path: 'detalhes-do-alimento/:foodId',
+        element: <FoodDetailsPage />,
       },
       {
         path: 'novo-alimento',

@@ -22,8 +22,8 @@ export enum MacronutrientTypes {
 }
 
 export enum UnitTypes {
-  GRAMS = 'GRAMS',
-  MILILITERS = 'MILILITERS',
+  Grams = 'GRAMS',
+  Mililiters = 'MILILITERS',
 }
 
 export type FoodWithQuantity = Food & {

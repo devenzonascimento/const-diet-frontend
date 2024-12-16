@@ -23,7 +23,7 @@ export function MacronutrientBadge({
     Sodium: 'Sódio',
   } as const
 
-  const unitAbbreviationMap: Record<UnitTypes, string> = {
+  const unitAbbreviationsMap: Record<UnitTypes, string> = {
     GRAMS: 'g',
     MILILITERS: 'ml',
   } as const
@@ -37,7 +37,7 @@ export function MacronutrientBadge({
     >
       <span className="text-xl font-semibold">
         {value.toFixed()}
-        {unitAbbreviationMap[unit]}
+        {unitAbbreviationsMap[unit]}
       </span>
       <span className="px-2">{macronutrientsMap[type]}</span>
       <div className="h-2 w-full bg-linear-to-r from-violet-500 to-violet-300 rounded-full" />

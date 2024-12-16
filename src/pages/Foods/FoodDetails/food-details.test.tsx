@@ -14,7 +14,7 @@ import { Food, UnitTypes } from '@/types/food-types'
 const fakeFood: Food = {
   id: 1,
   name: 'Banana',
-  unit: UnitTypes.GRAMS,
+  unit: UnitTypes.Grams,
   calories: 100,
   carbohydrates: 50,
   proteins: 25,

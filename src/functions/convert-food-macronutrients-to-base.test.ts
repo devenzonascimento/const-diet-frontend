@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import { convertFoodMacronutrientsToBase } from './convert-food-macronutrients-to-base'
-import { FoodWithQuantity } from '@/types/food-types'
+import { FoodWithQuantity, UnitTypes } from '@/types/food-types'
 
 describe('convertFoodMacronutrientsToBase', () => {
-  it('deve converter corretamente os valores baseados na quantidade', () => {
+  it('should convert values correctly based on quantity', () => {
     const food: FoodWithQuantity = {
       id: 1,
       name: 'Arroz',
-      unit: 'GRAMS',
+      unit: UnitTypes.Grams,
       calories: 200,
       carbohydrates: 50,
       proteins: 4,
@@ -22,7 +22,7 @@ describe('convertFoodMacronutrientsToBase', () => {
     expect(result).toEqual({
       id: 1,
       name: 'Arroz',
-      unit: 'GRAMS',
+      unit: UnitTypes.Grams,
       calories: 100,
       carbohydrates: 25,
       proteins: 2,
@@ -33,11 +33,11 @@ describe('convertFoodMacronutrientsToBase', () => {
     })
   })
 
-  it('deve retornar os mesmos valores quando a quantidade e a base desejada forem iguais', () => {
+  it('should return the same values ​​when the quantity and the desired base are equal', () => {
     const food: FoodWithQuantity = {
       id: 2,
       name: 'Feijão',
-      unit: 'GRAMS',
+      unit: UnitTypes.Grams,
       calories: 300,
       carbohydrates: 60,
       proteins: 20,
@@ -52,11 +52,11 @@ describe('convertFoodMacronutrientsToBase', () => {
     expect(result).toEqual(food)
   })
 
-  it('deve lidar com valores de quantidade menores que 1', () => {
+  it('should handle with decimal values correctly', () => {
     const food: FoodWithQuantity = {
       id: 3,
       name: 'Leite',
-      unit: 'MILILITERS',
+      unit: UnitTypes.Mililiters,
       calories: 42,
       carbohydrates: 5,
       proteins: 3,
@@ -71,7 +71,7 @@ describe('convertFoodMacronutrientsToBase', () => {
     expect(result).toEqual({
       id: 3,
       name: 'Leite',
-      unit: 'MILILITERS',
+      unit: UnitTypes.Mililiters,
       calories: 21,
       carbohydrates: 2.5,
       proteins: 1.5,
@@ -82,11 +82,11 @@ describe('convertFoodMacronutrientsToBase', () => {
     })
   })
 
-  it('deve lidar com valores extremos na quantidade', () => {
+  it('should handle with extreme quantity values correctly', () => {
     const food: FoodWithQuantity = {
       id: 5,
       name: 'Queijo',
-      unit: 'GRAMS',
+      unit: UnitTypes.Grams,
       calories: 400,
       carbohydrates: 1,
       proteins: 25,
@@ -101,7 +101,7 @@ describe('convertFoodMacronutrientsToBase', () => {
     expect(result).toEqual({
       id: 5,
       name: 'Queijo',
-      unit: 'GRAMS',
+      unit: UnitTypes.Grams,
       calories: 4000,
       carbohydrates: 10,
       proteins: 250,
@@ -110,5 +110,24 @@ describe('convertFoodMacronutrientsToBase', () => {
       sodium: 25,
       quantity: 10000,
     })
+  })
+
+  it('should handle correctly with values equal zero', () => {
+    const food: FoodWithQuantity = {
+      id: 5,
+      name: 'Queijo',
+      unit: UnitTypes.Grams,
+      calories: 0,
+      carbohydrates: 0,
+      proteins: 0,
+      fats: 0,
+      fibers: 0,
+      sodium: 0,
+      quantity: 0,
+    }
+
+    const result = convertFoodMacronutrientsToBase(food, 10000)
+
+    expect(result).toEqual(food)
   })
 })

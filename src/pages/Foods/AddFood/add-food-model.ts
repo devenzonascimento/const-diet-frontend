@@ -5,7 +5,7 @@ import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { IAddFoodService } from '@/services/http/food/food-service'
 import { convertFoodMacronutrientsToBase } from '@/functions/convert-food-macronutrients-to-base'
 import { foodFormSchema, FoodFormSchema } from '@/schemas/food-form-schema'
-import { Food, FoodWithQuantity } from '@/types/food-types'
+import { FoodWithQuantity } from '@/types/food-types'
 import { QueryKeys } from '@/types/query-keys'
 
 type UseAddFoodModelProps = {
@@ -27,10 +27,8 @@ export function useAddFoodModel({ addFoodService }: UseAddFoodModelProps) {
 
   const { mutateAsync } = useMutation({
     mutationFn: addFoodService,
-    onSuccess(newFood) {
-      queryClient.setQueryData([QueryKeys.FoodList], (foodList: Food[]) => {
-        return [...foodList, newFood]
-      })
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.FoodList] })
 
       navigate('/meus-alimentos')
     },

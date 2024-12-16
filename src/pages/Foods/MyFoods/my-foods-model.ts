@@ -21,7 +21,7 @@ export function useMyFoodsModel({
       queryFn: async ({ pageParam }) => {
         const response = await getPaginatedFoodListService({
           page: pageParam,
-          pageSize: 3,
+          pageSize: 10,
         })
 
         return response

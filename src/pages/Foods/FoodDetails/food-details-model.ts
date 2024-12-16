@@ -7,6 +7,16 @@ import {
 import { QueryKeys } from '@/types/query-keys'
 import { Food } from '@/types/food-types'
 
+type PaginationData<T> = {
+  pageParams: number[]
+  pages: {
+    itens: T[]
+    currentPage: number
+    totalCount: number
+    totalPages: number
+  }[]
+}
+
 type UseFoodDetailsModelProps = {
   getFoodByIdService: IGetFoodByIdService
   deleteFoodService: IDeleteFoodService
@@ -21,7 +31,7 @@ export function useFoodDetailsModel({
   const queryClient = useQueryClient()
 
   const { data: food, isPending: isFoodLoading } = useQuery({
-    queryKey: [QueryKeys.Food, foodId],
+    queryKey: [QueryKeys.Food, Number(foodId)],
     queryFn: () => getFoodByIdService(Number(foodId)),
     staleTime: 15 * 60 * 1000,
   })
@@ -35,9 +45,19 @@ export function useFoodDetailsModel({
           queryKey: [QueryKeys.Food, foodId],
         })
 
-        queryClient.setQueryData([QueryKeys.FoodList], (foods: Food[]) => {
-          return foods?.filter(food => food.id !== Number(foodId)) || []
-        })
+        // Atualiza o alimento na listagem de alimentos do cache que será exibido na pagina Meus Alimentos
+        queryClient.setQueryData(
+          [QueryKeys.FoodList],
+          (paginationData: PaginationData<Food>) => {
+            return {
+              ...paginationData,
+              pages: paginationData.pages.map(page => ({
+                ...page,
+                itens: page.itens.filter(food => food.id !== Number(foodId)),
+              })),
+            }
+          },
+        )
 
         navigate('/meus-alimentos')
       },

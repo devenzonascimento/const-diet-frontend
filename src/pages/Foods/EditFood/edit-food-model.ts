@@ -12,6 +12,16 @@ import { foodFormSchema, FoodFormSchema } from '@/schemas/food-form-schema'
 import { Food, FoodWithQuantity } from '@/types/food-types'
 import { QueryKeys } from '@/types/query-keys'
 
+type PaginationData<T> = {
+  pageParams: number[]
+  pages: {
+    itens: T[]
+    currentPage: number
+    totalCount: number
+    totalPages: number
+  }[]
+}
+
 type UseEditFoodModelProps = {
   getFoodByIdService: IGetFoodByIdService
   updateFoodService: IUpdateFoodService
@@ -28,7 +38,7 @@ export function useEditFoodModel({
   const queryClient = useQueryClient()
 
   const { data: food, isPending: isFoodLoading } = useQuery({
-    queryKey: [QueryKeys.Food, foodId],
+    queryKey: [QueryKeys.Food, Number(foodId)],
     queryFn: () => getFoodByIdService(Number(foodId)),
     staleTime: 15 * 60 * 1000,
   })
@@ -57,18 +67,26 @@ export function useEditFoodModel({
     mutationFn: updateFoodService,
     onSuccess(updatedFood) {
       // Atualiza o alimento do cache que será exibido na pagina de Detalhe do Alimento
-      queryClient.setQueryData([QueryKeys.Food], () => updatedFood)
+      queryClient.setQueryData(
+        [QueryKeys.Food, updatedFood.id],
+        () => updatedFood,
+      )
 
       // Atualiza o alimento na listagem de alimentos do cache que será exibido na pagina Meus Alimentos
-      queryClient.setQueryData([QueryKeys.FoodList], (foodList: Food[]) => {
-        return foodList.map(food => {
-          if (food.id === updatedFood.id) {
-            return updatedFood
+      queryClient.setQueryData(
+        [QueryKeys.FoodList],
+        (paginationData: PaginationData<Food>) => {
+          return {
+            ...paginationData,
+            pages: paginationData.pages.map(page => ({
+              ...page,
+              itens: page.itens.map(food =>
+                food.id === updatedFood.id ? updatedFood : food,
+              ),
+            })),
           }
-
-          return food
-        })
-      })
+        },
+      )
 
       navigate(`/detalhes-do-alimento/${updatedFood.id}`)
     },

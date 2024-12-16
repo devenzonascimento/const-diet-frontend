@@ -1,18 +1,12 @@
-import React, { useState } from 'react'
-import {
-  ArrowLeft,
-  EllipsisVerticalIcon,
-  FlameIcon,
-  PencilIcon,
-  Trash2Icon,
-} from 'lucide-react'
-import { MacronutrientBadge } from '@/components/macronutrient-badge'
-import { MacronutrientTypes } from '@/types/food-types'
+import React from 'react'
 import { useFoodDetailsModel } from './food-details-model'
 import { FoodDetailsLoadingPage } from './components/loading-page'
-import { FoodDetailsNotFoundPage } from './components/not-found-page'
+import { FoodNotFoundPage } from '../not-found-page'
+import { ArrowLeft, FlameIcon } from 'lucide-react'
 import { OptionsDropdown } from './components/options-dropdown'
+import { MacronutrientBadge } from '@/components/macronutrient-badge'
 import { Spinner } from '@/components/spinner'
+import { MacronutrientTypes } from '@/types/food-types'
 
 type FoodDetailsViewProps = ReturnType<typeof useFoodDetailsModel>
 
@@ -29,7 +23,7 @@ export function FoodDetailsView({
   }
 
   if (!food) {
-    return <FoodDetailsNotFoundPage />
+    return <FoodNotFoundPage />
   }
 
   return (
@@ -37,7 +31,7 @@ export function FoodDetailsView({
       <header className="w-full flex items-center justify-between">
         <button
           type="button"
-          title='Voltar'
+          title="Voltar"
           className="size-14 flex items-center justify-center p-3"
           onClick={handleBackToFoodListPage}
           datatest-id="back-button"

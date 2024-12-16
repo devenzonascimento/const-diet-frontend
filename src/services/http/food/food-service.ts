@@ -11,6 +11,14 @@ export const addFoodService: IAddFoodService = async (food: Food) => {
   return data
 }
 
+export type IUpdateFoodService = (food: Food) => Promise<Food>
+
+export const updateFoodService: IUpdateFoodService = async (food: Food) => {
+  const { data } = await http.put<Food, Food>(API_PREFIX, food)
+
+  return data
+}
+
 export type IGetFoodListService = () => Promise<Food[]>
 
 export const getFoodListService: IGetFoodListService = async () => {
@@ -21,7 +29,7 @@ export const getFoodListService: IGetFoodListService = async () => {
 
 export type IGetFoodByIdService = (foodId: number) => Promise<Food>
 
-export const getFoodByIdService: IGetFoodByIdService = async (foodId) => {
+export const getFoodByIdService: IGetFoodByIdService = async foodId => {
   const { data } = await http.get<Food>(`${API_PREFIX}/${foodId}`)
 
   return data

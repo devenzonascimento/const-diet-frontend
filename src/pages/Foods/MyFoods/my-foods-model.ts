@@ -1,58 +1,64 @@
-import {
-  IDeleteFoodService,
-  IGetFoodListService,
-} from '@/services/http/food/food-service'
-import { Food } from '@/types/food-types'
-import { QueryKeys } from '@/types/query-keys'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useInfiniteQuery } from '@tanstack/react-query'
+import { IGetPaginatedFoodListService } from '@/services/http/food/food-service'
+import { QueryKeys } from '@/types/query-keys'
 
 type UseMyFoodsModelProps = {
-  getFoodListService: IGetFoodListService
-  deleteFoodService: IDeleteFoodService
+  getPaginatedFoodListService: IGetPaginatedFoodListService
 }
 
 export function useMyFoodsModel({
-  getFoodListService,
-  deleteFoodService,
+  getPaginatedFoodListService,
 }: UseMyFoodsModelProps) {
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const { data: foodsList } = useQuery({
-    queryKey: [QueryKeys.FoodList],
-    queryFn: getFoodListService,
-    staleTime: 15 * 60 * 1000,
-  })
-
-  const filteredFoods = foodsList?.filter(food =>
-    food.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
-
   const navigate = useNavigate()
 
-  const queryClient = useQueryClient()
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const { mutateAsync: deleteFoodFn } = useMutation({
-    mutationFn: deleteFoodService,
-    onSuccess(_, foodId) {
-      queryClient.setQueryData([QueryKeys.FoodList], (data: Food[]) =>
-        data.filter(food => food.id !== foodId),
-      )
-    },
-  })
+  const { data, isPending, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useInfiniteQuery({
+      queryKey: [QueryKeys.FoodList],
+      queryFn: async ({ pageParam }) => {
+        const response = await getPaginatedFoodListService({
+          page: pageParam,
+          pageSize: 3,
+        })
 
-  const handleDeleteFood = (foodId: number) => deleteFoodFn(foodId)
+        return response
+      },
+      initialPageParam: 1,
+      getNextPageParam: lastPage => {
+        if (lastPage.currentPage + 1 > lastPage.totalPages) {
+          return undefined
+        }
+
+        return lastPage.currentPage + 1
+      },
+      staleTime: 15 * 60 * 1000,
+    })
+
+  const handlePagination = () => {
+    if (!isFetchingNextPage && hasNextPage) {
+      fetchNextPage()
+    }
+  }
+
+  const foods = data?.pages.flatMap(page => page.itens) || []
+
+  const filteredFoods = foods?.filter(food =>
+    food.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  )
 
   const handleNavigateToEditPage = (foodId: number) =>
     navigate(`/detalhes-do-alimento/${foodId}`)
 
   return {
     foods: filteredFoods || [],
+    isFoodsLoading: isPending,
+    handlePagination,
+    hasNextPage,
     searchTerm,
     setSearchTerm,
-
     handleNavigateToEditPage,
-    handleDeleteFood,
   }
 }

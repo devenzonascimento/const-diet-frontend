@@ -27,6 +27,31 @@ export const getFoodListService: IGetFoodListService = async () => {
   return data
 }
 
+type GetPaginatedFoodListRequest = {
+  page: number
+  pageSize: number
+}
+
+type GetPaginatedFoodListResponse = {
+  itens: Food[]
+  totalCount: number
+  totalPages: number
+  currentPage: number
+}
+
+export type IGetPaginatedFoodListService = (
+  params: GetPaginatedFoodListRequest,
+) => Promise<GetPaginatedFoodListResponse>
+
+export const getPaginatedFoodListService: IGetPaginatedFoodListService =
+  async params => {
+    const { data } = await http.get<GetPaginatedFoodListResponse>(API_PREFIX, {
+      params,
+    })
+
+    return data
+  }
+
 export type IGetFoodByIdService = (foodId: number) => Promise<Food>
 
 export const getFoodByIdService: IGetFoodByIdService = async foodId => {

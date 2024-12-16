@@ -22,6 +22,7 @@ export function useMyFoodsModel({
   const { data: foodsList } = useQuery({
     queryKey: [QueryKeys.FoodList],
     queryFn: getFoodListService,
+    staleTime: 15 * 60 * 1000,
   })
 
   const filteredFoods = foodsList?.filter(food =>

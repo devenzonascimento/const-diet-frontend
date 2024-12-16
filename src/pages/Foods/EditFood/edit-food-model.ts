@@ -30,6 +30,7 @@ export function useEditFoodModel({
   const { data: food, isPending: isFoodLoading } = useQuery({
     queryKey: [QueryKeys.Food, foodId],
     queryFn: () => getFoodByIdService(Number(foodId)),
+    staleTime: 15 * 60 * 1000,
   })
 
   const {

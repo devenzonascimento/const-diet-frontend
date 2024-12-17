@@ -19,6 +19,7 @@ export const FoodItem = ({ food, onClick }: FoodItemProps) => {
         className="h-18 w-full p-2 flex gap-2 bg-zinc-700 rounded-lg"
         onClick={onClick}
         onKeyDown={onClick}
+        data-testid="food-list-item"
       >
         <div className="h-full aspect-square rounded-full overflow-hidden shrink-0">
           <img
@@ -29,13 +30,18 @@ export const FoodItem = ({ food, onClick }: FoodItemProps) => {
         </div>
 
         <div className="w-full flex flex-col justify-between">
-          <div className='grid grid-cols-[1fr_auto] items-start'>
-            <p className="text-base font-semibold text-white truncate">{name}</p>
+          <div className="grid grid-cols-[1fr_auto] items-start">
+            <p className="text-base font-semibold text-white truncate">
+              {name}
+            </p>
 
             <CaloriesBadge className="" calories={calories} />
           </div>
 
-          <MacronutrientTags macronutrients={macronutrients} maxTagsToShow={4}/>
+          <MacronutrientTags
+            macronutrients={macronutrients}
+            maxTagsToShow={4}
+          />
         </div>
       </div>
     </>

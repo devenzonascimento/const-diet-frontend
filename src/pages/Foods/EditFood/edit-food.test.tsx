@@ -27,6 +27,13 @@ const mockGetFoodByIdService = vi.fn<IGetFoodByIdService>(async () => fakeFood)
 
 const mockUpdateFoodService = vi.fn<IUpdateFoodService>(async () => fakeFood)
 
+const renderSut = () =>
+  renderView(
+    <MakeSut />,
+    '/editar-alimento/:foodId',
+    `/editar-alimento/${fakeFood.id}`,
+  )
+
 function MakeSut() {
   const props = useEditFoodModel({
     getFoodByIdService: mockGetFoodByIdService,
@@ -42,11 +49,7 @@ describe('<EditFoodPage />', () => {
   })
 
   it('should load the data of food to be edited correctly', async () => {
-    const screen = renderView(
-      <MakeSut />,
-      '/editar-alimento/:foodId',
-      `/editar-alimento/${fakeFood.id}`,
-    )
+    const screen = renderSut()
 
     await delay(50)
 
@@ -76,11 +79,7 @@ describe('<EditFoodPage />', () => {
   })
 
   it('should call service with correct params when form is submitted with valid data', async () => {
-    const screen = renderView(
-      <MakeSut />,
-      '/editar-alimento/:foodId',
-      `/editar-alimento/${fakeFood.id}`,
-    )
+    const screen = renderSut()
 
     await delay(50)
 
@@ -127,7 +126,7 @@ describe('<EditFoodPage />', () => {
   })
 
   it('should show an error message if form submission fails', async () => {
-    const screen = renderView(<MakeSut />)
+    const screen = renderSut()
 
     await delay(1)
 
@@ -145,11 +144,7 @@ describe('<EditFoodPage />', () => {
   })
 
   it('should call the service only once per submission', async () => {
-    const screen = renderView(
-      <MakeSut />,
-      '/editar-alimento/:foodId',
-      `/editar-alimento/${fakeFood.id}`,
-    )
+    const screen = renderSut()
 
     await delay(50)
 

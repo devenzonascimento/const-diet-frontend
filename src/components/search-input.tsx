@@ -25,6 +25,7 @@ export const SearchInput = ({
         className="tracking-wide flex-1 text-lg text-white placeholder:text-zinc-400 bg-transparent outline-none"
         value={value}
         onChange={onChange}
+        data-testid='search-input'
       />
 
       {value !== '' && (

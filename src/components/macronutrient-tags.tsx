@@ -22,8 +22,8 @@ export function MacronutrientTags({
     'sodium',
   ]
 
-  const macronutrientsTags = Object.entries(macronutrients).map(
-    ([macronutrient, value]) => {
+  const macronutrientsTags = Object.entries(macronutrients)
+    .map(([macronutrient, value]) => {
       switch (macronutrient as keyof Macronutrients) {
         case 'carbohydrates':
           return {
@@ -55,9 +55,11 @@ export function MacronutrientTags({
             value,
             order: order.indexOf('sodium'),
           }
+        default:
+          return null
       }
-    },
-  )
+    })
+    .filter(m => m !== null)
 
   macronutrientsTags.sort((a, b) => a.order - b.order)
 

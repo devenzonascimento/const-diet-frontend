@@ -1,4 +1,4 @@
-import type { Macronutrients } from './macronutrients-types'
+import { Macronutrients } from './macronutrients-types'
 
 export type Food = {
   id: number

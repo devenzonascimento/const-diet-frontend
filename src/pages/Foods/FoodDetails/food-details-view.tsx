@@ -6,7 +6,7 @@ import { ArrowLeft, FlameIcon } from 'lucide-react'
 import { OptionsDropdown } from './components/options-dropdown'
 import { MacronutrientBadge } from '@/components/macronutrient-badge'
 import { Spinner } from '@/components/spinner'
-import type { MacronutrientTypes } from '@/types/macronutrients-types'
+import { MacronutrientTypes } from '@/types/macronutrients-types'
 
 type FoodDetailsViewProps = ReturnType<typeof useFoodDetailsModel>
 

@@ -3,9 +3,9 @@ import { Food } from '@/types/food-types'
 
 const API_PREFIX = '/foods'
 
-export type IAddFoodService = (food: Food) => Promise<Food>
+export type ICreateFoodService = (food: Food) => Promise<Food>
 
-export const addFoodService: IAddFoodService = async (food: Food) => {
+export const createFoodService: ICreateFoodService = async (food: Food) => {
   const { data } = await http.post<Food, Food>(API_PREFIX, food)
 
   return data

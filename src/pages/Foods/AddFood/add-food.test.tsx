@@ -4,18 +4,19 @@ import { fireEvent, waitFor } from '@testing-library/react'
 import { renderView } from '@/tests/render-view'
 import { useAddFoodModel } from './add-food-model'
 import { AddFoodView } from './add-food-view'
-import { IAddFoodService } from '@/services/http/food/food-service'
+import { ICreateFoodService } from '@/services/http/food/food-service'
 
-const mockAddFoodService = vi.fn<IAddFoodService>(async food => food)
+const mockCreateFoodService = vi.fn<ICreateFoodService>(async food => food)
 
 function MakeSut() {
-  const props = useAddFoodModel({ addFoodService: mockAddFoodService })
+  const props = useAddFoodModel({ createFoodService: mockCreateFoodService })
+
   return <AddFoodView {...props} />
 }
 
 describe('<AddFoodPage />', () => {
   beforeEach(() => {
-    mockAddFoodService.mockClear()
+    mockCreateFoodService.mockClear()
   })
 
   it('should call service with correct params when form is submitted with valid data', async () => {
@@ -50,16 +51,18 @@ describe('<AddFoodPage />', () => {
     const errorMessages = screen.queryAllByTestId('error-message')
     expect(errorMessages).toHaveLength(0)
 
-    expect(mockAddFoodService).toHaveBeenCalledWith({
+    expect(mockCreateFoodService).toHaveBeenCalledWith({
       id: 0,
       name: 'Mamão',
       unit: 'GRAMS',
       calories: 100,
-      carbohydrates: 50,
-      proteins: 10,
-      fats: 5,
-      fibers: 7.5,
-      sodium: 500,
+      macronutrients: {
+        carbohydrates: 50,
+        proteins: 10,
+        fats: 5,
+        fibers: 7.5,
+        sodium: 500,
+      },
     })
   })
 
@@ -88,6 +91,6 @@ describe('<AddFoodPage />', () => {
     const formSubmit = screen.getByTestId('food-form')
     await waitFor(() => formSubmit)
 
-    expect(mockAddFoodService).toHaveBeenCalledTimes(1)
+    expect(mockCreateFoodService).toHaveBeenCalledTimes(1)
   })
 })

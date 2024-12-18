@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { cva } from 'class-variance-authority'
-import type { MacronutrientTypes } from '@/types/macronutrients-types'
+import { MacronutrientTypes } from '@/types/macronutrients-types'
 
 const tagVariants = cva('font-medium text-center border rounded-xl', {
   variants: {

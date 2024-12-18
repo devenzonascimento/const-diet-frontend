@@ -1,9 +1,12 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
-import { Macronutrients, MacronutrientTypes } from '@/types/food-types'
 import { MacronutrientTag } from './macronutrient-tag'
+import type {
+  Macronutrients,
+  MacronutrientTypes,
+} from '@/types/macronutrients-types'
 
-interface MacronutrientTagsProps {
+type MacronutrientTagsProps = {
   macronutrients: Macronutrients
   className?: string
   maxTagsToShow?: number

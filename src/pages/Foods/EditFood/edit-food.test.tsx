@@ -16,11 +16,13 @@ const fakeFood: Food = {
   name: 'Banana',
   unit: UnitTypes.Grams,
   calories: 100,
-  carbohydrates: 50,
-  proteins: 25,
-  fats: 10,
-  fibers: 5,
-  sodium: 1,
+  macronutrients: {
+    carbohydrates: 50,
+    proteins: 25,
+    fats: 10,
+    fibers: 5,
+    sodium: 1,
+  },
 }
 
 const mockGetFoodByIdService = vi.fn<IGetFoodByIdService>(async () => fakeFood)
@@ -59,19 +61,19 @@ describe('<EditFoodPage />', () => {
       fakeFood.calories.toString(),
     )
     expect(screen.getByTestId('carbohydrates-input')).toHaveValue(
-      fakeFood.carbohydrates.toString(),
+      fakeFood.macronutrients.carbohydrates.toString(),
     )
     expect(screen.getByTestId('proteins-input')).toHaveValue(
-      fakeFood.proteins.toString(),
+      fakeFood.macronutrients.proteins.toString(),
     )
     expect(screen.getByTestId('fats-input')).toHaveValue(
-      fakeFood.fats.toString(),
+      fakeFood.macronutrients.fats.toString(),
     )
     expect(screen.getByTestId('fibers-input')).toHaveValue(
-      fakeFood.fibers.toString(),
+      fakeFood.macronutrients.fibers.toString(),
     )
     expect(screen.getByTestId('sodium-input')).toHaveValue(
-      fakeFood.sodium.toString(),
+      fakeFood.macronutrients.sodium.toString(),
     )
     expect(screen.getByTestId('unit-select-input')).toHaveValue(
       fakeFood.unit.toString(),
@@ -117,11 +119,13 @@ describe('<EditFoodPage />', () => {
       name: 'Mamão',
       unit: 'GRAMS',
       calories: 100,
-      carbohydrates: 50,
-      proteins: 10,
-      fats: 5,
-      fibers: 7.5,
-      sodium: 500,
+      macronutrients: {
+        carbohydrates: 50,
+        proteins: 10,
+        fats: 5,
+        fibers: 7.5,
+        sodium: 500,
+      },
     })
   })
 

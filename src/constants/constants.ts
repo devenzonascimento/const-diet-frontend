@@ -1,5 +1,7 @@
 import { Food, CycleIllustrationType } from "@/types/types";
 
+export const DEFAULT_QUANTITY = 100
+
 export const UNIT: Record<Food["unit"], string> = {
 	GRAMS: "g",
 	MILILITERS: "ml",

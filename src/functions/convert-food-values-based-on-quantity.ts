@@ -12,7 +12,7 @@ type ConvertFoodValuesToBaseParams = {
 export function convertFoodValuesBasedOnQuantity({
   stats,
   currentQuantity,
-  desiredQuantity,
+  desiredQuantity = 100,
 }: ConvertFoodValuesToBaseParams): FoodStats {
   if (currentQuantity === desiredQuantity || currentQuantity <= 0) {
     return stats

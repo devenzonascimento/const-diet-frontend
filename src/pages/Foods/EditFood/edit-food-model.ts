@@ -7,9 +7,10 @@ import {
   IGetFoodByIdService,
   IUpdateFoodService,
 } from '@/services/http/food/food-service'
-import { convertFoodMacronutrientsToBase } from '@/functions/convert-food-macronutrients-to-base'
+import { convertFoodValuesBasedOnQuantity } from '@/functions/convert-food-values-based-on-quantity'
 import { foodFormSchema, FoodFormSchema } from '@/schemas/food-form-schema'
-import { Food, FoodWithQuantity } from '@/types/food-types'
+import { DEFAULT_QUANTITY } from '@/constants/constants'
+import { Food } from '@/types/food-types'
 import { QueryKeys } from '@/types/query-keys'
 
 type PaginationData<T> = {
@@ -55,15 +56,19 @@ export function useEditFoodModel({
 
   useLayoutEffect(() => {
     if (food) {
-      for (const [key, value] of Object.entries(food)) {
-        setValue(key as keyof FoodFormSchema, value)
+      const foodFormData: FoodFormSchema = {
+        ...food,
+        ...food?.macronutrients,
+        quantity: DEFAULT_QUANTITY,
       }
 
-      setValue('quantity', 100)
+      for (const [key, value] of Object.entries(foodFormData)) {
+        setValue(key as keyof FoodFormSchema, value)
+      }
     }
   }, [food, setValue])
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync: updateFoodMutation } = useMutation({
     mutationFn: updateFoodService,
     onSuccess(updatedFood) {
       // Atualiza o alimento do cache que será exibido na pagina de Detalhe do Alimento
@@ -87,33 +92,41 @@ export function useEditFoodModel({
           }
         },
       )
-
-      navigate(`/detalhes-do-alimento/${updatedFood.id}`)
     },
     onError(error) {
       throw new Error(error.message)
     },
   })
 
-  const onSubmit = (formData: FoodFormSchema) => {
-    const food: FoodWithQuantity = {
-      id: Number(foodId),
-      ...formData,
-    }
-
-    const parsedFood = convertFoodMacronutrientsToBase(food, 100)
-
-    mutateAsync({
-      id: parsedFood.id,
-      name: parsedFood.name,
-      unit: parsedFood.unit,
-      calories: parsedFood.calories,
-      carbohydrates: parsedFood.carbohydrates,
-      proteins: parsedFood.proteins,
-      fats: parsedFood.fats,
-      fibers: parsedFood.fibers,
-      sodium: parsedFood.sodium,
+  const onSubmit = async (formData: FoodFormSchema) => {
+    const foodStatsConvertedToBase100 = convertFoodValuesBasedOnQuantity({
+      currentQuantity: formData.quantity,
+      desiredQuantity: DEFAULT_QUANTITY,
+      stats: {
+        calories: formData.calories,
+        carbohydrates: formData.carbohydrates,
+        proteins: formData.proteins,
+        fats: formData.fats,
+        fibers: formData.fibers,
+        sodium: formData.sodium,
+      },
     })
+
+    await updateFoodMutation({
+      id: Number(foodId),
+      name: formData.name,
+      unit: formData.unit,
+      calories: foodStatsConvertedToBase100.calories,
+      macronutrients: {
+        carbohydrates: foodStatsConvertedToBase100.carbohydrates,
+        proteins: foodStatsConvertedToBase100.proteins,
+        fats: foodStatsConvertedToBase100.fats,
+        fibers: foodStatsConvertedToBase100.fibers,
+        sodium: foodStatsConvertedToBase100.sodium,
+      },
+    })
+
+    navigate(`/detalhes-do-alimento/${foodId}`)
   }
 
   const isNotFound = Number.isNaN(foodId) || (!isFoodLoading && !food)

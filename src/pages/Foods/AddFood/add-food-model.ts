@@ -6,6 +6,7 @@ import { ICreateFoodService } from '@/services/http/food/food-service'
 import { convertFoodValuesBasedOnQuantity } from '@/functions/convert-food-values-based-on-quantity'
 import { foodFormSchema, FoodFormSchema } from '@/schemas/food-form-schema'
 import { QueryKeys } from '@/types/query-keys'
+import { DEFAULT_QUANTITY } from '@/constants/constants'
 
 type UseAddFoodModelProps = {
   createFoodService: ICreateFoodService
@@ -24,24 +25,20 @@ export function useAddFoodModel({ createFoodService }: UseAddFoodModelProps) {
 
   const queryClient = useQueryClient()
 
-  const { mutateAsync } = useMutation({
+  const { mutateAsync: createFoodMutation } = useMutation({
     mutationFn: createFoodService,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: [QueryKeys.FoodList] })
-
-      navigate('/meus-alimentos')
     },
     onError(error) {
       throw new Error(error.message)
     },
   })
 
-  const onSubmit = (formData: FoodFormSchema) => {
-    const DEFAULT_QUANTITY_BASE = 100
-
+  const onSubmit = async (formData: FoodFormSchema) => {
     const foodStatsConvertedToBase100 = convertFoodValuesBasedOnQuantity({
       currentQuantity: formData.quantity,
-      desiredQuantity: DEFAULT_QUANTITY_BASE,
+      desiredQuantity: DEFAULT_QUANTITY,
       stats: {
         calories: formData.calories,
         carbohydrates: formData.carbohydrates,
@@ -52,7 +49,7 @@ export function useAddFoodModel({ createFoodService }: UseAddFoodModelProps) {
       },
     })
 
-    mutateAsync({
+    const createdFood = await createFoodMutation({
       id: 0,
       name: formData.name,
       unit: formData.unit,
@@ -65,6 +62,8 @@ export function useAddFoodModel({ createFoodService }: UseAddFoodModelProps) {
         sodium: foodStatsConvertedToBase100.sodium,
       },
     })
+
+    navigate(`/detalhes-do-alimento/${createdFood.id}`)
   }
 
   return {

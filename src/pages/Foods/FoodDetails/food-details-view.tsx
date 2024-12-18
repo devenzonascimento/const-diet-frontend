@@ -6,7 +6,7 @@ import { ArrowLeft, FlameIcon } from 'lucide-react'
 import { OptionsDropdown } from './components/options-dropdown'
 import { MacronutrientBadge } from '@/components/macronutrient-badge'
 import { Spinner } from '@/components/spinner'
-import { MacronutrientTypes } from '@/types/food-types'
+import type { MacronutrientTypes } from '@/types/macronutrients-types'
 
 type FoodDetailsViewProps = ReturnType<typeof useFoodDetailsModel>
 
@@ -59,7 +59,7 @@ export function FoodDetailsView({
         </h2>
 
         <div className="h-16 flex items-center gap-2">
-          <FlameIcon className="size-10 text-white fill-violet-300" />
+          <FlameIcon className="size-10 text-white fill-violet-500" />
           <p className="text-4xl font-semibold text-white">
             {food?.calories}
             <span className="text-base font-semibold text-white">kcal</span>

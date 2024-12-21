@@ -29,7 +29,11 @@ export const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>(
           {...props}
         >
           {options.map(option => (
-            <option key={option.value} value={option.value}>
+            <option
+              key={option.value}
+              value={option.value}
+              className="bg-zinc-700 text-white"
+            >
               {option.text}
             </option>
           ))}

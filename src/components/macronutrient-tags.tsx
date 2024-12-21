@@ -1,37 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useResizeObserver } from '@/hooks/use-resize-observer'
 import { cn } from '@/lib/utils'
 import { MacronutrientTag } from './macronutrient-tag'
 import {
   Macronutrients,
   MacronutrientTypes,
 } from '@/types/macronutrients-types'
-import { useResizeObserver } from '@/hooks/use-resize-observer'
+
+const order: Array<keyof Macronutrients> = [
+  'carbohydrates',
+  'proteins',
+  'fats',
+  'fibers',
+  'sodium',
+]
 
 type MacronutrientTagsProps = {
   macronutrients: Macronutrients
   className?: string
-  wrap?: boolean
 }
 
 export function MacronutrientTags({
   macronutrients,
   className,
-  wrap,
 }: MacronutrientTagsProps) {
   const [limit, setLimit] = useState(0)
+
   const containerRef = useRef<HTMLDivElement>(null)
+
   const { width = 0 } = useResizeObserver<HTMLDivElement>({
     ref: containerRef,
     box: 'border-box',
   })
-
-  const order: Array<keyof Macronutrients> = [
-    'carbohydrates',
-    'proteins',
-    'fats',
-    'fibers',
-    'sodium',
-  ]
 
   const macronutrientsTags = Object.entries(macronutrients)
     .map(([macronutrient, value]) => {
@@ -75,12 +75,14 @@ export function MacronutrientTags({
   macronutrientsTags.sort((a, b) => a.order - b.order)
 
   useEffect(() => {
-    if (containerRef.current && !wrap) {
-      const dotsWidth = 24 // Espaço reservado para o "+X" indicador
+    if (containerRef.current) {
+      const dotsWidth = 34 // Espaço reservado para o "+X" indicador
       const flexGap = 8 // Gap entre os itens
 
       const limit = macronutrientsTags.reduce<[number, number]>(
         (acc, _, index) => {
+          const isLastTag = index === macronutrientsTags.length - 1
+
           const [totalWidth, count] = acc
           const currentElement = containerRef.current?.children[
             index
@@ -89,7 +91,10 @@ export function MacronutrientTags({
 
           const currentTotalWidth = totalWidth + currentElementWidth + flexGap
 
-          if (currentTotalWidth + dotsWidth > Math.ceil(width)) {
+          if (
+            currentTotalWidth + (isLastTag ? 0 : dotsWidth) >
+            Math.ceil(width)
+          ) {
             return [currentTotalWidth, count]
           }
           return [currentTotalWidth, count + 1]
@@ -98,33 +103,29 @@ export function MacronutrientTags({
       )
       setLimit(limit[1])
     }
-  }, [macronutrientsTags, wrap, width])
+  }, [macronutrientsTags, width])
 
   const hiddenTags = macronutrientsTags.slice(limit)
 
   return (
     <div
       ref={containerRef}
-      className={cn(
-        'w-full relative flex gap-2',
-        wrap ? 'flex-wrap' : 'flex-nowrap',
-        className,
-      )}
+      className={cn('w-full relative flex gap-2', className)}
     >
       {macronutrientsTags.map(({ type, value }, index) => (
         <MacronutrientTag
           key={type}
           type={type}
           value={value}
-          className={!wrap && index + 1 > limit ? 'invisible absolute' : ''}
+          className={index + 1 > limit ? 'invisible absolute' : ''}
         />
       ))}
 
-      {/* {!wrap && macronutrientsTags.length > limit && (
+      {macronutrientsTags.length > limit && (
         <div className="font-medium text-center border rounded-xl border-violet-300 text-violet-300 pb-0.5 px-1.5 text-xs">
           +{hiddenTags.length}
         </div>
-      )} */}
+      )}
     </div>
   )
 }

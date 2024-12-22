@@ -1,11 +1,12 @@
 import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
-import { act, fireEvent, waitFor } from '@testing-library/react'
+import { act, fireEvent } from '@testing-library/react'
 import { renderView } from '@/tests/render-view'
 
 import {
-  IDeleteFoodService,
   IGetFoodByIdService,
+  IUploadFoodImageService,
+  IDeleteFoodService,
 } from '@/services/http/food/food-service'
 import { useFoodDetailsModel } from './food-details-model'
 import { FoodDetailsView } from './food-details-view'
@@ -16,15 +17,21 @@ const fakeFood: Food = {
   name: 'Banana',
   unit: UnitTypes.Grams,
   calories: 100,
-  carbohydrates: 50,
-  proteins: 25,
-  fats: 10,
-  fibers: 5,
-  sodium: 1,
+  macronutrients: {
+    carbohydrates: 50,
+    proteins: 25,
+    fats: 10,
+    fibers: 5,
+    sodium: 1,
+  },
 }
 
 const mockGetFoodByIdService = vi.fn<IGetFoodByIdService>(
   () => new Promise(response => response(fakeFood)),
+)
+
+const mockUploadFoodImageService = vi.fn<IUploadFoodImageService>(
+  () => new Promise(response => response('#')),
 )
 
 const mockDeleteFoodService = vi.fn<IDeleteFoodService>()
@@ -32,6 +39,7 @@ const mockDeleteFoodService = vi.fn<IDeleteFoodService>()
 function MakeSut() {
   const props = useFoodDetailsModel({
     getFoodByIdService: mockGetFoodByIdService,
+    uploadFoodImageService: mockUploadFoodImageService,
     deleteFoodService: mockDeleteFoodService,
   })
 
@@ -67,12 +75,20 @@ describe('<FoodDetailsPage />', () => {
     expect(await screen.findByText(fakeFood.name)).toBeInTheDocument()
     expect(await screen.findByText(fakeFood.calories)).toBeInTheDocument()
     expect(
-      await screen.findByText(`${fakeFood.carbohydrates}g`),
+      await screen.findByText(`${fakeFood.macronutrients.carbohydrates}g`),
     ).toBeInTheDocument()
-    expect(await screen.findByText(`${fakeFood.proteins}g`)).toBeInTheDocument()
-    expect(await screen.findByText(`${fakeFood.fats}g`)).toBeInTheDocument()
-    expect(await screen.findByText(`${fakeFood.fibers}g`)).toBeInTheDocument()
-    expect(await screen.findByText(`${fakeFood.sodium}g`)).toBeInTheDocument()
+    expect(
+      await screen.findByText(`${fakeFood.macronutrients.proteins}g`),
+    ).toBeInTheDocument()
+    expect(
+      await screen.findByText(`${fakeFood.macronutrients.fats}g`),
+    ).toBeInTheDocument()
+    expect(
+      await screen.findByText(`${fakeFood.macronutrients.fibers}g`),
+    ).toBeInTheDocument()
+    expect(
+      await screen.findByText(`${fakeFood.macronutrients.sodium}g`),
+    ).toBeInTheDocument()
   })
 
   it('should navigate to edit food page, when edit button is clicked', async () => {

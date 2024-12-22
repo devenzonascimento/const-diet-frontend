@@ -92,32 +92,32 @@ export function FoodDetailsView({
           <MacronutrientBadge
             type={MacronutrientTypes.Carbohydrate}
             unit={food?.unit}
-            value={food?.macronutrients.carbohydrates || 0}
+            value={food.macronutrients?.carbohydrates || 0}
             className="col-span-2"
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Protein}
             unit={food?.unit}
-            value={food?.macronutrients.proteins || 0}
+            value={food.macronutrients?.proteins || 0}
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Fat}
             unit={food?.unit}
-            value={food?.macronutrients.fats || 0}
+            value={food.macronutrients?.fats || 0}
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Fiber}
             unit={food?.unit}
-            value={food?.macronutrients.fibers || 0}
+            value={food.macronutrients?.fibers || 0}
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Sodium}
             unit={food?.unit}
-            value={food?.macronutrients.sodium || 0}
+            value={food.macronutrients?.sodium || 0}
           />
         </div>
       </div>

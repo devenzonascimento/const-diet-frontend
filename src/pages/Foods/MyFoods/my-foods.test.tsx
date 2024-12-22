@@ -11,11 +11,13 @@ const generateFakeFood = (id: number, name: string) => ({
   name: name,
   unit: UnitTypes.Grams,
   calories: 0,
-  carbohydrates: 0,
-  proteins: 0,
-  fats: 0,
-  fibers: 0,
-  sodium: 0,
+  macronutrients: {
+    carbohydrates: 0,
+    proteins: 0,
+    fats: 0,
+    fibers: 0,
+    sodium: 0,
+  },
 })
 
 const mockGetPaginatedFoodListService = vi.fn<IGetPaginatedFoodListService>(

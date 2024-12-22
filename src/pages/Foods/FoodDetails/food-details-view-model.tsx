@@ -1,13 +1,18 @@
-import {
-  deleteFoodService,
-  getFoodByIdService,
-} from '@/services/http/food/food-service'
-import { useFoodDetailsModel } from './food-details-model'
-import { FoodDetailsView } from './food-details-view'
 import React from 'react'
+import { useFoodDetailsModel } from './food-details-model'
+import {
+  getFoodByIdService,
+  uploadFoodImageService,
+  deleteFoodService,
+} from '@/services/http/food/food-service'
+import { FoodDetailsView } from './food-details-view'
 
 export function FoodDetailsPage() {
-  const props = useFoodDetailsModel({ getFoodByIdService, deleteFoodService })
+  const props = useFoodDetailsModel({
+    getFoodByIdService,
+    uploadFoodImageService,
+    deleteFoodService,
+  })
 
   return <FoodDetailsView {...props} />
 }

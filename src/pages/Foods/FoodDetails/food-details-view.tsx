@@ -2,17 +2,19 @@ import React from 'react'
 import { useFoodDetailsModel } from './food-details-model'
 import { FoodDetailsLoadingPage } from './components/loading-page'
 import { FoodNotFoundPage } from '../not-found-page'
-import { ArrowLeft, FlameIcon } from 'lucide-react'
+import { ArrowLeft, CameraIcon, FlameIcon, PencilIcon } from 'lucide-react'
 import { OptionsDropdown } from './components/options-dropdown'
 import { MacronutrientBadge } from '@/components/macronutrient-badge'
 import { Spinner } from '@/components/spinner'
-import { MacronutrientTypes } from '@/types/food-types'
+import { MacronutrientTypes } from '@/types/macronutrients-types'
+import { Image } from '@/components/image'
 
 type FoodDetailsViewProps = ReturnType<typeof useFoodDetailsModel>
 
 export function FoodDetailsView({
   food,
   isFoodLoading,
+  imageUploadTrigger,
   handleBackToFoodListPage,
   handleNavigateToEditPage,
   handleDeleteFood,
@@ -46,12 +48,32 @@ export function FoodDetailsView({
       </header>
 
       <div className="flex-1 flex flex-col items-center gap-4 p-4 bg-zinc-900 rounded-t-[60px]">
-        <div className="-mt-32 aspect-square size-36 p-1 bg-radial-[at_25%_25%] from-violet-600 to-violet-300 to-75% border-4 border-white rounded-full overflow-hidden">
-          <img
-            src="/assets/strawberry.jpg"
-            alt=""
-            className="block size-full object-cover rounded-full"
-          />
+        <div className="-mt-32">
+          {!food.imageUrl && (
+            <button
+              type="button"
+              onClick={imageUploadTrigger}
+              className="size-36 p-8 flex items-center justify-center bg-zinc-700 rounded-full"
+            >
+              <CameraIcon className="size-24 stroke-1 text-white" />
+            </button>
+          )}
+
+          {food.imageUrl && (
+            <div className="relative">
+              <div className="size-36 p-1 bg-radial-[at_25%_25%] from-violet-700 to-violet-300 to-75% border-4 border-white rounded-full overflow-hidden">
+                <Image src={food?.imageUrl ?? ''} alt={food?.name ?? ''} />
+              </div>
+
+              <button
+                type="button"
+                onClick={imageUploadTrigger}
+                className="absolute bottom-0 right-2 p-2 bg-zinc-700 rounded-full"
+              >
+                <PencilIcon className="size-5 text-white" />
+              </button>
+            </div>
+          )}
         </div>
 
         <h2 className="text-center text-2xl capitalize text-white font-medium">
@@ -59,7 +81,7 @@ export function FoodDetailsView({
         </h2>
 
         <div className="h-16 flex items-center gap-2">
-          <FlameIcon className="size-10 text-white fill-violet-300" />
+          <FlameIcon className="size-10 text-white fill-violet-500" />
           <p className="text-4xl font-semibold text-white">
             {food?.calories}
             <span className="text-base font-semibold text-white">kcal</span>
@@ -70,32 +92,32 @@ export function FoodDetailsView({
           <MacronutrientBadge
             type={MacronutrientTypes.Carbohydrate}
             unit={food?.unit}
-            value={food?.carbohydrates || 0}
+            value={food.macronutrients?.carbohydrates || 0}
             className="col-span-2"
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Protein}
             unit={food?.unit}
-            value={food?.proteins || 0}
+            value={food.macronutrients?.proteins || 0}
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Fat}
             unit={food?.unit}
-            value={food?.fats || 0}
+            value={food.macronutrients?.fats || 0}
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Fiber}
             unit={food?.unit}
-            value={food?.fibers || 0}
+            value={food.macronutrients?.fibers || 0}
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Sodium}
             unit={food?.unit}
-            value={food?.sodium || 0}
+            value={food.macronutrients?.sodium || 0}
           />
         </div>
       </div>

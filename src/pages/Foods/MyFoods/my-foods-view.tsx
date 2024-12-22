@@ -36,7 +36,7 @@ export function MyFoodsView({
         />
 
         {/* LOADING DA LISTAGEM DE ALIMENTOS */}
-        {isFoodsLoading && foods.length > 0 && <MyFoodsListLoading />}
+        {isFoodsLoading && foods.length === 0 && <MyFoodsListLoading />}
 
         {/* LISTAGEM DE ALIMENTOS */}
         {!isFoodsLoading && foods.length > 0 && (

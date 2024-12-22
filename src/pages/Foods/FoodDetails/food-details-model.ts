@@ -1,7 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { useImageUpload } from '@/hooks/use-image-upload'
 import {
   IGetFoodByIdService,
+  IUploadFoodImageService,
   IDeleteFoodService,
 } from '@/services/http/food/food-service'
 import { QueryKeys } from '@/types/query-keys'
@@ -19,11 +21,13 @@ type PaginationData<T> = {
 
 type UseFoodDetailsModelProps = {
   getFoodByIdService: IGetFoodByIdService
+  uploadFoodImageService: IUploadFoodImageService
   deleteFoodService: IDeleteFoodService
 }
 
 export function useFoodDetailsModel({
   getFoodByIdService,
+  uploadFoodImageService,
   deleteFoodService,
 }: UseFoodDetailsModelProps) {
   const { foodId } = useParams()
@@ -36,8 +40,57 @@ export function useFoodDetailsModel({
     staleTime: 15 * 60 * 1000,
   })
 
-  const { mutateAsync: deleteFoodFn, isPending: isDeleteLoading } = useMutation(
-    {
+  const { mutateAsync: uploadFoodImageMutation } = useMutation({
+    mutationFn: uploadFoodImageService,
+    onSuccess: (imageUrl, variables) => {
+      if (!imageUrl) {
+        return
+      }
+
+      queryClient.setQueryData(
+        [QueryKeys.Food, variables.foodId],
+        (oldFood: Food) => {
+          return {
+            ...oldFood,
+            imageUrl,
+          }
+        },
+      )
+
+      // Atualiza o alimento na listagem de alimentos do cache que será exibido na pagina Meus Alimentos
+      queryClient.setQueryData(
+        [QueryKeys.FoodList],
+        (paginationData: PaginationData<Food>) => {
+          return {
+            ...paginationData,
+            pages: paginationData.pages.map(page => ({
+              ...page,
+              itens: page.itens.map(food =>
+                food.id === variables.foodId ? { ...food, imageUrl } : food,
+              ),
+            })),
+          }
+        },
+      )
+    },
+  })
+
+  const { imageUploadTrigger } = useImageUpload({
+    onUpload: imageFile => {
+      if (!food) {
+        return
+      }
+
+      uploadFoodImageMutation({ foodId: food.id, imageFile })
+    },
+    maxFileSizeMB: 2,
+    onError: error => {
+      console.error('Erro:', error)
+    },
+  })
+
+  const { mutateAsync: deleteFoodMutation, isPending: isDeleteLoading } =
+    useMutation({
       mutationFn: deleteFoodService,
       onSuccess: () => {
         queryClient.removeQueries({
@@ -61,8 +114,7 @@ export function useFoodDetailsModel({
 
         navigate('/meus-alimentos')
       },
-    },
-  )
+    })
 
   const handleBackToFoodListPage = () => {
     navigate('/meus-alimentos')
@@ -73,12 +125,13 @@ export function useFoodDetailsModel({
   }
 
   const handleDeleteFood = () => {
-    deleteFoodFn(Number(foodId))
+    deleteFoodMutation(Number(foodId))
   }
 
   return {
     food,
     isFoodLoading,
+    imageUploadTrigger,
     handleBackToFoodListPage,
     handleNavigateToEditPage,
     handleDeleteFood,

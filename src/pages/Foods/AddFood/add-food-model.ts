@@ -2,17 +2,17 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
-import { IAddFoodService } from '@/services/http/food/food-service'
-import { convertFoodMacronutrientsToBase } from '@/functions/convert-food-macronutrients-to-base'
+import { ICreateFoodService } from '@/services/http/food/food-service'
+import { convertFoodValuesBasedOnQuantity } from '@/functions/convert-food-values-based-on-quantity'
 import { foodFormSchema, FoodFormSchema } from '@/schemas/food-form-schema'
-import { FoodWithQuantity } from '@/types/food-types'
 import { QueryKeys } from '@/types/query-keys'
+import { DEFAULT_QUANTITY } from '@/constants/constants'
 
 type UseAddFoodModelProps = {
-  addFoodService: IAddFoodService
+  createFoodService: ICreateFoodService
 }
 
-export function useAddFoodModel({ addFoodService }: UseAddFoodModelProps) {
+export function useAddFoodModel({ createFoodService }: UseAddFoodModelProps) {
   const navigate = useNavigate()
 
   const {
@@ -25,37 +25,45 @@ export function useAddFoodModel({ addFoodService }: UseAddFoodModelProps) {
 
   const queryClient = useQueryClient()
 
-  const { mutateAsync } = useMutation({
-    mutationFn: addFoodService,
+  const { mutateAsync: createFoodMutation } = useMutation({
+    mutationFn: createFoodService,
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: [QueryKeys.FoodList] })
-
-      navigate('/meus-alimentos')
     },
     onError(error) {
       throw new Error(error.message)
     },
   })
 
-  const onSubmit = (formData: FoodFormSchema) => {
-    const food: FoodWithQuantity = {
-      id: 0,
-      ...formData,
-    }
-
-    const parsedFood = convertFoodMacronutrientsToBase(food, 100)
-
-    mutateAsync({
-      id: parsedFood.id,
-      name: parsedFood.name,
-      unit: parsedFood.unit,
-      calories: parsedFood.calories,
-      carbohydrates: parsedFood.carbohydrates,
-      proteins: parsedFood.proteins,
-      fats: parsedFood.fats,
-      fibers: parsedFood.fibers,
-      sodium: parsedFood.sodium,
+  const onSubmit = async (formData: FoodFormSchema) => {
+    const foodStatsConvertedToBase100 = convertFoodValuesBasedOnQuantity({
+      currentQuantity: formData.quantity,
+      desiredQuantity: DEFAULT_QUANTITY,
+      stats: {
+        calories: formData.calories,
+        carbohydrates: formData.carbohydrates,
+        proteins: formData.proteins,
+        fats: formData.fats,
+        fibers: formData.fibers,
+        sodium: formData.sodium,
+      },
     })
+
+    const createdFood = await createFoodMutation({
+      id: 0,
+      name: formData.name,
+      unit: formData.unit,
+      calories: foodStatsConvertedToBase100.calories,
+      macronutrients: {
+        carbohydrates: foodStatsConvertedToBase100.carbohydrates,
+        proteins: foodStatsConvertedToBase100.proteins,
+        fats: foodStatsConvertedToBase100.fats,
+        fibers: foodStatsConvertedToBase100.fibers,
+        sodium: foodStatsConvertedToBase100.sodium,
+      },
+    })
+
+    navigate(`/detalhes-do-alimento/${createdFood.id}`)
   }
 
   return {

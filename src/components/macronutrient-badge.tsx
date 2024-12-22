@@ -1,6 +1,7 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
-import { MacronutrientTypes, UnitTypes } from '@/types/food-types'
+import { MacronutrientTypes } from '@/types/macronutrients-types'
+import { UnitTypes } from '@/types/food-types'
 
 type MacronutrientBadgeProps = {
   type: MacronutrientTypes

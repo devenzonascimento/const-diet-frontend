@@ -83,7 +83,7 @@ export function useEditFoodModel({
         (paginationData: PaginationData<Food>) => {
           return {
             ...paginationData,
-            pages: paginationData.pages.map(page => ({
+            pages: paginationData?.pages?.map(page => ({
               ...page,
               itens: page.itens.map(food =>
                 food.id === updatedFood.id ? updatedFood : food,
@@ -92,6 +92,8 @@ export function useEditFoodModel({
           }
         },
       )
+
+      navigate(`/detalhes-do-alimento/${foodId}`)
     },
     onError(error) {
       throw new Error(error.message)
@@ -125,8 +127,6 @@ export function useEditFoodModel({
         sodium: foodStatsConvertedToBase100.sodium,
       },
     })
-
-    navigate(`/detalhes-do-alimento/${foodId}`)
   }
 
   const isNotFound = Number.isNaN(foodId) || (!isFoodLoading && !food)

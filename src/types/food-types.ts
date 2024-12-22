@@ -3,6 +3,7 @@ import { Macronutrients } from './macronutrients-types'
 export type Food = {
   id: number
   name: string
+  imageUrl?: string
   unit: UnitTypes
   calories: number
   macronutrients: Macronutrients

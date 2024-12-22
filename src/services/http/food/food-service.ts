@@ -65,3 +65,30 @@ export type IDeleteFoodService = (foodId: number) => Promise<void>
 export const deleteFoodService: IDeleteFoodService = async foodId => {
   await http.delete(`${API_PREFIX}/${foodId}`)
 }
+
+type UploadFoodImageRequest = {
+  foodId: number
+  imageFile: File
+}
+
+export type IUploadFoodImageService = (
+  params: UploadFoodImageRequest,
+) => Promise<string>
+
+export const uploadFoodImageService: IUploadFoodImageService = async ({
+  foodId,
+  imageFile,
+}) => {
+  const formData = new FormData()
+  formData.append('image', imageFile)
+
+  const response = await http.post(
+    `${API_PREFIX}/${foodId}/image-upload`,
+    formData,
+    {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    },
+  )
+
+  return response.data as string
+}

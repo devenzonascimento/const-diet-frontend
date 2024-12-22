@@ -2,6 +2,8 @@ import React from 'react'
 import { CaloriesBadge } from '@/components/calories-badge'
 import { MacronutrientTags } from '@/components/macronutrient-tags'
 import { Food } from '@/types/food-types'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Image } from '@/components/image'
 
 type FoodItemProps = {
   food: Food
@@ -16,13 +18,7 @@ export const FoodItem = ({ food, onClick }: FoodItemProps) => {
       onKeyDown={onClick}
       data-testid="food-list-item"
     >
-      <div className="h-full aspect-square rounded-full overflow-hidden shrink-0">
-        <img
-          className="block size-full object-cover"
-          src="/assets/strawberry.jpg"
-          alt="food"
-        />
-      </div>
+      <Image src={food?.imageUrl ?? ''} alt={food?.name ?? ''} />
 
       <div className="w-full grid grid-rows-2 content-between gap-4">
         <div className="grid grid-cols-[1fr_auto] items-start">

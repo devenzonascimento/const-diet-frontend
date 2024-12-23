@@ -18,10 +18,20 @@
 }
 
 #root {
-    min-height: 100dvh;
-    min-width: 100dvw;
-    max-height: 100dvh;
-    max-width: 100dvw;
-    display: flex;
-    flex-direction: column;
+  min-height: 100dvh;
+  min-width: 100dvw;
+  max-height: 100dvh;
+  max-width: 100dvw;
+  display: flex;
+  flex-direction: column;
+  background-color: oklch(0.21 0.006 285.885);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

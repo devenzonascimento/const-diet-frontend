@@ -1,6 +1,6 @@
 import React from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { DefaultInput } from '@/components/default-input'
+import { Input } from '@/components/input'
 import { SelectInput } from '@/components/select-input'
 import { Button } from '@/components/ui/button'
 import { FoodFormSchema } from '@/schemas/food-form-schema'
@@ -23,7 +23,7 @@ export const FoodFormTemplate = ({
       onSubmit={handleSubmit}
       data-testid="food-form"
     >
-      <DefaultInput
+      <Input
         id="foodName-input"
         required
         label="Nome do alimento"
@@ -32,7 +32,7 @@ export const FoodFormTemplate = ({
         data-testid="name-input"
       />
       <fieldset className="w-full grid grid-cols-2 gap-4">
-        <DefaultInput
+        <Input
           id="quantity-input"
           label="Quantidade"
           {...register('quantity')}
@@ -46,37 +46,37 @@ export const FoodFormTemplate = ({
           data-testid="unit-select-input"
         />
       </fieldset>
-      <DefaultInput
+      <Input
         id="calories-input"
         label="Calorias"
         {...register('calories')}
         data-testid="calories-input"
       />
-      <DefaultInput
+      <Input
         id="carbo-input"
         label="Carboidratos em gramas"
         {...register('carbohydrates')}
         data-testid="carbohydrates-input"
       />
-      <DefaultInput
+      <Input
         id="protein-input"
         label="Proteínas em gramas"
         {...register('proteins')}
         data-testid="proteins-input"
       />
-      <DefaultInput
+      <Input
         id="fat-input"
         label="Gorduras em gramas"
         {...register('fats')}
         data-testid="fats-input"
       />
-      <DefaultInput
+      <Input
         id="fiber-input"
         label="Fibras em gramas"
         {...register('fibers')}
         data-testid="fibers-input"
       />
-      <DefaultInput
+      <Input
         id="sodium-input"
         label="Sódios em gramas"
         {...register('sodium')}

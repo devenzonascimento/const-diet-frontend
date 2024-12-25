@@ -17,6 +17,10 @@
   --color-success: #10b981;
 }
 
+body {
+  background-color: oklch(0.21 0.006 285.885);
+}
+
 #root {
   min-height: 100dvh;
   min-width: 100dvw;
@@ -24,7 +28,6 @@
   max-width: 100dvw;
   display: flex;
   flex-direction: column;
-  background-color: oklch(0.21 0.006 285.885);
 }
 
 .no-scrollbar::-webkit-scrollbar {

@@ -14,8 +14,8 @@ import { AddFoodPage } from '@/pages/Foods/AddFood/add-food-view-model'
 import { EditFoodPage } from '@/pages/Foods/EditFood/edit-food-view-model'
 import { FoodDetailsPage } from '@/pages/Foods/FoodDetails/food-details-view-model'
 
-import { MyMealsPage } from '@/pages/Meals/MyMeals/page'
-import { AddNewMealPage } from '@/pages/Meals/AddNewMeal/page'
+import { MyMealsPage } from '@/pages/Meals/my-meals/my-meals-view-model'
+import { CreateMealPage } from '@/pages/Meals/create-meal/create-meal-view-model'
 import { EditMealPage } from '@/pages/Meals/EditMeal/page'
 
 import { MyRoutinesPage } from '@/pages/Routines/MyRoutines/page'
@@ -83,7 +83,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'nova-refeicao',
-        element: <AddNewMealPage />,
+        element: <CreateMealPage />,
       },
       {
         path: 'editar-refeicao/:mealId',

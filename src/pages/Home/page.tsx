@@ -1,59 +1,23 @@
-import { Header } from "@/components/header"
-import { StatsCard } from "@/components/stats-card"
-import { AppleIcon, CalendarDaysIcon, Clock3Icon, GoalIcon, ListChecksIcon, SoupIcon, SquareArrowOutUpRightIcon } from "lucide-react"
-import { Link } from "react-router-dom"
-import { ActivePlan } from "./components/active-plan"
+import React from 'react'
+import { NavCarrousel } from './components/nav-carrousel'
+import { ActivePlan } from './components/active-plan'
+import { StatsCard } from '@/components/stats-card'
+import { Clock3Icon, SquareArrowOutUpRightIcon, UserIcon } from 'lucide-react'
 
 export const HomePage = () => {
   return (
-    <>
-      <Header
-        title="Const Diet"
-      />
-      <nav className="w-full px-4 flex items-center gap-4 overflow-x-scroll ">
-        <Link to="meu-plano-diario" className="min-w-20 flex flex-col items-center gap-1">
-          <div className=" p-4 rounded-full text-white  bg-sky-800">
-            <GoalIcon size={40} />
-          </div>
-          <span className="text-[0.95rem] text-center font-semibold text-sky-900">
-            Plano de Hoje
-          </span>
-        </Link>
-        <Link to="meus-alimentos" className="min-w-20 flex flex-col items-center gap-1">
-          <div className=" p-4 rounded-full text-white  bg-sky-800">
-            <AppleIcon size={40} />
-          </div>
-          <span className="text-[0.95rem] text-center font-semibold text-sky-900">
-            Meus Alimentos
-          </span>
-        </Link>
-        <Link to="minhas-refeicoes" className="min-w-20 flex flex-col items-center gap-1">
-          <div className=" p-4 rounded-full text-white  bg-sky-800">
-            <SoupIcon size={40} />
-          </div>
-          <span className="text-[0.95rem] text-center font-semibold text-sky-900">
-            Minhas Refeições
-          </span>
-        </Link>
-        <Link to="minhas-rotinas" className="min-w-20 flex flex-col items-center gap-1">
-          <div className=" p-4 rounded-full text-white  bg-sky-800">
-            <ListChecksIcon size={40} />
-          </div>
-          <span className="text-[0.95rem] text-center font-semibold text-sky-900">
-            Minhas Rotinas
-          </span>
-        </Link>
-        <Link to="meus-planos" className="min-w-20 flex flex-col items-center gap-1">
-          <div className=" p-4 rounded-full text-white  bg-sky-800">
-            <CalendarDaysIcon size={40} />
-          </div>
-          <span className="text-[0.95rem] text-center font-semibold text-sky-900">
-            Meus Planos
-          </span>
-        </Link>
-      </nav>
-      <main className="w-full flex-1 flex flex-col items-center gap-4 px-4 pb-6 overflow-auto">
+    <div className="flex-1 flex flex-col bg-zinc-900">
+      <header className="flex items-center justify-between p-2 bg-violet-500">
+        <h1 className="px-4 text-white text-2xl font-semibold">Const Diet App</h1>
 
+        <button type="button" className="ml-auto p-3 bg-zinc-700 rounded-full">
+          <UserIcon className="size-6 text-white shrink-0" />
+        </button>
+      </header>
+
+      <NavCarrousel />
+
+      <main className="w-full flex-1 flex flex-col items-center gap-4 px-4 pb-6 overflow-auto">
         <ActivePlan />
 
         <section className="w-full flex flex-col">
@@ -76,6 +40,7 @@ export const HomePage = () => {
               <li>150g de Frango Grelhado</li>
             </ul>
             <button
+              type="button"
               className="absolute top-2 right-2 p-1 bg-sky-900 rounded-md"
             >
               <SquareArrowOutUpRightIcon className="text-white" />
@@ -111,30 +76,14 @@ export const HomePage = () => {
                 value={100}
                 className="col-span-3"
               />
-              <StatsCard
-                title="Proteínas"
-                value={100}
-                className="col-span-3"
-              />
-              <StatsCard
-                title="Gorduras"
-                value={100}
-                className="col-span-2"
-              />
-              <StatsCard
-                title="Sódio"
-                value={100}
-                className="col-span-2"
-              />
-              <StatsCard
-                title="Fibras"
-                value={100}
-                className="col-span-2"
-              />
+              <StatsCard title="Proteínas" value={100} className="col-span-3" />
+              <StatsCard title="Gorduras" value={100} className="col-span-2" />
+              <StatsCard title="Sódio" value={100} className="col-span-2" />
+              <StatsCard title="Fibras" value={100} className="col-span-2" />
             </main>
           </div>
         </section>
       </main>
-    </>
+    </div>
   )
 }

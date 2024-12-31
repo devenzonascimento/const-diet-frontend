@@ -12,7 +12,7 @@ import { Food } from '@/types/food-types'
 type PaginationData<T> = {
   pageParams: number[]
   pages: {
-    itens: T[]
+    items: T[]
     currentPage: number
     totalCount: number
     totalPages: number
@@ -65,7 +65,7 @@ export function useFoodDetailsModel({
             ...paginationData,
             pages: paginationData.pages.map(page => ({
               ...page,
-              itens: page.itens.map(food =>
+              items: page.items.map(food =>
                 food.id === variables.foodId ? { ...food, imageUrl } : food,
               ),
             })),
@@ -106,7 +106,7 @@ export function useFoodDetailsModel({
               ...paginationData,
               pages: paginationData.pages.map(page => ({
                 ...page,
-                itens: page.itens.filter(food => food.id !== Number(foodId)),
+                items: page.items.filter(food => food.id !== Number(foodId)),
               })),
             }
           },

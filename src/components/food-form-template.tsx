@@ -1,6 +1,6 @@
 import React from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { DefaultInput } from '@/components/default-input'
+import { Input } from '@/components/input'
 import { SelectInput } from '@/components/select-input'
 import { Button } from '@/components/ui/button'
 import { FoodFormSchema } from '@/schemas/food-form-schema'
@@ -23,7 +23,7 @@ export const FoodFormTemplate = ({
       onSubmit={handleSubmit}
       data-testid="food-form"
     >
-      <DefaultInput
+      <Input
         id="foodName-input"
         required
         label="Nome do alimento"
@@ -32,9 +32,11 @@ export const FoodFormTemplate = ({
         data-testid="name-input"
       />
       <fieldset className="w-full grid grid-cols-2 gap-4">
-        <DefaultInput
+        <Input
           id="quantity-input"
+          type="number"
           label="Quantidade"
+          errorMessage={errors.quantity?.message}
           {...register('quantity')}
           data-testid="quantity-input"
         />
@@ -46,39 +48,51 @@ export const FoodFormTemplate = ({
           data-testid="unit-select-input"
         />
       </fieldset>
-      <DefaultInput
+      <Input
         id="calories-input"
+        type="number"
         label="Calorias"
+        errorMessage={errors.calories?.message}
         {...register('calories')}
         data-testid="calories-input"
       />
-      <DefaultInput
+      <Input
         id="carbo-input"
+        type="number"
         label="Carboidratos em gramas"
+        errorMessage={errors.carbohydrates?.message}
         {...register('carbohydrates')}
         data-testid="carbohydrates-input"
       />
-      <DefaultInput
+      <Input
         id="protein-input"
+        type="number"
         label="Proteínas em gramas"
+        errorMessage={errors.proteins?.message}
         {...register('proteins')}
         data-testid="proteins-input"
       />
-      <DefaultInput
+      <Input
         id="fat-input"
+        type="number"
         label="Gorduras em gramas"
+        errorMessage={errors.fats?.message}
         {...register('fats')}
         data-testid="fats-input"
       />
-      <DefaultInput
+      <Input
         id="fiber-input"
+        type="number"
         label="Fibras em gramas"
+        errorMessage={errors.fibers?.message}
         {...register('fibers')}
         data-testid="fibers-input"
       />
-      <DefaultInput
+      <Input
         id="sodium-input"
+        type="number"
         label="Sódios em gramas"
+        errorMessage={errors.sodium?.message}
         {...register('sodium')}
         data-testid="sodium-input"
       />

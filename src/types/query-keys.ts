@@ -1,4 +1,6 @@
 export enum QueryKeys {
   FoodList = 'FoodList',
-  Food = 'Food'
+  Food = 'Food',
+
+  MealList = 'MealList'
 }

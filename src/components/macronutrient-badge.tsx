@@ -1,7 +1,7 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
 import { MacronutrientTypes } from '@/types/macronutrients-types'
-import { UnitTypes } from '@/types/food-types'
+import { unitAbbreviationsMap, UnitTypes } from '@/types/food-types'
 
 type MacronutrientBadgeProps = {
   type: MacronutrientTypes
@@ -22,11 +22,6 @@ export function MacronutrientBadge({
     Fat: 'Gorduras',
     Fiber: 'Fíbras',
     Sodium: 'Sódio',
-  } as const
-
-  const unitAbbreviationsMap: Record<UnitTypes, string> = {
-    GRAMS: 'g',
-    MILILITERS: 'ml',
   } as const
 
   return (

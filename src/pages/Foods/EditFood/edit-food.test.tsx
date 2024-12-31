@@ -56,27 +56,27 @@ describe('<EditFoodPage />', () => {
     await delay(50)
 
     expect(screen.getByTestId('name-input')).toHaveValue(fakeFood.name)
-    expect(screen.getByTestId('quantity-input')).toHaveValue('100')
+    expect(screen.getByTestId('quantity-input')).toHaveValue(100)
     expect(screen.getByTestId('calories-input')).toHaveValue(
-      fakeFood.calories.toString(),
+      fakeFood.calories,
     )
     expect(screen.getByTestId('carbohydrates-input')).toHaveValue(
-      fakeFood.macronutrients.carbohydrates.toString(),
+      fakeFood.macronutrients.carbohydrates,
     )
     expect(screen.getByTestId('proteins-input')).toHaveValue(
-      fakeFood.macronutrients.proteins.toString(),
+      fakeFood.macronutrients.proteins,
     )
     expect(screen.getByTestId('fats-input')).toHaveValue(
-      fakeFood.macronutrients.fats.toString(),
+      fakeFood.macronutrients.fats,
     )
     expect(screen.getByTestId('fibers-input')).toHaveValue(
-      fakeFood.macronutrients.fibers.toString(),
+      fakeFood.macronutrients.fibers,
     )
     expect(screen.getByTestId('sodium-input')).toHaveValue(
-      fakeFood.macronutrients.sodium.toString(),
+      fakeFood.macronutrients.sodium,
     )
     expect(screen.getByTestId('unit-select-input')).toHaveValue(
-      fakeFood.unit.toString(),
+      fakeFood.unit,
     )
   })
 

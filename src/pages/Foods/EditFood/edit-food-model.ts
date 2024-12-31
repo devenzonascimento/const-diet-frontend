@@ -16,7 +16,7 @@ import { QueryKeys } from '@/types/query-keys'
 type PaginationData<T> = {
   pageParams: number[]
   pages: {
-    itens: T[]
+    items: T[]
     currentPage: number
     totalCount: number
     totalPages: number
@@ -85,7 +85,7 @@ export function useEditFoodModel({
             ...paginationData,
             pages: paginationData?.pages?.map(page => ({
               ...page,
-              itens: page.itens.map(food =>
+              items: page.items.map(food =>
                 food.id === updatedFood.id ? updatedFood : food,
               ),
             })),

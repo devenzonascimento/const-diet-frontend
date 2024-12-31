@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import React, { forwardRef, TextareaHTMLAttributes } from 'react'
 
 type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -6,7 +7,7 @@ type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ label = '', errorMessage = '', required, ...props }, ref) => {
+  ({ label = '', className, errorMessage = '', required, ...props }, ref) => {
     return (
       <fieldset className="w-full grid grid-rows-[auto_auto_auto]">
         <div className="">
@@ -19,7 +20,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
         <textarea
           ref={ref}
-          className="w-full py-1 px-2 tracking-wide text-lg text-white placeholder:text-zinc-600 border border-violet-300 focus:border-violet-400 rounded-md outline-none"
+          className={cn(
+            'w-full py-1 px-2 tracking-wide text-lg text-white placeholder:text-zinc-600 border border-violet-300 focus:border-violet-400 rounded-md outline-none',
+            className,
+          )}
           {...props}
         />
 

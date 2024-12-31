@@ -1,12 +1,21 @@
 import React, { useState } from 'react'
 import { Skeleton } from './ui/skeleton'
 import { cn } from '@/lib/utils'
-import { HamIcon } from 'lucide-react'
 
 type ImageProps = {
   src: string
   alt: string
   className?: string
+}
+
+const getInitials = (name: string) => {
+  const words = name.split(' ')
+
+  if (words.length > 1) {
+    return (words[0][0] + words[1][0]).toUpperCase()
+  }
+
+  return name.substring(0, 2).toUpperCase()
 }
 
 export function Image({ src, alt, className }: ImageProps) {
@@ -37,8 +46,10 @@ export function Image({ src, alt, className }: ImageProps) {
       )}
 
       {imageStatus === 'error' && (
-        <div className="p-2 bg-zinc-600">
-          <HamIcon className="size-full text-white shrink-0" />
+        <div className="size-full p-2 flex items-center justify-center bg-zinc-600">
+          <span className="text-white text-xl font-bold">
+            {getInitials(alt)}
+          </span>
         </div>
       )}
     </div>

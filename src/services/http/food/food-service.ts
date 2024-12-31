@@ -33,7 +33,7 @@ type GetPaginatedFoodListRequest = {
 }
 
 type GetPaginatedFoodListResponse = {
-  itens: Food[]
+  items: Food[]
   totalCount: number
   totalPages: number
   currentPage: number

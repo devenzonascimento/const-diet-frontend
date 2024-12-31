@@ -22,7 +22,7 @@ const generateFakeFood = (id: number, name: string) => ({
 
 const mockGetPaginatedFoodListService = vi.fn<IGetPaginatedFoodListService>(
   async () => ({
-    itens: [
+    items: [
       generateFakeFood(1, 'A'),
       generateFakeFood(2, 'B'),
       generateFakeFood(3, 'C'),

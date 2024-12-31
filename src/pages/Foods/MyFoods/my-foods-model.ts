@@ -43,7 +43,7 @@ export function useMyFoodsModel({
     }
   }
 
-  const foods = data?.pages.flatMap(page => page.itens) || []
+  const foods = data?.pages.flatMap(page => page.items) || []
 
   const filteredFoods = foods?.filter(food =>
     food.name.toLowerCase().includes(searchTerm.toLowerCase()),

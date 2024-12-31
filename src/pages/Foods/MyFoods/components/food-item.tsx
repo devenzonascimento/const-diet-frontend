@@ -30,9 +30,9 @@ export const FoodItem = ({ food, isActive, onClick }: FoodItemProps) => {
 
       <div className="w-full grid grid-rows-2 content-between gap-4">
         <div className="grid grid-cols-[1fr_auto] items-start">
-          <p className="text-base font-semibold text-white truncate">
+          <h2 className="text-base font-semibold text-white truncate">
             {food.name}
-          </p>
+          </h2>
 
           <CaloriesBadge calories={food.calories} />
         </div>

@@ -41,7 +41,7 @@ export function FoodPickerView({
         onKeyDown={onClose}
       />
 
-      <div className="fixed bottom-0 w-full h-9/10 flex flex-col items-center gap-4 p-4 bg-zinc-900 rounded-t-4xl">
+      <div className="fixed bottom-0 w-full h-9/10 flex flex-col items-center gap-4 p-4 bg-zinc-900 rounded-t-4xl" data-testid="food-picker">
         <header className="w-full flex items-center justify-between">
           <h1 className="text-lg font-semibold text-zinc-100">
             Selecionar alimento

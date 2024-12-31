@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { Header } from '@/components/header'
 import { SearchInput } from '@/components/search-input'
 import { FlatList } from '@/components/flat-list'
-import { MealItem } from './_components/meal-item'
+import { MealItem } from './components/meal-item'
 import { Spinner } from '@/components/spinner'
 import { SoupIcon, CirclePlusIcon } from 'lucide-react'
-import { MyMealsListLoading } from './_components/list-loading'
+import { MyMealsListLoading } from './components/list-loading'
 import { RouteTypes } from '@/types/routes-types'
 
 export function MyMealsView({

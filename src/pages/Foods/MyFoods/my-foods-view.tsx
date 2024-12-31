@@ -18,7 +18,7 @@ export function MyFoodsView({
   handlePagination,
   searchTerm,
   setSearchTerm,
-  handleNavigateToEditPage,
+  handleNavigateToDetailsPage,
 }: MyFoodsViewProps) {
   return (
     <div className="flex-1 flex flex-col bg-zinc-900 overflow-hidden">
@@ -46,7 +46,7 @@ export function MyFoodsView({
               <FoodItem
                 key={food.id}
                 food={food}
-                onClick={() => handleNavigateToEditPage(food.id)}
+                onClick={() => handleNavigateToDetailsPage(food.id)}
               />
             )}
             keyExtractor={item => item.id.toString()}

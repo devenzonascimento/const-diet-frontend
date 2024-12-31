@@ -49,7 +49,7 @@ export function useMyFoodsModel({
     food.name.toLowerCase().includes(searchTerm.toLowerCase()),
   )
 
-  const handleNavigateToEditPage = (foodId: number) =>
+  const handleNavigateToDetailsPage = (foodId: number) =>
     navigate(`/detalhes-do-alimento/${foodId}`)
 
   return {
@@ -59,6 +59,6 @@ export function useMyFoodsModel({
     hasNextPage,
     searchTerm,
     setSearchTerm,
-    handleNavigateToEditPage,
+    handleNavigateToDetailsPage,
   }
 }

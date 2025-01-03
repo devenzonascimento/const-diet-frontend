@@ -9,8 +9,12 @@ export function generateMealFoodList(foods: MealFood[]): string {
 
     const isLastFood = foods.length - 1 === i
 
-    mealFoodList += `${food.quantity}${unitAbbreviationsMap[food.unit]} de ${food.name}${isLastFood ? '' : ', '}`
+    mealFoodList += `${generateMealFoodPresentation(food)}${isLastFood ? '' : ', '}`
   }
 
   return mealFoodList
+}
+
+export function generateMealFoodPresentation(food: MealFood): string {
+  return `${food.quantity}${unitAbbreviationsMap[food.unit]} de ${food.name}`
 }

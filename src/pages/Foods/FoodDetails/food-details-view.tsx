@@ -91,32 +91,27 @@ export function FoodDetailsView({
         <div className="w-full grid grid-cols-2 grid-rows-3 gap-3">
           <MacronutrientBadge
             type={MacronutrientTypes.Carbohydrate}
-            unit={food?.unit}
             value={food.macronutrients?.carbohydrates || 0}
             className="col-span-2"
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Protein}
-            unit={food?.unit}
             value={food.macronutrients?.proteins || 0}
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Fat}
-            unit={food?.unit}
             value={food.macronutrients?.fats || 0}
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Fiber}
-            unit={food?.unit}
             value={food.macronutrients?.fibers || 0}
           />
 
           <MacronutrientBadge
             type={MacronutrientTypes.Sodium}
-            unit={food?.unit}
             value={food.macronutrients?.sodium || 0}
           />
         </div>

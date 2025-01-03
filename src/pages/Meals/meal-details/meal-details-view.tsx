@@ -1,5 +1,7 @@
 import React from 'react'
 import { useMealDetailsModel } from './meal-details-model'
+import { MealDetailsLoadingPage } from './components/loading-page'
+import { MealNotFoundPage } from '../not-found-page'
 import { ArrowLeft, FlameIcon, PencilIcon, Trash2Icon } from 'lucide-react'
 import { Image } from '@/components/image'
 import { MacronutrientBadge } from '@/components/macronutrient-badge'
@@ -17,11 +19,11 @@ export function MealDetailsView({
   isDeleteLoading,
 }: ReturnType<typeof useMealDetailsModel>) {
   if (isMealLoading) {
-    return <div>LOADING...</div> // TODO: Create a loading page
+    return <MealDetailsLoadingPage />
   }
 
   if (!meal) {
-    return <div>NOT FOUND</div> // TODO: Create a not found page
+    return <MealNotFoundPage />
   }
 
   return (

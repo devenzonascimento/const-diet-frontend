@@ -17,6 +17,7 @@ import { FoodDetailsPage } from '@/pages/Foods/FoodDetails/food-details-view-mod
 import { MyMealsPage } from '@/pages/Meals/my-meals/my-meals-view-model'
 import { CreateMealPage } from '@/pages/Meals/create-meal/create-meal-view-model'
 import { EditMealPage } from '@/pages/Meals/EditMeal/page'
+import { MealDetailsPage } from '@/pages/Meals/meal-details/meal-details-view-model'
 
 import { MyRoutinesPage } from '@/pages/Routines/MyRoutines/page'
 import { AddNewRoutinePage } from '@/pages/Routines/AddNewRoutine/page'
@@ -29,6 +30,8 @@ import { EditPlanPage } from '@/pages/Plans/EditPlan/page'
 import { PlanDetailsPage } from '@/pages/Plans/PlanDetails/page'
 
 import { DailyRoutinePage } from '@/pages/DailyRoutine/page'
+
+import { RouteTypes } from '@/types/routes-types'
 
 export const router = createBrowserRouter([
   {
@@ -78,15 +81,19 @@ export const router = createBrowserRouter([
         element: <EditFoodPage />,
       },
       {
-        path: 'minhas-refeicoes',
+        path: RouteTypes.MyMealsPage,
         element: <MyMealsPage />,
       },
       {
-        path: 'nova-refeicao',
+        path: `${RouteTypes.MealDetailsPage}/:mealId`,
+        element: <MealDetailsPage />,
+      },
+      {
+        path: RouteTypes.CreateMealPage,
         element: <CreateMealPage />,
       },
       {
-        path: 'editar-refeicao/:mealId',
+        path: `${RouteTypes.UpdateMealPage}/:mealId`,
         element: <EditMealPage />,
       },
       {

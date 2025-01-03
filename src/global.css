@@ -19,6 +19,7 @@
 
 body {
   background-color: oklch(0.21 0.006 285.885);
+  color: #ffffff;
 }
 
 #root {
@@ -27,7 +28,7 @@ body {
   max-height: 100dvh;
   max-width: 100dvw;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
 }
 
 .no-scrollbar::-webkit-scrollbar {

@@ -32,12 +32,7 @@ type GetPaginatedFoodListRequest = {
   pageSize: number
 }
 
-type GetPaginatedFoodListResponse = {
-  items: Food[]
-  totalCount: number
-  totalPages: number
-  currentPage: number
-}
+type GetPaginatedFoodListResponse = ApiPaginationResponse<Food>
 
 export type IGetPaginatedFoodListService = (
   params: GetPaginatedFoodListRequest,

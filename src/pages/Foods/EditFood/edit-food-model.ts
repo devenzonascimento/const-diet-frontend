@@ -13,16 +13,6 @@ import { DEFAULT_QUANTITY } from '@/constants/constants'
 import { Food } from '@/types/food-types'
 import { QueryKeys } from '@/types/query-keys'
 
-type PaginationData<T> = {
-  pageParams: number[]
-  pages: {
-    items: T[]
-    currentPage: number
-    totalCount: number
-    totalPages: number
-  }[]
-}
-
 type UseEditFoodModelProps = {
   getFoodByIdService: IGetFoodByIdService
   updateFoodService: IUpdateFoodService
@@ -80,7 +70,7 @@ export function useEditFoodModel({
       // Atualiza o alimento na listagem de alimentos do cache que será exibido na pagina Meus Alimentos
       queryClient.setQueryData(
         [QueryKeys.FoodList],
-        (paginationData: PaginationData<Food>) => {
+        (paginationData: ApiPaginationResponse<Food>) => {
           return {
             ...paginationData,
             pages: paginationData?.pages?.map(page => ({

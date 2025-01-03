@@ -8,6 +8,7 @@ import {
 } from '@/services/http/food/food-service'
 import { QueryKeys } from '@/types/query-keys'
 import { Food } from '@/types/food-types'
+import { RouteTypes } from '@/types/routes-types'
 
 type UseFoodDetailsModelProps = {
   getFoodByIdService: IGetFoodByIdService
@@ -102,16 +103,16 @@ export function useFoodDetailsModel({
           },
         )
 
-        navigate('/meus-alimentos')
+        navigate(RouteTypes.MyFoodsPage)
       },
     })
 
   const handleBackToFoodListPage = () => {
-    navigate('/meus-alimentos')
+    navigate(RouteTypes.MyFoodsPage)
   }
 
   const handleNavigateToEditPage = () => {
-    navigate(`/editar-alimento/${foodId}`)
+    navigate(`${RouteTypes.UpdateFoodPage}/${foodId}`)
   }
 
   const handleDeleteFood = () => {

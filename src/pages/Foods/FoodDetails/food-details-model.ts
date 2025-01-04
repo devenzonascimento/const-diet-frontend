@@ -9,6 +9,12 @@ import {
 import { QueryKeys } from '@/types/query-keys'
 import { Food } from '@/types/food-types'
 import { RouteTypes } from '@/types/routes-types'
+import { ApiPaginationResponse } from '@/types/api-responses-types'
+
+type PaginationData = {
+  pageParam: number
+  pages: ApiPaginationResponse<Food>[]
+}
 
 type UseFoodDetailsModelProps = {
   getFoodByIdService: IGetFoodByIdService
@@ -51,7 +57,7 @@ export function useFoodDetailsModel({
       // Atualiza o alimento na listagem de alimentos do cache que será exibido na pagina Meus Alimentos
       queryClient.setQueryData(
         [QueryKeys.FoodList],
-        (paginationData: ApiPaginationResponse<Food>) => {
+        (paginationData: PaginationData) => {
           return {
             ...paginationData,
             pages: paginationData.pages.map(page => ({
@@ -92,7 +98,7 @@ export function useFoodDetailsModel({
         // Atualiza o alimento na listagem de alimentos do cache que será exibido na pagina Meus Alimentos
         queryClient.setQueryData(
           [QueryKeys.FoodList],
-          (paginationData: ApiPaginationResponse<Food>) => {
+          (paginationData: PaginationData) => {
             return {
               ...paginationData,
               pages: paginationData.pages.map(page => ({

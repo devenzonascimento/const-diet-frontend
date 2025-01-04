@@ -12,6 +12,12 @@ import { foodFormSchema, FoodFormSchema } from '@/schemas/food-form-schema'
 import { DEFAULT_QUANTITY } from '@/constants/constants'
 import { Food } from '@/types/food-types'
 import { QueryKeys } from '@/types/query-keys'
+import { ApiPaginationResponse } from '@/types/api-responses-types'
+
+type PaginationData = {
+  pageParam: number
+  pages: ApiPaginationResponse<Food>[]
+}
 
 type UseEditFoodModelProps = {
   getFoodByIdService: IGetFoodByIdService
@@ -70,7 +76,7 @@ export function useEditFoodModel({
       // Atualiza o alimento na listagem de alimentos do cache que será exibido na pagina Meus Alimentos
       queryClient.setQueryData(
         [QueryKeys.FoodList],
-        (paginationData: ApiPaginationResponse<Food>) => {
+        (paginationData: PaginationData) => {
           return {
             ...paginationData,
             pages: paginationData?.pages?.map(page => ({

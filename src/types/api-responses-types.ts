@@ -1,9 +1,6 @@
-type ApiPaginationResponse<T> = {
-  pageParams: number[]
-  pages: {
-    items: T[]
-    currentPage: number
-    totalCount: number
-    totalPages: number
-  }[]
+export type ApiPaginationResponse<T> = {
+  items: T[]
+  currentPage: number
+  totalCount: number
+  totalPages: number
 }

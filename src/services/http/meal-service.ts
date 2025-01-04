@@ -1,4 +1,5 @@
 import { http } from '@/services/http'
+import { ApiPaginationResponse } from '@/types/api-responses-types'
 import { Meal, MealFood } from '@/types/meal-types'
 
 const API_PREFIX = '/meals'
@@ -28,10 +29,10 @@ type UpdateMealRequest = {
   foods: MealFood[]
 }
 
-export type IUpdateMealService = (meal: Meal) => Promise<Meal>
+export type IUpdateMealService = (mealData: UpdateMealRequest) => Promise<Meal>
 
-export const updateMealService: IUpdateMealService = async meal => {
-  const { data } = await http.put<UpdateMealRequest, Meal>(API_PREFIX, meal)
+export const updateMealService: IUpdateMealService = async mealData => {
+  const { data } = await http.put<UpdateMealRequest, Meal>(API_PREFIX, mealData)
 
   return data
 }

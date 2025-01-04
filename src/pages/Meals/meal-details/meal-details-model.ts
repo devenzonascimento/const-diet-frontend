@@ -10,6 +10,12 @@ import { generateMealFoodPresentation } from '@/functions/generateMealFoodList'
 import { Meal } from '@/types/meal-types'
 import { QueryKeys } from '@/types/query-keys'
 import { RouteTypes } from '@/types/routes-types'
+import { ApiPaginationResponse } from '@/types/api-responses-types'
+
+type PaginationData = {
+  pageParam: number
+  pages: ApiPaginationResponse<Meal>[]
+}
 
 type UseMealDetailsModelProps = {
   getMealByIdService: IGetMealByIdService
@@ -49,10 +55,9 @@ export function useMealDetailsModel({
           queryKey: [QueryKeys.Meal, mealId],
         })
 
-        // Atualiza o alimento na listagem de alimentos do cache que será exibido na pagina Meus Alimentos
         queryClient.setQueryData(
           [QueryKeys.MealList],
-          (paginationData: ApiPaginationResponse<Meal>) => {
+          (paginationData: PaginationData) => {
             return {
               ...paginationData,
               pages: paginationData.pages.map(page => ({

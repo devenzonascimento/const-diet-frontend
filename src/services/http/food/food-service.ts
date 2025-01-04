@@ -1,4 +1,5 @@
 import { http } from '@/services/http'
+import { ApiPaginationResponse } from '@/types/api-responses-types'
 import { Food } from '@/types/food-types'
 
 const API_PREFIX = '/foods'
